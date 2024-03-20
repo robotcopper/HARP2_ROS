@@ -1,0 +1,9 @@
+[submodule "rf2o_laser_odometry"]
+	path = rf2o_laser_odometry
+	url = https://github.com/MAPIRlab/rf2o_laser_odometry.git
+[submodule "ydlidar_ros2_driver"]
+	path = ydlidar_ros2_driver
+	url = https://github.com/YDLIDAR/ydlidar_ros2_driver.git
+[submodule "YDLidar-SDK"]
+	path = YDLidar-SDK
+	url = https://github.com/YDLIDAR/YDLidar-SDK.git
