@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro"  name="robot">
+
+    <!-- Include all the contents. -->
+    <xacro:include filename="standard_inertia_util.xacro" />
+    <xacro:include filename="holonomic_wheel/wheel.xacro" />
+
+    <!-- This first link called "base_footprint" is empty -->
+    <link name="base_footprint"/>
+    
+    <joint name="base_joint" type="fixed">
+        <origin xyz="0 0 -0.01" rpy="0 0 0"/>
+        <parent link="base_link"/>
+        <child link="base_footprint"/>        
+    </joint>
+    
+    <xacro:property name="length" value="0.045" />
+    <xacro:property name="radius" value="0.18" />
+    
+    <link name="base_link">
+        <visual>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<geometry>
+			<mesh filename="package://robot_description/urdf/robot_base.stl"/>
+		</geometry>
+		<material name="robot_base_material">
+			<color rgba="1 1 1 1.0"/>
+		</material>
+	</visual>
+	<collision>
+		<origin xyz="0 0 0" rpy="0 0 0" />
+		<geometry>
+			<mesh filename="package://robot_description/urdf/robot_base.stl"/>
+		</geometry>
+	</collision>
+	<xacro:inertial_cylinder mass="1.2" length="${length}" radius="${radius}">
+            <origin xyz="0 0 0" rpy="0 0 0" />
+        </xacro:inertial_cylinder>
+    </link>
+
+
+    <!-- Add the 3 holonomic wheel -->
+    <xacro:holonomic_wheel joint_wheel_xyz="0.11539788567280147291 0.066624999269165083304 0.018159998763917353098" joint_wheel_rpy="1.5707963059327449962 -3.6134307765750467638e-08 -1.0471975663321160255" name_roueholonome="roueholonome1">
+    </xacro:holonomic_wheel>
+    
+    <xacro:holonomic_wheel joint_wheel_xyz="-9.4218689434714475786e-10 -0.13324999991488650775 0.018160000618041127751" joint_wheel_rpy="-1.5707963372259698964 -1.578796498993817555e-16 -1.5135513408355580736e-08" name_roueholonome="roueholonome2">
+    </xacro:holonomic_wheel>
+
+    <xacro:holonomic_wheel joint_wheel_xyz="-0.11539788473061769747 0.06662500090107909001 0.018159998763917353098" joint_wheel_rpy="1.570796305932749215 3.6134297384305885703e-08 1.0471975360610779049" name_roueholonome="roueholonome3">
+    </xacro:holonomic_wheel>
+
+</robot>
