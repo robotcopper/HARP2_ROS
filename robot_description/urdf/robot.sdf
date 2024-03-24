@@ -1,0 +1,2372 @@
+<sdf version='1.7'>
+  <model name='robot'>
+    <link name='base_link'>
+      <inertial>
+        <pose>0 0 0.005 0 -0 0</pose>
+        <mass>3</mass>
+        <inertia>
+          <ixx>0.024325</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.024325</iyy>
+          <iyz>0</iyz>
+          <izz>0.0486</izz>
+        </inertia>
+      </inertial>
+      <collision name='base_link_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/robot_base.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1000</kp>
+              <kd>10000</kd>
+            </ode>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='base_link_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/robot_base.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='joint_wheel_roueholonome1' type='revolute'>
+      <pose relative_to='base_link'>0.115398 0.066625 0.01816 1.5708 -0 -1.0472</pose>
+      <parent>base_link</parent>
+      <child>roueholonome1</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>1</effort>
+          <velocity>20</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='roueholonome1'>
+      <pose relative_to='joint_wheel_roueholonome1'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0 0 -0.00905 0 -0 0</pose>
+        <mass>0.0560365</mass>
+        <inertia>
+          <ixx>0</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1e-05</iyy>
+          <iyz>0</iyz>
+          <izz>0</izz>
+        </inertia>
+      </inertial>
+      <collision name='roueholonome1_collision'>
+        <pose>0 0 0 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/roueholonome.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='roueholonome1_visual'>
+        <pose>0 0 0 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/roueholonome.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Grey</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='Rouleau_a_roueholonome1' type='revolute'>
+      <pose relative_to='roueholonome1'>-0.013108 0.018041 -0.0156 -0.628319 1.5708 0</pose>
+      <parent>roueholonome1</parent>
+      <child>rouleau_1_roueholonome1</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>1</effort>
+          <velocity>20</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='rouleau_1_roueholonome1'>
+      <pose relative_to='Rouleau_a_roueholonome1'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0 -0 -0 0 -0 0</pose>
+        <mass>0.00234322</mass>
+        <inertia>
+          <ixx>0</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>8.1e-08</iyy>
+          <iyz>0</iyz>
+          <izz>0</izz>
+        </inertia>
+      </inertial>
+      <collision name='rouleau_1_roueholonome1_collision'>
+        <pose>0 -0 -0 -1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1000</kp>
+              <kd>10000</kd>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>0.8</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='rouleau_1_roueholonome1_visual'>
+        <pose>0 -0 -0 -1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Black</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='Rouleau_b_roueholonome1' type='revolute'>
+      <pose relative_to='roueholonome1'>-0.021209 -0.006891 -0.0156 -1.88496 1.5708 0</pose>
+      <parent>roueholonome1</parent>
+      <child>rouleau_2_roueholonome1</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>1</effort>
+          <velocity>20</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='rouleau_2_roueholonome1'>
+      <pose relative_to='Rouleau_b_roueholonome1'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0 0 -0 0 -0 0</pose>
+        <mass>0.00234322</mass>
+        <inertia>
+          <ixx>0</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>8.1e-08</iyy>
+          <iyz>0</iyz>
+          <izz>0</izz>
+        </inertia>
+      </inertial>
+      <collision name='rouleau_2_roueholonome1_collision'>
+        <pose>0 0 -0 -1.5708 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1000</kp>
+              <kd>10000</kd>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>0.8</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='rouleau_2_roueholonome1_visual'>
+        <pose>0 0 -0 -1.5708 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Black</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='Rouleau_c_roueholonome1' type='revolute'>
+      <pose relative_to='roueholonome1'>-0 -0.0223 -0.0156 0 1.5708 0</pose>
+      <parent>roueholonome1</parent>
+      <child>rouleau_3_roueholonome1</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>1</effort>
+          <velocity>20</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='rouleau_3_roueholonome1'>
+      <pose relative_to='Rouleau_c_roueholonome1'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0 -0 -0 0 -0 0</pose>
+        <mass>0.00234322</mass>
+        <inertia>
+          <ixx>0</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>8.1e-08</iyy>
+          <iyz>0</iyz>
+          <izz>0</izz>
+        </inertia>
+      </inertial>
+      <collision name='rouleau_3_roueholonome1_collision'>
+        <pose>-0 -0 0 -1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1000</kp>
+              <kd>10000</kd>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>0.8</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='rouleau_3_roueholonome1_visual'>
+        <pose>-0 -0 0 -1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Black</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='Rouleau_d_roueholonome1' type='revolute'>
+      <pose relative_to='roueholonome1'>0.021209 -0.006891 -0.0156 -1.25664 1.5708 0</pose>
+      <parent>roueholonome1</parent>
+      <child>rouleau_4_roueholonome1</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>1</effort>
+          <velocity>20</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='rouleau_4_roueholonome1'>
+      <pose relative_to='Rouleau_d_roueholonome1'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0 -0 -0 0 -0 0</pose>
+        <mass>0.00234322</mass>
+        <inertia>
+          <ixx>0</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>8.1e-08</iyy>
+          <iyz>0</iyz>
+          <izz>0</izz>
+        </inertia>
+      </inertial>
+      <collision name='rouleau_4_roueholonome1_collision'>
+        <pose>0 -0 0 -1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1000</kp>
+              <kd>10000</kd>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>0.8</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='rouleau_4_roueholonome1_visual'>
+        <pose>0 -0 0 -1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Black</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='Rouleau_e_roueholonome1' type='revolute'>
+      <pose relative_to='roueholonome1'>0.013108 0.018041 -0.0156 0.628319 1.5708 0</pose>
+      <parent>roueholonome1</parent>
+      <child>rouleau_5_roueholonome1</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>1</effort>
+          <velocity>20</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='rouleau_5_roueholonome1'>
+      <pose relative_to='Rouleau_e_roueholonome1'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0 0 -0 0 -0 0</pose>
+        <mass>0.00234322</mass>
+        <inertia>
+          <ixx>0</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>8.1e-08</iyy>
+          <iyz>0</iyz>
+          <izz>0</izz>
+        </inertia>
+      </inertial>
+      <collision name='rouleau_5_roueholonome1_collision'>
+        <pose>-0 0 0 -1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1000</kp>
+              <kd>10000</kd>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>0.8</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='rouleau_5_roueholonome1_visual'>
+        <pose>-0 0 0 -1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Black</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='Rouleau_f_roueholonome1' type='revolute'>
+      <pose relative_to='roueholonome1'>-0 0.0223 -0.0025 0 1.5708 0</pose>
+      <parent>roueholonome1</parent>
+      <child>rouleau_6_roueholonome1</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>1</effort>
+          <velocity>20</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='rouleau_6_roueholonome1'>
+      <pose relative_to='Rouleau_f_roueholonome1'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0 -0 -0 0 -0 0</pose>
+        <mass>0.00234322</mass>
+        <inertia>
+          <ixx>0</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>8.1e-08</iyy>
+          <iyz>0</iyz>
+          <izz>0</izz>
+        </inertia>
+      </inertial>
+      <collision name='rouleau_6_roueholonome1_collision'>
+        <pose>0 0 0 -1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1000</kp>
+              <kd>10000</kd>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>0.8</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='rouleau_6_roueholonome1_visual'>
+        <pose>0 0 0 -1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Black</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='Rouleau_g_roueholonome1' type='revolute'>
+      <pose relative_to='roueholonome1'>-0.021209 0.006891 -0.0025 -1.25664 1.5708 0</pose>
+      <parent>roueholonome1</parent>
+      <child>rouleau_7_roueholonome1</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>1</effort>
+          <velocity>20</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='rouleau_7_roueholonome1'>
+      <pose relative_to='Rouleau_g_roueholonome1'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0 -0 -0 0 -0 0</pose>
+        <mass>0.00234322</mass>
+        <inertia>
+          <ixx>0</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>8.1e-08</iyy>
+          <iyz>0</iyz>
+          <izz>0</izz>
+        </inertia>
+      </inertial>
+      <collision name='rouleau_7_roueholonome1_collision'>
+        <pose>0 -0 0 -1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1000</kp>
+              <kd>10000</kd>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>0.8</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='rouleau_7_roueholonome1_visual'>
+        <pose>0 -0 0 -1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Black</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='Rouleau_h_roueholonome1' type='revolute'>
+      <pose relative_to='roueholonome1'>-0.013108 -0.018041 -0.0025 0.628319 1.5708 0</pose>
+      <parent>roueholonome1</parent>
+      <child>rouleau_8_roueholonome1</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>1</effort>
+          <velocity>20</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='rouleau_8_roueholonome1'>
+      <pose relative_to='Rouleau_h_roueholonome1'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0 -0 -0 0 -0 0</pose>
+        <mass>0.00234322</mass>
+        <inertia>
+          <ixx>0</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>8.1e-08</iyy>
+          <iyz>0</iyz>
+          <izz>0</izz>
+        </inertia>
+      </inertial>
+      <collision name='rouleau_8_roueholonome1_collision'>
+        <pose>0 -0 -0 -1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1000</kp>
+              <kd>10000</kd>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>0.8</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='rouleau_8_roueholonome1_visual'>
+        <pose>0 -0 -0 -1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Black</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='Rouleau_i_roueholonome1' type='revolute'>
+      <pose relative_to='roueholonome1'>0.013108 -0.018041 -0.0025 -0.628319 1.5708 0</pose>
+      <parent>roueholonome1</parent>
+      <child>rouleau_9_roueholonome1</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>1</effort>
+          <velocity>20</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='rouleau_9_roueholonome1'>
+      <pose relative_to='Rouleau_i_roueholonome1'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0 -0 -0 0 -0 0</pose>
+        <mass>0.00234322</mass>
+        <inertia>
+          <ixx>0</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>8.1e-08</iyy>
+          <iyz>0</iyz>
+          <izz>0</izz>
+        </inertia>
+      </inertial>
+      <collision name='rouleau_9_roueholonome1_collision'>
+        <pose>0 0 -0 -1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1000</kp>
+              <kd>10000</kd>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>0.8</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='rouleau_9_roueholonome1_visual'>
+        <pose>0 0 -0 -1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Black</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='Rouleau_j_roueholonome1' type='revolute'>
+      <pose relative_to='roueholonome1'>0.021209 0.006891 -0.0025 -1.88496 1.5708 0</pose>
+      <parent>roueholonome1</parent>
+      <child>rouleau_10_roueholonome1</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>1</effort>
+          <velocity>20</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='rouleau_10_roueholonome1'>
+      <pose relative_to='Rouleau_j_roueholonome1'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0 0 -0 0 -0 0</pose>
+        <mass>0.00234322</mass>
+        <inertia>
+          <ixx>0</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>8.1e-08</iyy>
+          <iyz>0</iyz>
+          <izz>0</izz>
+        </inertia>
+      </inertial>
+      <collision name='rouleau_10_roueholonome1_collision'>
+        <pose>0 0 0 -1.5708 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1000</kp>
+              <kd>10000</kd>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>0.8</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='rouleau_10_roueholonome1_visual'>
+        <pose>0 0 0 -1.5708 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Black</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='joint_wheel_roueholonome2' type='revolute'>
+      <pose relative_to='base_link'>-0 -0.13325 0.01816 -1.5708 -0 -0</pose>
+      <parent>base_link</parent>
+      <child>roueholonome2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>1</effort>
+          <velocity>20</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='roueholonome2'>
+      <pose relative_to='joint_wheel_roueholonome2'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0 0 -0.00905 0 -0 0</pose>
+        <mass>0.0560365</mass>
+        <inertia>
+          <ixx>0</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1e-05</iyy>
+          <iyz>0</iyz>
+          <izz>0</izz>
+        </inertia>
+      </inertial>
+      <collision name='roueholonome2_collision'>
+        <pose>0 0 0 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/roueholonome.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='roueholonome2_visual'>
+        <pose>0 0 0 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/roueholonome.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Grey</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='Rouleau_a_roueholonome2' type='revolute'>
+      <pose relative_to='roueholonome2'>-0.013108 0.018041 -0.0156 -0.628319 1.5708 0</pose>
+      <parent>roueholonome2</parent>
+      <child>rouleau_1_roueholonome2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>1</effort>
+          <velocity>20</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='rouleau_1_roueholonome2'>
+      <pose relative_to='Rouleau_a_roueholonome2'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0 -0 -0 0 -0 0</pose>
+        <mass>0.00234322</mass>
+        <inertia>
+          <ixx>0</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>8.1e-08</iyy>
+          <iyz>0</iyz>
+          <izz>0</izz>
+        </inertia>
+      </inertial>
+      <collision name='rouleau_1_roueholonome2_collision'>
+        <pose>0 -0 -0 -1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1000</kp>
+              <kd>10000</kd>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>0.8</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='rouleau_1_roueholonome2_visual'>
+        <pose>0 -0 -0 -1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Black</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='Rouleau_b_roueholonome2' type='revolute'>
+      <pose relative_to='roueholonome2'>-0.021209 -0.006891 -0.0156 -1.88496 1.5708 0</pose>
+      <parent>roueholonome2</parent>
+      <child>rouleau_2_roueholonome2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>1</effort>
+          <velocity>20</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='rouleau_2_roueholonome2'>
+      <pose relative_to='Rouleau_b_roueholonome2'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0 0 -0 0 -0 0</pose>
+        <mass>0.00234322</mass>
+        <inertia>
+          <ixx>0</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>8.1e-08</iyy>
+          <iyz>0</iyz>
+          <izz>0</izz>
+        </inertia>
+      </inertial>
+      <collision name='rouleau_2_roueholonome2_collision'>
+        <pose>0 0 -0 -1.5708 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1000</kp>
+              <kd>10000</kd>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>0.8</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='rouleau_2_roueholonome2_visual'>
+        <pose>0 0 -0 -1.5708 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Black</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='Rouleau_c_roueholonome2' type='revolute'>
+      <pose relative_to='roueholonome2'>-0 -0.0223 -0.0156 0 1.5708 0</pose>
+      <parent>roueholonome2</parent>
+      <child>rouleau_3_roueholonome2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>1</effort>
+          <velocity>20</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='rouleau_3_roueholonome2'>
+      <pose relative_to='Rouleau_c_roueholonome2'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0 -0 -0 0 -0 0</pose>
+        <mass>0.00234322</mass>
+        <inertia>
+          <ixx>0</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>8.1e-08</iyy>
+          <iyz>0</iyz>
+          <izz>0</izz>
+        </inertia>
+      </inertial>
+      <collision name='rouleau_3_roueholonome2_collision'>
+        <pose>-0 -0 0 -1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1000</kp>
+              <kd>10000</kd>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>0.8</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='rouleau_3_roueholonome2_visual'>
+        <pose>-0 -0 0 -1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Black</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='Rouleau_d_roueholonome2' type='revolute'>
+      <pose relative_to='roueholonome2'>0.021209 -0.006891 -0.0156 -1.25664 1.5708 0</pose>
+      <parent>roueholonome2</parent>
+      <child>rouleau_4_roueholonome2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>1</effort>
+          <velocity>20</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='rouleau_4_roueholonome2'>
+      <pose relative_to='Rouleau_d_roueholonome2'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0 -0 -0 0 -0 0</pose>
+        <mass>0.00234322</mass>
+        <inertia>
+          <ixx>0</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>8.1e-08</iyy>
+          <iyz>0</iyz>
+          <izz>0</izz>
+        </inertia>
+      </inertial>
+      <collision name='rouleau_4_roueholonome2_collision'>
+        <pose>0 -0 0 -1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1000</kp>
+              <kd>10000</kd>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>0.8</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='rouleau_4_roueholonome2_visual'>
+        <pose>0 -0 0 -1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Black</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='Rouleau_e_roueholonome2' type='revolute'>
+      <pose relative_to='roueholonome2'>0.013108 0.018041 -0.0156 0.628319 1.5708 0</pose>
+      <parent>roueholonome2</parent>
+      <child>rouleau_5_roueholonome2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>1</effort>
+          <velocity>20</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='rouleau_5_roueholonome2'>
+      <pose relative_to='Rouleau_e_roueholonome2'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0 0 -0 0 -0 0</pose>
+        <mass>0.00234322</mass>
+        <inertia>
+          <ixx>0</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>8.1e-08</iyy>
+          <iyz>0</iyz>
+          <izz>0</izz>
+        </inertia>
+      </inertial>
+      <collision name='rouleau_5_roueholonome2_collision'>
+        <pose>-0 0 0 -1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1000</kp>
+              <kd>10000</kd>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>0.8</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='rouleau_5_roueholonome2_visual'>
+        <pose>-0 0 0 -1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Black</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='Rouleau_f_roueholonome2' type='revolute'>
+      <pose relative_to='roueholonome2'>-0 0.0223 -0.0025 0 1.5708 0</pose>
+      <parent>roueholonome2</parent>
+      <child>rouleau_6_roueholonome2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>1</effort>
+          <velocity>20</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='rouleau_6_roueholonome2'>
+      <pose relative_to='Rouleau_f_roueholonome2'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0 -0 -0 0 -0 0</pose>
+        <mass>0.00234322</mass>
+        <inertia>
+          <ixx>0</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>8.1e-08</iyy>
+          <iyz>0</iyz>
+          <izz>0</izz>
+        </inertia>
+      </inertial>
+      <collision name='rouleau_6_roueholonome2_collision'>
+        <pose>0 0 0 -1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1000</kp>
+              <kd>10000</kd>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>0.8</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='rouleau_6_roueholonome2_visual'>
+        <pose>0 0 0 -1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Black</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='Rouleau_g_roueholonome2' type='revolute'>
+      <pose relative_to='roueholonome2'>-0.021209 0.006891 -0.0025 -1.25664 1.5708 0</pose>
+      <parent>roueholonome2</parent>
+      <child>rouleau_7_roueholonome2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>1</effort>
+          <velocity>20</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='rouleau_7_roueholonome2'>
+      <pose relative_to='Rouleau_g_roueholonome2'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0 -0 -0 0 -0 0</pose>
+        <mass>0.00234322</mass>
+        <inertia>
+          <ixx>0</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>8.1e-08</iyy>
+          <iyz>0</iyz>
+          <izz>0</izz>
+        </inertia>
+      </inertial>
+      <collision name='rouleau_7_roueholonome2_collision'>
+        <pose>0 -0 0 -1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1000</kp>
+              <kd>10000</kd>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>0.8</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='rouleau_7_roueholonome2_visual'>
+        <pose>0 -0 0 -1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Black</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='Rouleau_h_roueholonome2' type='revolute'>
+      <pose relative_to='roueholonome2'>-0.013108 -0.018041 -0.0025 0.628319 1.5708 0</pose>
+      <parent>roueholonome2</parent>
+      <child>rouleau_8_roueholonome2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>1</effort>
+          <velocity>20</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='rouleau_8_roueholonome2'>
+      <pose relative_to='Rouleau_h_roueholonome2'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0 -0 -0 0 -0 0</pose>
+        <mass>0.00234322</mass>
+        <inertia>
+          <ixx>0</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>8.1e-08</iyy>
+          <iyz>0</iyz>
+          <izz>0</izz>
+        </inertia>
+      </inertial>
+      <collision name='rouleau_8_roueholonome2_collision'>
+        <pose>0 -0 -0 -1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1000</kp>
+              <kd>10000</kd>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>0.8</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='rouleau_8_roueholonome2_visual'>
+        <pose>0 -0 -0 -1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Black</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='Rouleau_i_roueholonome2' type='revolute'>
+      <pose relative_to='roueholonome2'>0.013108 -0.018041 -0.0025 -0.628319 1.5708 0</pose>
+      <parent>roueholonome2</parent>
+      <child>rouleau_9_roueholonome2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>1</effort>
+          <velocity>20</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='rouleau_9_roueholonome2'>
+      <pose relative_to='Rouleau_i_roueholonome2'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0 -0 -0 0 -0 0</pose>
+        <mass>0.00234322</mass>
+        <inertia>
+          <ixx>0</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>8.1e-08</iyy>
+          <iyz>0</iyz>
+          <izz>0</izz>
+        </inertia>
+      </inertial>
+      <collision name='rouleau_9_roueholonome2_collision'>
+        <pose>0 0 -0 -1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1000</kp>
+              <kd>10000</kd>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>0.8</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='rouleau_9_roueholonome2_visual'>
+        <pose>0 0 -0 -1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Black</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='Rouleau_j_roueholonome2' type='revolute'>
+      <pose relative_to='roueholonome2'>0.021209 0.006891 -0.0025 -1.88496 1.5708 0</pose>
+      <parent>roueholonome2</parent>
+      <child>rouleau_10_roueholonome2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>1</effort>
+          <velocity>20</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='rouleau_10_roueholonome2'>
+      <pose relative_to='Rouleau_j_roueholonome2'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0 0 -0 0 -0 0</pose>
+        <mass>0.00234322</mass>
+        <inertia>
+          <ixx>0</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>8.1e-08</iyy>
+          <iyz>0</iyz>
+          <izz>0</izz>
+        </inertia>
+      </inertial>
+      <collision name='rouleau_10_roueholonome2_collision'>
+        <pose>0 0 0 -1.5708 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1000</kp>
+              <kd>10000</kd>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>0.8</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='rouleau_10_roueholonome2_visual'>
+        <pose>0 0 0 -1.5708 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Black</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='joint_wheel_roueholonome3' type='revolute'>
+      <pose relative_to='base_link'>-0.115398 0.066625 0.01816 1.5708 0 1.0472</pose>
+      <parent>base_link</parent>
+      <child>roueholonome3</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>1</effort>
+          <velocity>20</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='roueholonome3'>
+      <pose relative_to='joint_wheel_roueholonome3'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0 0 -0.00905 0 -0 0</pose>
+        <mass>0.0560365</mass>
+        <inertia>
+          <ixx>0</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1e-05</iyy>
+          <iyz>0</iyz>
+          <izz>0</izz>
+        </inertia>
+      </inertial>
+      <collision name='roueholonome3_collision'>
+        <pose>0 0 0 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/roueholonome.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='roueholonome3_visual'>
+        <pose>0 0 0 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/roueholonome.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Grey</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='Rouleau_a_roueholonome3' type='revolute'>
+      <pose relative_to='roueholonome3'>-0.013108 0.018041 -0.0156 -0.628319 1.5708 0</pose>
+      <parent>roueholonome3</parent>
+      <child>rouleau_1_roueholonome3</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>1</effort>
+          <velocity>20</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='rouleau_1_roueholonome3'>
+      <pose relative_to='Rouleau_a_roueholonome3'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0 -0 -0 0 -0 0</pose>
+        <mass>0.00234322</mass>
+        <inertia>
+          <ixx>0</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>8.1e-08</iyy>
+          <iyz>0</iyz>
+          <izz>0</izz>
+        </inertia>
+      </inertial>
+      <collision name='rouleau_1_roueholonome3_collision'>
+        <pose>0 -0 -0 -1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1000</kp>
+              <kd>10000</kd>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>0.8</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='rouleau_1_roueholonome3_visual'>
+        <pose>0 -0 -0 -1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Black</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='Rouleau_b_roueholonome3' type='revolute'>
+      <pose relative_to='roueholonome3'>-0.021209 -0.006891 -0.0156 -1.88496 1.5708 0</pose>
+      <parent>roueholonome3</parent>
+      <child>rouleau_2_roueholonome3</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>1</effort>
+          <velocity>20</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='rouleau_2_roueholonome3'>
+      <pose relative_to='Rouleau_b_roueholonome3'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0 0 -0 0 -0 0</pose>
+        <mass>0.00234322</mass>
+        <inertia>
+          <ixx>0</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>8.1e-08</iyy>
+          <iyz>0</iyz>
+          <izz>0</izz>
+        </inertia>
+      </inertial>
+      <collision name='rouleau_2_roueholonome3_collision'>
+        <pose>0 0 -0 -1.5708 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1000</kp>
+              <kd>10000</kd>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>0.8</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='rouleau_2_roueholonome3_visual'>
+        <pose>0 0 -0 -1.5708 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Black</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='Rouleau_c_roueholonome3' type='revolute'>
+      <pose relative_to='roueholonome3'>-0 -0.0223 -0.0156 0 1.5708 0</pose>
+      <parent>roueholonome3</parent>
+      <child>rouleau_3_roueholonome3</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>1</effort>
+          <velocity>20</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='rouleau_3_roueholonome3'>
+      <pose relative_to='Rouleau_c_roueholonome3'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0 -0 -0 0 -0 0</pose>
+        <mass>0.00234322</mass>
+        <inertia>
+          <ixx>0</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>8.1e-08</iyy>
+          <iyz>0</iyz>
+          <izz>0</izz>
+        </inertia>
+      </inertial>
+      <collision name='rouleau_3_roueholonome3_collision'>
+        <pose>-0 -0 0 -1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1000</kp>
+              <kd>10000</kd>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>0.8</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='rouleau_3_roueholonome3_visual'>
+        <pose>-0 -0 0 -1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Black</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='Rouleau_d_roueholonome3' type='revolute'>
+      <pose relative_to='roueholonome3'>0.021209 -0.006891 -0.0156 -1.25664 1.5708 0</pose>
+      <parent>roueholonome3</parent>
+      <child>rouleau_4_roueholonome3</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>1</effort>
+          <velocity>20</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='rouleau_4_roueholonome3'>
+      <pose relative_to='Rouleau_d_roueholonome3'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0 -0 -0 0 -0 0</pose>
+        <mass>0.00234322</mass>
+        <inertia>
+          <ixx>0</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>8.1e-08</iyy>
+          <iyz>0</iyz>
+          <izz>0</izz>
+        </inertia>
+      </inertial>
+      <collision name='rouleau_4_roueholonome3_collision'>
+        <pose>0 -0 0 -1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1000</kp>
+              <kd>10000</kd>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>0.8</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='rouleau_4_roueholonome3_visual'>
+        <pose>0 -0 0 -1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Black</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='Rouleau_e_roueholonome3' type='revolute'>
+      <pose relative_to='roueholonome3'>0.013108 0.018041 -0.0156 0.628319 1.5708 0</pose>
+      <parent>roueholonome3</parent>
+      <child>rouleau_5_roueholonome3</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>1</effort>
+          <velocity>20</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='rouleau_5_roueholonome3'>
+      <pose relative_to='Rouleau_e_roueholonome3'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0 0 -0 0 -0 0</pose>
+        <mass>0.00234322</mass>
+        <inertia>
+          <ixx>0</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>8.1e-08</iyy>
+          <iyz>0</iyz>
+          <izz>0</izz>
+        </inertia>
+      </inertial>
+      <collision name='rouleau_5_roueholonome3_collision'>
+        <pose>-0 0 0 -1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1000</kp>
+              <kd>10000</kd>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>0.8</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='rouleau_5_roueholonome3_visual'>
+        <pose>-0 0 0 -1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Black</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='Rouleau_f_roueholonome3' type='revolute'>
+      <pose relative_to='roueholonome3'>-0 0.0223 -0.0025 0 1.5708 0</pose>
+      <parent>roueholonome3</parent>
+      <child>rouleau_6_roueholonome3</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>1</effort>
+          <velocity>20</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='rouleau_6_roueholonome3'>
+      <pose relative_to='Rouleau_f_roueholonome3'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0 -0 -0 0 -0 0</pose>
+        <mass>0.00234322</mass>
+        <inertia>
+          <ixx>0</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>8.1e-08</iyy>
+          <iyz>0</iyz>
+          <izz>0</izz>
+        </inertia>
+      </inertial>
+      <collision name='rouleau_6_roueholonome3_collision'>
+        <pose>0 0 0 -1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1000</kp>
+              <kd>10000</kd>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>0.8</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='rouleau_6_roueholonome3_visual'>
+        <pose>0 0 0 -1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Black</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='Rouleau_g_roueholonome3' type='revolute'>
+      <pose relative_to='roueholonome3'>-0.021209 0.006891 -0.0025 -1.25664 1.5708 0</pose>
+      <parent>roueholonome3</parent>
+      <child>rouleau_7_roueholonome3</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>1</effort>
+          <velocity>20</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='rouleau_7_roueholonome3'>
+      <pose relative_to='Rouleau_g_roueholonome3'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0 -0 -0 0 -0 0</pose>
+        <mass>0.00234322</mass>
+        <inertia>
+          <ixx>0</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>8.1e-08</iyy>
+          <iyz>0</iyz>
+          <izz>0</izz>
+        </inertia>
+      </inertial>
+      <collision name='rouleau_7_roueholonome3_collision'>
+        <pose>0 -0 0 -1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1000</kp>
+              <kd>10000</kd>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>0.8</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='rouleau_7_roueholonome3_visual'>
+        <pose>0 -0 0 -1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Black</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='Rouleau_h_roueholonome3' type='revolute'>
+      <pose relative_to='roueholonome3'>-0.013108 -0.018041 -0.0025 0.628319 1.5708 0</pose>
+      <parent>roueholonome3</parent>
+      <child>rouleau_8_roueholonome3</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>1</effort>
+          <velocity>20</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='rouleau_8_roueholonome3'>
+      <pose relative_to='Rouleau_h_roueholonome3'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0 -0 -0 0 -0 0</pose>
+        <mass>0.00234322</mass>
+        <inertia>
+          <ixx>0</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>8.1e-08</iyy>
+          <iyz>0</iyz>
+          <izz>0</izz>
+        </inertia>
+      </inertial>
+      <collision name='rouleau_8_roueholonome3_collision'>
+        <pose>0 -0 -0 -1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1000</kp>
+              <kd>10000</kd>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>0.8</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='rouleau_8_roueholonome3_visual'>
+        <pose>0 -0 -0 -1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Black</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='Rouleau_i_roueholonome3' type='revolute'>
+      <pose relative_to='roueholonome3'>0.013108 -0.018041 -0.0025 -0.628319 1.5708 0</pose>
+      <parent>roueholonome3</parent>
+      <child>rouleau_9_roueholonome3</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>1</effort>
+          <velocity>20</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='rouleau_9_roueholonome3'>
+      <pose relative_to='Rouleau_i_roueholonome3'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0 -0 -0 0 -0 0</pose>
+        <mass>0.00234322</mass>
+        <inertia>
+          <ixx>0</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>8.1e-08</iyy>
+          <iyz>0</iyz>
+          <izz>0</izz>
+        </inertia>
+      </inertial>
+      <collision name='rouleau_9_roueholonome3_collision'>
+        <pose>0 0 -0 -1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1000</kp>
+              <kd>10000</kd>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>0.8</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='rouleau_9_roueholonome3_visual'>
+        <pose>0 0 -0 -1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Black</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='Rouleau_j_roueholonome3' type='revolute'>
+      <pose relative_to='roueholonome3'>0.021209 0.006891 -0.0025 -1.88496 1.5708 0</pose>
+      <parent>roueholonome3</parent>
+      <child>rouleau_10_roueholonome3</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>1</effort>
+          <velocity>20</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='rouleau_10_roueholonome3'>
+      <pose relative_to='Rouleau_j_roueholonome3'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0 0 -0 0 -0 0</pose>
+        <mass>0.00234322</mass>
+        <inertia>
+          <ixx>0</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>8.1e-08</iyy>
+          <iyz>0</iyz>
+          <izz>0</izz>
+        </inertia>
+      </inertial>
+      <collision name='rouleau_10_roueholonome3_collision'>
+        <pose>0 0 0 -1.5708 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1000</kp>
+              <kd>10000</kd>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>0.8</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='rouleau_10_roueholonome3_visual'>
+        <pose>0 0 0 -1.5708 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/holonomic_wheel/rouleau.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Black</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+  </model>
+</sdf>
