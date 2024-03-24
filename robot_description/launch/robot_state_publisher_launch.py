@@ -27,7 +27,7 @@ def generate_launch_description():
 
     # Specify the package directory and path to xacro file within the package
     robot_description_pkg_dir = get_package_share_directory('robot_description')
-    urdf_file_subpath = 'urdf/robot_urdf.xacro'
+    urdf_file_subpath = 'urdf/robot.urdf.xacro'
     rviz_launch_file_subpath = 'launch/rviz.launch.py'
     rviz_config_file_subpath = 'rviz/robot_description_rviz.rviz'
 
