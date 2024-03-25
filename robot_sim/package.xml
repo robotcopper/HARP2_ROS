@@ -23,12 +23,6 @@
   <exec_depend>xacro</exec_depend>
   
   <export>
-    <!-- <gazebo_ros gazebo_model_path="${prefix}/world"/> -->
-    <gazebo_ros gazebo_model_path="/home/floris/ros2_ws/src/HARP2/robot_sim/world, /home/floris/ros2_ws/src/HARP2/robot_description "/>
-    <!-- <gazebo_ros gazebo_media_path="${prefix}/world"/> -->
-    <gazebo_ros gazebo_media_path="/home/floris/ros2_ws/src/HARP2/robot_sim/world, /home/floris/ros2_ws/src/HARP2/robot_description "/>
-    <!-- <gazebo_ros gazebo_resource_path="${prefix}/world"/> -->
-    <gazebo_ros gazebo_resource_path="/home/floris/ros2_ws/src/HARP2/robot_sim/world, /home/floris/ros2_ws/src/HARP2/robot_description "/>
     <build_type>ament_cmake</build_type>
   </export>
 </package>
