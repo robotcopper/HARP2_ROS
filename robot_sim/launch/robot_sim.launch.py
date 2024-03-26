@@ -37,17 +37,17 @@ def generate_launch_description():
     wordl_file_subpath = 'world/Table2024.world'
     gazebo_ros_pkg_dir = get_package_share_directory('gazebo_ros')
 
-    # Environment variables setup normally optional 
+    # Gazebo environment variables setup 
     gazebo_models_world_path = os.path.join(robot_sim_pkg_dir, 'world')
     gazebo_models_robot_description_path = os.path.join(robot_description_pkg_dir, 'urdf')
     gazebo_models_default_path = os.path.join('$HOME', '.gazebo', 'models')
-    SetEnvironmentVariable(name='GAZEBO_MODEL_PATH', value=[gazebo_models_world_path, gazebo_models_robot_description_path, gazebo_models_default_path])
-    SetEnvironmentVariable(name='GAZEBO_RESOURCE_PATH',value=[gazebo_models_world_path, gazebo_models_robot_description_path, gazebo_models_default_path])
-    SetEnvironmentVariable(name='GAZEBO_MEDIA_PATH',value=[gazebo_models_world_path, gazebo_models_robot_description_path, gazebo_models_default_path])
-    # Set GAZEBO_MODEL_URI to empty string to prevent Gazebo from downloading models
-    SetEnvironmentVariable(name='GAZEBO_MODEL_URI',value=[''])
-    # Set GAZEBO_MODEL_DATABASE_URI to empty string to prevent Gazebo from downloading models
-    SetEnvironmentVariable(name='GAZEBO_MODEL_DATABASE_URI',value=[''])
+    gazebo_default_path = '/usr/share/gazebo-11' # Must have to avoid gazebo::rendering::Camera error
+    all_paths = gazebo_models_world_path+':'+gazebo_models_robot_description_path+':'+gazebo_models_default_path+':'+gazebo_default_path
+    os.environ['GAZEBO_MODEL_PATH'] = all_paths 
+    os.environ['GAZEBO_MEDIA_PATH'] = all_paths 
+    os.environ['GAZEBO_RESOURCE_PATH'] = all_paths
+    os.environ['GAZEBO_MODEL_URI'] = '' # To prevent Gazebo from downloading models
+    os.environ['GAZEBO_MODEL_DATABASE_URI'] = '' # To prevent Gazebo from downloading models
 
 
     return LaunchDescription([
