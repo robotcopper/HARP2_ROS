@@ -109,7 +109,7 @@
           <geometry>
             <mesh>
               <scale>1 1 1</scale>
-              <uri>/home/floris/ros2_ws/src/HARP2/robot_sim/world/Table2024/meshes/Table2024.dae</uri>
+              <uri>model://Table2024/meshes/Table2024.dae</uri>
             </mesh>
           </geometry>
           <max_contacts>10</max_contacts>
@@ -131,7 +131,7 @@
           <geometry>
             <mesh>
               <scale>1 1 1</scale>
-              <uri>/home/floris/ros2_ws/src/HARP2/robot_sim/world/Table2024/meshes/Table2024.dae</uri>
+              <uri>model://Table2024/meshes/Table2024.dae</uri>
             </mesh>
           </geometry>
         </visual>
