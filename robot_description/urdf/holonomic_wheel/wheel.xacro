@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" >
+
+	<xacro:include filename="$(find robot_description)/urdf/standard_inertia_util.xacro" />
 	
 	<xacro:property name="roue_xyz" value="0 0 0" />
 	<xacro:property name="roue_rpy" value="1.570796326794896558 1.570796326794896558 0" />
@@ -21,14 +23,18 @@
 					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/roueholonome.stl"/>
 				</geometry>
 			</collision>
-			<inertial>
+			<xacro:inertial_cylinder mass="0.073" length="0.0215" radius="0.03">
 				<origin xyz="-2.5184848675754577033e-17 4.8001766176252168599e-18 -0.0090500000000000198341" rpy="0 0 0"/>
-				<mass value="0.056036470001344637626" />
-				<inertia ixx="0.0" ixy="0.0"  ixz="0.0" iyy="1.0e-05" iyz="0.0" izz="0.0" />
-			</inertial>
+			</xacro:inertial_cylinder>
 		</link>
 		<gazebo reference="${name_roueholonome}">
 			<material>Gazebo/Grey</material>
+			<mu1>100.0</mu1>
+    		<mu2>100.8</mu2>
+			<kp>500000.0</kp>
+    		<kd>10.0</kd>
+			<min_depth>0.1</min_depth>
+			<maxVel>0.1</maxVel>
 		</gazebo>
 
 		<link name="rouleau_1_${name_roueholonome}">
@@ -45,20 +51,20 @@
 				<origin xyz="0 -6.9388939039072283776e-18 -1.3660947373317355868e-17" rpy="-1.570796326794896558 7.4458241183643537248e-17 -2.2931001679521526839e-18" />
 				<geometry>
 					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/rouleau.stl"/>
-				</geometry>
+				</geometry>	
 			</collision>
-			<inertial>
-				<origin xyz="-1.3533020587659002873e-19 -6.9388939039072283776e-18 -7.6373245842409416038e-17" rpy="0 0 0"/>
-				<mass value="0.0023432187849480503455" />
-				<inertia ixx="0.0" ixy="0.0"  ixz="0.0" iyy="8.1e-08" iyz="0.0" izz="0.0" />
-			</inertial>
+			<xacro:inertial_cylinder mass="0.010" length="0.019" radius="0.0075">
+            	<origin xyz="-1.3533020587659002873e-19 -6.9388939039072283776e-18 -7.6373245842409416038e-17" rpy="0 0 0"/>
+        	</xacro:inertial_cylinder>
 		</link>
 		<gazebo reference="rouleau_1_${name_roueholonome}">
 			<material>Gazebo/Black</material>
-			<mu1>1.0</mu1>
-    		<mu2>0.8</mu2>
-			<kp>1000.0</kp>
-    		<kd>10000.0</kd>
+			<mu1>100.0</mu1>
+    		<mu2>100.8</mu2>
+			<kp>500000.0</kp>
+    		<kd>10.0</kd>
+			<min_depth>0.1</min_depth>
+			<maxVel>0.1</maxVel>
 		</gazebo>
 
 		<joint name="Rouleau_a_${name_roueholonome}" type="continuous">
@@ -67,7 +73,7 @@
 			<child link="rouleau_1_${name_roueholonome}" />
 			<axis xyz="0 0 1"/>
 			<limit effort="1" velocity="20" />
-			<joint_properties friction="0.0"/>
+			<joint_properties friction="10000.0"/>
 		</joint>
 
 
@@ -85,20 +91,20 @@
 				<origin xyz="0 3.4694469519536141888e-18 -3.4694469519536141888e-18" rpy="-1.570796326794896558 1.704115477206629922e-17 1.0069492273628905161e-16" />
 				<geometry>
 					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/rouleau.stl"/>
-				</geometry>
+				</geometry>	
 			</collision>
-			<inertial>
+			<xacro:inertial_cylinder mass="0.010" length="0.019" radius="0.0075">
 				<origin xyz="-1.3533020587657876204e-19 3.4694469519536203518e-18 -6.6181745421045662032e-17" rpy="0 0 0"/>
-				<mass value="0.0023432187849480503455" />
-				<inertia ixx="0.0" ixy="0.0"  ixz="0.0" iyy="8.1e-08" iyz="0.0" izz="0.0" />
-			</inertial>
+			</xacro:inertial_cylinder>
 		</link>
 		<gazebo reference="rouleau_2_${name_roueholonome}">
 			<material>Gazebo/Black</material>
-			<mu1>1.0</mu1>
-    		<mu2>0.8</mu2>
-			<kp>1000.0</kp>
-    		<kd>10000.0</kd>
+			<mu1>100.0</mu1>
+    		<mu2>100.8</mu2>
+			<kp>500000.0</kp>
+    		<kd>10.0</kd>
+			<min_depth>0.1</min_depth>
+			<maxVel>0.1</maxVel>
 		</gazebo>
 
 		<joint name="Rouleau_b_${name_roueholonome}" type="continuous">
@@ -107,7 +113,7 @@
 			<child link="rouleau_2_${name_roueholonome}" />
 			<axis xyz="0 0 1"/>
 			<limit effort="1" velocity="20" />
-			<joint_properties friction="0.0"/>
+			<joint_properties friction="10000.0"/>
 		</joint>
 
 
@@ -127,18 +133,18 @@
 					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/rouleau.stl"/>
 				</geometry>
 			</collision>
-			<inertial>
+			<xacro:inertial_cylinder mass="0.010" length="0.019" radius="0.0075">
 				<origin xyz="-2.7890905821505490852e-17 -5.2041704279304320684e-18 -5.9242851517138445981e-17" rpy="0 0 0"/>
-				<mass value="0.0023432187849480503455" />
-				<inertia ixx="0.0" ixy="0.0"  ixz="0.0" iyy="8.1e-08" iyz="0.0" izz="0.0" />
-			</inertial>
+			</xacro:inertial_cylinder>
 		</link>
 		<gazebo reference="rouleau_3_${name_roueholonome}">
 			<material>Gazebo/Black</material>
-			<mu1>1.0</mu1>
-    		<mu2>0.8</mu2>
-			<kp>1000.0</kp>
-    		<kd>10000.0</kd>
+			<mu1>100.0</mu1>
+    		<mu2>100.8</mu2>
+			<kp>500000.0</kp>
+    		<kd>10.0</kd>
+			<min_depth>0.1</min_depth>
+			<maxVel>0.1</maxVel>
 		</gazebo>
 
 		<joint name="Rouleau_c_${name_roueholonome}" type="continuous">
@@ -147,7 +153,7 @@
 			<child link="rouleau_3_${name_roueholonome}" />
 			<axis xyz="0 0 1"/>
 			<limit effort="1" velocity="20" />
-			<joint_properties friction="0.0"/>
+			<joint_properties friction="10000.0"/>
 		</joint>
 
 
@@ -165,20 +171,20 @@
 				<origin xyz="0 -5.2041704279304212832e-18 6.9388939039072283776e-18" rpy="-1.57079632679489678 2.2968870007964204446e-18 -1.2816475377239519703e-17" />
 				<geometry>
 					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/rouleau.stl"/>
-				</geometry>
+				</geometry>			
 			</collision>
-			<inertial>
+			<xacro:inertial_cylinder mass="0.010" length="0.019" radius="0.0075">
 				<origin xyz="-1.3533020587658461205e-19 -5.2041704279304251351e-18 -5.5773404565184819466e-17" rpy="0 0 0"/>
-				<mass value="0.0023432187849480503455" />
-				<inertia ixx="0.0" ixy="0.0"  ixz="0.0" iyy="8.1e-08" iyz="0.0" izz="0.0" />
-			</inertial>
+			</xacro:inertial_cylinder>
 		</link>
 		<gazebo reference="rouleau_4_${name_roueholonome}">
 			<material>Gazebo/Black</material>
-			<mu1>1.0</mu1>
-    		<mu2>0.8</mu2>
-			<kp>1000.0</kp>
-    		<kd>10000.0</kd>
+			<mu1>100.0</mu1>
+    		<mu2>100.8</mu2>
+			<kp>500000.0</kp>
+    		<kd>10.0</kd>
+			<min_depth>0.1</min_depth>
+			<maxVel>0.1</maxVel>
 		</gazebo>
 
 		<joint name="Rouleau_d_${name_roueholonome}" type="continuous">
@@ -187,7 +193,7 @@
 			<child link="rouleau_4_${name_roueholonome}" />
 			<axis xyz="0 0 1"/>
 			<limit effort="1" velocity="20" />
-			<joint_properties friction="0.0"/>
+			<joint_properties friction="10000.0"/>
 		</joint>
 
 
@@ -205,20 +211,20 @@
 				<origin xyz="-2.7755575615628913511e-17 3.4694469519536141888e-18 3.4694469519536141888e-18" rpy="-1.570796326794896558 -3.1610276974795425021e-18 9.1157131572497391962e-18" />
 				<geometry>
 					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/rouleau.stl"/>
-				</geometry>
+				</geometry>	
 			</collision>
-			<inertial>
+			<xacro:inertial_cylinder mass="0.010" length="0.019" radius="0.0075">
 				<origin xyz="-2.7890905821505497015e-17 3.4694469519536134185e-18 -5.9242851517138445981e-17" rpy="0 0 0"/>
-				<mass value="0.0023432187849480503455" />
-				<inertia ixx="0.0" ixy="0.0"  ixz="0.0" iyy="8.1e-08" iyz="0.0" izz="0.0" />
-			</inertial>
+			</xacro:inertial_cylinder>
 		</link>
 		<gazebo reference="rouleau_5_${name_roueholonome}">
 			<material>Gazebo/Black</material>
-			<mu1>1.0</mu1>
-    		<mu2>0.8</mu2>
-			<kp>1000.0</kp>
-    		<kd>10000.0</kd>
+			<mu1>100.0</mu1>
+    		<mu2>100.8</mu2>
+			<kp>500000.0</kp>
+    		<kd>10.0</kd>
+			<min_depth>0.1</min_depth>
+			<maxVel>0.1</maxVel>
 		</gazebo>
 
 		<joint name="Rouleau_e_${name_roueholonome}" type="continuous">
@@ -227,7 +233,7 @@
 			<child link="rouleau_5_${name_roueholonome}" />
 			<axis xyz="0 0 1"/>
 			<limit effort="1" velocity="20" />
-			<joint_properties friction="0.0"/>
+			<joint_properties friction="10000.0"/>
 		</joint>
 
 
@@ -247,18 +253,18 @@
 					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/rouleau.stl"/>
 				</geometry>
 			</collision>
-			<inertial>
+			<xacro:inertial_cylinder mass="0.010" length="0.019" radius="0.0075">
 				<origin xyz="-1.3533020587657560833e-19 -4.0005310894682744636e-33 -5.7508128041161638886e-17" rpy="0 0 0"/>
-				<mass value="0.0023432187849480503455" />
-				<inertia ixx="0.0" ixy="0.0"  ixz="0.0" iyy="8.1e-08" iyz="0.0" izz="0.0" />
-			</inertial>
+			</xacro:inertial_cylinder>
 		</link>
 		<gazebo reference="rouleau_6_${name_roueholonome}">
 			<material>Gazebo/Black</material>
-			<mu1>1.0</mu1>
-    		<mu2>0.8</mu2>
-			<kp>1000.0</kp>
-    		<kd>10000.0</kd>
+			<mu1>100.0</mu1>
+    		<mu2>100.8</mu2>
+			<kp>500000.0</kp>
+    	<kd>10.0</kd>
+			<min_depth>0.1</min_depth>
+			<maxVel>0.1</maxVel>
 		</gazebo>
 
 		<joint name="Rouleau_f_${name_roueholonome}" type="continuous">
@@ -267,7 +273,7 @@
 			<child link="rouleau_6_${name_roueholonome}" />
 			<axis xyz="0 0 1"/>
 			<limit effort="1" velocity="20" />
-			<joint_properties friction="0.0"/>
+			<joint_properties friction="10000.0"/>
 		</joint>
 
 
@@ -285,20 +291,20 @@
 				<origin xyz="0 -6.9388939039072283776e-18 5.2041704279304212832e-18" rpy="-1.57079632679489678 2.2968870007964204446e-18 -1.2816475377239519703e-17" />
 				<geometry>
 					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/rouleau.stl"/>
-				</geometry>
+				</geometry>	
 			</collision>
-			<inertial>
+			<xacro:inertial_cylinder mass="0.010" length="0.019" radius="0.0075">
 				<origin xyz="-1.3533020587658461205e-19 -6.9388939039072329999e-18 -5.750812804116162656e-17" rpy="0 0 0"/>
-				<mass value="0.0023432187849480503455" />
-				<inertia ixx="0.0" ixy="0.0"  ixz="0.0" iyy="8.1e-08" iyz="0.0" izz="0.0" />
-			</inertial>
+			</xacro:inertial_cylinder>
 		</link>
 		<gazebo reference="rouleau_7_${name_roueholonome}">
 			<material>Gazebo/Black</material>
-			<mu1>1.0</mu1>
-    		<mu2>0.8</mu2>
-			<kp>1000.0</kp>
-    		<kd>10000.0</kd>
+			<mu1>100.0</mu1>
+    		<mu2>100.8</mu2>
+			<kp>500000.0</kp>
+    		<kd>10.0</kd>
+			<min_depth>0.1</min_depth>
+			<maxVel>0.1</maxVel>
 		</gazebo>
 
 		<joint name="Rouleau_g_${name_roueholonome}" type="continuous">
@@ -307,7 +313,7 @@
 			<child link="rouleau_7_${name_roueholonome}" />
 			<axis xyz="0 0 1"/>
 			<limit effort="1" velocity="20" />
-			<joint_properties friction="0.0"/>
+			<joint_properties friction="10000.0"/>
 		</joint>
 
 
@@ -325,20 +331,20 @@
 				<origin xyz="0 -1.0408340855860842566e-17 -3.4694469519536141888e-18" rpy="-1.570796326794896558 -3.1610276974795425021e-18 9.1157131572497391962e-18" />
 				<geometry>
 					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/rouleau.stl"/>
-				</geometry>
+				</geometry>				
 			</collision>
-			<inertial>
+			<xacro:inertial_cylinder mass="0.010" length="0.019" radius="0.0075">
 				<origin xyz="-1.3533020587658068797e-19 -1.0408340855860842566e-17 -6.6181745421045674358e-17" rpy="0 0 0"/>
-				<mass value="0.0023432187849480503455" />
-				<inertia ixx="0.0" ixy="0.0"  ixz="0.0" iyy="8.1e-08" iyz="0.0" izz="0.0" />
-			</inertial>
+			</xacro:inertial_cylinder>
 		</link>
 		<gazebo reference="rouleau_8_${name_roueholonome}">
 			<material>Gazebo/Black</material>
-			<mu1>1.0</mu1>
-    		<mu2>0.8</mu2>
-			<kp>1000.0</kp>
-    		<kd>10000.0</kd>
+			<mu1>100.0</mu1>
+    		<mu2>100.8</mu2>
+			<kp>500000.0</kp>
+    		<kd>10.0</kd>
+			<min_depth>0.1</min_depth>
+			<maxVel>0.1</maxVel>
 		</gazebo>
 
 		<joint name="Rouleau_h_${name_roueholonome}" type="continuous">
@@ -347,7 +353,7 @@
 			<child link="rouleau_8_${name_roueholonome}" />
 			<axis xyz="0 0 1"/>
 			<limit effort="1" velocity="20" />
-			<joint_properties friction="0.0"/>
+			<joint_properties friction="10000.0"/>
 		</joint>
 
 
@@ -365,20 +371,20 @@
 				<origin xyz="0 0 -2.4936649967166601982e-18" rpy="-1.570796326794896558 7.4458252970967266128e-17 -2.2931034766746028961e-18" />
 				<geometry>
 					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/rouleau.stl"/>
-				</geometry>
+				</geometry>				
 			</collision>
-			<inertial>
+			<xacro:inertial_cylinder mass="0.010" length="0.019" radius="0.0075">
 				<origin xyz="-1.353302058765900528e-19 -8.1870457482636967244e-35 -6.5205963465808720368e-17" rpy="0 0 0"/>
-				<mass value="0.0023432187849480503455" />
-				<inertia ixx="0.0" ixy="0.0"  ixz="0.0" iyy="8.1e-08" iyz="0.0" izz="0.0" />
-			</inertial>
+			</xacro:inertial_cylinder>
 		</link>
 		<gazebo reference="rouleau_9_${name_roueholonome}">
 			<material>Gazebo/Black</material>
-			<mu1>1.0</mu1>
-    		<mu2>0.8</mu2>
-			<kp>1000.0</kp>
-    		<kd>10000.0</kd>
+			<mu1>100.0</mu1>
+    		<mu2>100.8</mu2>
+			<kp>500000.0</kp>
+    		<kd>10.0</kd>
+			<min_depth>0.1</min_depth>
+			<maxVel>0.1</maxVel>
 		</gazebo>
 
 		<joint name="Rouleau_i_${name_roueholonome}" type="continuous">
@@ -387,7 +393,7 @@
 			<child link="rouleau_9_${name_roueholonome}" />
 			<axis xyz="0 0 1"/>
 			<limit effort="1" velocity="20" />
-			<joint_properties friction="0.0"/>
+			<joint_properties friction="10000.0"/>
 		</joint>
 
 
@@ -405,20 +411,20 @@
 				<origin xyz="0 0 3.4694469519536141888e-18" rpy="-1.570796326794896558 1.704115477206629922e-17 1.0069492273628905161e-16" />
 				<geometry>
 					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/rouleau.stl"/>
-				</geometry>
+				</geometry>		
 			</collision>
-			<inertial>
+			<xacro:inertial_cylinder mass="0.010" length="0.019" radius="0.0075">
 				<origin xyz="-1.3533020587657876204e-19 6.4315019349350432793e-33 -5.9242851517138433655e-17" rpy="0 0 0"/>
-				<mass value="0.0023432187849480503455" />
-				<inertia ixx="0.0" ixy="0.0"  ixz="0.0" iyy="8.1e-08" iyz="0.0" izz="0.0" />
-			</inertial>
+			</xacro:inertial_cylinder>
 		</link>
 		<gazebo reference="rouleau_10_${name_roueholonome}">
 			<material>Gazebo/Black</material>
-			<mu1>1.0</mu1>
-    		<mu2>0.8</mu2>
-			<kp>1000.0</kp>
-    		<kd>10000.0</kd>
+			<mu1>100.0</mu1>
+    		<mu2>100.8</mu2>
+			<kp>500000.0</kp>
+    		<kd>10.0</kd>
+			<min_depth>0.1</min_depth>
+			<maxVel>0.1</maxVel>
 		</gazebo>
 
 		<joint name="Rouleau_j_${name_roueholonome}" type="continuous">
@@ -427,7 +433,7 @@
 			<child link="rouleau_10_${name_roueholonome}" />
 			<axis xyz="0 0 1"/>
 			<limit effort="1" velocity="20" />
-			<joint_properties friction="0.0"/>
+			<joint_properties friction="10000.0"/>
 		</joint>
 
 
@@ -437,7 +443,7 @@
 			<child link="${name_roueholonome}" />
 			<axis xyz="0 0 1"/>
 			<limit effort="1" velocity="20" />
-			<joint_properties friction="0.0"/>
+			<joint_properties friction="10000.0"/>
 		</joint>
 
 		<!-- <gazebo>

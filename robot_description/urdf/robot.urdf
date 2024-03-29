@@ -6,6 +6,37 @@
 <robot name="robot">
   <!-- Specify some standard inertial calculations https://en.wikipedia.org/wiki/List_of_moments_of_inertia -->
   <!-- These make use of xacro's mathematical functionality -->
+  <!-- Specify some standard inertial calculations https://en.wikipedia.org/wiki/List_of_moments_of_inertia -->
+  <!-- These make use of xacro's mathematical functionality -->
+  <ros2_control name="GazeboSystem" type="system">
+    <hardware>
+      <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+    </hardware>
+    <joint name="joint_wheel_roueholonome1">
+      <command_interface name="velocity">
+        <param name="min">-10</param>
+        <param name="max">10</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+    <joint name="joint_wheel_roueholonome2">
+      <command_interface name="velocity">
+        <param name="min">-10</param>
+        <param name="max">10</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+    <joint name="joint_wheel_roueholonome3">
+      <command_interface name="velocity">
+        <param name="min">-10</param>
+        <param name="max">10</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+  </ros2_control>
   <!-- This first link called "base_footprint" is empty -->
   <link name="base_footprint"/>
   <joint name="base_joint" type="fixed">
@@ -28,6 +59,13 @@
       <geometry>
         <mesh filename="file:///home/floris/ros2_ws/install/robot_description/share/robot_description/urdf/robot_base.stl"/>
       </geometry>
+      <surface>
+        <contact>
+          <ode>
+            <min_depth>0.001</min_depth>
+          </ode>
+        </contact>
+      </surface>
     </collision>
     <inertial>
       <origin rpy="0 0 0" xyz="0 0 0.005"/>
@@ -36,11 +74,13 @@
     </inertial>
   </link>
   <gazebo reference="base_link">
-    <!--<material>Gazebo/Black</material>
-        <mu1>1.0</mu1>
-        <mu2>0.8</mu2> -->
-    <kp>1000.0</kp>
-    <kd>10000.0</kd>
+    <!-- <material>Gazebo/Black</material> -->
+    <mu1>1.0</mu1>
+    <mu2>0.8</mu2>
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <min_depth>0.1</min_depth>
+    <maxVel>0.1</maxVel>
   </gazebo>
   <link name="roueholonome1">
     <visual>
@@ -60,12 +100,18 @@
     </collision>
     <inertial>
       <origin rpy="0 0 0" xyz="-2.5184848675754577033e-17 4.8001766176252168599e-18 -0.0090500000000000198341"/>
-      <mass value="0.056036470001344637626"/>
-      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="1.0e-05" iyz="0.0" izz="0.0"/>
+      <mass value="0.073"/>
+      <inertia ixx="1.923702083333333e-05" ixy="0.0" ixz="0.0" iyy="1.923702083333333e-05" iyz="0.0" izz="3.285e-05"/>
     </inertial>
   </link>
   <gazebo reference="roueholonome1">
     <material>Gazebo/Grey</material>
+    <mu1>100.0</mu1>
+    <mu2>100.8</mu2>
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <min_depth>0.1</min_depth>
+    <maxVel>0.1</maxVel>
   </gazebo>
   <link name="rouleau_1_roueholonome1">
     <visual>
@@ -85,16 +131,18 @@
     </collision>
     <inertial>
       <origin rpy="0 0 0" xyz="-1.3533020587659002873e-19 -6.9388939039072283776e-18 -7.6373245842409416038e-17"/>
-      <mass value="0.0023432187849480503455"/>
-      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="8.1e-08" iyz="0.0" izz="0.0"/>
+      <mass value="0.01"/>
+      <inertia ixx="4.4145833333333327e-07" ixy="0.0" ixz="0.0" iyy="4.4145833333333327e-07" iyz="0.0" izz="2.8125e-07"/>
     </inertial>
   </link>
   <gazebo reference="rouleau_1_roueholonome1">
     <material>Gazebo/Black</material>
-    <mu1>1.0</mu1>
-    <mu2>0.8</mu2>
-    <kp>1000.0</kp>
-    <kd>10000.0</kd>
+    <mu1>100.0</mu1>
+    <mu2>100.8</mu2>
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <min_depth>0.1</min_depth>
+    <maxVel>0.1</maxVel>
   </gazebo>
   <joint name="Rouleau_a_roueholonome1" type="continuous">
     <origin rpy="-0.62831853071795829013 1.570796326794896558 0" xyz="-0.013107611126122130016 0.018041078974561301773 -0.015600000000000002753"/>
@@ -102,7 +150,7 @@
     <child link="rouleau_1_roueholonome1"/>
     <axis xyz="0 0 1"/>
     <limit effort="1" velocity="20"/>
-    <joint_properties friction="0.0"/>
+    <joint_properties friction="10000.0"/>
   </joint>
   <link name="rouleau_2_roueholonome1">
     <visual>
@@ -122,16 +170,18 @@
     </collision>
     <inertial>
       <origin rpy="0 0 0" xyz="-1.3533020587657876204e-19 3.4694469519536203518e-18 -6.6181745421045662032e-17"/>
-      <mass value="0.0023432187849480503455"/>
-      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="8.1e-08" iyz="0.0" izz="0.0"/>
+      <mass value="0.01"/>
+      <inertia ixx="4.4145833333333327e-07" ixy="0.0" ixz="0.0" iyy="4.4145833333333327e-07" iyz="0.0" izz="2.8125e-07"/>
     </inertial>
   </link>
   <gazebo reference="rouleau_2_roueholonome1">
     <material>Gazebo/Black</material>
-    <mu1>1.0</mu1>
-    <mu2>0.8</mu2>
-    <kp>1000.0</kp>
-    <kd>10000.0</kd>
+    <mu1>100.0</mu1>
+    <mu2>100.8</mu2>
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <min_depth>0.1</min_depth>
+    <maxVel>0.1</maxVel>
   </gazebo>
   <joint name="Rouleau_b_roueholonome1" type="continuous">
     <origin rpy="-1.8849555921538763137 1.570796326794896558 0" xyz="-0.02120856031338196751 -0.0068910789745613692386 -0.015599999999999974998"/>
@@ -139,7 +189,7 @@
     <child link="rouleau_2_roueholonome1"/>
     <axis xyz="0 0 1"/>
     <limit effort="1" velocity="20"/>
-    <joint_properties friction="0.0"/>
+    <joint_properties friction="10000.0"/>
   </joint>
   <link name="rouleau_3_roueholonome1">
     <visual>
@@ -159,16 +209,18 @@
     </collision>
     <inertial>
       <origin rpy="0 0 0" xyz="-2.7890905821505490852e-17 -5.2041704279304320684e-18 -5.9242851517138445981e-17"/>
-      <mass value="0.0023432187849480503455"/>
-      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="8.1e-08" iyz="0.0" izz="0.0"/>
+      <mass value="0.01"/>
+      <inertia ixx="4.4145833333333327e-07" ixy="0.0" ixz="0.0" iyy="4.4145833333333327e-07" iyz="0.0" izz="2.8125e-07"/>
     </inertial>
   </link>
   <gazebo reference="rouleau_3_roueholonome1">
     <material>Gazebo/Black</material>
-    <mu1>1.0</mu1>
-    <mu2>0.8</mu2>
-    <kp>1000.0</kp>
-    <kd>10000.0</kd>
+    <mu1>100.0</mu1>
+    <mu2>100.8</mu2>
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <min_depth>0.1</min_depth>
+    <maxVel>0.1</maxVel>
   </gazebo>
   <joint name="Rouleau_c_roueholonome1" type="continuous">
     <origin rpy="2.2204460492503130808e-16 1.570796326794896558 0" xyz="-6.9388939039072283776e-18 -0.022300000000000003847 -0.015600000000000002753"/>
@@ -176,7 +228,7 @@
     <child link="rouleau_3_roueholonome1"/>
     <axis xyz="0 0 1"/>
     <limit effort="1" velocity="20"/>
-    <joint_properties friction="0.0"/>
+    <joint_properties friction="10000.0"/>
   </joint>
   <link name="rouleau_4_roueholonome1">
     <visual>
@@ -196,16 +248,18 @@
     </collision>
     <inertial>
       <origin rpy="0 0 0" xyz="-1.3533020587658461205e-19 -5.2041704279304251351e-18 -5.5773404565184819466e-17"/>
-      <mass value="0.0023432187849480503455"/>
-      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="8.1e-08" iyz="0.0" izz="0.0"/>
+      <mass value="0.01"/>
+      <inertia ixx="4.4145833333333327e-07" ixy="0.0" ixz="0.0" iyy="4.4145833333333327e-07" iyz="0.0" izz="2.8125e-07"/>
     </inertial>
   </link>
   <gazebo reference="rouleau_4_roueholonome1">
     <material>Gazebo/Black</material>
-    <mu1>1.0</mu1>
-    <mu2>0.8</mu2>
-    <kp>1000.0</kp>
-    <kd>10000.0</kd>
+    <mu1>100.0</mu1>
+    <mu2>100.8</mu2>
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <min_depth>0.1</min_depth>
+    <maxVel>0.1</maxVel>
   </gazebo>
   <joint name="Rouleau_d_roueholonome1" type="continuous">
     <origin rpy="-1.2566370614359168023 1.570796326794896558 0" xyz="0.021208560313381925877 -0.006891078974561298115 -0.015600000000000002753"/>
@@ -213,7 +267,7 @@
     <child link="rouleau_4_roueholonome1"/>
     <axis xyz="0 0 1"/>
     <limit effort="1" velocity="20"/>
-    <joint_properties friction="0.0"/>
+    <joint_properties friction="10000.0"/>
   </joint>
   <link name="rouleau_5_roueholonome1">
     <visual>
@@ -233,16 +287,18 @@
     </collision>
     <inertial>
       <origin rpy="0 0 0" xyz="-2.7890905821505497015e-17 3.4694469519536134185e-18 -5.9242851517138445981e-17"/>
-      <mass value="0.0023432187849480503455"/>
-      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="8.1e-08" iyz="0.0" izz="0.0"/>
+      <mass value="0.01"/>
+      <inertia ixx="4.4145833333333327e-07" ixy="0.0" ixz="0.0" iyy="4.4145833333333327e-07" iyz="0.0" izz="2.8125e-07"/>
     </inertial>
   </link>
   <gazebo reference="rouleau_5_roueholonome1">
     <material>Gazebo/Black</material>
-    <mu1>1.0</mu1>
-    <mu2>0.8</mu2>
-    <kp>1000.0</kp>
-    <kd>10000.0</kd>
+    <mu1>100.0</mu1>
+    <mu2>100.8</mu2>
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <min_depth>0.1</min_depth>
+    <maxVel>0.1</maxVel>
   </gazebo>
   <joint name="Rouleau_e_roueholonome1" type="continuous">
     <origin rpy="0.62831853071795817911 1.570796326794896558 0" xyz="0.013107611126122100526 0.018041078974561364223 -0.015600000000000002753"/>
@@ -250,7 +306,7 @@
     <child link="rouleau_5_roueholonome1"/>
     <axis xyz="0 0 1"/>
     <limit effort="1" velocity="20"/>
-    <joint_properties friction="0.0"/>
+    <joint_properties friction="10000.0"/>
   </joint>
   <link name="rouleau_6_roueholonome1">
     <visual>
@@ -270,16 +326,18 @@
     </collision>
     <inertial>
       <origin rpy="0 0 0" xyz="-1.3533020587657560833e-19 -4.0005310894682744636e-33 -5.7508128041161638886e-17"/>
-      <mass value="0.0023432187849480503455"/>
-      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="8.1e-08" iyz="0.0" izz="0.0"/>
+      <mass value="0.01"/>
+      <inertia ixx="4.4145833333333327e-07" ixy="0.0" ixz="0.0" iyy="4.4145833333333327e-07" iyz="0.0" izz="2.8125e-07"/>
     </inertial>
   </link>
   <gazebo reference="rouleau_6_roueholonome1">
     <material>Gazebo/Black</material>
-    <mu1>1.0</mu1>
-    <mu2>0.8</mu2>
-    <kp>1000.0</kp>
-    <kd>10000.0</kd>
+    <mu1>100.0</mu1>
+    <mu2>100.8</mu2>
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <min_depth>0.1</min_depth>
+    <maxVel>0.1</maxVel>
   </gazebo>
   <joint name="Rouleau_f_roueholonome1" type="continuous">
     <origin rpy="-0 1.570796326794896558 0" xyz="-8.6736173798840354721e-18 0.022299999999999993439 -0.0025000000000000022204"/>
@@ -287,7 +345,7 @@
     <child link="rouleau_6_roueholonome1"/>
     <axis xyz="0 0 1"/>
     <limit effort="1" velocity="20"/>
-    <joint_properties friction="0.0"/>
+    <joint_properties friction="10000.0"/>
   </joint>
   <link name="rouleau_7_roueholonome1">
     <visual>
@@ -307,16 +365,18 @@
     </collision>
     <inertial>
       <origin rpy="0 0 0" xyz="-1.3533020587658461205e-19 -6.9388939039072329999e-18 -5.750812804116162656e-17"/>
-      <mass value="0.0023432187849480503455"/>
-      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="8.1e-08" iyz="0.0" izz="0.0"/>
+      <mass value="0.01"/>
+      <inertia ixx="4.4145833333333327e-07" ixy="0.0" ixz="0.0" iyy="4.4145833333333327e-07" iyz="0.0" izz="2.8125e-07"/>
     </inertial>
   </link>
   <gazebo reference="rouleau_7_roueholonome1">
     <material>Gazebo/Black</material>
-    <mu1>1.0</mu1>
-    <mu2>0.8</mu2>
-    <kp>1000.0</kp>
-    <kd>10000.0</kd>
+    <mu1>100.0</mu1>
+    <mu2>100.8</mu2>
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <min_depth>0.1</min_depth>
+    <maxVel>0.1</maxVel>
   </gazebo>
   <joint name="Rouleau_g_roueholonome1" type="continuous">
     <origin rpy="-1.2566370614359168023 1.570796326794896558 0" xyz="-0.021208560313381932816 0.0068910789745613033191 -0.0025000000000000022204"/>
@@ -324,7 +384,7 @@
     <child link="rouleau_7_roueholonome1"/>
     <axis xyz="0 0 1"/>
     <limit effort="1" velocity="20"/>
-    <joint_properties friction="0.0"/>
+    <joint_properties friction="10000.0"/>
   </joint>
   <link name="rouleau_8_roueholonome1">
     <visual>
@@ -344,16 +404,18 @@
     </collision>
     <inertial>
       <origin rpy="0 0 0" xyz="-1.3533020587658068797e-19 -1.0408340855860842566e-17 -6.6181745421045674358e-17"/>
-      <mass value="0.0023432187849480503455"/>
-      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="8.1e-08" iyz="0.0" izz="0.0"/>
+      <mass value="0.01"/>
+      <inertia ixx="4.4145833333333327e-07" ixy="0.0" ixz="0.0" iyy="4.4145833333333327e-07" iyz="0.0" izz="2.8125e-07"/>
     </inertial>
   </link>
   <gazebo reference="rouleau_8_roueholonome1">
     <material>Gazebo/Black</material>
-    <mu1>1.0</mu1>
-    <mu2>0.8</mu2>
-    <kp>1000.0</kp>
-    <kd>10000.0</kd>
+    <mu1>100.0</mu1>
+    <mu2>100.8</mu2>
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <min_depth>0.1</min_depth>
+    <maxVel>0.1</maxVel>
   </gazebo>
   <joint name="Rouleau_h_roueholonome1" type="continuous">
     <origin rpy="0.62831853071795817911 1.570796326794896558 0" xyz="-0.013107611126122147363 -0.018041078974561343407 -0.0024999999999999744649"/>
@@ -361,7 +423,7 @@
     <child link="rouleau_8_roueholonome1"/>
     <axis xyz="0 0 1"/>
     <limit effort="1" velocity="20"/>
-    <joint_properties friction="0.0"/>
+    <joint_properties friction="10000.0"/>
   </joint>
   <link name="rouleau_9_roueholonome1">
     <visual>
@@ -381,16 +443,18 @@
     </collision>
     <inertial>
       <origin rpy="0 0 0" xyz="-1.353302058765900528e-19 -8.1870457482636967244e-35 -6.5205963465808720368e-17"/>
-      <mass value="0.0023432187849480503455"/>
-      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="8.1e-08" iyz="0.0" izz="0.0"/>
+      <mass value="0.01"/>
+      <inertia ixx="4.4145833333333327e-07" ixy="0.0" ixz="0.0" iyy="4.4145833333333327e-07" iyz="0.0" izz="2.8125e-07"/>
     </inertial>
   </link>
   <gazebo reference="rouleau_9_roueholonome1">
     <material>Gazebo/Black</material>
-    <mu1>1.0</mu1>
-    <mu2>0.8</mu2>
-    <kp>1000.0</kp>
-    <kd>10000.0</kd>
+    <mu1>100.0</mu1>
+    <mu2>100.8</mu2>
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <min_depth>0.1</min_depth>
+    <maxVel>0.1</maxVel>
   </gazebo>
   <joint name="Rouleau_i_roueholonome1" type="continuous">
     <origin rpy="-0.62831853071795884524 1.570796326794896558 0" xyz="0.013107611126122112669 -0.018041078974561298304 -0.0025000000000000022204"/>
@@ -398,7 +462,7 @@
     <child link="rouleau_9_roueholonome1"/>
     <axis xyz="0 0 1"/>
     <limit effort="1" velocity="20"/>
-    <joint_properties friction="0.0"/>
+    <joint_properties friction="10000.0"/>
   </joint>
   <link name="rouleau_10_roueholonome1">
     <visual>
@@ -418,16 +482,18 @@
     </collision>
     <inertial>
       <origin rpy="0 0 0" xyz="-1.3533020587657876204e-19 6.4315019349350432793e-33 -5.9242851517138433655e-17"/>
-      <mass value="0.0023432187849480503455"/>
-      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="8.1e-08" iyz="0.0" izz="0.0"/>
+      <mass value="0.01"/>
+      <inertia ixx="4.4145833333333327e-07" ixy="0.0" ixz="0.0" iyy="4.4145833333333327e-07" iyz="0.0" izz="2.8125e-07"/>
     </inertial>
   </link>
   <gazebo reference="rouleau_10_roueholonome1">
     <material>Gazebo/Black</material>
-    <mu1>1.0</mu1>
-    <mu2>0.8</mu2>
-    <kp>1000.0</kp>
-    <kd>10000.0</kd>
+    <mu1>100.0</mu1>
+    <mu2>100.8</mu2>
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <min_depth>0.1</min_depth>
+    <maxVel>0.1</maxVel>
   </gazebo>
   <joint name="Rouleau_j_roueholonome1" type="continuous">
     <origin rpy="-1.8849555921538763137 1.570796326794896558 0" xyz="0.021208560313381953633 0.0068910789745613831164 -0.0025000000000000022204"/>
@@ -435,7 +501,7 @@
     <child link="rouleau_10_roueholonome1"/>
     <axis xyz="0 0 1"/>
     <limit effort="1" velocity="20"/>
-    <joint_properties friction="0.0"/>
+    <joint_properties friction="10000.0"/>
   </joint>
   <joint name="joint_wheel_roueholonome1" type="continuous">
     <origin rpy="1.5707963059327449962 -3.6134307765750467638e-08 -1.0471975663321160255" xyz="0.11539788567280147291 0.066624999269165083304 0.018159998763917353098"/>
@@ -443,7 +509,7 @@
     <child link="roueholonome1"/>
     <axis xyz="0 0 1"/>
     <limit effort="1" velocity="20"/>
-    <joint_properties friction="0.0"/>
+    <joint_properties friction="10000.0"/>
   </joint>
   <!-- <gazebo>
 			<plugin name="gazebo_ros_joint_state_publisher"
@@ -480,12 +546,18 @@
     </collision>
     <inertial>
       <origin rpy="0 0 0" xyz="-2.5184848675754577033e-17 4.8001766176252168599e-18 -0.0090500000000000198341"/>
-      <mass value="0.056036470001344637626"/>
-      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="1.0e-05" iyz="0.0" izz="0.0"/>
+      <mass value="0.073"/>
+      <inertia ixx="1.923702083333333e-05" ixy="0.0" ixz="0.0" iyy="1.923702083333333e-05" iyz="0.0" izz="3.285e-05"/>
     </inertial>
   </link>
   <gazebo reference="roueholonome2">
     <material>Gazebo/Grey</material>
+    <mu1>100.0</mu1>
+    <mu2>100.8</mu2>
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <min_depth>0.1</min_depth>
+    <maxVel>0.1</maxVel>
   </gazebo>
   <link name="rouleau_1_roueholonome2">
     <visual>
@@ -505,16 +577,18 @@
     </collision>
     <inertial>
       <origin rpy="0 0 0" xyz="-1.3533020587659002873e-19 -6.9388939039072283776e-18 -7.6373245842409416038e-17"/>
-      <mass value="0.0023432187849480503455"/>
-      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="8.1e-08" iyz="0.0" izz="0.0"/>
+      <mass value="0.01"/>
+      <inertia ixx="4.4145833333333327e-07" ixy="0.0" ixz="0.0" iyy="4.4145833333333327e-07" iyz="0.0" izz="2.8125e-07"/>
     </inertial>
   </link>
   <gazebo reference="rouleau_1_roueholonome2">
     <material>Gazebo/Black</material>
-    <mu1>1.0</mu1>
-    <mu2>0.8</mu2>
-    <kp>1000.0</kp>
-    <kd>10000.0</kd>
+    <mu1>100.0</mu1>
+    <mu2>100.8</mu2>
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <min_depth>0.1</min_depth>
+    <maxVel>0.1</maxVel>
   </gazebo>
   <joint name="Rouleau_a_roueholonome2" type="continuous">
     <origin rpy="-0.62831853071795829013 1.570796326794896558 0" xyz="-0.013107611126122130016 0.018041078974561301773 -0.015600000000000002753"/>
@@ -522,7 +596,7 @@
     <child link="rouleau_1_roueholonome2"/>
     <axis xyz="0 0 1"/>
     <limit effort="1" velocity="20"/>
-    <joint_properties friction="0.0"/>
+    <joint_properties friction="10000.0"/>
   </joint>
   <link name="rouleau_2_roueholonome2">
     <visual>
@@ -542,16 +616,18 @@
     </collision>
     <inertial>
       <origin rpy="0 0 0" xyz="-1.3533020587657876204e-19 3.4694469519536203518e-18 -6.6181745421045662032e-17"/>
-      <mass value="0.0023432187849480503455"/>
-      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="8.1e-08" iyz="0.0" izz="0.0"/>
+      <mass value="0.01"/>
+      <inertia ixx="4.4145833333333327e-07" ixy="0.0" ixz="0.0" iyy="4.4145833333333327e-07" iyz="0.0" izz="2.8125e-07"/>
     </inertial>
   </link>
   <gazebo reference="rouleau_2_roueholonome2">
     <material>Gazebo/Black</material>
-    <mu1>1.0</mu1>
-    <mu2>0.8</mu2>
-    <kp>1000.0</kp>
-    <kd>10000.0</kd>
+    <mu1>100.0</mu1>
+    <mu2>100.8</mu2>
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <min_depth>0.1</min_depth>
+    <maxVel>0.1</maxVel>
   </gazebo>
   <joint name="Rouleau_b_roueholonome2" type="continuous">
     <origin rpy="-1.8849555921538763137 1.570796326794896558 0" xyz="-0.02120856031338196751 -0.0068910789745613692386 -0.015599999999999974998"/>
@@ -559,7 +635,7 @@
     <child link="rouleau_2_roueholonome2"/>
     <axis xyz="0 0 1"/>
     <limit effort="1" velocity="20"/>
-    <joint_properties friction="0.0"/>
+    <joint_properties friction="10000.0"/>
   </joint>
   <link name="rouleau_3_roueholonome2">
     <visual>
@@ -579,16 +655,18 @@
     </collision>
     <inertial>
       <origin rpy="0 0 0" xyz="-2.7890905821505490852e-17 -5.2041704279304320684e-18 -5.9242851517138445981e-17"/>
-      <mass value="0.0023432187849480503455"/>
-      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="8.1e-08" iyz="0.0" izz="0.0"/>
+      <mass value="0.01"/>
+      <inertia ixx="4.4145833333333327e-07" ixy="0.0" ixz="0.0" iyy="4.4145833333333327e-07" iyz="0.0" izz="2.8125e-07"/>
     </inertial>
   </link>
   <gazebo reference="rouleau_3_roueholonome2">
     <material>Gazebo/Black</material>
-    <mu1>1.0</mu1>
-    <mu2>0.8</mu2>
-    <kp>1000.0</kp>
-    <kd>10000.0</kd>
+    <mu1>100.0</mu1>
+    <mu2>100.8</mu2>
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <min_depth>0.1</min_depth>
+    <maxVel>0.1</maxVel>
   </gazebo>
   <joint name="Rouleau_c_roueholonome2" type="continuous">
     <origin rpy="2.2204460492503130808e-16 1.570796326794896558 0" xyz="-6.9388939039072283776e-18 -0.022300000000000003847 -0.015600000000000002753"/>
@@ -596,7 +674,7 @@
     <child link="rouleau_3_roueholonome2"/>
     <axis xyz="0 0 1"/>
     <limit effort="1" velocity="20"/>
-    <joint_properties friction="0.0"/>
+    <joint_properties friction="10000.0"/>
   </joint>
   <link name="rouleau_4_roueholonome2">
     <visual>
@@ -616,16 +694,18 @@
     </collision>
     <inertial>
       <origin rpy="0 0 0" xyz="-1.3533020587658461205e-19 -5.2041704279304251351e-18 -5.5773404565184819466e-17"/>
-      <mass value="0.0023432187849480503455"/>
-      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="8.1e-08" iyz="0.0" izz="0.0"/>
+      <mass value="0.01"/>
+      <inertia ixx="4.4145833333333327e-07" ixy="0.0" ixz="0.0" iyy="4.4145833333333327e-07" iyz="0.0" izz="2.8125e-07"/>
     </inertial>
   </link>
   <gazebo reference="rouleau_4_roueholonome2">
     <material>Gazebo/Black</material>
-    <mu1>1.0</mu1>
-    <mu2>0.8</mu2>
-    <kp>1000.0</kp>
-    <kd>10000.0</kd>
+    <mu1>100.0</mu1>
+    <mu2>100.8</mu2>
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <min_depth>0.1</min_depth>
+    <maxVel>0.1</maxVel>
   </gazebo>
   <joint name="Rouleau_d_roueholonome2" type="continuous">
     <origin rpy="-1.2566370614359168023 1.570796326794896558 0" xyz="0.021208560313381925877 -0.006891078974561298115 -0.015600000000000002753"/>
@@ -633,7 +713,7 @@
     <child link="rouleau_4_roueholonome2"/>
     <axis xyz="0 0 1"/>
     <limit effort="1" velocity="20"/>
-    <joint_properties friction="0.0"/>
+    <joint_properties friction="10000.0"/>
   </joint>
   <link name="rouleau_5_roueholonome2">
     <visual>
@@ -653,16 +733,18 @@
     </collision>
     <inertial>
       <origin rpy="0 0 0" xyz="-2.7890905821505497015e-17 3.4694469519536134185e-18 -5.9242851517138445981e-17"/>
-      <mass value="0.0023432187849480503455"/>
-      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="8.1e-08" iyz="0.0" izz="0.0"/>
+      <mass value="0.01"/>
+      <inertia ixx="4.4145833333333327e-07" ixy="0.0" ixz="0.0" iyy="4.4145833333333327e-07" iyz="0.0" izz="2.8125e-07"/>
     </inertial>
   </link>
   <gazebo reference="rouleau_5_roueholonome2">
     <material>Gazebo/Black</material>
-    <mu1>1.0</mu1>
-    <mu2>0.8</mu2>
-    <kp>1000.0</kp>
-    <kd>10000.0</kd>
+    <mu1>100.0</mu1>
+    <mu2>100.8</mu2>
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <min_depth>0.1</min_depth>
+    <maxVel>0.1</maxVel>
   </gazebo>
   <joint name="Rouleau_e_roueholonome2" type="continuous">
     <origin rpy="0.62831853071795817911 1.570796326794896558 0" xyz="0.013107611126122100526 0.018041078974561364223 -0.015600000000000002753"/>
@@ -670,7 +752,7 @@
     <child link="rouleau_5_roueholonome2"/>
     <axis xyz="0 0 1"/>
     <limit effort="1" velocity="20"/>
-    <joint_properties friction="0.0"/>
+    <joint_properties friction="10000.0"/>
   </joint>
   <link name="rouleau_6_roueholonome2">
     <visual>
@@ -690,16 +772,18 @@
     </collision>
     <inertial>
       <origin rpy="0 0 0" xyz="-1.3533020587657560833e-19 -4.0005310894682744636e-33 -5.7508128041161638886e-17"/>
-      <mass value="0.0023432187849480503455"/>
-      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="8.1e-08" iyz="0.0" izz="0.0"/>
+      <mass value="0.01"/>
+      <inertia ixx="4.4145833333333327e-07" ixy="0.0" ixz="0.0" iyy="4.4145833333333327e-07" iyz="0.0" izz="2.8125e-07"/>
     </inertial>
   </link>
   <gazebo reference="rouleau_6_roueholonome2">
     <material>Gazebo/Black</material>
-    <mu1>1.0</mu1>
-    <mu2>0.8</mu2>
-    <kp>1000.0</kp>
-    <kd>10000.0</kd>
+    <mu1>100.0</mu1>
+    <mu2>100.8</mu2>
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <min_depth>0.1</min_depth>
+    <maxVel>0.1</maxVel>
   </gazebo>
   <joint name="Rouleau_f_roueholonome2" type="continuous">
     <origin rpy="-0 1.570796326794896558 0" xyz="-8.6736173798840354721e-18 0.022299999999999993439 -0.0025000000000000022204"/>
@@ -707,7 +791,7 @@
     <child link="rouleau_6_roueholonome2"/>
     <axis xyz="0 0 1"/>
     <limit effort="1" velocity="20"/>
-    <joint_properties friction="0.0"/>
+    <joint_properties friction="10000.0"/>
   </joint>
   <link name="rouleau_7_roueholonome2">
     <visual>
@@ -727,16 +811,18 @@
     </collision>
     <inertial>
       <origin rpy="0 0 0" xyz="-1.3533020587658461205e-19 -6.9388939039072329999e-18 -5.750812804116162656e-17"/>
-      <mass value="0.0023432187849480503455"/>
-      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="8.1e-08" iyz="0.0" izz="0.0"/>
+      <mass value="0.01"/>
+      <inertia ixx="4.4145833333333327e-07" ixy="0.0" ixz="0.0" iyy="4.4145833333333327e-07" iyz="0.0" izz="2.8125e-07"/>
     </inertial>
   </link>
   <gazebo reference="rouleau_7_roueholonome2">
     <material>Gazebo/Black</material>
-    <mu1>1.0</mu1>
-    <mu2>0.8</mu2>
-    <kp>1000.0</kp>
-    <kd>10000.0</kd>
+    <mu1>100.0</mu1>
+    <mu2>100.8</mu2>
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <min_depth>0.1</min_depth>
+    <maxVel>0.1</maxVel>
   </gazebo>
   <joint name="Rouleau_g_roueholonome2" type="continuous">
     <origin rpy="-1.2566370614359168023 1.570796326794896558 0" xyz="-0.021208560313381932816 0.0068910789745613033191 -0.0025000000000000022204"/>
@@ -744,7 +830,7 @@
     <child link="rouleau_7_roueholonome2"/>
     <axis xyz="0 0 1"/>
     <limit effort="1" velocity="20"/>
-    <joint_properties friction="0.0"/>
+    <joint_properties friction="10000.0"/>
   </joint>
   <link name="rouleau_8_roueholonome2">
     <visual>
@@ -764,16 +850,18 @@
     </collision>
     <inertial>
       <origin rpy="0 0 0" xyz="-1.3533020587658068797e-19 -1.0408340855860842566e-17 -6.6181745421045674358e-17"/>
-      <mass value="0.0023432187849480503455"/>
-      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="8.1e-08" iyz="0.0" izz="0.0"/>
+      <mass value="0.01"/>
+      <inertia ixx="4.4145833333333327e-07" ixy="0.0" ixz="0.0" iyy="4.4145833333333327e-07" iyz="0.0" izz="2.8125e-07"/>
     </inertial>
   </link>
   <gazebo reference="rouleau_8_roueholonome2">
     <material>Gazebo/Black</material>
-    <mu1>1.0</mu1>
-    <mu2>0.8</mu2>
-    <kp>1000.0</kp>
-    <kd>10000.0</kd>
+    <mu1>100.0</mu1>
+    <mu2>100.8</mu2>
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <min_depth>0.1</min_depth>
+    <maxVel>0.1</maxVel>
   </gazebo>
   <joint name="Rouleau_h_roueholonome2" type="continuous">
     <origin rpy="0.62831853071795817911 1.570796326794896558 0" xyz="-0.013107611126122147363 -0.018041078974561343407 -0.0024999999999999744649"/>
@@ -781,7 +869,7 @@
     <child link="rouleau_8_roueholonome2"/>
     <axis xyz="0 0 1"/>
     <limit effort="1" velocity="20"/>
-    <joint_properties friction="0.0"/>
+    <joint_properties friction="10000.0"/>
   </joint>
   <link name="rouleau_9_roueholonome2">
     <visual>
@@ -801,16 +889,18 @@
     </collision>
     <inertial>
       <origin rpy="0 0 0" xyz="-1.353302058765900528e-19 -8.1870457482636967244e-35 -6.5205963465808720368e-17"/>
-      <mass value="0.0023432187849480503455"/>
-      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="8.1e-08" iyz="0.0" izz="0.0"/>
+      <mass value="0.01"/>
+      <inertia ixx="4.4145833333333327e-07" ixy="0.0" ixz="0.0" iyy="4.4145833333333327e-07" iyz="0.0" izz="2.8125e-07"/>
     </inertial>
   </link>
   <gazebo reference="rouleau_9_roueholonome2">
     <material>Gazebo/Black</material>
-    <mu1>1.0</mu1>
-    <mu2>0.8</mu2>
-    <kp>1000.0</kp>
-    <kd>10000.0</kd>
+    <mu1>100.0</mu1>
+    <mu2>100.8</mu2>
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <min_depth>0.1</min_depth>
+    <maxVel>0.1</maxVel>
   </gazebo>
   <joint name="Rouleau_i_roueholonome2" type="continuous">
     <origin rpy="-0.62831853071795884524 1.570796326794896558 0" xyz="0.013107611126122112669 -0.018041078974561298304 -0.0025000000000000022204"/>
@@ -818,7 +908,7 @@
     <child link="rouleau_9_roueholonome2"/>
     <axis xyz="0 0 1"/>
     <limit effort="1" velocity="20"/>
-    <joint_properties friction="0.0"/>
+    <joint_properties friction="10000.0"/>
   </joint>
   <link name="rouleau_10_roueholonome2">
     <visual>
@@ -838,16 +928,18 @@
     </collision>
     <inertial>
       <origin rpy="0 0 0" xyz="-1.3533020587657876204e-19 6.4315019349350432793e-33 -5.9242851517138433655e-17"/>
-      <mass value="0.0023432187849480503455"/>
-      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="8.1e-08" iyz="0.0" izz="0.0"/>
+      <mass value="0.01"/>
+      <inertia ixx="4.4145833333333327e-07" ixy="0.0" ixz="0.0" iyy="4.4145833333333327e-07" iyz="0.0" izz="2.8125e-07"/>
     </inertial>
   </link>
   <gazebo reference="rouleau_10_roueholonome2">
     <material>Gazebo/Black</material>
-    <mu1>1.0</mu1>
-    <mu2>0.8</mu2>
-    <kp>1000.0</kp>
-    <kd>10000.0</kd>
+    <mu1>100.0</mu1>
+    <mu2>100.8</mu2>
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <min_depth>0.1</min_depth>
+    <maxVel>0.1</maxVel>
   </gazebo>
   <joint name="Rouleau_j_roueholonome2" type="continuous">
     <origin rpy="-1.8849555921538763137 1.570796326794896558 0" xyz="0.021208560313381953633 0.0068910789745613831164 -0.0025000000000000022204"/>
@@ -855,7 +947,7 @@
     <child link="rouleau_10_roueholonome2"/>
     <axis xyz="0 0 1"/>
     <limit effort="1" velocity="20"/>
-    <joint_properties friction="0.0"/>
+    <joint_properties friction="10000.0"/>
   </joint>
   <joint name="joint_wheel_roueholonome2" type="continuous">
     <origin rpy="-1.5707963372259698964 -1.578796498993817555e-16 -1.5135513408355580736e-08" xyz="-9.4218689434714475786e-10 -0.13324999991488650775 0.018160000618041127751"/>
@@ -863,7 +955,7 @@
     <child link="roueholonome2"/>
     <axis xyz="0 0 1"/>
     <limit effort="1" velocity="20"/>
-    <joint_properties friction="0.0"/>
+    <joint_properties friction="10000.0"/>
   </joint>
   <!-- <gazebo>
 			<plugin name="gazebo_ros_joint_state_publisher"
@@ -900,12 +992,18 @@
     </collision>
     <inertial>
       <origin rpy="0 0 0" xyz="-2.5184848675754577033e-17 4.8001766176252168599e-18 -0.0090500000000000198341"/>
-      <mass value="0.056036470001344637626"/>
-      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="1.0e-05" iyz="0.0" izz="0.0"/>
+      <mass value="0.073"/>
+      <inertia ixx="1.923702083333333e-05" ixy="0.0" ixz="0.0" iyy="1.923702083333333e-05" iyz="0.0" izz="3.285e-05"/>
     </inertial>
   </link>
   <gazebo reference="roueholonome3">
     <material>Gazebo/Grey</material>
+    <mu1>100.0</mu1>
+    <mu2>100.8</mu2>
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <min_depth>0.1</min_depth>
+    <maxVel>0.1</maxVel>
   </gazebo>
   <link name="rouleau_1_roueholonome3">
     <visual>
@@ -925,16 +1023,18 @@
     </collision>
     <inertial>
       <origin rpy="0 0 0" xyz="-1.3533020587659002873e-19 -6.9388939039072283776e-18 -7.6373245842409416038e-17"/>
-      <mass value="0.0023432187849480503455"/>
-      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="8.1e-08" iyz="0.0" izz="0.0"/>
+      <mass value="0.01"/>
+      <inertia ixx="4.4145833333333327e-07" ixy="0.0" ixz="0.0" iyy="4.4145833333333327e-07" iyz="0.0" izz="2.8125e-07"/>
     </inertial>
   </link>
   <gazebo reference="rouleau_1_roueholonome3">
     <material>Gazebo/Black</material>
-    <mu1>1.0</mu1>
-    <mu2>0.8</mu2>
-    <kp>1000.0</kp>
-    <kd>10000.0</kd>
+    <mu1>100.0</mu1>
+    <mu2>100.8</mu2>
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <min_depth>0.1</min_depth>
+    <maxVel>0.1</maxVel>
   </gazebo>
   <joint name="Rouleau_a_roueholonome3" type="continuous">
     <origin rpy="-0.62831853071795829013 1.570796326794896558 0" xyz="-0.013107611126122130016 0.018041078974561301773 -0.015600000000000002753"/>
@@ -942,7 +1042,7 @@
     <child link="rouleau_1_roueholonome3"/>
     <axis xyz="0 0 1"/>
     <limit effort="1" velocity="20"/>
-    <joint_properties friction="0.0"/>
+    <joint_properties friction="10000.0"/>
   </joint>
   <link name="rouleau_2_roueholonome3">
     <visual>
@@ -962,16 +1062,18 @@
     </collision>
     <inertial>
       <origin rpy="0 0 0" xyz="-1.3533020587657876204e-19 3.4694469519536203518e-18 -6.6181745421045662032e-17"/>
-      <mass value="0.0023432187849480503455"/>
-      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="8.1e-08" iyz="0.0" izz="0.0"/>
+      <mass value="0.01"/>
+      <inertia ixx="4.4145833333333327e-07" ixy="0.0" ixz="0.0" iyy="4.4145833333333327e-07" iyz="0.0" izz="2.8125e-07"/>
     </inertial>
   </link>
   <gazebo reference="rouleau_2_roueholonome3">
     <material>Gazebo/Black</material>
-    <mu1>1.0</mu1>
-    <mu2>0.8</mu2>
-    <kp>1000.0</kp>
-    <kd>10000.0</kd>
+    <mu1>100.0</mu1>
+    <mu2>100.8</mu2>
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <min_depth>0.1</min_depth>
+    <maxVel>0.1</maxVel>
   </gazebo>
   <joint name="Rouleau_b_roueholonome3" type="continuous">
     <origin rpy="-1.8849555921538763137 1.570796326794896558 0" xyz="-0.02120856031338196751 -0.0068910789745613692386 -0.015599999999999974998"/>
@@ -979,7 +1081,7 @@
     <child link="rouleau_2_roueholonome3"/>
     <axis xyz="0 0 1"/>
     <limit effort="1" velocity="20"/>
-    <joint_properties friction="0.0"/>
+    <joint_properties friction="10000.0"/>
   </joint>
   <link name="rouleau_3_roueholonome3">
     <visual>
@@ -999,16 +1101,18 @@
     </collision>
     <inertial>
       <origin rpy="0 0 0" xyz="-2.7890905821505490852e-17 -5.2041704279304320684e-18 -5.9242851517138445981e-17"/>
-      <mass value="0.0023432187849480503455"/>
-      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="8.1e-08" iyz="0.0" izz="0.0"/>
+      <mass value="0.01"/>
+      <inertia ixx="4.4145833333333327e-07" ixy="0.0" ixz="0.0" iyy="4.4145833333333327e-07" iyz="0.0" izz="2.8125e-07"/>
     </inertial>
   </link>
   <gazebo reference="rouleau_3_roueholonome3">
     <material>Gazebo/Black</material>
-    <mu1>1.0</mu1>
-    <mu2>0.8</mu2>
-    <kp>1000.0</kp>
-    <kd>10000.0</kd>
+    <mu1>100.0</mu1>
+    <mu2>100.8</mu2>
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <min_depth>0.1</min_depth>
+    <maxVel>0.1</maxVel>
   </gazebo>
   <joint name="Rouleau_c_roueholonome3" type="continuous">
     <origin rpy="2.2204460492503130808e-16 1.570796326794896558 0" xyz="-6.9388939039072283776e-18 -0.022300000000000003847 -0.015600000000000002753"/>
@@ -1016,7 +1120,7 @@
     <child link="rouleau_3_roueholonome3"/>
     <axis xyz="0 0 1"/>
     <limit effort="1" velocity="20"/>
-    <joint_properties friction="0.0"/>
+    <joint_properties friction="10000.0"/>
   </joint>
   <link name="rouleau_4_roueholonome3">
     <visual>
@@ -1036,16 +1140,18 @@
     </collision>
     <inertial>
       <origin rpy="0 0 0" xyz="-1.3533020587658461205e-19 -5.2041704279304251351e-18 -5.5773404565184819466e-17"/>
-      <mass value="0.0023432187849480503455"/>
-      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="8.1e-08" iyz="0.0" izz="0.0"/>
+      <mass value="0.01"/>
+      <inertia ixx="4.4145833333333327e-07" ixy="0.0" ixz="0.0" iyy="4.4145833333333327e-07" iyz="0.0" izz="2.8125e-07"/>
     </inertial>
   </link>
   <gazebo reference="rouleau_4_roueholonome3">
     <material>Gazebo/Black</material>
-    <mu1>1.0</mu1>
-    <mu2>0.8</mu2>
-    <kp>1000.0</kp>
-    <kd>10000.0</kd>
+    <mu1>100.0</mu1>
+    <mu2>100.8</mu2>
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <min_depth>0.1</min_depth>
+    <maxVel>0.1</maxVel>
   </gazebo>
   <joint name="Rouleau_d_roueholonome3" type="continuous">
     <origin rpy="-1.2566370614359168023 1.570796326794896558 0" xyz="0.021208560313381925877 -0.006891078974561298115 -0.015600000000000002753"/>
@@ -1053,7 +1159,7 @@
     <child link="rouleau_4_roueholonome3"/>
     <axis xyz="0 0 1"/>
     <limit effort="1" velocity="20"/>
-    <joint_properties friction="0.0"/>
+    <joint_properties friction="10000.0"/>
   </joint>
   <link name="rouleau_5_roueholonome3">
     <visual>
@@ -1073,16 +1179,18 @@
     </collision>
     <inertial>
       <origin rpy="0 0 0" xyz="-2.7890905821505497015e-17 3.4694469519536134185e-18 -5.9242851517138445981e-17"/>
-      <mass value="0.0023432187849480503455"/>
-      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="8.1e-08" iyz="0.0" izz="0.0"/>
+      <mass value="0.01"/>
+      <inertia ixx="4.4145833333333327e-07" ixy="0.0" ixz="0.0" iyy="4.4145833333333327e-07" iyz="0.0" izz="2.8125e-07"/>
     </inertial>
   </link>
   <gazebo reference="rouleau_5_roueholonome3">
     <material>Gazebo/Black</material>
-    <mu1>1.0</mu1>
-    <mu2>0.8</mu2>
-    <kp>1000.0</kp>
-    <kd>10000.0</kd>
+    <mu1>100.0</mu1>
+    <mu2>100.8</mu2>
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <min_depth>0.1</min_depth>
+    <maxVel>0.1</maxVel>
   </gazebo>
   <joint name="Rouleau_e_roueholonome3" type="continuous">
     <origin rpy="0.62831853071795817911 1.570796326794896558 0" xyz="0.013107611126122100526 0.018041078974561364223 -0.015600000000000002753"/>
@@ -1090,7 +1198,7 @@
     <child link="rouleau_5_roueholonome3"/>
     <axis xyz="0 0 1"/>
     <limit effort="1" velocity="20"/>
-    <joint_properties friction="0.0"/>
+    <joint_properties friction="10000.0"/>
   </joint>
   <link name="rouleau_6_roueholonome3">
     <visual>
@@ -1110,16 +1218,18 @@
     </collision>
     <inertial>
       <origin rpy="0 0 0" xyz="-1.3533020587657560833e-19 -4.0005310894682744636e-33 -5.7508128041161638886e-17"/>
-      <mass value="0.0023432187849480503455"/>
-      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="8.1e-08" iyz="0.0" izz="0.0"/>
+      <mass value="0.01"/>
+      <inertia ixx="4.4145833333333327e-07" ixy="0.0" ixz="0.0" iyy="4.4145833333333327e-07" iyz="0.0" izz="2.8125e-07"/>
     </inertial>
   </link>
   <gazebo reference="rouleau_6_roueholonome3">
     <material>Gazebo/Black</material>
-    <mu1>1.0</mu1>
-    <mu2>0.8</mu2>
-    <kp>1000.0</kp>
-    <kd>10000.0</kd>
+    <mu1>100.0</mu1>
+    <mu2>100.8</mu2>
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <min_depth>0.1</min_depth>
+    <maxVel>0.1</maxVel>
   </gazebo>
   <joint name="Rouleau_f_roueholonome3" type="continuous">
     <origin rpy="-0 1.570796326794896558 0" xyz="-8.6736173798840354721e-18 0.022299999999999993439 -0.0025000000000000022204"/>
@@ -1127,7 +1237,7 @@
     <child link="rouleau_6_roueholonome3"/>
     <axis xyz="0 0 1"/>
     <limit effort="1" velocity="20"/>
-    <joint_properties friction="0.0"/>
+    <joint_properties friction="10000.0"/>
   </joint>
   <link name="rouleau_7_roueholonome3">
     <visual>
@@ -1147,16 +1257,18 @@
     </collision>
     <inertial>
       <origin rpy="0 0 0" xyz="-1.3533020587658461205e-19 -6.9388939039072329999e-18 -5.750812804116162656e-17"/>
-      <mass value="0.0023432187849480503455"/>
-      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="8.1e-08" iyz="0.0" izz="0.0"/>
+      <mass value="0.01"/>
+      <inertia ixx="4.4145833333333327e-07" ixy="0.0" ixz="0.0" iyy="4.4145833333333327e-07" iyz="0.0" izz="2.8125e-07"/>
     </inertial>
   </link>
   <gazebo reference="rouleau_7_roueholonome3">
     <material>Gazebo/Black</material>
-    <mu1>1.0</mu1>
-    <mu2>0.8</mu2>
-    <kp>1000.0</kp>
-    <kd>10000.0</kd>
+    <mu1>100.0</mu1>
+    <mu2>100.8</mu2>
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <min_depth>0.1</min_depth>
+    <maxVel>0.1</maxVel>
   </gazebo>
   <joint name="Rouleau_g_roueholonome3" type="continuous">
     <origin rpy="-1.2566370614359168023 1.570796326794896558 0" xyz="-0.021208560313381932816 0.0068910789745613033191 -0.0025000000000000022204"/>
@@ -1164,7 +1276,7 @@
     <child link="rouleau_7_roueholonome3"/>
     <axis xyz="0 0 1"/>
     <limit effort="1" velocity="20"/>
-    <joint_properties friction="0.0"/>
+    <joint_properties friction="10000.0"/>
   </joint>
   <link name="rouleau_8_roueholonome3">
     <visual>
@@ -1184,16 +1296,18 @@
     </collision>
     <inertial>
       <origin rpy="0 0 0" xyz="-1.3533020587658068797e-19 -1.0408340855860842566e-17 -6.6181745421045674358e-17"/>
-      <mass value="0.0023432187849480503455"/>
-      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="8.1e-08" iyz="0.0" izz="0.0"/>
+      <mass value="0.01"/>
+      <inertia ixx="4.4145833333333327e-07" ixy="0.0" ixz="0.0" iyy="4.4145833333333327e-07" iyz="0.0" izz="2.8125e-07"/>
     </inertial>
   </link>
   <gazebo reference="rouleau_8_roueholonome3">
     <material>Gazebo/Black</material>
-    <mu1>1.0</mu1>
-    <mu2>0.8</mu2>
-    <kp>1000.0</kp>
-    <kd>10000.0</kd>
+    <mu1>100.0</mu1>
+    <mu2>100.8</mu2>
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <min_depth>0.1</min_depth>
+    <maxVel>0.1</maxVel>
   </gazebo>
   <joint name="Rouleau_h_roueholonome3" type="continuous">
     <origin rpy="0.62831853071795817911 1.570796326794896558 0" xyz="-0.013107611126122147363 -0.018041078974561343407 -0.0024999999999999744649"/>
@@ -1201,7 +1315,7 @@
     <child link="rouleau_8_roueholonome3"/>
     <axis xyz="0 0 1"/>
     <limit effort="1" velocity="20"/>
-    <joint_properties friction="0.0"/>
+    <joint_properties friction="10000.0"/>
   </joint>
   <link name="rouleau_9_roueholonome3">
     <visual>
@@ -1221,16 +1335,18 @@
     </collision>
     <inertial>
       <origin rpy="0 0 0" xyz="-1.353302058765900528e-19 -8.1870457482636967244e-35 -6.5205963465808720368e-17"/>
-      <mass value="0.0023432187849480503455"/>
-      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="8.1e-08" iyz="0.0" izz="0.0"/>
+      <mass value="0.01"/>
+      <inertia ixx="4.4145833333333327e-07" ixy="0.0" ixz="0.0" iyy="4.4145833333333327e-07" iyz="0.0" izz="2.8125e-07"/>
     </inertial>
   </link>
   <gazebo reference="rouleau_9_roueholonome3">
     <material>Gazebo/Black</material>
-    <mu1>1.0</mu1>
-    <mu2>0.8</mu2>
-    <kp>1000.0</kp>
-    <kd>10000.0</kd>
+    <mu1>100.0</mu1>
+    <mu2>100.8</mu2>
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <min_depth>0.1</min_depth>
+    <maxVel>0.1</maxVel>
   </gazebo>
   <joint name="Rouleau_i_roueholonome3" type="continuous">
     <origin rpy="-0.62831853071795884524 1.570796326794896558 0" xyz="0.013107611126122112669 -0.018041078974561298304 -0.0025000000000000022204"/>
@@ -1238,7 +1354,7 @@
     <child link="rouleau_9_roueholonome3"/>
     <axis xyz="0 0 1"/>
     <limit effort="1" velocity="20"/>
-    <joint_properties friction="0.0"/>
+    <joint_properties friction="10000.0"/>
   </joint>
   <link name="rouleau_10_roueholonome3">
     <visual>
@@ -1258,16 +1374,18 @@
     </collision>
     <inertial>
       <origin rpy="0 0 0" xyz="-1.3533020587657876204e-19 6.4315019349350432793e-33 -5.9242851517138433655e-17"/>
-      <mass value="0.0023432187849480503455"/>
-      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="8.1e-08" iyz="0.0" izz="0.0"/>
+      <mass value="0.01"/>
+      <inertia ixx="4.4145833333333327e-07" ixy="0.0" ixz="0.0" iyy="4.4145833333333327e-07" iyz="0.0" izz="2.8125e-07"/>
     </inertial>
   </link>
   <gazebo reference="rouleau_10_roueholonome3">
     <material>Gazebo/Black</material>
-    <mu1>1.0</mu1>
-    <mu2>0.8</mu2>
-    <kp>1000.0</kp>
-    <kd>10000.0</kd>
+    <mu1>100.0</mu1>
+    <mu2>100.8</mu2>
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <min_depth>0.1</min_depth>
+    <maxVel>0.1</maxVel>
   </gazebo>
   <joint name="Rouleau_j_roueholonome3" type="continuous">
     <origin rpy="-1.8849555921538763137 1.570796326794896558 0" xyz="0.021208560313381953633 0.0068910789745613831164 -0.0025000000000000022204"/>
@@ -1275,7 +1393,7 @@
     <child link="rouleau_10_roueholonome3"/>
     <axis xyz="0 0 1"/>
     <limit effort="1" velocity="20"/>
-    <joint_properties friction="0.0"/>
+    <joint_properties friction="10000.0"/>
   </joint>
   <joint name="joint_wheel_roueholonome3" type="continuous">
     <origin rpy="1.570796305932749215 3.6134297384305885703e-08 1.0471975360610779049" xyz="-0.11539788473061769747 0.06662500090107909001 0.018159998763917353098"/>
@@ -1283,7 +1401,7 @@
     <child link="roueholonome3"/>
     <axis xyz="0 0 1"/>
     <limit effort="1" velocity="20"/>
-    <joint_properties friction="0.0"/>
+    <joint_properties friction="10000.0"/>
   </joint>
   <!-- <gazebo>
 			<plugin name="gazebo_ros_joint_state_publisher"
@@ -1302,4 +1420,20 @@
 				<joint_name>joint_wheel_${name_roueholonome}</joint_name>
 			</plugin>
 		</gazebo> -->
+  <gazebo>
+    <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+      <robot_param>robot_description</robot_param>
+      <robot_param_node>robot_state_publisher</robot_param_node>
+      <parameters>/home/floris/ros2_ws/install/robot_nav/share/robot_nav/params/omnidirectional_controller.yaml</parameters>
+    </plugin>
+    <plugin filename="libgazebo_ros_p3d.so" name="gazebo_ros_p3d">
+      <ros>
+        <namespace>gazebo_ground_truth</namespace>
+      </ros>
+      <frame_name>world</frame_name>
+      <body_name>base_link</body_name>
+      <update_rate>50.0</update_rate>
+      <gaussian_noise>0.01</gaussian_noise>
+    </plugin>
+  </gazebo>
 </robot>
