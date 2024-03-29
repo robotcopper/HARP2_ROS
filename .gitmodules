@@ -7,3 +7,6 @@
 [submodule "YDLidar-SDK"]
 	path = YDLidar-SDK
 	url = https://github.com/YDLIDAR/YDLidar-SDK.git
+[submodule "omnidirectional_controllers"]
+	path = omnidirectional_controllers
+	url = https://github.com/mateusmenezes95/omnidirectional_controllers.git

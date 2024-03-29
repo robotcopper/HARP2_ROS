@@ -2,8 +2,11 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro"  name="robot">
 
     <!-- Include all the contents. -->
-    <xacro:include filename="standard_inertia_util.xacro" />
-    <xacro:include filename="holonomic_wheel/wheel.xacro" />
+    <xacro:include filename="$(find robot_description)/urdf/standard_inertia_util.xacro" />
+    <xacro:include filename="$(find robot_description)/urdf/holonomic_wheel/wheel.xacro" />
+
+    <!-- <xacro:include filename="$(find robot_description)/urdf/gazebo.urdf.xacro"/> -->
+    <xacro:include filename="$(find robot_description)/urdf/ros2_control.urdf.xacro"/>
 
     <!-- This first link called "base_footprint" is empty -->
     <link name="base_footprint"/>
@@ -33,17 +36,26 @@
             <geometry>
                 <mesh filename="file://$(find robot_description)/urdf/robot_base.stl"/>
             </geometry>
+            <surface>
+                <contact>
+                    <ode>
+                        <min_depth>0.001</min_depth>
+                    </ode>
+                </contact>
+            </surface>
         </collision>
 	    <xacro:inertial_cylinder mass="${mass}" length="${length}" radius="${radius}">
             <origin xyz="0 0 0.005" rpy="0 0 0" />
         </xacro:inertial_cylinder>
     </link>
     <gazebo reference="base_link">
-        <!--<material>Gazebo/Black</material>
+        <!-- <material>Gazebo/Black</material> -->
         <mu1>1.0</mu1>
-        <mu2>0.8</mu2> -->
-        <kp>1000.0</kp>
-        <kd>10000.0</kd>
+        <mu2>0.8</mu2>
+        <kp>500000.0</kp>
+        <kd>10.0</kd>
+        <min_depth>0.1</min_depth>
+        <maxVel>0.1</maxVel>
     </gazebo>
 
 
@@ -57,5 +69,22 @@
 
     <xacro:holonomic_wheel joint_wheel_xyz="-0.11539788473061769747 0.06662500090107909001 0.018159998763917353098" joint_wheel_rpy="1.570796305932749215 3.6134297384305885703e-08 1.0471975360610779049" name_roueholonome="roueholonome3">
     </xacro:holonomic_wheel>
+
+    <gazebo>
+        <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+            <robot_param>robot_description</robot_param>
+            <robot_param_node>robot_state_publisher</robot_param_node>
+            <parameters>$(find robot_nav)/params/omnidirectional_controller.yaml</parameters>
+        </plugin>
+        <plugin filename="libgazebo_ros_p3d.so" name="gazebo_ros_p3d" >
+            <ros>
+                <namespace>gazebo_ground_truth</namespace>
+            </ros>
+            <frame_name>world</frame_name>
+            <body_name>base_link</body_name>
+            <update_rate>50.0</update_rate>
+            <gaussian_noise>0.01</gaussian_noise>
+        </plugin>
+    </gazebo>
 
 </robot>

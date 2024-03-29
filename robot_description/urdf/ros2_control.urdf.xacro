@@ -1,0 +1,22 @@
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:macro name="ros2_control_wheel_joint" params="name_roueholonome">
+        <joint name="joint_wheel_${name_roueholonome}">
+            <command_interface name="velocity">
+                <param name="min">-10</param>
+                <param name="max">10</param>
+            </command_interface>
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+        </joint>
+    </xacro:macro>
+
+    <ros2_control name="GazeboSystem" type="system">
+        <hardware>
+            <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+        </hardware>
+        <xacro:ros2_control_wheel_joint name_roueholonome="roueholonome1"/>
+        <xacro:ros2_control_wheel_joint name_roueholonome="roueholonome2"/>
+        <xacro:ros2_control_wheel_joint name_roueholonome="roueholonome3"/>
+    </ros2_control>
+</robot>

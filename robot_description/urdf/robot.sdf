@@ -24,12 +24,16 @@
         <surface>
           <contact>
             <ode>
-              <kp>1000</kp>
-              <kd>10000</kd>
+              <kp>500000</kp>
+              <kd>10</kd>
+              <max_vel>0.1</max_vel>
             </ode>
           </contact>
           <friction>
-            <ode/>
+            <ode>
+              <mu>1</mu>
+              <mu2>0.8</mu2>
+            </ode>
           </friction>
         </surface>
       </collision>
@@ -42,6 +46,7 @@
           </mesh>
         </geometry>
       </visual>
+      <min_depth>0.1</min_depth>
     </link>
     <joint name='joint_wheel_roueholonome1' type='revolute'>
       <pose relative_to='base_link'>0.115398 0.066625 0.01816 1.5708 -0 -1.0472</pose>
@@ -65,14 +70,14 @@
       <pose relative_to='joint_wheel_roueholonome1'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose>-0 0 -0.00905 0 -0 0</pose>
-        <mass>0.0560365</mass>
+        <mass>0.073</mass>
         <inertia>
-          <ixx>0</ixx>
+          <ixx>1.9237e-05</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>1e-05</iyy>
+          <iyy>1.9237e-05</iyy>
           <iyz>0</iyz>
-          <izz>0</izz>
+          <izz>3.285e-05</izz>
         </inertia>
       </inertial>
       <collision name='roueholonome1_collision'>
@@ -85,10 +90,17 @@
         </geometry>
         <surface>
           <contact>
-            <ode/>
+            <ode>
+              <kp>500000</kp>
+              <kd>10</kd>
+              <max_vel>0.1</max_vel>
+            </ode>
           </contact>
           <friction>
-            <ode/>
+            <ode>
+              <mu>100</mu>
+              <mu2>100.8</mu2>
+            </ode>
           </friction>
         </surface>
       </collision>
@@ -107,6 +119,7 @@
           </script>
         </material>
       </visual>
+      <min_depth>0.1</min_depth>
     </link>
     <joint name='Rouleau_a_roueholonome1' type='revolute'>
       <pose relative_to='roueholonome1'>-0.013108 0.018041 -0.0156 -0.628319 1.5708 0</pose>
@@ -130,14 +143,14 @@
       <pose relative_to='Rouleau_a_roueholonome1'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose>-0 -0 -0 0 -0 0</pose>
-        <mass>0.00234322</mass>
+        <mass>0.01</mass>
         <inertia>
-          <ixx>0</ixx>
+          <ixx>4.41458e-07</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>8.1e-08</iyy>
+          <iyy>4.41458e-07</iyy>
           <iyz>0</iyz>
-          <izz>0</izz>
+          <izz>2.8125e-07</izz>
         </inertia>
       </inertial>
       <collision name='rouleau_1_roueholonome1_collision'>
@@ -151,14 +164,15 @@
         <surface>
           <contact>
             <ode>
-              <kp>1000</kp>
-              <kd>10000</kd>
+              <kp>500000</kp>
+              <kd>10</kd>
+              <max_vel>0.1</max_vel>
             </ode>
           </contact>
           <friction>
             <ode>
-              <mu>1</mu>
-              <mu2>0.8</mu2>
+              <mu>100</mu>
+              <mu2>100.8</mu2>
             </ode>
           </friction>
         </surface>
@@ -178,6 +192,7 @@
           </script>
         </material>
       </visual>
+      <min_depth>0.1</min_depth>
     </link>
     <joint name='Rouleau_b_roueholonome1' type='revolute'>
       <pose relative_to='roueholonome1'>-0.021209 -0.006891 -0.0156 -1.88496 1.5708 0</pose>
@@ -201,14 +216,14 @@
       <pose relative_to='Rouleau_b_roueholonome1'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose>-0 0 -0 0 -0 0</pose>
-        <mass>0.00234322</mass>
+        <mass>0.01</mass>
         <inertia>
-          <ixx>0</ixx>
+          <ixx>4.41458e-07</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>8.1e-08</iyy>
+          <iyy>4.41458e-07</iyy>
           <iyz>0</iyz>
-          <izz>0</izz>
+          <izz>2.8125e-07</izz>
         </inertia>
       </inertial>
       <collision name='rouleau_2_roueholonome1_collision'>
@@ -222,14 +237,15 @@
         <surface>
           <contact>
             <ode>
-              <kp>1000</kp>
-              <kd>10000</kd>
+              <kp>500000</kp>
+              <kd>10</kd>
+              <max_vel>0.1</max_vel>
             </ode>
           </contact>
           <friction>
             <ode>
-              <mu>1</mu>
-              <mu2>0.8</mu2>
+              <mu>100</mu>
+              <mu2>100.8</mu2>
             </ode>
           </friction>
         </surface>
@@ -249,6 +265,7 @@
           </script>
         </material>
       </visual>
+      <min_depth>0.1</min_depth>
     </link>
     <joint name='Rouleau_c_roueholonome1' type='revolute'>
       <pose relative_to='roueholonome1'>-0 -0.0223 -0.0156 0 1.5708 0</pose>
@@ -272,14 +289,14 @@
       <pose relative_to='Rouleau_c_roueholonome1'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose>-0 -0 -0 0 -0 0</pose>
-        <mass>0.00234322</mass>
+        <mass>0.01</mass>
         <inertia>
-          <ixx>0</ixx>
+          <ixx>4.41458e-07</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>8.1e-08</iyy>
+          <iyy>4.41458e-07</iyy>
           <iyz>0</iyz>
-          <izz>0</izz>
+          <izz>2.8125e-07</izz>
         </inertia>
       </inertial>
       <collision name='rouleau_3_roueholonome1_collision'>
@@ -293,14 +310,15 @@
         <surface>
           <contact>
             <ode>
-              <kp>1000</kp>
-              <kd>10000</kd>
+              <kp>500000</kp>
+              <kd>10</kd>
+              <max_vel>0.1</max_vel>
             </ode>
           </contact>
           <friction>
             <ode>
-              <mu>1</mu>
-              <mu2>0.8</mu2>
+              <mu>100</mu>
+              <mu2>100.8</mu2>
             </ode>
           </friction>
         </surface>
@@ -320,6 +338,7 @@
           </script>
         </material>
       </visual>
+      <min_depth>0.1</min_depth>
     </link>
     <joint name='Rouleau_d_roueholonome1' type='revolute'>
       <pose relative_to='roueholonome1'>0.021209 -0.006891 -0.0156 -1.25664 1.5708 0</pose>
@@ -343,14 +362,14 @@
       <pose relative_to='Rouleau_d_roueholonome1'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose>-0 -0 -0 0 -0 0</pose>
-        <mass>0.00234322</mass>
+        <mass>0.01</mass>
         <inertia>
-          <ixx>0</ixx>
+          <ixx>4.41458e-07</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>8.1e-08</iyy>
+          <iyy>4.41458e-07</iyy>
           <iyz>0</iyz>
-          <izz>0</izz>
+          <izz>2.8125e-07</izz>
         </inertia>
       </inertial>
       <collision name='rouleau_4_roueholonome1_collision'>
@@ -364,14 +383,15 @@
         <surface>
           <contact>
             <ode>
-              <kp>1000</kp>
-              <kd>10000</kd>
+              <kp>500000</kp>
+              <kd>10</kd>
+              <max_vel>0.1</max_vel>
             </ode>
           </contact>
           <friction>
             <ode>
-              <mu>1</mu>
-              <mu2>0.8</mu2>
+              <mu>100</mu>
+              <mu2>100.8</mu2>
             </ode>
           </friction>
         </surface>
@@ -391,6 +411,7 @@
           </script>
         </material>
       </visual>
+      <min_depth>0.1</min_depth>
     </link>
     <joint name='Rouleau_e_roueholonome1' type='revolute'>
       <pose relative_to='roueholonome1'>0.013108 0.018041 -0.0156 0.628319 1.5708 0</pose>
@@ -414,14 +435,14 @@
       <pose relative_to='Rouleau_e_roueholonome1'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose>-0 0 -0 0 -0 0</pose>
-        <mass>0.00234322</mass>
+        <mass>0.01</mass>
         <inertia>
-          <ixx>0</ixx>
+          <ixx>4.41458e-07</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>8.1e-08</iyy>
+          <iyy>4.41458e-07</iyy>
           <iyz>0</iyz>
-          <izz>0</izz>
+          <izz>2.8125e-07</izz>
         </inertia>
       </inertial>
       <collision name='rouleau_5_roueholonome1_collision'>
@@ -435,14 +456,15 @@
         <surface>
           <contact>
             <ode>
-              <kp>1000</kp>
-              <kd>10000</kd>
+              <kp>500000</kp>
+              <kd>10</kd>
+              <max_vel>0.1</max_vel>
             </ode>
           </contact>
           <friction>
             <ode>
-              <mu>1</mu>
-              <mu2>0.8</mu2>
+              <mu>100</mu>
+              <mu2>100.8</mu2>
             </ode>
           </friction>
         </surface>
@@ -462,6 +484,7 @@
           </script>
         </material>
       </visual>
+      <min_depth>0.1</min_depth>
     </link>
     <joint name='Rouleau_f_roueholonome1' type='revolute'>
       <pose relative_to='roueholonome1'>-0 0.0223 -0.0025 0 1.5708 0</pose>
@@ -485,14 +508,14 @@
       <pose relative_to='Rouleau_f_roueholonome1'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose>-0 -0 -0 0 -0 0</pose>
-        <mass>0.00234322</mass>
+        <mass>0.01</mass>
         <inertia>
-          <ixx>0</ixx>
+          <ixx>4.41458e-07</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>8.1e-08</iyy>
+          <iyy>4.41458e-07</iyy>
           <iyz>0</iyz>
-          <izz>0</izz>
+          <izz>2.8125e-07</izz>
         </inertia>
       </inertial>
       <collision name='rouleau_6_roueholonome1_collision'>
@@ -506,14 +529,15 @@
         <surface>
           <contact>
             <ode>
-              <kp>1000</kp>
-              <kd>10000</kd>
+              <kp>500000</kp>
+              <kd>10</kd>
+              <max_vel>0.1</max_vel>
             </ode>
           </contact>
           <friction>
             <ode>
-              <mu>1</mu>
-              <mu2>0.8</mu2>
+              <mu>100</mu>
+              <mu2>100.8</mu2>
             </ode>
           </friction>
         </surface>
@@ -533,6 +557,7 @@
           </script>
         </material>
       </visual>
+      <min_depth>0.1</min_depth>
     </link>
     <joint name='Rouleau_g_roueholonome1' type='revolute'>
       <pose relative_to='roueholonome1'>-0.021209 0.006891 -0.0025 -1.25664 1.5708 0</pose>
@@ -556,14 +581,14 @@
       <pose relative_to='Rouleau_g_roueholonome1'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose>-0 -0 -0 0 -0 0</pose>
-        <mass>0.00234322</mass>
+        <mass>0.01</mass>
         <inertia>
-          <ixx>0</ixx>
+          <ixx>4.41458e-07</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>8.1e-08</iyy>
+          <iyy>4.41458e-07</iyy>
           <iyz>0</iyz>
-          <izz>0</izz>
+          <izz>2.8125e-07</izz>
         </inertia>
       </inertial>
       <collision name='rouleau_7_roueholonome1_collision'>
@@ -577,14 +602,15 @@
         <surface>
           <contact>
             <ode>
-              <kp>1000</kp>
-              <kd>10000</kd>
+              <kp>500000</kp>
+              <kd>10</kd>
+              <max_vel>0.1</max_vel>
             </ode>
           </contact>
           <friction>
             <ode>
-              <mu>1</mu>
-              <mu2>0.8</mu2>
+              <mu>100</mu>
+              <mu2>100.8</mu2>
             </ode>
           </friction>
         </surface>
@@ -604,6 +630,7 @@
           </script>
         </material>
       </visual>
+      <min_depth>0.1</min_depth>
     </link>
     <joint name='Rouleau_h_roueholonome1' type='revolute'>
       <pose relative_to='roueholonome1'>-0.013108 -0.018041 -0.0025 0.628319 1.5708 0</pose>
@@ -627,14 +654,14 @@
       <pose relative_to='Rouleau_h_roueholonome1'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose>-0 -0 -0 0 -0 0</pose>
-        <mass>0.00234322</mass>
+        <mass>0.01</mass>
         <inertia>
-          <ixx>0</ixx>
+          <ixx>4.41458e-07</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>8.1e-08</iyy>
+          <iyy>4.41458e-07</iyy>
           <iyz>0</iyz>
-          <izz>0</izz>
+          <izz>2.8125e-07</izz>
         </inertia>
       </inertial>
       <collision name='rouleau_8_roueholonome1_collision'>
@@ -648,14 +675,15 @@
         <surface>
           <contact>
             <ode>
-              <kp>1000</kp>
-              <kd>10000</kd>
+              <kp>500000</kp>
+              <kd>10</kd>
+              <max_vel>0.1</max_vel>
             </ode>
           </contact>
           <friction>
             <ode>
-              <mu>1</mu>
-              <mu2>0.8</mu2>
+              <mu>100</mu>
+              <mu2>100.8</mu2>
             </ode>
           </friction>
         </surface>
@@ -675,6 +703,7 @@
           </script>
         </material>
       </visual>
+      <min_depth>0.1</min_depth>
     </link>
     <joint name='Rouleau_i_roueholonome1' type='revolute'>
       <pose relative_to='roueholonome1'>0.013108 -0.018041 -0.0025 -0.628319 1.5708 0</pose>
@@ -698,14 +727,14 @@
       <pose relative_to='Rouleau_i_roueholonome1'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose>-0 -0 -0 0 -0 0</pose>
-        <mass>0.00234322</mass>
+        <mass>0.01</mass>
         <inertia>
-          <ixx>0</ixx>
+          <ixx>4.41458e-07</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>8.1e-08</iyy>
+          <iyy>4.41458e-07</iyy>
           <iyz>0</iyz>
-          <izz>0</izz>
+          <izz>2.8125e-07</izz>
         </inertia>
       </inertial>
       <collision name='rouleau_9_roueholonome1_collision'>
@@ -719,14 +748,15 @@
         <surface>
           <contact>
             <ode>
-              <kp>1000</kp>
-              <kd>10000</kd>
+              <kp>500000</kp>
+              <kd>10</kd>
+              <max_vel>0.1</max_vel>
             </ode>
           </contact>
           <friction>
             <ode>
-              <mu>1</mu>
-              <mu2>0.8</mu2>
+              <mu>100</mu>
+              <mu2>100.8</mu2>
             </ode>
           </friction>
         </surface>
@@ -746,6 +776,7 @@
           </script>
         </material>
       </visual>
+      <min_depth>0.1</min_depth>
     </link>
     <joint name='Rouleau_j_roueholonome1' type='revolute'>
       <pose relative_to='roueholonome1'>0.021209 0.006891 -0.0025 -1.88496 1.5708 0</pose>
@@ -769,14 +800,14 @@
       <pose relative_to='Rouleau_j_roueholonome1'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose>-0 0 -0 0 -0 0</pose>
-        <mass>0.00234322</mass>
+        <mass>0.01</mass>
         <inertia>
-          <ixx>0</ixx>
+          <ixx>4.41458e-07</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>8.1e-08</iyy>
+          <iyy>4.41458e-07</iyy>
           <iyz>0</iyz>
-          <izz>0</izz>
+          <izz>2.8125e-07</izz>
         </inertia>
       </inertial>
       <collision name='rouleau_10_roueholonome1_collision'>
@@ -790,14 +821,15 @@
         <surface>
           <contact>
             <ode>
-              <kp>1000</kp>
-              <kd>10000</kd>
+              <kp>500000</kp>
+              <kd>10</kd>
+              <max_vel>0.1</max_vel>
             </ode>
           </contact>
           <friction>
             <ode>
-              <mu>1</mu>
-              <mu2>0.8</mu2>
+              <mu>100</mu>
+              <mu2>100.8</mu2>
             </ode>
           </friction>
         </surface>
@@ -817,6 +849,7 @@
           </script>
         </material>
       </visual>
+      <min_depth>0.1</min_depth>
     </link>
     <joint name='joint_wheel_roueholonome2' type='revolute'>
       <pose relative_to='base_link'>-0 -0.13325 0.01816 -1.5708 -0 -0</pose>
@@ -840,14 +873,14 @@
       <pose relative_to='joint_wheel_roueholonome2'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose>-0 0 -0.00905 0 -0 0</pose>
-        <mass>0.0560365</mass>
+        <mass>0.073</mass>
         <inertia>
-          <ixx>0</ixx>
+          <ixx>1.9237e-05</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>1e-05</iyy>
+          <iyy>1.9237e-05</iyy>
           <iyz>0</iyz>
-          <izz>0</izz>
+          <izz>3.285e-05</izz>
         </inertia>
       </inertial>
       <collision name='roueholonome2_collision'>
@@ -860,10 +893,17 @@
         </geometry>
         <surface>
           <contact>
-            <ode/>
+            <ode>
+              <kp>500000</kp>
+              <kd>10</kd>
+              <max_vel>0.1</max_vel>
+            </ode>
           </contact>
           <friction>
-            <ode/>
+            <ode>
+              <mu>100</mu>
+              <mu2>100.8</mu2>
+            </ode>
           </friction>
         </surface>
       </collision>
@@ -882,6 +922,7 @@
           </script>
         </material>
       </visual>
+      <min_depth>0.1</min_depth>
     </link>
     <joint name='Rouleau_a_roueholonome2' type='revolute'>
       <pose relative_to='roueholonome2'>-0.013108 0.018041 -0.0156 -0.628319 1.5708 0</pose>
@@ -905,14 +946,14 @@
       <pose relative_to='Rouleau_a_roueholonome2'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose>-0 -0 -0 0 -0 0</pose>
-        <mass>0.00234322</mass>
+        <mass>0.01</mass>
         <inertia>
-          <ixx>0</ixx>
+          <ixx>4.41458e-07</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>8.1e-08</iyy>
+          <iyy>4.41458e-07</iyy>
           <iyz>0</iyz>
-          <izz>0</izz>
+          <izz>2.8125e-07</izz>
         </inertia>
       </inertial>
       <collision name='rouleau_1_roueholonome2_collision'>
@@ -926,14 +967,15 @@
         <surface>
           <contact>
             <ode>
-              <kp>1000</kp>
-              <kd>10000</kd>
+              <kp>500000</kp>
+              <kd>10</kd>
+              <max_vel>0.1</max_vel>
             </ode>
           </contact>
           <friction>
             <ode>
-              <mu>1</mu>
-              <mu2>0.8</mu2>
+              <mu>100</mu>
+              <mu2>100.8</mu2>
             </ode>
           </friction>
         </surface>
@@ -953,6 +995,7 @@
           </script>
         </material>
       </visual>
+      <min_depth>0.1</min_depth>
     </link>
     <joint name='Rouleau_b_roueholonome2' type='revolute'>
       <pose relative_to='roueholonome2'>-0.021209 -0.006891 -0.0156 -1.88496 1.5708 0</pose>
@@ -976,14 +1019,14 @@
       <pose relative_to='Rouleau_b_roueholonome2'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose>-0 0 -0 0 -0 0</pose>
-        <mass>0.00234322</mass>
+        <mass>0.01</mass>
         <inertia>
-          <ixx>0</ixx>
+          <ixx>4.41458e-07</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>8.1e-08</iyy>
+          <iyy>4.41458e-07</iyy>
           <iyz>0</iyz>
-          <izz>0</izz>
+          <izz>2.8125e-07</izz>
         </inertia>
       </inertial>
       <collision name='rouleau_2_roueholonome2_collision'>
@@ -997,14 +1040,15 @@
         <surface>
           <contact>
             <ode>
-              <kp>1000</kp>
-              <kd>10000</kd>
+              <kp>500000</kp>
+              <kd>10</kd>
+              <max_vel>0.1</max_vel>
             </ode>
           </contact>
           <friction>
             <ode>
-              <mu>1</mu>
-              <mu2>0.8</mu2>
+              <mu>100</mu>
+              <mu2>100.8</mu2>
             </ode>
           </friction>
         </surface>
@@ -1024,6 +1068,7 @@
           </script>
         </material>
       </visual>
+      <min_depth>0.1</min_depth>
     </link>
     <joint name='Rouleau_c_roueholonome2' type='revolute'>
       <pose relative_to='roueholonome2'>-0 -0.0223 -0.0156 0 1.5708 0</pose>
@@ -1047,14 +1092,14 @@
       <pose relative_to='Rouleau_c_roueholonome2'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose>-0 -0 -0 0 -0 0</pose>
-        <mass>0.00234322</mass>
+        <mass>0.01</mass>
         <inertia>
-          <ixx>0</ixx>
+          <ixx>4.41458e-07</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>8.1e-08</iyy>
+          <iyy>4.41458e-07</iyy>
           <iyz>0</iyz>
-          <izz>0</izz>
+          <izz>2.8125e-07</izz>
         </inertia>
       </inertial>
       <collision name='rouleau_3_roueholonome2_collision'>
@@ -1068,14 +1113,15 @@
         <surface>
           <contact>
             <ode>
-              <kp>1000</kp>
-              <kd>10000</kd>
+              <kp>500000</kp>
+              <kd>10</kd>
+              <max_vel>0.1</max_vel>
             </ode>
           </contact>
           <friction>
             <ode>
-              <mu>1</mu>
-              <mu2>0.8</mu2>
+              <mu>100</mu>
+              <mu2>100.8</mu2>
             </ode>
           </friction>
         </surface>
@@ -1095,6 +1141,7 @@
           </script>
         </material>
       </visual>
+      <min_depth>0.1</min_depth>
     </link>
     <joint name='Rouleau_d_roueholonome2' type='revolute'>
       <pose relative_to='roueholonome2'>0.021209 -0.006891 -0.0156 -1.25664 1.5708 0</pose>
@@ -1118,14 +1165,14 @@
       <pose relative_to='Rouleau_d_roueholonome2'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose>-0 -0 -0 0 -0 0</pose>
-        <mass>0.00234322</mass>
+        <mass>0.01</mass>
         <inertia>
-          <ixx>0</ixx>
+          <ixx>4.41458e-07</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>8.1e-08</iyy>
+          <iyy>4.41458e-07</iyy>
           <iyz>0</iyz>
-          <izz>0</izz>
+          <izz>2.8125e-07</izz>
         </inertia>
       </inertial>
       <collision name='rouleau_4_roueholonome2_collision'>
@@ -1139,14 +1186,15 @@
         <surface>
           <contact>
             <ode>
-              <kp>1000</kp>
-              <kd>10000</kd>
+              <kp>500000</kp>
+              <kd>10</kd>
+              <max_vel>0.1</max_vel>
             </ode>
           </contact>
           <friction>
             <ode>
-              <mu>1</mu>
-              <mu2>0.8</mu2>
+              <mu>100</mu>
+              <mu2>100.8</mu2>
             </ode>
           </friction>
         </surface>
@@ -1166,6 +1214,7 @@
           </script>
         </material>
       </visual>
+      <min_depth>0.1</min_depth>
     </link>
     <joint name='Rouleau_e_roueholonome2' type='revolute'>
       <pose relative_to='roueholonome2'>0.013108 0.018041 -0.0156 0.628319 1.5708 0</pose>
@@ -1189,14 +1238,14 @@
       <pose relative_to='Rouleau_e_roueholonome2'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose>-0 0 -0 0 -0 0</pose>
-        <mass>0.00234322</mass>
+        <mass>0.01</mass>
         <inertia>
-          <ixx>0</ixx>
+          <ixx>4.41458e-07</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>8.1e-08</iyy>
+          <iyy>4.41458e-07</iyy>
           <iyz>0</iyz>
-          <izz>0</izz>
+          <izz>2.8125e-07</izz>
         </inertia>
       </inertial>
       <collision name='rouleau_5_roueholonome2_collision'>
@@ -1210,14 +1259,15 @@
         <surface>
           <contact>
             <ode>
-              <kp>1000</kp>
-              <kd>10000</kd>
+              <kp>500000</kp>
+              <kd>10</kd>
+              <max_vel>0.1</max_vel>
             </ode>
           </contact>
           <friction>
             <ode>
-              <mu>1</mu>
-              <mu2>0.8</mu2>
+              <mu>100</mu>
+              <mu2>100.8</mu2>
             </ode>
           </friction>
         </surface>
@@ -1237,6 +1287,7 @@
           </script>
         </material>
       </visual>
+      <min_depth>0.1</min_depth>
     </link>
     <joint name='Rouleau_f_roueholonome2' type='revolute'>
       <pose relative_to='roueholonome2'>-0 0.0223 -0.0025 0 1.5708 0</pose>
@@ -1260,14 +1311,14 @@
       <pose relative_to='Rouleau_f_roueholonome2'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose>-0 -0 -0 0 -0 0</pose>
-        <mass>0.00234322</mass>
+        <mass>0.01</mass>
         <inertia>
-          <ixx>0</ixx>
+          <ixx>4.41458e-07</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>8.1e-08</iyy>
+          <iyy>4.41458e-07</iyy>
           <iyz>0</iyz>
-          <izz>0</izz>
+          <izz>2.8125e-07</izz>
         </inertia>
       </inertial>
       <collision name='rouleau_6_roueholonome2_collision'>
@@ -1281,14 +1332,15 @@
         <surface>
           <contact>
             <ode>
-              <kp>1000</kp>
-              <kd>10000</kd>
+              <kp>500000</kp>
+              <kd>10</kd>
+              <max_vel>0.1</max_vel>
             </ode>
           </contact>
           <friction>
             <ode>
-              <mu>1</mu>
-              <mu2>0.8</mu2>
+              <mu>100</mu>
+              <mu2>100.8</mu2>
             </ode>
           </friction>
         </surface>
@@ -1308,6 +1360,7 @@
           </script>
         </material>
       </visual>
+      <min_depth>0.1</min_depth>
     </link>
     <joint name='Rouleau_g_roueholonome2' type='revolute'>
       <pose relative_to='roueholonome2'>-0.021209 0.006891 -0.0025 -1.25664 1.5708 0</pose>
@@ -1331,14 +1384,14 @@
       <pose relative_to='Rouleau_g_roueholonome2'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose>-0 -0 -0 0 -0 0</pose>
-        <mass>0.00234322</mass>
+        <mass>0.01</mass>
         <inertia>
-          <ixx>0</ixx>
+          <ixx>4.41458e-07</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>8.1e-08</iyy>
+          <iyy>4.41458e-07</iyy>
           <iyz>0</iyz>
-          <izz>0</izz>
+          <izz>2.8125e-07</izz>
         </inertia>
       </inertial>
       <collision name='rouleau_7_roueholonome2_collision'>
@@ -1352,14 +1405,15 @@
         <surface>
           <contact>
             <ode>
-              <kp>1000</kp>
-              <kd>10000</kd>
+              <kp>500000</kp>
+              <kd>10</kd>
+              <max_vel>0.1</max_vel>
             </ode>
           </contact>
           <friction>
             <ode>
-              <mu>1</mu>
-              <mu2>0.8</mu2>
+              <mu>100</mu>
+              <mu2>100.8</mu2>
             </ode>
           </friction>
         </surface>
@@ -1379,6 +1433,7 @@
           </script>
         </material>
       </visual>
+      <min_depth>0.1</min_depth>
     </link>
     <joint name='Rouleau_h_roueholonome2' type='revolute'>
       <pose relative_to='roueholonome2'>-0.013108 -0.018041 -0.0025 0.628319 1.5708 0</pose>
@@ -1402,14 +1457,14 @@
       <pose relative_to='Rouleau_h_roueholonome2'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose>-0 -0 -0 0 -0 0</pose>
-        <mass>0.00234322</mass>
+        <mass>0.01</mass>
         <inertia>
-          <ixx>0</ixx>
+          <ixx>4.41458e-07</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>8.1e-08</iyy>
+          <iyy>4.41458e-07</iyy>
           <iyz>0</iyz>
-          <izz>0</izz>
+          <izz>2.8125e-07</izz>
         </inertia>
       </inertial>
       <collision name='rouleau_8_roueholonome2_collision'>
@@ -1423,14 +1478,15 @@
         <surface>
           <contact>
             <ode>
-              <kp>1000</kp>
-              <kd>10000</kd>
+              <kp>500000</kp>
+              <kd>10</kd>
+              <max_vel>0.1</max_vel>
             </ode>
           </contact>
           <friction>
             <ode>
-              <mu>1</mu>
-              <mu2>0.8</mu2>
+              <mu>100</mu>
+              <mu2>100.8</mu2>
             </ode>
           </friction>
         </surface>
@@ -1450,6 +1506,7 @@
           </script>
         </material>
       </visual>
+      <min_depth>0.1</min_depth>
     </link>
     <joint name='Rouleau_i_roueholonome2' type='revolute'>
       <pose relative_to='roueholonome2'>0.013108 -0.018041 -0.0025 -0.628319 1.5708 0</pose>
@@ -1473,14 +1530,14 @@
       <pose relative_to='Rouleau_i_roueholonome2'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose>-0 -0 -0 0 -0 0</pose>
-        <mass>0.00234322</mass>
+        <mass>0.01</mass>
         <inertia>
-          <ixx>0</ixx>
+          <ixx>4.41458e-07</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>8.1e-08</iyy>
+          <iyy>4.41458e-07</iyy>
           <iyz>0</iyz>
-          <izz>0</izz>
+          <izz>2.8125e-07</izz>
         </inertia>
       </inertial>
       <collision name='rouleau_9_roueholonome2_collision'>
@@ -1494,14 +1551,15 @@
         <surface>
           <contact>
             <ode>
-              <kp>1000</kp>
-              <kd>10000</kd>
+              <kp>500000</kp>
+              <kd>10</kd>
+              <max_vel>0.1</max_vel>
             </ode>
           </contact>
           <friction>
             <ode>
-              <mu>1</mu>
-              <mu2>0.8</mu2>
+              <mu>100</mu>
+              <mu2>100.8</mu2>
             </ode>
           </friction>
         </surface>
@@ -1521,6 +1579,7 @@
           </script>
         </material>
       </visual>
+      <min_depth>0.1</min_depth>
     </link>
     <joint name='Rouleau_j_roueholonome2' type='revolute'>
       <pose relative_to='roueholonome2'>0.021209 0.006891 -0.0025 -1.88496 1.5708 0</pose>
@@ -1544,14 +1603,14 @@
       <pose relative_to='Rouleau_j_roueholonome2'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose>-0 0 -0 0 -0 0</pose>
-        <mass>0.00234322</mass>
+        <mass>0.01</mass>
         <inertia>
-          <ixx>0</ixx>
+          <ixx>4.41458e-07</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>8.1e-08</iyy>
+          <iyy>4.41458e-07</iyy>
           <iyz>0</iyz>
-          <izz>0</izz>
+          <izz>2.8125e-07</izz>
         </inertia>
       </inertial>
       <collision name='rouleau_10_roueholonome2_collision'>
@@ -1565,14 +1624,15 @@
         <surface>
           <contact>
             <ode>
-              <kp>1000</kp>
-              <kd>10000</kd>
+              <kp>500000</kp>
+              <kd>10</kd>
+              <max_vel>0.1</max_vel>
             </ode>
           </contact>
           <friction>
             <ode>
-              <mu>1</mu>
-              <mu2>0.8</mu2>
+              <mu>100</mu>
+              <mu2>100.8</mu2>
             </ode>
           </friction>
         </surface>
@@ -1592,6 +1652,7 @@
           </script>
         </material>
       </visual>
+      <min_depth>0.1</min_depth>
     </link>
     <joint name='joint_wheel_roueholonome3' type='revolute'>
       <pose relative_to='base_link'>-0.115398 0.066625 0.01816 1.5708 0 1.0472</pose>
@@ -1615,14 +1676,14 @@
       <pose relative_to='joint_wheel_roueholonome3'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose>-0 0 -0.00905 0 -0 0</pose>
-        <mass>0.0560365</mass>
+        <mass>0.073</mass>
         <inertia>
-          <ixx>0</ixx>
+          <ixx>1.9237e-05</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>1e-05</iyy>
+          <iyy>1.9237e-05</iyy>
           <iyz>0</iyz>
-          <izz>0</izz>
+          <izz>3.285e-05</izz>
         </inertia>
       </inertial>
       <collision name='roueholonome3_collision'>
@@ -1635,10 +1696,17 @@
         </geometry>
         <surface>
           <contact>
-            <ode/>
+            <ode>
+              <kp>500000</kp>
+              <kd>10</kd>
+              <max_vel>0.1</max_vel>
+            </ode>
           </contact>
           <friction>
-            <ode/>
+            <ode>
+              <mu>100</mu>
+              <mu2>100.8</mu2>
+            </ode>
           </friction>
         </surface>
       </collision>
@@ -1657,6 +1725,7 @@
           </script>
         </material>
       </visual>
+      <min_depth>0.1</min_depth>
     </link>
     <joint name='Rouleau_a_roueholonome3' type='revolute'>
       <pose relative_to='roueholonome3'>-0.013108 0.018041 -0.0156 -0.628319 1.5708 0</pose>
@@ -1680,14 +1749,14 @@
       <pose relative_to='Rouleau_a_roueholonome3'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose>-0 -0 -0 0 -0 0</pose>
-        <mass>0.00234322</mass>
+        <mass>0.01</mass>
         <inertia>
-          <ixx>0</ixx>
+          <ixx>4.41458e-07</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>8.1e-08</iyy>
+          <iyy>4.41458e-07</iyy>
           <iyz>0</iyz>
-          <izz>0</izz>
+          <izz>2.8125e-07</izz>
         </inertia>
       </inertial>
       <collision name='rouleau_1_roueholonome3_collision'>
@@ -1701,14 +1770,15 @@
         <surface>
           <contact>
             <ode>
-              <kp>1000</kp>
-              <kd>10000</kd>
+              <kp>500000</kp>
+              <kd>10</kd>
+              <max_vel>0.1</max_vel>
             </ode>
           </contact>
           <friction>
             <ode>
-              <mu>1</mu>
-              <mu2>0.8</mu2>
+              <mu>100</mu>
+              <mu2>100.8</mu2>
             </ode>
           </friction>
         </surface>
@@ -1728,6 +1798,7 @@
           </script>
         </material>
       </visual>
+      <min_depth>0.1</min_depth>
     </link>
     <joint name='Rouleau_b_roueholonome3' type='revolute'>
       <pose relative_to='roueholonome3'>-0.021209 -0.006891 -0.0156 -1.88496 1.5708 0</pose>
@@ -1751,14 +1822,14 @@
       <pose relative_to='Rouleau_b_roueholonome3'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose>-0 0 -0 0 -0 0</pose>
-        <mass>0.00234322</mass>
+        <mass>0.01</mass>
         <inertia>
-          <ixx>0</ixx>
+          <ixx>4.41458e-07</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>8.1e-08</iyy>
+          <iyy>4.41458e-07</iyy>
           <iyz>0</iyz>
-          <izz>0</izz>
+          <izz>2.8125e-07</izz>
         </inertia>
       </inertial>
       <collision name='rouleau_2_roueholonome3_collision'>
@@ -1772,14 +1843,15 @@
         <surface>
           <contact>
             <ode>
-              <kp>1000</kp>
-              <kd>10000</kd>
+              <kp>500000</kp>
+              <kd>10</kd>
+              <max_vel>0.1</max_vel>
             </ode>
           </contact>
           <friction>
             <ode>
-              <mu>1</mu>
-              <mu2>0.8</mu2>
+              <mu>100</mu>
+              <mu2>100.8</mu2>
             </ode>
           </friction>
         </surface>
@@ -1799,6 +1871,7 @@
           </script>
         </material>
       </visual>
+      <min_depth>0.1</min_depth>
     </link>
     <joint name='Rouleau_c_roueholonome3' type='revolute'>
       <pose relative_to='roueholonome3'>-0 -0.0223 -0.0156 0 1.5708 0</pose>
@@ -1822,14 +1895,14 @@
       <pose relative_to='Rouleau_c_roueholonome3'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose>-0 -0 -0 0 -0 0</pose>
-        <mass>0.00234322</mass>
+        <mass>0.01</mass>
         <inertia>
-          <ixx>0</ixx>
+          <ixx>4.41458e-07</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>8.1e-08</iyy>
+          <iyy>4.41458e-07</iyy>
           <iyz>0</iyz>
-          <izz>0</izz>
+          <izz>2.8125e-07</izz>
         </inertia>
       </inertial>
       <collision name='rouleau_3_roueholonome3_collision'>
@@ -1843,14 +1916,15 @@
         <surface>
           <contact>
             <ode>
-              <kp>1000</kp>
-              <kd>10000</kd>
+              <kp>500000</kp>
+              <kd>10</kd>
+              <max_vel>0.1</max_vel>
             </ode>
           </contact>
           <friction>
             <ode>
-              <mu>1</mu>
-              <mu2>0.8</mu2>
+              <mu>100</mu>
+              <mu2>100.8</mu2>
             </ode>
           </friction>
         </surface>
@@ -1870,6 +1944,7 @@
           </script>
         </material>
       </visual>
+      <min_depth>0.1</min_depth>
     </link>
     <joint name='Rouleau_d_roueholonome3' type='revolute'>
       <pose relative_to='roueholonome3'>0.021209 -0.006891 -0.0156 -1.25664 1.5708 0</pose>
@@ -1893,14 +1968,14 @@
       <pose relative_to='Rouleau_d_roueholonome3'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose>-0 -0 -0 0 -0 0</pose>
-        <mass>0.00234322</mass>
+        <mass>0.01</mass>
         <inertia>
-          <ixx>0</ixx>
+          <ixx>4.41458e-07</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>8.1e-08</iyy>
+          <iyy>4.41458e-07</iyy>
           <iyz>0</iyz>
-          <izz>0</izz>
+          <izz>2.8125e-07</izz>
         </inertia>
       </inertial>
       <collision name='rouleau_4_roueholonome3_collision'>
@@ -1914,14 +1989,15 @@
         <surface>
           <contact>
             <ode>
-              <kp>1000</kp>
-              <kd>10000</kd>
+              <kp>500000</kp>
+              <kd>10</kd>
+              <max_vel>0.1</max_vel>
             </ode>
           </contact>
           <friction>
             <ode>
-              <mu>1</mu>
-              <mu2>0.8</mu2>
+              <mu>100</mu>
+              <mu2>100.8</mu2>
             </ode>
           </friction>
         </surface>
@@ -1941,6 +2017,7 @@
           </script>
         </material>
       </visual>
+      <min_depth>0.1</min_depth>
     </link>
     <joint name='Rouleau_e_roueholonome3' type='revolute'>
       <pose relative_to='roueholonome3'>0.013108 0.018041 -0.0156 0.628319 1.5708 0</pose>
@@ -1964,14 +2041,14 @@
       <pose relative_to='Rouleau_e_roueholonome3'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose>-0 0 -0 0 -0 0</pose>
-        <mass>0.00234322</mass>
+        <mass>0.01</mass>
         <inertia>
-          <ixx>0</ixx>
+          <ixx>4.41458e-07</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>8.1e-08</iyy>
+          <iyy>4.41458e-07</iyy>
           <iyz>0</iyz>
-          <izz>0</izz>
+          <izz>2.8125e-07</izz>
         </inertia>
       </inertial>
       <collision name='rouleau_5_roueholonome3_collision'>
@@ -1985,14 +2062,15 @@
         <surface>
           <contact>
             <ode>
-              <kp>1000</kp>
-              <kd>10000</kd>
+              <kp>500000</kp>
+              <kd>10</kd>
+              <max_vel>0.1</max_vel>
             </ode>
           </contact>
           <friction>
             <ode>
-              <mu>1</mu>
-              <mu2>0.8</mu2>
+              <mu>100</mu>
+              <mu2>100.8</mu2>
             </ode>
           </friction>
         </surface>
@@ -2012,6 +2090,7 @@
           </script>
         </material>
       </visual>
+      <min_depth>0.1</min_depth>
     </link>
     <joint name='Rouleau_f_roueholonome3' type='revolute'>
       <pose relative_to='roueholonome3'>-0 0.0223 -0.0025 0 1.5708 0</pose>
@@ -2035,14 +2114,14 @@
       <pose relative_to='Rouleau_f_roueholonome3'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose>-0 -0 -0 0 -0 0</pose>
-        <mass>0.00234322</mass>
+        <mass>0.01</mass>
         <inertia>
-          <ixx>0</ixx>
+          <ixx>4.41458e-07</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>8.1e-08</iyy>
+          <iyy>4.41458e-07</iyy>
           <iyz>0</iyz>
-          <izz>0</izz>
+          <izz>2.8125e-07</izz>
         </inertia>
       </inertial>
       <collision name='rouleau_6_roueholonome3_collision'>
@@ -2056,14 +2135,15 @@
         <surface>
           <contact>
             <ode>
-              <kp>1000</kp>
-              <kd>10000</kd>
+              <kp>500000</kp>
+              <kd>10</kd>
+              <max_vel>0.1</max_vel>
             </ode>
           </contact>
           <friction>
             <ode>
-              <mu>1</mu>
-              <mu2>0.8</mu2>
+              <mu>100</mu>
+              <mu2>100.8</mu2>
             </ode>
           </friction>
         </surface>
@@ -2083,6 +2163,7 @@
           </script>
         </material>
       </visual>
+      <min_depth>0.1</min_depth>
     </link>
     <joint name='Rouleau_g_roueholonome3' type='revolute'>
       <pose relative_to='roueholonome3'>-0.021209 0.006891 -0.0025 -1.25664 1.5708 0</pose>
@@ -2106,14 +2187,14 @@
       <pose relative_to='Rouleau_g_roueholonome3'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose>-0 -0 -0 0 -0 0</pose>
-        <mass>0.00234322</mass>
+        <mass>0.01</mass>
         <inertia>
-          <ixx>0</ixx>
+          <ixx>4.41458e-07</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>8.1e-08</iyy>
+          <iyy>4.41458e-07</iyy>
           <iyz>0</iyz>
-          <izz>0</izz>
+          <izz>2.8125e-07</izz>
         </inertia>
       </inertial>
       <collision name='rouleau_7_roueholonome3_collision'>
@@ -2127,14 +2208,15 @@
         <surface>
           <contact>
             <ode>
-              <kp>1000</kp>
-              <kd>10000</kd>
+              <kp>500000</kp>
+              <kd>10</kd>
+              <max_vel>0.1</max_vel>
             </ode>
           </contact>
           <friction>
             <ode>
-              <mu>1</mu>
-              <mu2>0.8</mu2>
+              <mu>100</mu>
+              <mu2>100.8</mu2>
             </ode>
           </friction>
         </surface>
@@ -2154,6 +2236,7 @@
           </script>
         </material>
       </visual>
+      <min_depth>0.1</min_depth>
     </link>
     <joint name='Rouleau_h_roueholonome3' type='revolute'>
       <pose relative_to='roueholonome3'>-0.013108 -0.018041 -0.0025 0.628319 1.5708 0</pose>
@@ -2177,14 +2260,14 @@
       <pose relative_to='Rouleau_h_roueholonome3'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose>-0 -0 -0 0 -0 0</pose>
-        <mass>0.00234322</mass>
+        <mass>0.01</mass>
         <inertia>
-          <ixx>0</ixx>
+          <ixx>4.41458e-07</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>8.1e-08</iyy>
+          <iyy>4.41458e-07</iyy>
           <iyz>0</iyz>
-          <izz>0</izz>
+          <izz>2.8125e-07</izz>
         </inertia>
       </inertial>
       <collision name='rouleau_8_roueholonome3_collision'>
@@ -2198,14 +2281,15 @@
         <surface>
           <contact>
             <ode>
-              <kp>1000</kp>
-              <kd>10000</kd>
+              <kp>500000</kp>
+              <kd>10</kd>
+              <max_vel>0.1</max_vel>
             </ode>
           </contact>
           <friction>
             <ode>
-              <mu>1</mu>
-              <mu2>0.8</mu2>
+              <mu>100</mu>
+              <mu2>100.8</mu2>
             </ode>
           </friction>
         </surface>
@@ -2225,6 +2309,7 @@
           </script>
         </material>
       </visual>
+      <min_depth>0.1</min_depth>
     </link>
     <joint name='Rouleau_i_roueholonome3' type='revolute'>
       <pose relative_to='roueholonome3'>0.013108 -0.018041 -0.0025 -0.628319 1.5708 0</pose>
@@ -2248,14 +2333,14 @@
       <pose relative_to='Rouleau_i_roueholonome3'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose>-0 -0 -0 0 -0 0</pose>
-        <mass>0.00234322</mass>
+        <mass>0.01</mass>
         <inertia>
-          <ixx>0</ixx>
+          <ixx>4.41458e-07</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>8.1e-08</iyy>
+          <iyy>4.41458e-07</iyy>
           <iyz>0</iyz>
-          <izz>0</izz>
+          <izz>2.8125e-07</izz>
         </inertia>
       </inertial>
       <collision name='rouleau_9_roueholonome3_collision'>
@@ -2269,14 +2354,15 @@
         <surface>
           <contact>
             <ode>
-              <kp>1000</kp>
-              <kd>10000</kd>
+              <kp>500000</kp>
+              <kd>10</kd>
+              <max_vel>0.1</max_vel>
             </ode>
           </contact>
           <friction>
             <ode>
-              <mu>1</mu>
-              <mu2>0.8</mu2>
+              <mu>100</mu>
+              <mu2>100.8</mu2>
             </ode>
           </friction>
         </surface>
@@ -2296,6 +2382,7 @@
           </script>
         </material>
       </visual>
+      <min_depth>0.1</min_depth>
     </link>
     <joint name='Rouleau_j_roueholonome3' type='revolute'>
       <pose relative_to='roueholonome3'>0.021209 0.006891 -0.0025 -1.88496 1.5708 0</pose>
@@ -2319,14 +2406,14 @@
       <pose relative_to='Rouleau_j_roueholonome3'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose>-0 0 -0 0 -0 0</pose>
-        <mass>0.00234322</mass>
+        <mass>0.01</mass>
         <inertia>
-          <ixx>0</ixx>
+          <ixx>4.41458e-07</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>8.1e-08</iyy>
+          <iyy>4.41458e-07</iyy>
           <iyz>0</iyz>
-          <izz>0</izz>
+          <izz>2.8125e-07</izz>
         </inertia>
       </inertial>
       <collision name='rouleau_10_roueholonome3_collision'>
@@ -2340,14 +2427,15 @@
         <surface>
           <contact>
             <ode>
-              <kp>1000</kp>
-              <kd>10000</kd>
+              <kp>500000</kp>
+              <kd>10</kd>
+              <max_vel>0.1</max_vel>
             </ode>
           </contact>
           <friction>
             <ode>
-              <mu>1</mu>
-              <mu2>0.8</mu2>
+              <mu>100</mu>
+              <mu2>100.8</mu2>
             </ode>
           </friction>
         </surface>
@@ -2367,6 +2455,22 @@
           </script>
         </material>
       </visual>
+      <min_depth>0.1</min_depth>
     </link>
+    <static>0</static>
+    <plugin name='gazebo_ros2_control' filename='libgazebo_ros2_control.so'>
+      <robot_param>robot_description</robot_param>
+      <robot_param_node>robot_state_publisher</robot_param_node>
+      <parameters>/home/floris/ros2_ws/install/robot_nav/share/robot_nav/params/omnidirectional_controller.yaml</parameters>
+    </plugin>
+    <plugin name='gazebo_ros_p3d' filename='libgazebo_ros_p3d.so'>
+      <ros>
+        <namespace>gazebo_ground_truth</namespace>
+      </ros>
+      <frame_name>world</frame_name>
+      <body_name>base_link</body_name>
+      <update_rate>50.0</update_rate>
+      <gaussian_noise>0.01</gaussian_noise>
+    </plugin>
   </model>
 </sdf>
