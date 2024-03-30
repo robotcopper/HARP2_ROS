@@ -10,6 +10,7 @@
             <state_interface name="velocity"/>
         </joint>
     </xacro:macro>
+    
 
     <ros2_control name="GazeboSystem" type="system">
         <hardware>
@@ -19,4 +20,25 @@
         <xacro:ros2_control_wheel_joint name_roueholonome="roueholonome2"/>
         <xacro:ros2_control_wheel_joint name_roueholonome="roueholonome1"/>
     </ros2_control>
+
+
+    <gazebo>
+        <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+            <robot_param>robot_description</robot_param>
+            <robot_param_node>robot_state_publisher</robot_param_node>
+            <parameters>$(find robot_controller)/params/omnidirectional_controller.yaml</parameters>
+        </plugin>
+        <plugin filename="libgazebo_ros_p3d.so" name="gazebo_ros_p3d" >
+            <ros>
+                <namespace>gazebo_ground_truth</namespace>
+            </ros>
+            <frame_name>world</frame_name>
+            <body_name>base_link</body_name>
+            <update_rate>50.0</update_rate>
+            <gaussian_noise>0.01</gaussian_noise>
+        </plugin>
+    </gazebo>
+
+
 </robot>
+

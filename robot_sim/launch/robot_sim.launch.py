@@ -11,6 +11,8 @@ from launch.substitutions import PathJoinSubstitution, EnvironmentVariable
 from launch_ros.substitutions import FindPackageShare
 from pathlib import Path
 
+import xacro
+
 
 def generate_launch_description():
     
@@ -18,79 +20,112 @@ def generate_launch_description():
     namespace = LaunchConfiguration('namespace')
     use_sim_time = LaunchConfiguration('use_sim_time')
     gui = LaunchConfiguration('gui')
-    verbose = LaunchConfiguration('verbose')
-    gui_required = LaunchConfiguration('gui_required')
-    server_required = LaunchConfiguration('server_required')
+    gui_required = 'True' #Terminate launch script when gzclient (user interface window) exits
+    server_required = 'True' #Terminate launch script when gzserver (Gazebo Server) exits
     world = LaunchConfiguration('world')
     robot_name = LaunchConfiguration('robot_name')
-    pose = {'x': LaunchConfiguration('x_pose', default='0.0'),
-            'y': LaunchConfiguration('y_pose', default='0.0'),
-            'z': LaunchConfiguration('z_pose', default='0.04'),
+    pose = {'x': LaunchConfiguration('x_pose'),
+            'y': LaunchConfiguration('y_pose'),
+            'z': LaunchConfiguration('z_pose'),
             'R': LaunchConfiguration('roll', default='0.00'),
             'P': LaunchConfiguration('pitch', default='0.00'),
-            'Y': LaunchConfiguration('yaw', default='0.00')}
+            'Y': LaunchConfiguration('yaw', default='0.523599')}
+    use_robot_state_pub = LaunchConfiguration('use_robot_state_pub')
+    use_joint_state_pub = LaunchConfiguration('use_joint_state_pub')
+    use_joint_state_pub_gui = LaunchConfiguration('use_joint_state_pub_gui')
+    use_rviz = LaunchConfiguration('use_rviz')
+    robot_description = LaunchConfiguration('robot_description')
+    rviz_config_file = LaunchConfiguration('rviz_config_file')
 
-    # Specify the package directory and path to file within the package
+    # Specify directory and path to file within package
     robot_description_pkg_dir = get_package_share_directory('robot_description')
-    sdf_file_subpath = 'urdf/robot.sdf'
     robot_sim_pkg_dir = get_package_share_directory('robot_sim')
-    wordl_file_subpath = 'world/Table2024.world'
     gazebo_ros_pkg_dir = get_package_share_directory('gazebo_ros')
+    robot_description_launch_file_subpath = 'launch/robot_description.launch.py'
+    rviz_config_file_subpath = 'rviz/robot_description_rviz.rviz'
+    urdf_file_subpath = 'urdf/robot.urdf.xacro'
+    wordl_file_subpath = 'world/Table2024.world'
+
+    # Use xacro to process the file
+    xacro_file = os.path.join(robot_description_pkg_dir, urdf_file_subpath)
+    robot_description_raw = xacro.process_file(xacro_file).toxml()
 
     # Gazebo environment variables setup 
     gazebo_models_world_path = os.path.join(robot_sim_pkg_dir, 'world')
-    gazebo_models_robot_description_path = os.path.join(robot_description_pkg_dir, 'urdf')
-    gazebo_models_default_path = os.path.join('$HOME', '.gazebo', 'models')
-    gazebo_default_path = '/usr/share/gazebo-11' # Must have to avoid gazebo::rendering::Camera error
-    all_paths = gazebo_models_world_path+':'+gazebo_models_robot_description_path+':'+gazebo_models_default_path+':'+gazebo_default_path
-    os.environ['GAZEBO_MODEL_PATH'] = all_paths 
-    os.environ['GAZEBO_MEDIA_PATH'] = all_paths 
-    os.environ['GAZEBO_RESOURCE_PATH'] = all_paths
-    os.environ['GAZEBO_MODEL_URI'] = '' # To prevent Gazebo from downloading models
-    os.environ['GAZEBO_MODEL_DATABASE_URI'] = '' # To prevent Gazebo from downloading models
-
+    os.environ['GAZEBO_MODEL_PATH'] = gazebo_models_world_path # Specification of additional model path to use "model://" in world file
 
     return LaunchDescription([
         
+        # Declare launch arguments
 	    DeclareLaunchArgument(
-        'namespace',
-        default_value='',
-        description='Top-level namespace'
+            'namespace',
+            default_value='',
+            description='Top-level namespace'
         ),
         DeclareLaunchArgument(
-        'gui',
-        default_value='True',
-        description='Launch the user interface window of Gazebo'
+            'gui',
+            default_value='True',
+            description='Launch the user interface window of Gazebo'
         ),
         DeclareLaunchArgument(
-        'use_sim_time',
-        default_value='True',
-        description='Use simulation (Gazebo) clock if true'
+            'use_sim_time',
+            default_value='True',
+            description='Use simulation (Gazebo) clock if true'
         ),
 	    DeclareLaunchArgument(
-        'verbose',
-        default_value='False',
-        description='Run gzserver and gzclient with --verbose, printing errors and warnings to the terminal'
+            'world',
+            default_value=PathJoinSubstitution([robot_sim_pkg_dir, wordl_file_subpath ]),
+            description='world file'
         ),
-	    DeclareLaunchArgument(
-        'gui_required',
-        default_value='True',
-        description='Terminate launch script when gzclient (user interface window) exits'
-        ),
-	    DeclareLaunchArgument(
-        'server_required',
-        default_value='False',
-        description='Terminate launch script when gzserver (Gazebo Server) exits'
-        ),
-	    DeclareLaunchArgument(
-        'world',
-        default_value=PathJoinSubstitution([robot_sim_pkg_dir, wordl_file_subpath ]),
-        description='world file'
+            DeclareLaunchArgument(
+            'robot_name',
+            default_value='HARP2',
+            description='name of the robot'
         ),
         DeclareLaunchArgument(
-        'robot_name',
-        default_value='HARP2',
-        description='name of the robot'
+            'robot_description',
+            default_value=robot_description_raw,
+            description='robot_description'
+        ),
+        DeclareLaunchArgument(
+            'use_robot_state_pub',
+            default_value='True',
+            description='Whether to start the robot state publisher'
+        ),
+        DeclareLaunchArgument(
+            'use_joint_state_pub',
+            default_value='True',
+            description='Whether to start the joint state publisher'
+        ),
+        DeclareLaunchArgument(
+            'use_joint_state_pub_gui',
+            default_value='False',
+            description='Whether to start the joint state publisher GUI'
+        ),
+        DeclareLaunchArgument(
+            'use_rviz',
+            default_value='True',
+            description='Whether to start RVIZ'
+        ),
+        DeclareLaunchArgument(
+            'rviz_config_file',
+            default_value= PathJoinSubstitution([robot_description_pkg_dir, rviz_config_file_subpath ]),
+            description='Full path to the RVIZ config file to use'
+        ),
+        DeclareLaunchArgument(
+            'x_pose',
+            default_value= '0.0',
+            description='x_pose'
+        ),
+        DeclareLaunchArgument(
+            'y_pose',
+            default_value= '0.0',
+            description='Y_pose'
+        ),
+        DeclareLaunchArgument(
+            'z_pose',
+            default_value= '0.04',
+            description='Z_pose'
         ),
 
 
@@ -101,9 +136,23 @@ def generate_launch_description():
             launch_arguments={'world': world,
                               'use_sim_time': use_sim_time,
                               'gui': gui,
-                              'verbose': verbose,
                               'gui_required': gui_required,
                               'server_required': server_required,
+                             }.items()
+        ),
+
+        IncludeLaunchDescription(
+            PythonLaunchDescriptionSource(
+                os.path.join(robot_description_pkg_dir, robot_description_launch_file_subpath)
+            ),
+            launch_arguments={'namespace': namespace,
+                              'use_sim_time': use_sim_time,
+                              'use_robot_state_pub': use_robot_state_pub,
+                              'use_joint_state_pub': use_joint_state_pub,
+                              'use_joint_state_pub_gui': use_joint_state_pub_gui,
+                              'use_rviz': use_rviz,
+                              'rviz_config_file': rviz_config_file,
+                              'robot_description': robot_description
                              }.items()
         ),
 
@@ -113,11 +162,11 @@ def generate_launch_description():
             output={'both': 'log'},
             arguments=[
                 '-entity', robot_name,
-                #'-topic', 'robot_description',
-                '-file', PathJoinSubstitution([robot_description_pkg_dir, sdf_file_subpath]),
+                '-topic', 'robot_description',
                 '-robot_namespace', namespace,
                 '-x', pose['x'], '-y', pose['y'], '-z', pose['z'],
                 '-R', pose['R'], '-P', pose['P'], '-Y', pose['Y']]
-        )
-	    
+        ),
+
+
     ])

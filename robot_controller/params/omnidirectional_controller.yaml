@@ -15,10 +15,10 @@ omnidirectional_controller:
       - joint_wheel_roueholonome3
       - joint_wheel_roueholonome2
       - joint_wheel_roueholonome1
-
+      
     robot_radius: 0.2
     wheel_radius: 0.058
-    gamma: 30.0 # angle between body fixed y axis and the normal of wheel3
+    gamma: 30.0 # angle between body fixed y axis and the normal of third wheel in list above
 
     publish_rate: 50.0
     odom_frame_id: odom

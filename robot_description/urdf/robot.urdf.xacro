@@ -5,8 +5,14 @@
     <xacro:include filename="$(find robot_description)/urdf/standard_inertia_util.xacro" />
     <xacro:include filename="$(find robot_description)/urdf/holonomic_wheel/wheel.xacro" />
 
-    <!-- <xacro:include filename="$(find robot_description)/urdf/gazebo.urdf.xacro"/> -->
-    <xacro:include filename="$(find robot_description)/urdf/ros2_control.urdf.xacro"/>
+    <xacro:arg name="use_ros2_control" default="false"/>
+    <xacro:if value="$(arg use_ros2_control)">
+        <xacro:include filename="$(find robot_controller)/urdf/ros2_control.urdf.xacro"/>
+    </xacro:if>
+    <xacro:unless value="$(arg use_ros2_control)">
+        <xacro:include filename="$(find robot_controller)/urdf/gazebo_control.urdf.xacro"/>
+    </xacro:unless>
+
 
     <!-- This first link called "base_footprint" is empty -->
     <link name="base_footprint"/>
@@ -69,22 +75,5 @@
 
     <xacro:holonomic_wheel joint_wheel_xyz="-0.11539788473061769747 0.06662500090107909001 0.018159998763917353098" joint_wheel_rpy="1.570796305932749215 3.6134297384305885703e-08 1.0471975360610779049" name_roueholonome="roueholonome3">
     </xacro:holonomic_wheel>
-
-    <gazebo>
-        <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
-            <robot_param>robot_description</robot_param>
-            <robot_param_node>robot_state_publisher</robot_param_node>
-            <parameters>$(find robot_nav)/params/omnidirectional_controller.yaml</parameters>
-        </plugin>
-        <plugin filename="libgazebo_ros_p3d.so" name="gazebo_ros_p3d" >
-            <ros>
-                <namespace>gazebo_ground_truth</namespace>
-            </ros>
-            <frame_name>world</frame_name>
-            <body_name>base_link</body_name>
-            <update_rate>50.0</update_rate>
-            <gaussian_noise>0.01</gaussian_noise>
-        </plugin>
-    </gazebo>
 
 </robot>
