@@ -445,24 +445,6 @@
 			<limit effort="1" velocity="20" />
 			<joint_properties friction="10000.0"/>
 		</joint>
-
-		<!-- <gazebo>
-			<plugin name="gazebo_ros_joint_state_publisher"
-				filename="libgazebo_ros_joint_state_publisher.so">
-				<update_rate>20</update_rate>
-				<joint_name>Rouleau_a_${name_roueholonome}</joint_name>
-				<joint_name>Rouleau_b_${name_roueholonome}</joint_name>
-				<joint_name>Rouleau_c_${name_roueholonome}</joint_name>
-				<joint_name>Rouleau_d_${name_roueholonome}</joint_name>
-				<joint_name>Rouleau_e_${name_roueholonome}</joint_name>
-				<joint_name>Rouleau_f_${name_roueholonome}</joint_name>
-				<joint_name>Rouleau_g_${name_roueholonome}</joint_name>
-				<joint_name>Rouleau_h_${name_roueholonome}</joint_name>
-				<joint_name>Rouleau_i_${name_roueholonome}</joint_name>
-				<joint_name>Rouleau_j_${name_roueholonome}</joint_name>
-				<joint_name>joint_wheel_${name_roueholonome}</joint_name>
-			</plugin>
-		</gazebo> -->
 	
 	</xacro:macro>
 

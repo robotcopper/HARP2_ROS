@@ -6,7 +6,7 @@ from launch import LaunchDescription
 from launch_ros.actions import Node
 from launch.substitutions import LaunchConfiguration
 from launch.conditions import IfCondition
-from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
+from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, TimerAction
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import PathJoinSubstitution
 
@@ -24,8 +24,9 @@ def generate_launch_description():
     use_joint_state_pub_gui = LaunchConfiguration('use_joint_state_pub_gui')
     use_rviz = LaunchConfiguration('use_rviz')
     rviz_config_file = LaunchConfiguration('rviz_config_file')
+    robot_description = LaunchConfiguration('robot_description')
 
-    # Specify the package directory and path to xacro file within the package
+    # Specify directory and path to file within package
     robot_description_pkg_dir = get_package_share_directory('robot_description')
     urdf_file_subpath = 'urdf/robot.urdf.xacro'
     rviz_launch_file_subpath = 'launch/rviz.launch.py'
@@ -35,43 +36,51 @@ def generate_launch_description():
     xacro_file = os.path.join(robot_description_pkg_dir, urdf_file_subpath)
     robot_description_raw = xacro.process_file(xacro_file).toxml()
 
+
     return LaunchDescription([
         
+        # Declare launch arguments
 	    DeclareLaunchArgument(
-        'namespace',
-        default_value='',
-        description='Namespace'
+            'robot_description',
+            default_value=robot_description_raw,
+            description='robot_description'
         ),
         DeclareLaunchArgument(
-        'use_sim_time',
-        default_value='False',
-        description='Use simulation (Gazebo) clock if true'
+            'namespace',
+            default_value='',
+            description='Namespace'
         ),
         DeclareLaunchArgument(
-        'use_robot_state_pub',
-        default_value='True',
-        description='Whether to start the robot state publisher'
+            'use_sim_time',
+            default_value='False',
+            description='Use simulation (Gazebo) clock if true'
         ),
         DeclareLaunchArgument(
-        'use_joint_state_pub',
-        default_value='True',
-        description='Whether to start the joint state publisher'
+            'use_robot_state_pub',
+            default_value='True',
+            description='Whether to start the robot state publisher'
         ),
         DeclareLaunchArgument(
-        'use_joint_state_pub_gui',
-        default_value='False',
-        description='Whether to start the joint state publisher GUI'
+            'use_joint_state_pub',
+            default_value='True',
+            description='Whether to start the joint state publisher'
         ),
         DeclareLaunchArgument(
-        'use_rviz',
-        default_value='True',
-        description='Whether to start RVIZ'
+            'use_joint_state_pub_gui',
+            default_value='False',
+            description='Whether to start the joint state publisher GUI'
         ),
         DeclareLaunchArgument(
-        'rviz_config_file',
-        default_value= PathJoinSubstitution([robot_description_pkg_dir, rviz_config_file_subpath ]),
-        description='Full path to the RVIZ config file to use'
+            'use_rviz',
+            default_value='True',
+            description='Whether to start RVIZ'
         ),
+        DeclareLaunchArgument(
+            'rviz_config_file',
+            default_value= PathJoinSubstitution([robot_description_pkg_dir, rviz_config_file_subpath ]),
+            description='Full path to the RVIZ config file to use'
+        ),
+
 
 		Node(
         condition=IfCondition(use_robot_state_pub),
@@ -81,10 +90,8 @@ def generate_launch_description():
         namespace=namespace,
         output='screen',
         parameters=[{'use_sim_time': use_sim_time,
-                     'robot_description':robot_description_raw
+                     'robot_description':robot_description,
                     }],
-        remappings = [('/tf', 'tf'),
-                      ('/tf_static', 'tf_static'),]
         ),
 	    
 		Node(
@@ -94,7 +101,7 @@ def generate_launch_description():
         name='joint_state_publisher',
         namespace=namespace,
         parameters=[{'use_sim_time': use_sim_time,
-                     'robot_description': robot_description_raw
+                     'robot_description': robot_description,
                     }],
     	),
         
@@ -105,7 +112,6 @@ def generate_launch_description():
         name='joint_state_publisher_gui',
         namespace=namespace,
         ),
-
 
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(
