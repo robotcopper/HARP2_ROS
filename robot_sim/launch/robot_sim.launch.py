@@ -4,11 +4,12 @@ from ament_index_python.packages import get_package_share_directory
 
 from launch import LaunchDescription
 from launch_ros.actions import Node
-from launch.substitutions import LaunchConfiguration
+from launch.substitutions import LaunchConfiguration, Command
 from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, SetEnvironmentVariable
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import PathJoinSubstitution, EnvironmentVariable
 from launch_ros.substitutions import FindPackageShare
+from launch.conditions import IfCondition
 from pathlib import Path
 
 import xacro
@@ -36,6 +37,8 @@ def generate_launch_description():
     use_rviz = LaunchConfiguration('use_rviz')
     robot_description = LaunchConfiguration('robot_description')
     rviz_config_file = LaunchConfiguration('rviz_config_file')
+    use_TopicBasedSystem_hardware_interface = LaunchConfiguration('use_TopicBasedSystem_hardware_interface')
+    use_gazebo = LaunchConfiguration('use_gazebo')
 
     # Specify directory and path to file within package
     robot_description_pkg_dir = get_package_share_directory('robot_description')
@@ -48,7 +51,7 @@ def generate_launch_description():
 
     # Use xacro to process the file
     xacro_file = os.path.join(robot_description_pkg_dir, urdf_file_subpath)
-    robot_description_raw = xacro.process_file(xacro_file).toxml()
+    robot_description_raw = Command(['xacro ', xacro_file, ' use_TopicBasedSystem_hardware_interface:=', use_TopicBasedSystem_hardware_interface]) # Use of Command to replace robot_description assignment with a call to xacro process rather than Python module
 
     # Gazebo environment variables setup 
     gazebo_models_world_path = os.path.join(robot_sim_pkg_dir, 'world')
@@ -127,12 +130,23 @@ def generate_launch_description():
             default_value= '0.04',
             description='Z_pose'
         ),
+        DeclareLaunchArgument(
+            'use_TopicBasedSystem_hardware_interface',
+            default_value='False',
+            description='Use TopicBasedSystem_hardware_interface if true and use GazeboSystem_hardware_interface if false'
+        ),
+        DeclareLaunchArgument(
+            'use_gazebo',
+            default_value='True',
+            description='Use Gazebo'
+        ),
 
 
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(
                 os.path.join(gazebo_ros_pkg_dir, 'launch', 'gazebo.launch.py')
             ),
+            condition =IfCondition(use_gazebo),         
             launch_arguments={'world': world,
                               'use_sim_time': use_sim_time,
                               'gui': gui,
@@ -160,6 +174,7 @@ def generate_launch_description():
             package='gazebo_ros',
             executable='spawn_entity.py',
             output={'both': 'log'},
+            condition =IfCondition(use_gazebo),         
             arguments=[
                 '-entity', robot_name,
                 '-topic', 'robot_description',
