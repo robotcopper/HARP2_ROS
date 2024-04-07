@@ -1,11 +1,14 @@
 controller_manager:
   ros__parameters:
     update_rate: 20  # Hz
-    use_sim_time: false
+    use_sim_time: True
 
     omnidirectional_controller:
       type: omnidirectional_controllers/OmnidirectionalController
-      
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
 
 omnidirectional_controller:
   ros__parameters:
