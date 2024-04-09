@@ -4,15 +4,18 @@
     <!-- Include all the contents. -->
     <xacro:include filename="$(find robot_description)/urdf/standard_inertia_util.xacro" />
     <xacro:include filename="$(find robot_description)/urdf/holonomic_wheel/wheel.xacro" />
-
+    
     <xacro:arg name="use_TopicBasedSystem_hardware_interface" default="false"/>
-    <xacro:if value="$(arg use_TopicBasedSystem_hardware_interface)">
-        <xacro:include filename="$(find robot_controller)/urdf/TopicBasedSystem_hardware_interface.urdf.xacro"/>
-    </xacro:if>
-    <xacro:unless value="$(arg use_TopicBasedSystem_hardware_interface)">
-        <xacro:include filename="$(find robot_controller)/urdf/GazeboSystem_hardware_interface.urdf.xacro"/>
-    </xacro:unless>
+    <xacro:arg name="use_controller" default="false"/>
 
+    <xacro:if value="$(arg use_controller)">
+        <xacro:if value="$(arg use_TopicBasedSystem_hardware_interface)">
+            <xacro:include filename="$(find robot_controller)/urdf/TopicBasedSystem_hardware_interface.urdf.xacro"/>
+        </xacro:if>
+        <xacro:unless value="$(arg use_TopicBasedSystem_hardware_interface)">
+            <xacro:include filename="$(find robot_controller)/urdf/GazeboSystem_hardware_interface.urdf.xacro"/>
+        </xacro:unless>
+    </xacro:if>
 
     <!-- This first link called "base_footprint" is empty -->
     <link name="base_footprint"/>
