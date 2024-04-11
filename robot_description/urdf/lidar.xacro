@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" >
+
+    <joint name="laser_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="ydlidarx4_laser_frame"/>
+        <origin xyz="0 0 0.05" rpy="0 0 0.523599"/>
+    </joint>
+
+    <link name="ydlidarx4_laser_frame">
+        <visual>
+            <origin xyz="0.14618951398576332523 0.14013748441688259061 -0.032534567993216335913" rpy="0.0070131046609522990076 -0.0043951746943098691026 1.0588559938320413748e-20" />
+            <geometry>
+                <mesh filename="file://$(find robot_description)/urdf/meshes/YDLidarX4.dae"/>
+            </geometry>
+            <cast_shadow>false</cast_shadow>
+        </visual>
+        <collision>
+            <origin xyz="0.14618951398576332523 0.14013748441688259061 -0.032534567993216335913" rpy="0.0070131046609522990076 -0.0043951746943098691026 1.0588559938320413748e-20" />
+            <geometry>
+                <mesh filename="file://$(find robot_description)/urdf/meshes/YDLidarX4.dae"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <origin xyz="-0.0086009941406221535054 0.00011298993473073847471 -0.0076526351124166051842" rpy="0 0 0"/>
+            <mass value="0.14752655941234493753" />
+            <inertia ixx="6.0489990249921805519e-05" ixy="6.49244014726941633e-07"  ixz="-2.0768494329416872714e-05" iyy="0.00010990306661424009238" iyz="2.7283250986639107559e-07" izz="0.00012710683473264090424" />
+        </inertial>
+    </link>
+
+    <gazebo reference="ydlidarx4_laser_frame">
+
+        <sensor name="laser" type="gpu_ray">
+            <always_on>true</always_on>
+            <pose> 0 0 0 0 0 0 </pose>
+            <visualize>false</visualize>
+            <update_rate>15</update_rate>
+            <ray> 
+                <scan>
+                    <horizontal>
+                        <samples>360</samples>
+                        <resolution>1</resolution>
+                        <min_angle>-3.14</min_angle>
+                        <max_angle>3.14</max_angle>
+                    </horizontal>
+                </scan>
+                <range>
+                    <min>0.1</min>
+                    <max>10</max>
+                    <resolution>0.01</resolution>
+                </range>
+                <noise>
+                    <type>gaussian</type>
+                    <mean>0.0</mean>
+                    <stddev>0.004</stddev>
+                </noise>
+            </ray>
+            <plugin name="laser_controller" filename="libgazebo_ros_ray_sensor.so">
+                <ros>
+                    <remapping>~/out:=/scan</remapping>
+                </ros>
+                <output_type>sensor_msgs/LaserScan</output_type>
+                <frame_name>ydlidarx4_laser_frame</frame_name>
+            </plugin>
+        </sensor>
+    </gazebo>
+</robot>
