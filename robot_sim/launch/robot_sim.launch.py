@@ -20,7 +20,7 @@ def generate_launch_description():
 	# Create the launch configuration variables    
     namespace = LaunchConfiguration('namespace')
     use_sim_time = LaunchConfiguration('use_sim_time')
-    gui = LaunchConfiguration('gui')
+    use_gazebo_gui = LaunchConfiguration('use_gazebo_gui')
     gui_required = 'True' #Terminate launch script when gzclient (user interface window) exits
     server_required = 'True' #Terminate launch script when gzserver (Gazebo Server) exits
     world = LaunchConfiguration('world')
@@ -51,7 +51,7 @@ def generate_launch_description():
             description='Top-level namespace'
         ),
         DeclareLaunchArgument(
-            'gui',
+            'use_gazebo_gui',
             default_value='True',
             description='Launch the user interface window of Gazebo'
         ),
@@ -99,7 +99,7 @@ def generate_launch_description():
             condition =IfCondition(use_gazebo),         
             launch_arguments={'world': world,
                               'use_sim_time': use_sim_time,
-                              'gui': gui,
+                              'gui': use_gazebo_gui,
                               'gui_required': gui_required,
                               'server_required': server_required,
                              }.items()
@@ -112,7 +112,7 @@ def generate_launch_description():
             condition =IfCondition(use_gazebo),         
             arguments=[
                 '-entity', robot_name,
-                '-topic', 'robot_description',
+                '-topic', 'robot_description', # Use of robot description topic to get robot_description. Can use SDF instead created with $ gz sdf -p <urdf_file_name>
                 '-robot_namespace', namespace,
                 '-x', pose['x'], '-y', pose['y'], '-z', pose['z'],
                 '-R', pose['R'], '-P', pose['P'], '-Y', pose['Y']]
