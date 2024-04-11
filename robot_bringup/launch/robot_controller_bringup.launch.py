@@ -1,64 +1,64 @@
 import os
 
 from ament_index_python.packages import get_package_share_directory
-
 from launch import LaunchDescription
 from launch_ros.actions import Node
-from launch.substitutions import LaunchConfiguration, Command, NotSubstitution
-from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, SetEnvironmentVariable
+from launch.actions import DeclareLaunchArgument, ExecuteProcess, IncludeLaunchDescription, RegisterEventHandler, TimerAction
+from launch.conditions import IfCondition, UnlessCondition
+from launch.event_handlers import OnProcessExit
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import PathJoinSubstitution, EnvironmentVariable
+from launch.substitutions import LaunchConfiguration, Command, PathJoinSubstitution, EnvironmentVariable, NotSubstitution
 from launch_ros.substitutions import FindPackageShare
-from launch.conditions import IfCondition
-from pathlib import Path
 
 import xacro
 
-
 def generate_launch_description():
-    
-	# Create the launch configuration variables    
+
+    # Create the launch configuration variables
     namespace = LaunchConfiguration('namespace')
-    use_sim_time = LaunchConfiguration('use_sim_time')
     use_gazebo_gui = LaunchConfiguration('use_gazebo_gui')
     world = LaunchConfiguration('world')
-    robot_name = LaunchConfiguration('robot_name')
-    pose = {'x': LaunchConfiguration('x_pose'),
-            'y': LaunchConfiguration('y_pose'),
-            'z': LaunchConfiguration('z_pose'),}
-    use_robot_state_pub = LaunchConfiguration('use_robot_state_pub')
-    use_joint_state_pub = LaunchConfiguration('use_joint_state_pub')
-    use_joint_state_pub_gui = LaunchConfiguration('use_joint_state_pub_gui')
     use_rviz = LaunchConfiguration('use_rviz')
-    robot_description = LaunchConfiguration('robot_description')
+    robot_name = LaunchConfiguration('robot_name')
+    pose = {'x': LaunchConfiguration('x_pose', default='0.0'),
+            'y': LaunchConfiguration('y_pose', default='0.0'),
+            'z': LaunchConfiguration('z_pose', default='0.04'),}
+    use_TopicBasedSystem_hardware_interface = LaunchConfiguration('use_TopicBasedSystem_hardware_interface')
     rviz_config_file = LaunchConfiguration('rviz_config_file')
-    use_gazebo = LaunchConfiguration('use_gazebo')
+    robot_description = LaunchConfiguration('robot_description')
+    use_robot_state_pub = 'True'
+    use_joint_state_pub = LaunchConfiguration('use_TopicBasedSystem_hardware_interface')
+    use_joint_state_pub_gui = 'False'
+    use_sim_time = NotSubstitution(use_TopicBasedSystem_hardware_interface)
+    use_gazebo = NotSubstitution(use_TopicBasedSystem_hardware_interface)
 
     # Specify directory and path to file within package
     robot_description_pkg_dir = get_package_share_directory('robot_description')
     robot_sim_pkg_dir = get_package_share_directory('robot_sim')
-    robot_description_launch_file_subpath = 'launch/robot_description.launch.py'
-    rviz_launch_file_subpath = 'launch/rviz.launch.py'
+    robot_controller_pkg_dir = get_package_share_directory('robot_controller')
     rviz_config_file_subpath = 'rviz/robot_description_rviz.rviz'
     urdf_file_subpath = 'urdf/robot.urdf.xacro'
-    wordl_file_subpath = 'world/Table2024.world'
     robot_sim_launch_file_subpath = 'launch/robot_sim.launch.py'
+    controller_launch_file_subpath = 'launch/controller.launch.py'
+    robot_description_launch_file_subpath = 'launch/robot_description.launch.py'
+    rviz_launch_file_subpath = 'launch/rviz.launch.py'
+    wordl_file_subpath = 'world/Table2024.world'
 
     # Use xacro to process the file
     xacro_file = os.path.join(robot_description_pkg_dir, urdf_file_subpath)
-    robot_description_raw = Command(['xacro ', xacro_file, ' use_controller:=', 'False', ' use_TopicBasedSystem_hardware_interface:=', 'False']) # Use of Command to replace robot_description assignment with a call to xacro process rather than Python module
+    # robot_description_raw = Command(['xacro ', xacro_file, ' use_TopicBasedSystem_hardware_interface:=', use_TopicBasedSystem_hardware_interface]) # Use of Command to replace robot_description assignment with a call to xacro process rather than Python module
+    robot_description_raw = Command(['xacro ', xacro_file, ' use_controller:=', 'True', ' use_TopicBasedSystem_hardware_interface:=', use_TopicBasedSystem_hardware_interface]) # Use of Command to replace robot_description assignment with a call to xacro process rather than Python module
 
-    # Gazebo environment variables setup 
-    gazebo_models_world_path = os.path.join(robot_sim_pkg_dir, 'world')
-    os.environ['GAZEBO_MODEL_PATH'] = gazebo_models_world_path # Specification of additional model path to use "model://" in world file
+    # reqest contents fo robot_description parameter from robot_state_publisher node
+    # robot_description = Command(['ros2 param get --hide-type /robot_state_publisher robot_description'])
 
     return LaunchDescription([
-        
+
         # Declare launch arguments
-	    DeclareLaunchArgument(
+        DeclareLaunchArgument(
             'namespace',
             default_value='',
-            description='Top-level namespace'
+            description='Namespace'
         ),
         DeclareLaunchArgument(
             'use_gazebo_gui',
@@ -67,38 +67,23 @@ def generate_launch_description():
         ),
         DeclareLaunchArgument(
             'use_sim_time',
-            default_value='True',
+            default_value='False',
             description='Use simulation (Gazebo) clock if true'
         ),
-	    DeclareLaunchArgument(
+        DeclareLaunchArgument(
+            'use_TopicBasedSystem_hardware_interface',
+            default_value='False',
+            description='Use TopicBasedSystem_hardware_interface if true and use GazeboSystem_hardware_interface if false'
+        ),
+        DeclareLaunchArgument(
             'world',
             default_value=PathJoinSubstitution([robot_sim_pkg_dir, wordl_file_subpath ]),
             description='world file'
         ),
-            DeclareLaunchArgument(
+        DeclareLaunchArgument(
             'robot_name',
             default_value='HARP2',
             description='name of the robot'
-        ),
-        DeclareLaunchArgument(
-            'robot_description',
-            default_value=robot_description_raw,
-            description='robot_description'
-        ),
-        DeclareLaunchArgument(
-            'use_robot_state_pub',
-            default_value='True',
-            description='Whether to start the robot state publisher'
-        ),
-        DeclareLaunchArgument(
-            'use_joint_state_pub',
-            default_value='True',
-            description='Whether to start the joint state publisher'
-        ),
-        DeclareLaunchArgument(
-            'use_joint_state_pub_gui',
-            default_value='False',
-            description='Whether to start the joint state publisher GUI'
         ),
         DeclareLaunchArgument(
             'use_rviz',
@@ -111,25 +96,16 @@ def generate_launch_description():
             description='Full path to the RVIZ config file to use'
         ),
         DeclareLaunchArgument(
-            'x_pose',
-            default_value= '0.0',
-            description='x_pose'
-        ),
-        DeclareLaunchArgument(
-            'y_pose',
-            default_value= '0.0',
-            description='Y_pose'
-        ),
-        DeclareLaunchArgument(
-            'z_pose',
-            default_value= '0.04',
-            description='Z_pose'
+            'robot_description',
+            default_value=robot_description_raw,
+            description='robot_description'
         ),
         DeclareLaunchArgument(
             'use_gazebo',
             default_value='True',
             description='Use Gazebo'
         ),
+
 
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(
@@ -169,6 +145,14 @@ def generate_launch_description():
                               'use_gazebo': use_gazebo,
                              }.items()
         ),
-
+        
+        IncludeLaunchDescription(
+            PythonLaunchDescriptionSource(
+                os.path.join(robot_controller_pkg_dir, controller_launch_file_subpath)
+            ),
+            launch_arguments={'namespace': namespace,
+                              'use_TopicBasedSystem_hardware_interface': use_TopicBasedSystem_hardware_interface,
+                             }.items()
+        ),
 
     ])
