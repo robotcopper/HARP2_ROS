@@ -11,14 +11,14 @@
         <visual>
             <origin xyz="0.14618951398576332523 0.14013748441688259061 -0.032534567993216335913" rpy="0.0070131046609522990076 -0.0043951746943098691026 1.0588559938320413748e-20" />
             <geometry>
-                <mesh filename="file://$(find robot_description)/urdf/meshes/YDLidarX4.dae"/>
+                <mesh filename="file://$(find robot_description)/urdf/lidar/meshes/YDLidarX4.dae"/>
             </geometry>
             <cast_shadow>false</cast_shadow>
         </visual>
         <collision>
             <origin xyz="0.14618951398576332523 0.14013748441688259061 -0.032534567993216335913" rpy="0.0070131046609522990076 -0.0043951746943098691026 1.0588559938320413748e-20" />
             <geometry>
-                <mesh filename="file://$(find robot_description)/urdf/meshes/YDLidarX4.dae"/>
+                <mesh filename="file://$(find robot_description)/urdf/lidar/meshes/YDLidarX4.dae"/>
             </geometry>
         </collision>
         <inertial>
