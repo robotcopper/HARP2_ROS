@@ -36,7 +36,8 @@ def generate_launch_description():
     robot_description_pkg_dir = get_package_share_directory('robot_description')
     robot_sim_pkg_dir = get_package_share_directory('robot_sim')
     robot_controller_pkg_dir = get_package_share_directory('robot_controller')
-    rviz_config_file_subpath = 'rviz/robot_description_rviz.rviz'
+    robot_bringup_pkg_dir = get_package_share_directory('robot_bringup')
+    rviz_config_file_subpath = 'rviz/robot_control_laser_display.rviz'
     urdf_file_subpath = 'urdf/robot.urdf.xacro'
     robot_sim_launch_file_subpath = 'launch/robot_sim.launch.py'
     controller_launch_file_subpath = 'launch/controller.launch.py'
@@ -92,7 +93,7 @@ def generate_launch_description():
         ),
         DeclareLaunchArgument(
             'rviz_config_file',
-            default_value= PathJoinSubstitution([robot_description_pkg_dir, rviz_config_file_subpath ]),
+            default_value= PathJoinSubstitution([robot_bringup_pkg_dir, rviz_config_file_subpath ]),
             description='Full path to the RVIZ config file to use'
         ),
         DeclareLaunchArgument(

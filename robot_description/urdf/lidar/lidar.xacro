@@ -52,7 +52,7 @@
                 <noise>
                     <type>gaussian</type>
                     <mean>0.0</mean>
-                    <stddev>0.004</stddev>
+                    <stddev>0.0005</stddev>
                 </noise>
             </ray>
             <plugin name="laser_controller" filename="libgazebo_ros_ray_sensor.so">
