@@ -3,11 +3,11 @@
 	url = https://github.com/MAPIRlab/rf2o_laser_odometry.git
 	branch = ros2
 [submodule "ydlidar_ros2_driver"]
-	path = ydlidar_ros2_driver
+	path = ydlidar/ydlidar_ros2_driver
 	url = https://github.com/YDLIDAR/ydlidar_ros2_driver.git
 	branch = humble
 [submodule "YDLidar-SDK"]
-	path = YDLidar-SDK
+	path = ydlidar/YDLidar-SDK
 	url = https://github.com/YDLIDAR/YDLidar-SDK.git
 	branch = master
 [submodule "omnidirectional_controllers"]
