@@ -11,7 +11,7 @@
 			<visual>
 				<origin xyz= "${roue_xyz}" rpy="${roue_rpy}" />
 				<geometry>
-					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/roueholonome.stl"/>
+					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/meshes/roueholonome.stl"/>
 				</geometry>
 				<material name="roueholonome_material">
 					<color rgba="0.80000000000000004441 0.80000000000000004441 0.80000000000000004441 1.0"/>
@@ -20,7 +20,7 @@
 			<collision>
 				<origin xyz="${roue_xyz}" rpy="${roue_rpy}" />
 				<geometry>
-					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/roueholonome.stl"/>
+					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/meshes/roueholonome.stl"/>
 				</geometry>
 			</collision>
 			<xacro:inertial_cylinder mass="0.073" length="0.0215" radius="0.03">
@@ -41,7 +41,7 @@
 			<visual>
 				<origin xyz="0 -6.9388939039072283776e-18 -1.3660947373317355868e-17" rpy="-1.570796326794896558 7.4458241183643537248e-17 -2.2931001679521526839e-18" />
 				<geometry>
-					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/rouleau.stl"/>
+					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/meshes/rouleau.stl"/>
 				</geometry>
 				<material name="rouleau_material">
 					<color rgba="0.16078431372549020772 0.16078431372549020772 0.16078431372549020772 1.0"/>
@@ -50,7 +50,7 @@
 			<collision>
 				<origin xyz="0 -6.9388939039072283776e-18 -1.3660947373317355868e-17" rpy="-1.570796326794896558 7.4458241183643537248e-17 -2.2931001679521526839e-18" />
 				<geometry>
-					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/rouleau.stl"/>
+					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/meshes/rouleau.stl"/>
 				</geometry>	
 			</collision>
 			<xacro:inertial_cylinder mass="0.010" length="0.019" radius="0.0075">
@@ -81,7 +81,7 @@
 			<visual>
 				<origin xyz="0 3.4694469519536141888e-18 -3.4694469519536141888e-18" rpy="-1.570796326794896558 1.704115477206629922e-17 1.0069492273628905161e-16" />
 				<geometry>
-					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/rouleau.stl"/>
+					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/meshes/rouleau.stl"/>
 				</geometry>
 				<material name="rouleau_material">
 					<color rgba="0.16078431372549020772 0.16078431372549020772 0.16078431372549020772 1.0"/>
@@ -90,7 +90,7 @@
 			<collision>
 				<origin xyz="0 3.4694469519536141888e-18 -3.4694469519536141888e-18" rpy="-1.570796326794896558 1.704115477206629922e-17 1.0069492273628905161e-16" />
 				<geometry>
-					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/rouleau.stl"/>
+					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/meshes/rouleau.stl"/>
 				</geometry>	
 			</collision>
 			<xacro:inertial_cylinder mass="0.010" length="0.019" radius="0.0075">
@@ -121,7 +121,7 @@
 			<visual>
 				<origin xyz="-2.7755575615628913511e-17 -5.2041704279304212832e-18 3.4694469519536141888e-18" rpy="-1.57079632679489678 -3.8858620800219972321e-17 1.4515871623615415173e-17" />
 				<geometry>
-					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/rouleau.stl"/>
+					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/meshes/rouleau.stl"/>
 				</geometry>
 				<material name="rouleau_material">
 					<color rgba="0.16078431372549020772 0.16078431372549020772 0.16078431372549020772 1.0"/>
@@ -130,7 +130,7 @@
 			<collision>
 				<origin xyz="-2.7755575615628913511e-17 -5.2041704279304212832e-18 3.4694469519536141888e-18" rpy="-1.57079632679489678 -3.8858620800219972321e-17 1.4515871623615415173e-17" />
 				<geometry>
-					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/rouleau.stl"/>
+					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/meshes/rouleau.stl"/>
 				</geometry>
 			</collision>
 			<xacro:inertial_cylinder mass="0.010" length="0.019" radius="0.0075">
@@ -161,7 +161,7 @@
 			<visual>
 				<origin xyz="0 -5.2041704279304212832e-18 6.9388939039072283776e-18" rpy="-1.57079632679489678 2.2968870007964204446e-18 -1.2816475377239519703e-17" />
 				<geometry>
-					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/rouleau.stl"/>
+					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/meshes/rouleau.stl"/>
 				</geometry>
 				<material name="rouleau_material">
 					<color rgba="0.16078431372549020772 0.16078431372549020772 0.16078431372549020772 1.0"/>
@@ -170,7 +170,7 @@
 			<collision>
 				<origin xyz="0 -5.2041704279304212832e-18 6.9388939039072283776e-18" rpy="-1.57079632679489678 2.2968870007964204446e-18 -1.2816475377239519703e-17" />
 				<geometry>
-					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/rouleau.stl"/>
+					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/meshes/rouleau.stl"/>
 				</geometry>			
 			</collision>
 			<xacro:inertial_cylinder mass="0.010" length="0.019" radius="0.0075">
@@ -201,7 +201,7 @@
 			<visual>
 				<origin xyz="-2.7755575615628913511e-17 3.4694469519536141888e-18 3.4694469519536141888e-18" rpy="-1.570796326794896558 -3.1610276974795425021e-18 9.1157131572497391962e-18" />
 				<geometry>
-					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/rouleau.stl"/>
+					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/meshes/rouleau.stl"/>
 				</geometry>
 				<material name="rouleau_material">
 					<color rgba="0.16078431372549020772 0.16078431372549020772 0.16078431372549020772 1.0"/>
@@ -210,7 +210,7 @@
 			<collision>
 				<origin xyz="-2.7755575615628913511e-17 3.4694469519536141888e-18 3.4694469519536141888e-18" rpy="-1.570796326794896558 -3.1610276974795425021e-18 9.1157131572497391962e-18" />
 				<geometry>
-					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/rouleau.stl"/>
+					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/meshes/rouleau.stl"/>
 				</geometry>	
 			</collision>
 			<xacro:inertial_cylinder mass="0.010" length="0.019" radius="0.0075">
@@ -241,7 +241,7 @@
 			<visual>
 				<origin xyz="0 0 5.2041704279304212832e-18" rpy="-1.57079632679489678 -3.8858615837136297003e-17 1.4515871623615415173e-17" />
 				<geometry>
-					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/rouleau.stl"/>
+					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/meshes/rouleau.stl"/>
 				</geometry>
 				<material name="rouleau_material">
 					<color rgba="0.16078431372549020772 0.16078431372549020772 0.16078431372549020772 1.0"/>
@@ -250,7 +250,7 @@
 			<collision>
 				<origin xyz="0 0 5.2041704279304212832e-18" rpy="-1.57079632679489678 -3.8858615837136297003e-17 1.4515871623615415173e-17" />
 				<geometry>
-					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/rouleau.stl"/>
+					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/meshes/rouleau.stl"/>
 				</geometry>
 			</collision>
 			<xacro:inertial_cylinder mass="0.010" length="0.019" radius="0.0075">
@@ -281,7 +281,7 @@
 			<visual>
 				<origin xyz="0 -6.9388939039072283776e-18 5.2041704279304212832e-18" rpy="-1.57079632679489678 2.2968870007964204446e-18 -1.2816475377239519703e-17" />
 				<geometry>
-					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/rouleau.stl"/>
+					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/meshes/rouleau.stl"/>
 				</geometry>
 				<material name="rouleau_material">
 					<color rgba="0.16078431372549020772 0.16078431372549020772 0.16078431372549020772 1.0"/>
@@ -290,7 +290,7 @@
 			<collision>
 				<origin xyz="0 -6.9388939039072283776e-18 5.2041704279304212832e-18" rpy="-1.57079632679489678 2.2968870007964204446e-18 -1.2816475377239519703e-17" />
 				<geometry>
-					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/rouleau.stl"/>
+					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/meshes/rouleau.stl"/>
 				</geometry>	
 			</collision>
 			<xacro:inertial_cylinder mass="0.010" length="0.019" radius="0.0075">
@@ -321,7 +321,7 @@
 			<visual>
 				<origin xyz="0 -1.0408340855860842566e-17 -3.4694469519536141888e-18" rpy="-1.570796326794896558 -3.1610276974795425021e-18 9.1157131572497391962e-18" />
 				<geometry>
-					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/rouleau.stl"/>
+					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/meshes/rouleau.stl"/>
 				</geometry>
 				<material name="rouleau_material">
 					<color rgba="0.16078431372549020772 0.16078431372549020772 0.16078431372549020772 1.0"/>
@@ -330,7 +330,7 @@
 			<collision>
 				<origin xyz="0 -1.0408340855860842566e-17 -3.4694469519536141888e-18" rpy="-1.570796326794896558 -3.1610276974795425021e-18 9.1157131572497391962e-18" />
 				<geometry>
-					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/rouleau.stl"/>
+					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/meshes/rouleau.stl"/>
 				</geometry>				
 			</collision>
 			<xacro:inertial_cylinder mass="0.010" length="0.019" radius="0.0075">
@@ -361,7 +361,7 @@
 			<visual>
 				<origin xyz="0 0 -2.4936649967166601982e-18" rpy="-1.570796326794896558 7.4458252970967266128e-17 -2.2931034766746028961e-18" />
 				<geometry>
-					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/rouleau.stl"/>
+					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/meshes/rouleau.stl"/>
 				</geometry>
 				<material name="rouleau_material">
 					<color rgba="0.16078431372549020772 0.16078431372549020772 0.16078431372549020772 1.0"/>
@@ -370,7 +370,7 @@
 			<collision>
 				<origin xyz="0 0 -2.4936649967166601982e-18" rpy="-1.570796326794896558 7.4458252970967266128e-17 -2.2931034766746028961e-18" />
 				<geometry>
-					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/rouleau.stl"/>
+					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/meshes/rouleau.stl"/>
 				</geometry>				
 			</collision>
 			<xacro:inertial_cylinder mass="0.010" length="0.019" radius="0.0075">
@@ -401,7 +401,7 @@
 			<visual>
 				<origin xyz="0 0 3.4694469519536141888e-18" rpy="-1.570796326794896558 1.704115477206629922e-17 1.0069492273628905161e-16" />
 				<geometry>
-					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/rouleau.stl"/>
+					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/meshes/rouleau.stl"/>
 				</geometry>
 				<material name="rouleau_material">
 					<color rgba="0.16078431372549020772 0.16078431372549020772 0.16078431372549020772 1.0"/>
@@ -410,7 +410,7 @@
 			<collision>
 				<origin xyz="0 0 3.4694469519536141888e-18" rpy="-1.570796326794896558 1.704115477206629922e-17 1.0069492273628905161e-16" />
 				<geometry>
-					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/rouleau.stl"/>
+					<mesh filename="file://$(find robot_description)/urdf/holonomic_wheel/meshes/rouleau.stl"/>
 				</geometry>		
 			</collision>
 			<xacro:inertial_cylinder mass="0.010" length="0.019" radius="0.0075">

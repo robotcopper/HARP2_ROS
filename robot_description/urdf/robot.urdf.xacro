@@ -2,9 +2,9 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro"  name="robot">
 
     <!-- Include all the contents. -->
-    <xacro:include filename="$(find robot_description)/urdf/standard_inertia_util.xacro" />
+    <xacro:include filename="$(find robot_description)/urdf/meshes/standard_inertia_util.xacro" />
     <xacro:include filename="$(find robot_description)/urdf/holonomic_wheel/wheel.xacro" />
-    <xacro:include filename="$(find robot_description)/urdf/lidar.xacro" />
+    <xacro:include filename="$(find robot_description)/urdf/lidar/lidar.xacro" />
 
     <xacro:arg name="use_TopicBasedSystem_hardware_interface" default="false"/>
     <xacro:arg name="use_controller" default="false"/>
@@ -35,7 +35,7 @@
         <visual>
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
-                <mesh filename="file://$(find robot_description)/urdf/robot_base.stl"/>
+                <mesh filename="file://$(find robot_description)/urdf/meshes/robot_base.stl"/>
             </geometry>
             <material name="robot_base_material">
                 <color rgba="1 1 1 1.0"/>
@@ -44,7 +44,7 @@
         <collision>
             <origin xyz="0 0 0" rpy="0 0 0" />
             <geometry>
-                <mesh filename="file://$(find robot_description)/urdf/robot_base.stl"/>
+                <mesh filename="file://$(find robot_description)/urdf/meshes/robot_base.stl"/>
             </geometry>
             <surface>
                 <contact>
