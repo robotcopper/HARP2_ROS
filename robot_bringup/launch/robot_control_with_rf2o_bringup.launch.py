@@ -43,16 +43,13 @@ def generate_launch_description():
     controller_launch_file_subpath = 'launch/controller.launch.py'
     robot_description_launch_file_subpath = 'launch/robot_description.launch.py'
     rviz_launch_file_subpath = 'launch/rviz.launch.py'
-    laser_odometry_file_subpath = 'launch/laser_odometry.launch.py'
+    laser_odometry_launch_file_subpath = 'launch/laser_odometry.launch.py'
     wordl_file_subpath = 'world/Table2024.world'
 
     # Use xacro to process the file
     xacro_file = os.path.join(robot_description_pkg_dir, urdf_file_subpath)
-    # robot_description_raw = Command(['xacro ', xacro_file, ' use_TopicBasedSystem_hardware_interface:=', use_TopicBasedSystem_hardware_interface]) # Use of Command to replace robot_description assignment with a call to xacro process rather than Python module
     robot_description_raw = Command(['xacro ', xacro_file, ' use_controller:=', 'True', ' use_TopicBasedSystem_hardware_interface:=', use_TopicBasedSystem_hardware_interface]) # Use of Command to replace robot_description assignment with a call to xacro process rather than Python module
 
-    # reqest contents fo robot_description parameter from robot_state_publisher node
-    # robot_description = Command(['ros2 param get --hide-type /robot_state_publisher robot_description'])
 
     return LaunchDescription([
 
@@ -159,7 +156,7 @@ def generate_launch_description():
 
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(
-                os.path.join(robot_bringup_pkg_dir, laser_odometry_file_subpath)
+                os.path.join(robot_bringup_pkg_dir, laser_odometry_launch_file_subpath)
             ),
             launch_arguments={'namespace': namespace,
                               'use_TopicBasedSystem_hardware_interface': use_TopicBasedSystem_hardware_interface,
