@@ -261,6 +261,8 @@ Visualization Manager:
           Value: true
         base_link:
           Value: true
+        map:
+          Value: true
         odom:
           Value: true
         roueholonome1:
@@ -277,17 +279,18 @@ Visualization Manager:
       Show Axes: true
       Show Names: true
       Tree:
-        odom:
-          base_footprint:
-            base_link:
-              roueholonome1:
-                {}
-              roueholonome2:
-                {}
-              roueholonome3:
-                {}
-              ydlidarx4_laser_frame:
-                {}
+        map:
+          odom:
+            base_footprint:
+              base_link:
+                roueholonome1:
+                  {}
+                roueholonome2:
+                  {}
+                roueholonome3:
+                  {}
+                ydlidarx4_laser_frame:
+                  {}
       Update Interval: 0
       Value: true
     - Alpha: 1
