@@ -9,13 +9,13 @@ slam_toolbox:
 
     # ROS Parameters
     odom_frame: odom
-    map_frame: map
-    base_frame: base_link
+    map_frame: map_localization
+    base_frame: base_footprint
     scan_topic: /scan
     mode: localization 
 
     # if you'd like to start localizing on bringup in a map and pose
-    map_file_name: "/workspaces/colcon_ws/src/enabl_sim/maps/test_map"
+    map_file_name: "$(find robot_slam)/maps/Table2024"
     map_start_pose: [0.0, 0.0, 0.0]
 
     debug_logging: false
