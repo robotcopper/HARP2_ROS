@@ -39,7 +39,8 @@ def generate_launch_description():
     robot_controller_pkg_dir = get_package_share_directory('robot_controller')
     robot_bringup_pkg_dir = get_package_share_directory('robot_bringup')
     robot_slam_pkg_dir = get_package_share_directory('robot_slam')
-    rviz_config_file_subpath = 'rviz/slam.rviz'
+    rviz_config_file_subpath = 'rviz/slam_localization.rviz'
+    rviz_localization_config_file_subpath = 'rviz/slam.rviz'
     urdf_file_subpath = 'urdf/robot.urdf.xacro'
     robot_sim_launch_file_subpath = 'launch/robot_sim.launch.py'
     controller_launch_file_subpath = 'launch/controller.launch.py'
@@ -53,6 +54,10 @@ def generate_launch_description():
     xacro_file = os.path.join(robot_description_pkg_dir, urdf_file_subpath)
     robot_description_raw = Command(['xacro ', xacro_file, ' use_controller:=', 'True', ' use_TopicBasedSystem_hardware_interface:=', use_TopicBasedSystem_hardware_interface]) # Use of Command to replace robot_description assignment with a call to xacro process rather than Python module
 
+    if use_localisation:
+        rviz_config=PathJoinSubstitution([robot_slam_pkg_dir, rviz_localization_config_file_subpath ]),
+    else:
+        rviz_config=PathJoinSubstitution([robot_slam_pkg_dir, rviz_config_file_subpath ]),
 
     return LaunchDescription([
 
