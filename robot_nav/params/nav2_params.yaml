@@ -98,7 +98,7 @@ bt_navigator:
 controller_server:
   ros__parameters:
     use_sim_time: true
-    controller_frequency: 30.0
+    controller_frequency: 50.0
     min_x_velocity_threshold: 0.001
     min_y_velocity_threshold: 0.001
     min_theta_velocity_threshold: 0.001
@@ -116,7 +116,7 @@ controller_server:
       plugin: "nav2_controller::PoseProgressChecker"
       required_movement_radius: 0.05
       required_movement_angle: 0.05
-      movement_time_allowance: 30.0
+      movement_time_allowance: 10.0
 
     # Goal checker parameters
     GoalChecker:
@@ -129,26 +129,26 @@ controller_server:
 
     FollowPath:
 
-      plugin: "nav2_rotation_shim_controller::RotationShimController"
-      angular_dist_threshold: 0.1
-      forward_sampling_distance: 0.1
-      rotate_to_heading_angular_vel: 2.8
-      max_angular_accel: 1.4
-      simulate_ahead_time: 0.2
+      # plugin: "nav2_rotation_shim_controller::RotationShimController"
+      # angular_dist_threshold: 0.1
+      # forward_sampling_distance: 0.1
+      # rotate_to_heading_angular_vel: 2.8
+      # max_angular_accel: 1.4
+      # simulate_ahead_time: 0.2
 
       plugin: "nav2_mppi_controller::MPPIController"
-      time_steps: 60
-      model_dt: 0.05
+      time_steps: 10
+      model_dt: 0.035
       batch_size: 1000
       vx_std: 0.2
-      vy_std: 0.2
-      wz_std: 0.4
-      vx_max: 1.5
-      vx_min: -0.35
-      vy_max: 1.5
+      vy_std: 0.1
+      wz_std: 0.2
+      vx_max: 1.0
+      vx_min: -1.0
+      vy_max: 1.0
       wz_max: 1.9
       iteration_count: 1
-      prune_distance: 0.7
+      prune_distance: 4.0
       transform_tolerance: 0.1
       temperature: 0.3
       gamma: 0.015
@@ -170,7 +170,7 @@ controller_server:
       
       GoalCritic:
         enabled: true
-        cost_power: 1
+        cost_power: 3
         cost_weight: 5.0
         threshold_to_consider: 0.3
       
@@ -178,7 +178,7 @@ controller_server:
         enabled: true
         cost_power: 1
         cost_weight: 3.0
-        threshold_to_consider: 0.1
+        threshold_to_consider: 0.3
       
       # PreferForwardCritic:
       #   enabled: true
@@ -189,13 +189,13 @@ controller_server:
       ObstaclesCritic:
         enabled: true
         cost_power: 1
-        repulsion_weight: 1.5
+        repulsion_weight: 10.5
         critical_weight: 20.0
         consider_footprint: false
         collision_cost: 10000.0
-        collision_margin_distance: 0.02
-        near_goal_distance: 0.7
-        inflation_radius: 0.55 # (only in Humble)
+        collision_margin_distance: 0.2
+        near_goal_distance: 0.2
+        inflation_radius: 0.5 # (only in Humble)
         cost_scaling_factor: 10.0 # (only in Humble)
       
       # PathAlignCritic:
@@ -210,7 +210,7 @@ controller_server:
       
       PathFollowCritic:
         enabled: true
-        cost_power: 10
+        cost_power: 3
         cost_weight: 5.0
         offset_from_furthest: 5
         threshold_to_consider: 0.3
@@ -233,7 +233,7 @@ controller_server:
       TwirlingCritic:
         enabled: true
         twirling_cost_power: 1
-        twirling_cost_weight: 10.0
+        twirling_cost_weight: 2.0
 
 
 
@@ -453,13 +453,13 @@ local_costmap:
   local_costmap:
     ros__parameters:
       update_frequency: 20.0
-      publish_frequency: 2.0
+      publish_frequency: 5.0
       global_frame: odom
       robot_base_frame: base_footprint
       use_sim_time: True
       rolling_window: true
-      width: 3
-      height: 3
+      width: 1
+      height: 1
       resolution: 0.05
       robot_radius: 0.22
       plugins: ["voxel_layer", "inflation_layer", "static_layer"]
