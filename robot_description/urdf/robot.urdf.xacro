@@ -9,6 +9,7 @@
     <xacro:arg name="use_TopicBasedSystem_hardware_interface" default="false"/>
     <xacro:arg name="use_controller" default="false"/>
 
+    <!-- Hhardware interfaces chosen according to whether the robot is simulated or real -->
     <xacro:if value="$(arg use_controller)">
         <xacro:if value="$(arg use_TopicBasedSystem_hardware_interface)">
             <xacro:include filename="$(find robot_controller)/urdf/TopicBasedSystem_hardware_interface.urdf.xacro"/>

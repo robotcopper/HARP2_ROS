@@ -55,11 +55,13 @@ def generate_launch_description():
         Node(
             package="controller_manager",
             executable="spawner",
-            condition=UnlessCondition(use_TopicBasedSystem_hardware_interface), # Use ros2_control_node when using TopicBasedSystem because Gazebo plugin not running controller manager for us anymore
+            condition=UnlessCondition(use_TopicBasedSystem_hardware_interface), # Use Gazebo running controller manager
             arguments=["joint_state_broadcaster",
                        "-c", "/controller_manager",
                        "-t", "joint_state_broadcaster/JointStateBroadcaster",
                       ],
+            parameters=[robot_controllers, 
+            ],
             namespace=namespace,
         ),
 
