@@ -41,7 +41,8 @@ def generate_launch_description():
     robot_bringup_pkg_dir = get_package_share_directory('robot_bringup')
     robot_localization_pkg_dir = get_package_share_directory('robot_localization')
     robot_slam_pkg_dir = get_package_share_directory('robot_slam')
-    rviz_config_file_subpath = 'rviz/amcl.rviz'
+    robot_nav_pkg_dir = get_package_share_directory('robot_nav')
+    rviz_config_file_subpath = 'rviz/nav2.rviz'
     urdf_file_subpath = 'urdf/robot.urdf.xacro'
     robot_sim_launch_file_subpath = 'launch/robot_sim.launch.py'
     controller_launch_file_subpath = 'launch/controller.launch.py'
@@ -52,6 +53,8 @@ def generate_launch_description():
     wordl_file_subpath = 'world/Table2024.world'
     amcl_params_file_subpath = 'params/amcl.yaml'
     map_file_subpath = 'maps/Table2024.yaml'
+    nav_launch_file_subpath = 'launch/nav2.launch.py'
+    nav2_params_file_subpath = 'params/nav2_params.yaml'
 
     # Use xacro to process the file
     xacro_file = os.path.join(robot_description_pkg_dir, urdf_file_subpath)
@@ -98,7 +101,7 @@ def generate_launch_description():
         ),
         DeclareLaunchArgument(
             'rviz_config_file',
-            default_value= PathJoinSubstitution([robot_localization_pkg_dir, rviz_config_file_subpath ]),
+            default_value= PathJoinSubstitution([robot_nav_pkg_dir, rviz_config_file_subpath ]),
             description='Full path to the RVIZ config file to use'
         ),
         DeclareLaunchArgument(
@@ -188,6 +191,16 @@ def generate_launch_description():
                               'use_sim_time': use_sim_time,
                               'params_file': amcl_params_file,
                               'map': map,
+                             }.items()
+        ),
+
+        IncludeLaunchDescription(
+            PythonLaunchDescriptionSource(
+                os.path.join(robot_nav_pkg_dir, nav_launch_file_subpath)
+            ),
+            launch_arguments={'namespace': namespace,
+                              'use_sim_time': use_sim_time,
+                              'params_file':PathJoinSubstitution([robot_nav_pkg_dir, nav2_params_file_subpath]),
                              }.items()
         ),
 
