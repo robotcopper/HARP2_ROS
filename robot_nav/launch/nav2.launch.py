@@ -24,7 +24,6 @@ def generate_launch_description():
     nav2_params_file_subpath = 'params/nav2_params.yaml'
 
     lifecycle_nodes = ['controller_server',
-                       'velocity_smoother',
                        'planner_server',
                        'behavior_server',
                        'bt_navigator',
@@ -80,7 +79,7 @@ def generate_launch_description():
             respawn_delay=2.0,
             parameters=[configured_params],
             arguments=['--ros-args', '--log-level', log_level],
-            remappings=remappings + [('cmd_vel', 'cmd_vel_nav')],# + [('cmd_vel', '/omnidirectional_controller/cmd_vel_unstamped')],
+            remappings=remappings + [('cmd_vel', '/omnidirectional_controller/cmd_vel_unstamped')], #+ [('cmd_vel', 'cmd_vel_nav')], 
         ),
         # Node(
         #     package='nav2_smoother',
@@ -137,18 +136,18 @@ def generate_launch_description():
             arguments=['--ros-args', '--log-level', log_level],
             remappings=remappings,
         ),
-        Node(
-            package='nav2_velocity_smoother',
-            executable='velocity_smoother',
-            name='velocity_smoother',
-            output='screen',
-            respawn=use_respawn,
-            respawn_delay=2.0,
-            parameters=[configured_params],
-            arguments=['--ros-args', '--log-level', log_level],
-            remappings=remappings +
-                    [('cmd_vel', 'cmd_vel_nav'), ('cmd_vel_smoothed', '/omnidirectional_controller/cmd_vel_unstamped')],
-        ),
+        # Node(
+        #     package='nav2_velocity_smoother',
+        #     executable='velocity_smoother',
+        #     name='velocity_smoother',
+        #     output='screen',
+        #     respawn=use_respawn,
+        #     respawn_delay=2.0,
+        #     parameters=[configured_params],
+        #     arguments=['--ros-args', '--log-level', log_level],
+        #     remappings=remappings +
+        #             [('cmd_vel', 'cmd_vel_nav'), ('cmd_vel_smoothed', '/omnidirectional_controller/cmd_vel_unstamped')],
+        # ),
         Node(
             package='nav2_lifecycle_manager',
             executable='lifecycle_manager',
