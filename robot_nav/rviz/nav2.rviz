@@ -253,19 +253,163 @@ Visualization Manager:
       Value: true
       Visual Enabled: true
     - Class: rviz_default_plugins/TF
-      Enabled: false
+      Enabled: true
       Frame Timeout: 15
       Frames:
         All Enabled: false
-      Marker Scale: 0.5
+        base_footprint:
+          Value: true
+        base_link:
+          Value: false
+        map:
+          Value: false
+        odom:
+          Value: false
+        roueholonome1:
+          Value: false
+        roueholonome2:
+          Value: false
+        roueholonome3:
+          Value: false
+        rouleau_10_roueholonome1:
+          Value: false
+        rouleau_10_roueholonome2:
+          Value: false
+        rouleau_10_roueholonome3:
+          Value: false
+        rouleau_1_roueholonome1:
+          Value: false
+        rouleau_1_roueholonome2:
+          Value: false
+        rouleau_1_roueholonome3:
+          Value: false
+        rouleau_2_roueholonome1:
+          Value: false
+        rouleau_2_roueholonome2:
+          Value: false
+        rouleau_2_roueholonome3:
+          Value: false
+        rouleau_3_roueholonome1:
+          Value: false
+        rouleau_3_roueholonome2:
+          Value: false
+        rouleau_3_roueholonome3:
+          Value: false
+        rouleau_4_roueholonome1:
+          Value: false
+        rouleau_4_roueholonome2:
+          Value: false
+        rouleau_4_roueholonome3:
+          Value: false
+        rouleau_5_roueholonome1:
+          Value: false
+        rouleau_5_roueholonome2:
+          Value: false
+        rouleau_5_roueholonome3:
+          Value: false
+        rouleau_6_roueholonome1:
+          Value: false
+        rouleau_6_roueholonome2:
+          Value: false
+        rouleau_6_roueholonome3:
+          Value: false
+        rouleau_7_roueholonome1:
+          Value: false
+        rouleau_7_roueholonome2:
+          Value: false
+        rouleau_7_roueholonome3:
+          Value: false
+        rouleau_8_roueholonome1:
+          Value: false
+        rouleau_8_roueholonome2:
+          Value: false
+        rouleau_8_roueholonome3:
+          Value: false
+        rouleau_9_roueholonome1:
+          Value: false
+        rouleau_9_roueholonome2:
+          Value: false
+        rouleau_9_roueholonome3:
+          Value: false
+        ydlidarx4_laser_frame:
+          Value: false
+      Marker Scale: 1.5
       Name: TF
       Show Arrows: false
       Show Axes: true
       Show Names: true
       Tree:
-        {}
+        map:
+          odom:
+            base_footprint:
+              base_link:
+                roueholonome1:
+                  rouleau_10_roueholonome1:
+                    {}
+                  rouleau_1_roueholonome1:
+                    {}
+                  rouleau_2_roueholonome1:
+                    {}
+                  rouleau_3_roueholonome1:
+                    {}
+                  rouleau_4_roueholonome1:
+                    {}
+                  rouleau_5_roueholonome1:
+                    {}
+                  rouleau_6_roueholonome1:
+                    {}
+                  rouleau_7_roueholonome1:
+                    {}
+                  rouleau_8_roueholonome1:
+                    {}
+                  rouleau_9_roueholonome1:
+                    {}
+                roueholonome2:
+                  rouleau_10_roueholonome2:
+                    {}
+                  rouleau_1_roueholonome2:
+                    {}
+                  rouleau_2_roueholonome2:
+                    {}
+                  rouleau_3_roueholonome2:
+                    {}
+                  rouleau_4_roueholonome2:
+                    {}
+                  rouleau_5_roueholonome2:
+                    {}
+                  rouleau_6_roueholonome2:
+                    {}
+                  rouleau_7_roueholonome2:
+                    {}
+                  rouleau_8_roueholonome2:
+                    {}
+                  rouleau_9_roueholonome2:
+                    {}
+                roueholonome3:
+                  rouleau_10_roueholonome3:
+                    {}
+                  rouleau_1_roueholonome3:
+                    {}
+                  rouleau_2_roueholonome3:
+                    {}
+                  rouleau_3_roueholonome3:
+                    {}
+                  rouleau_4_roueholonome3:
+                    {}
+                  rouleau_5_roueholonome3:
+                    {}
+                  rouleau_6_roueholonome3:
+                    {}
+                  rouleau_7_roueholonome3:
+                    {}
+                  rouleau_8_roueholonome3:
+                    {}
+                  rouleau_9_roueholonome3:
+                    {}
+                ydlidarx4_laser_frame:
+                  {}
       Update Interval: 0
-      Value: false
+      Value: true
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
