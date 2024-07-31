@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<sdf version='1.5'>
+<sdf version='1.7'>
   <model name='Table2024'>
     <static>true</static>
     <link name='table'>

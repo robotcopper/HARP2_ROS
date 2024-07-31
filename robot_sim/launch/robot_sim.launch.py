@@ -35,12 +35,13 @@ def generate_launch_description():
 
     # Specify directory and path to file within package
     robot_sim_pkg_dir = get_package_share_directory('robot_sim')
+    robot_description_pkg_dir = get_package_share_directory('robot_description')
     gazebo_ros_pkg_dir = get_package_share_directory('gazebo_ros')
     wordl_file_subpath = 'world/Table2024.world'
-
     # Gazebo environment variables setup 
+    gazebo_models_description_path = os.path.join(robot_description_pkg_dir,'urdf')
     gazebo_models_world_path = os.path.join(robot_sim_pkg_dir, 'world')
-    os.environ['GAZEBO_MODEL_PATH'] = gazebo_models_world_path # Specification of additional model path to use "model://" in world file
+    os.environ['GAZEBO_MODEL_PATH'] = gazebo_models_world_path+':'+gazebo_models_description_path # Specification of additional model path to use "model://" in world file
 
     return LaunchDescription([
         

@@ -36,7 +36,7 @@
         <visual>
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
-                <mesh filename="file://$(find robot_description)/urdf/meshes/robot_base.stl"/>
+                <mesh filename="file://$(find robot_description)/urdf/meshes/robot_base.dae"/>
             </geometry>
             <material name="robot_base_material">
                 <color rgba="1 1 1 1.0"/>
@@ -45,7 +45,7 @@
         <collision>
             <origin xyz="0 0 0" rpy="0 0 0" />
             <geometry>
-                <mesh filename="file://$(find robot_description)/urdf/meshes/robot_base.stl"/>
+                <mesh filename="file://$(find robot_description)/urdf/meshes/robot_base.dae"/>
             </geometry>
             <surface>
                 <contact>

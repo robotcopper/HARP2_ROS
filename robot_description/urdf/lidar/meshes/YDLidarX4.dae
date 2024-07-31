@@ -36,7 +36,7 @@
       <technique_common>
         <point>
           <color sid="color">1000 1000 1000</color>
-          <constant_attenuation>1</constant_attenuation>
+          <constant_attenuation>0</constant_attenuation>
           <linear_attenuation>0</linear_attenuation>
           <quadratic_attenuation>0</quadratic_attenuation>
         </point>
@@ -72,6 +72,9 @@
       <profile_COMMON>
         <technique sid="common">
           <lambert>
+            <ambient>
+                <color>0.2 0.2 0.2 1</color>
+            </ambient>
             <emission>
               <color sid="emission">0 0 0 1</color>
             </emission>
@@ -89,6 +92,9 @@
       <profile_COMMON>
         <technique sid="common">
           <lambert>
+            <ambient>
+                <color>0.2 0.2 0.2 1</color>
+            </ambient>
             <emission>
               <color sid="emission">0 0 0 1</color>
             </emission>
@@ -106,6 +112,9 @@
       <profile_COMMON>
         <technique sid="common">
           <lambert>
+            <ambient>
+                <color>0.2 0.2 0.2 1</color>
+            </ambient>
             <emission>
               <color sid="emission">0 0 0 1</color>
             </emission>
@@ -203,4 +212,5 @@
   <scene>
     <instance_visual_scene url="#Scene"/>
   </scene>
+  <ambient>1.0 1.0 1.0 1</ambient>
 </COLLADA>

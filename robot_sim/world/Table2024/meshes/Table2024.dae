@@ -69,14 +69,14 @@
     </effect>
     <effect id="Material_002-effect">
       <profile_COMMON>
-        <newparam sid="Table2024_png-surface">
+        <newparam sid="Table2024_2_png-surface">
           <surface type="2D">
-            <init_from>Table2024_png</init_from>
+            <init_from>Table2024_2_png</init_from>
           </surface>
         </newparam>
-        <newparam sid="Table2024_png-sampler">
+        <newparam sid="Table2024_2_png-sampler">
           <sampler2D>
-            <source>Table2024_png-surface</source>
+            <source>Table2024_2_png-surface</source>
           </sampler2D>
         </newparam>
         <technique sid="common">
@@ -85,7 +85,7 @@
               <color sid="emission">0 0 0 1</color>
             </emission>
             <diffuse>
-              <texture texture="Table2024_png-sampler" texcoord="UVMap"/>
+              <texture texture="Table2024_2_png-sampler" texcoord="UVMap"/>
             </diffuse>
             <reflectivity>
               <float sid="specular">1</float>
@@ -99,8 +99,8 @@
     </effect>
   </library_effects>
   <library_images>
-    <image id="Table2024_png" name="Table2024_png">
-      <init_from>Table2024.png</init_from>
+    <image id="Table2024_2_png" name="Table2024_2_png">
+      <init_from>../materials/textures/Table2024_2.png</init_from>
     </image>
   </library_images>
   <library_materials>
