@@ -112,7 +112,7 @@
       <direction>0 0 -1</direction>
       <attenuation>
         <range>20</range>
-        <constant>1</constant>
+        <constant>1.2</constant>
         <linear>0.0</linear>
         <quadratic>0.0</quadratic>
       </attenuation>
@@ -130,7 +130,7 @@
       <direction>0 0 -1</direction>
       <attenuation>
         <range>20</range>
-        <constant>1</constant>
+        <constant>1.2</constant>
         <linear>0.0</linear>
         <quadratic>0.0</quadratic>
       </attenuation>
