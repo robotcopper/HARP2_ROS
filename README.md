@@ -35,3 +35,22 @@ ros2 launch robot_bringup nav2_bringup.launch.py use_TopicBasedSystem_hardware_i
 ```
 
 With `use_TopicBasedSystem_hardware_interface:=False`, the simulation is launched.
+
+
+<br>
+<br>
+---
+<br>
+<br>
+
+- Launching AMCL with a specific map:
+```
+ ros2 launch nav2_bringup localization_launch.py map:=<path_to_yaml_file_of_your_map>
+```
+<br>
+<br>
+
+- Launching micro_ros_agent on the device ttyACM0:
+```
+ ros2 run micro_ros_agent micro_ros_agent serial --dev /dev/ttyACM0
+```

@@ -1,0 +1,6 @@
+# Ignore rf2o_laser_odometry
+rf2o_laser_odometry/
+
+# Ignore ydlidar_ros2_driver
+ydlidar/ydlidar_ros2_driver/
+
