@@ -10,11 +10,11 @@ controller_manager:
 omnidirectional_controller:
   ros__parameters:
     wheel_names:
-      - joint_wheel_roueholonome3
-      - joint_wheel_roueholonome2
+      - joint_wheel_roueholonome3 # motor on the x axis of the robot
       - joint_wheel_roueholonome1
+      - joint_wheel_roueholonome2 # motor on the y axis side of the robot
       
-    robot_radius: 0.2
+    robot_radius: 0.144 # robot center to the outer edge center of the wheel
     wheel_radius: 0.058
     gamma: 30.0 # angle between body fixed y axis and the normal of third wheel in list above
 
