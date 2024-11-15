@@ -77,4 +77,12 @@ def generate_launch_description():
             output='screen',
         ),
 
+        Node(
+            package="robot_controller",
+            executable="twist_acc_filter",
+            output="screen",
+            namespace=namespace,
+        ),
+        
+
     ])
