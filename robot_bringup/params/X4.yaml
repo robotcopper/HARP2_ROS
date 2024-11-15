@@ -3,7 +3,7 @@
 ydlidar_ros2_driver_node:
   ros__parameters:
     port: /dev/ydlidar_X4
-    frame_id: laser_frame
+    frame_id: X4_laser_frame
     ignore_array: ""
     baudrate: 128000
     lidar_type: 1
