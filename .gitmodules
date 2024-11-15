@@ -2,15 +2,23 @@
 	path = rf2o_laser_odometry
 	url = https://github.com/MAPIRlab/rf2o_laser_odometry.git
 	branch = ros2
+	ignore = dirty
+
 [submodule "ydlidar_ros2_driver"]
 	path = ydlidar/ydlidar_ros2_driver
 	url = https://github.com/YDLIDAR/ydlidar_ros2_driver.git
 	branch = humble
+	ignore = dirty
+
 [submodule "YDLidar-SDK"]
 	path = ydlidar/YDLidar-SDK
 	url = https://github.com/YDLIDAR/YDLidar-SDK.git
 	branch = master
+	ignore = dirty
+
 [submodule "omnidirectional_controllers"]
 	path = omnidirectional_controllers
 	url = https://github.com/mateusmenezes95/omnidirectional_controllers.git
 	branch = humble
+	ignore = dirty
+
