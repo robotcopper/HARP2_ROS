@@ -5,7 +5,7 @@ class TwistFilter : public rclcpp::Node {
 public:
     TwistFilter() : Node("twist_acc_filter") {
         // Paramètres d'accélération maximale
-        max_linear_accel_ = this->declare_parameter("max_linear_accel", 0.5);  // m/s²
+        max_linear_accel_ = this->declare_parameter("max_linear_accel", 0.3);  // m/s²
         max_angular_accel_ = this->declare_parameter("max_angular_accel", 0.5);  // rad/s²
 
         // Initialisation des abonnements et publications

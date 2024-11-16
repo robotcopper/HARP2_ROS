@@ -16,6 +16,7 @@ def generate_launch_description():
 
     # Create the launch configuration variables
     namespace = LaunchConfiguration('namespace')
+    use_twist_acc_filter = LaunchConfiguration('use_twist_acc_filter')
 
     # Specify directory and path to file within package
     robot_bringup_pkg_dir = get_package_share_directory('robot_bringup')
@@ -38,6 +39,12 @@ def generate_launch_description():
             'namespace',
             default_value='',
             description='Namespace'
+        ),
+
+         DeclareLaunchArgument(
+            'use_twist_acc_filter',
+            default_value='False',
+            description='use_twist_acc_filter'
         ),
 
         ExecuteProcess(
@@ -70,6 +77,7 @@ def generate_launch_description():
         ),
 
         ExecuteProcess(
+            condition=IfCondition(use_twist_acc_filter), 
             cmd=[
                 'gnome-terminal', '--', 'ros2', 'run', 'teleop_twist_keyboard', 'teleop_twist_keyboard',
                 '--ros-args', '--remap', '/cmd_vel:=/keyboard_cmd_vel'
@@ -77,7 +85,18 @@ def generate_launch_description():
             output='screen',
         ),
 
+
+        ExecuteProcess(
+            condition=UnlessCondition(use_twist_acc_filter), 
+            cmd=[
+                'gnome-terminal', '--', 'ros2', 'run', 'teleop_twist_keyboard', 'teleop_twist_keyboard',
+                '--ros-args', '--remap', '/cmd_vel:=/omnidirectional_controller/cmd_vel_unstamped'
+            ],
+            output='screen',
+        ),
+
         Node(
+            condition=IfCondition(use_twist_acc_filter), 
             package="robot_controller",
             executable="twist_acc_filter",
             output="screen",
