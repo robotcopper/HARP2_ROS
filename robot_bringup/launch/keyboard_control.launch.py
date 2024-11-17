@@ -19,10 +19,8 @@ def generate_launch_description():
     use_twist_acc_filter = LaunchConfiguration('use_twist_acc_filter')
 
     # Specify directory and path to file within package
-    robot_bringup_pkg_dir = get_package_share_directory('robot_bringup')
     robot_description_pkg_dir = get_package_share_directory('robot_description')
     robot_controller_pkg_dir = get_package_share_directory('robot_controller')
-    nav2_bringup_launch_file_subpath = 'launch/nav2_bringup.launch.py'
     controller_launch_file_subpath = 'launch/controller.launch.py'
     robot_description_launch_file_subpath = 'launch/robot_description.launch.py'
     urdf_file_subpath = 'urdf/robot.urdf.xacro'
