@@ -50,7 +50,7 @@ def generate_launch_description():
     rviz_launch_file_subpath = 'launch/rviz.launch.py'
     laser_odometry_launch_file_subpath = 'launch/laser_odometry.launch.py'
     amcl_launch_file_subpath = 'launch/amcl.launch.py'
-    wordl_file_subpath = 'world/Table2024.world'
+    wordl_file_subpath = 'world/Table2025.world'
     amcl_params_file_subpath = 'params/amcl.yaml'
     map_file_subpath = 'maps/Table2024.yaml'
     nav_launch_file_subpath = 'launch/nav2.launch.py'
