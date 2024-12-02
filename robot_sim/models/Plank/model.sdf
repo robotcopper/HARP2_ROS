@@ -1,0 +1,87 @@
+<?xml version='1.0'?>
+<sdf version='1.7'>
+  <model name='plank'>
+   	<static>false</static>
+    <allow_auto_disable>true</allow_auto_disable>
+    <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label">
+        <label>10</label>
+    </plugin>
+    <link name='link_0'>
+			<gravity>1</gravity>
+      <inertial>
+        <pose>0 0 0.02 0 0 0</pose>
+        <mass>0.025</mass>
+        <inertia>
+          <ixx>2.5e-5</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.5e-5</iyy>
+          <iyz>0</iyz>
+          <izz>8e-6</izz>
+        </inertia>
+      </inertial>
+      <pose>0 0 0 0 0 0</pose>
+      <visual name='visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+        <size>0.4 0.1 0.015</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.6 0.4 0.2 1</ambient>
+          <diffuse>0.6 0.4 0.2 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 1</emissive>
+        </material>
+        <transparency>0</transparency>
+        <cast_shadows>1</cast_shadows>
+      </visual>
+
+      <collision name="collision">
+  <max_contacts>100</max_contacts> <!-- Nombre élevé de points -->
+  <pose>0 0 0 0 0 0</pose>
+  <geometry>
+    <box>
+      <size>0.4 0.1 0.015</size>
+    </box>
+  </geometry>
+  <surface>
+    <bounce>
+      <restitution_coefficient>0.0</restitution_coefficient>
+      <threshold>1e5</threshold>
+    </bounce>
+    <friction>
+      <ode>
+        <mu>2.0</mu>
+        <mu2>2.0</mu2>
+      </ode>
+    </friction>
+    <contact>
+      <ode>
+        <soft_cfm>0</soft_cfm>
+        <soft_erp>0.8</soft_erp>
+        <kp>1e5</kp>
+        <kd>1</kd>
+        <max_vel>0.1</max_vel>
+        <min_depth>0.01</min_depth>
+      </ode>
+    </contact>
+    <torsional>
+      <coefficient>1</coefficient>
+      <patch_radius>0.05</patch_radius>
+      <surface_radius>0.05</surface_radius>
+      <use_patch_radius>1</use_patch_radius>
+      <ode>
+        <slip>0</slip>
+      </ode>
+    </torsional>
+  </surface>
+</collision>
+
+    </link>
+    <pose>0 0 0 0 0 0</pose>
+
+    <allow_auto_disable>1</allow_auto_disable>
+  </model>
+</sdf>

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <asset>
+    <contributor>
+      <author>Blender User</author>
+      <authoring_tool>Blender 4.3.0 commit date:2024-11-19, commit time:08:52, hash:2b18cad88b13</authoring_tool>
+    </contributor>
+    <created>2024-12-01T19:24:24</created>
+    <modified>2024-12-01T19:24:24</modified>
+    <unit name="meter" meter="1"/>
+    <up_axis>Z_UP</up_axis>
+  </asset>
+  <library_effects>
+    <effect id="Material_001-effect">
+      <profile_COMMON>
+        <newparam sid="StageTexture_top_png-surface">
+          <surface type="2D">
+            <init_from>StageTexture_top_png</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="StageTexture_top_png-sampler">
+          <sampler2D>
+            <source>StageTexture_top_png-surface</source>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <diffuse>
+              <texture texture="StageTexture_top_png-sampler" texcoord="UVMap"/>
+            </diffuse>
+            <index_of_refraction>
+              <float sid="ior">1.5</float>
+            </index_of_refraction>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="Material_002-effect">
+      <profile_COMMON>
+        <newparam sid="StageTexture_blue_png-surface">
+          <surface type="2D">
+            <init_from>StageTexture_blue_png</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="StageTexture_blue_png-sampler">
+          <sampler2D>
+            <source>StageTexture_blue_png-surface</source>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <diffuse>
+              <texture texture="StageTexture_blue_png-sampler" texcoord="UVMap"/>
+            </diffuse>
+            <index_of_refraction>
+              <float sid="ior">1.5</float>
+            </index_of_refraction>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="Material_003-effect">
+      <profile_COMMON>
+        <newparam sid="StageTexture_yellow_png-surface">
+          <surface type="2D">
+            <init_from>StageTexture_yellow_png</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="StageTexture_yellow_png-sampler">
+          <sampler2D>
+            <source>StageTexture_yellow_png-surface</source>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <diffuse>
+              <texture texture="StageTexture_yellow_png-sampler" texcoord="UVMap"/>
+            </diffuse>
+            <index_of_refraction>
+              <float sid="ior">1.5</float>
+            </index_of_refraction>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="Material_004-effect">
+      <profile_COMMON>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <diffuse>
+              <color sid="diffuse">0.05612814 0.04970661 0.04970659 1</color>
+            </diffuse>
+            <index_of_refraction>
+              <float sid="ior">1.5</float>
+            </index_of_refraction>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_images>
+    <image id="StageTexture_blue_png" name="StageTexture_blue_png">
+      <init_from>../materials/textures/StageTexture_blue.png</init_from>
+    </image>
+    <image id="StageTexture_top_png" name="StageTexture_top_png">
+      <init_from>../materials/textures/StageTexture_top.png</init_from>
+    </image>
+    <image id="StageTexture_yellow_png" name="StageTexture_yellow_png">
+      <init_from>../materials/textures/StageTexture_yellow.png</init_from>
+    </image>
+  </library_images>
+  <library_materials>
+    <material id="Material_001-material" name="Material.001">
+      <instance_effect url="#Material_001-effect"/>
+    </material>
+    <material id="Material_002-material" name="Material.002">
+      <instance_effect url="#Material_002-effect"/>
+    </material>
+    <material id="Material_003-material" name="Material.003">
+      <instance_effect url="#Material_003-effect"/>
+    </material>
+    <material id="Material_004-material" name="Material.004">
+      <instance_effect url="#Material_004-effect"/>
+    </material>
+  </library_materials>
+  <library_geometries>
+    <geometry id="Part_1_20_-mesh" name="Part 1(20)">
+      <mesh>
+        <source id="Part_1_20_-mesh-positions">
+          <float_array id="Part_1_20_-mesh-positions-array" count="42">-0.01834815 0.5210554 0.05499994 -0.01834815 0.9210554 0 -0.2183482 0.5210554 0.05499994 -0.2183482 0.9210554 0 -0.01834815 -0.7789447 0 -0.01834815 -0.3789446 0.05499994 -0.2183482 -0.7789447 0 -0.2183482 -0.3789446 0.05499994 -0.01834815 -0.3789446 0 0.2316518 -0.3789446 0 0.2316518 -0.3789446 0.05499994 0.2316518 0.5210554 0.05499994 0.2316518 0.5210554 0 -0.01834815 0.5210554 0</float_array>
+          <technique_common>
+            <accessor source="#Part_1_20_-mesh-positions-array" count="14" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Part_1_20_-mesh-normals">
+          <float_array id="Part_1_20_-mesh-normals-array" count="72">-1 0 0 1 0 0 0 -0.1362183 0.9906789 1 0 0 0 -1 0 0 0.1362183 0.9906789 0 0 1 0 0 -1 0 1 0 1 0 0 -1 0 0 0 -0.1362183 0.9906789 0 -1 0 0 0.1362183 0.9906789 0 0 1 0 0 1 0 0 1 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 1 0 1 0 0</float_array>
+          <technique_common>
+            <accessor source="#Part_1_20_-mesh-normals-array" count="24" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Part_1_20_-mesh-map-0">
+          <float_array id="Part_1_20_-mesh-map-0-array" count="144">0 0 0 0 0 0 0.1091276 0.8492802 0.1079195 0.9814167 0.09836339 0.8842318 0.9999122 1.000006 4.17232e-6 0.001396417 0.9999122 0.001396417 0.2596572 0.02522814 0.2247843 0.1304797 0.2212539 0.09523665 0.01438349 0.7810915 0.09836339 0.8842318 5.29957e-5 0.7943844 1.000037 0.999997 -1.66893e-5 7.49826e-5 1.000016 -9.53674e-6 1 0.5559652 4.34518e-5 0.5559648 1 1.45078e-4 0.2720025 0.001446485 5.30002e-5 5.29897e-5 0.09836339 0.8842318 0 0 0 0 0 0 5.29957e-5 0.7943844 0.1250066 0.06947165 0.01438349 0.7810915 0 0 0 0 0 0 0.9999122 1.000006 4.17232e-6 1.000006 4.17232e-6 0.001396417 0.01438349 0.7810915 0.1091276 0.8492802 0.09836339 0.8842318 1.000037 0.999997 4.05312e-6 1.000082 -1.66893e-5 7.49826e-5 1 0.5559652 1 1.000621 4.34518e-5 1.000621 4.34518e-5 0.5559648 4.35114e-5 1.4472e-4 1 1.45078e-4 1 0.5559652 4.34518e-5 1.000621 4.34518e-5 0.5559648 0.1079195 0.9814167 0 0 0.09836339 0.8842318 0 0 0.2720025 0.001446485 0.09836339 0.8842318 0.2720025 0.001446485 0.2596572 0.02522814 5.30002e-5 5.29897e-5 5.30002e-5 5.29897e-5 0.1024739 0.05695348 0 0 5.30002e-5 5.29897e-5 0 0 0.09836339 0.8842318 0 0 0 0 0 0 5.29957e-5 0.7943844 0.1024739 0.05695348 0.1250066 0.06947165</float_array>
+          <technique_common>
+            <accessor source="#Part_1_20_-mesh-map-0-array" count="72" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="Part_1_20_-mesh-vertices">
+          <input semantic="POSITION" source="#Part_1_20_-mesh-positions"/>
+        </vertices>
+        <triangles material="Material_001-material" count="4">
+          <input semantic="VERTEX" source="#Part_1_20_-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#Part_1_20_-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#Part_1_20_-mesh-map-0" offset="2" set="0"/>
+          <p>0 6 18 5 6 19 11 6 20 0 14 42 2 14 43 7 14 44 5 15 45 10 15 46 11 15 47 0 16 48 7 16 49 5 16 50</p>
+        </triangles>
+        <triangles material="Material_002-material" count="2">
+          <input semantic="VERTEX" source="#Part_1_20_-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#Part_1_20_-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#Part_1_20_-mesh-map-0" offset="2" set="0"/>
+          <p>3 5 15 0 5 16 1 5 17 3 13 39 2 13 40 0 13 41</p>
+        </triangles>
+        <triangles material="Material_003-material" count="2">
+          <input semantic="VERTEX" source="#Part_1_20_-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#Part_1_20_-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#Part_1_20_-mesh-map-0" offset="2" set="0"/>
+          <p>7 2 6 4 2 7 5 2 8 7 11 33 6 11 34 4 11 35</p>
+        </triangles>
+        <triangles material="Material_004-material" count="16">
+          <input semantic="VERTEX" source="#Part_1_20_-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#Part_1_20_-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#Part_1_20_-mesh-map-0" offset="2" set="0"/>
+          <p>6 0 0 2 0 1 3 0 2 5 1 3 4 1 4 8 1 5 1 3 9 0 3 10 13 3 11 10 4 12 8 4 13 9 4 14 3 7 21 13 7 22 8 7 23 13 8 24 11 8 25 12 8 26 9 9 27 11 9 28 10 9 29 6 10 30 7 10 31 2 10 32 10 12 36 5 12 37 8 12 38 4 17 51 6 17 52 8 17 53 6 18 54 3 18 55 8 18 56 3 19 57 1 19 58 13 19 59 13 20 60 12 20 61 9 20 62 13 21 63 9 21 64 8 21 65 13 22 66 0 22 67 11 22 68 9 23 69 12 23 70 11 23 71</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="Scene" name="Scene">
+      <node id="Part_1_20_" name="Part 1(20)" type="NODE">
+        <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+        <instance_geometry url="#Part_1_20_-mesh" name="Part 1(20)">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="Material_001-material" target="#Material_001-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
+              <instance_material symbol="Material_002-material" target="#Material_002-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
+              <instance_material symbol="Material_003-material" target="#Material_003-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
+              <instance_material symbol="Material_004-material" target="#Material_004-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#Scene"/>
+  </scene>
+</COLLADA>

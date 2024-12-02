@@ -1,0 +1,4425 @@
+<sdf version='1.7'>
+  <world name='default'>
+    <gravity>0 0 -9.8</gravity>
+    <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
+    <atmosphere type='adiabatic'/>
+    <physics type='ode'>
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+    <scene>
+      <ambient>1 1 1 1</ambient>
+      <background>0.7 0.7 0.7 1</background>
+      <shadows>0</shadows>
+    </scene>
+    <audio>
+      <device>default</device>
+    </audio>
+    <wind/>
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <latitude_deg>0</latitude_deg>
+      <longitude_deg>0</longitude_deg>
+      <elevation>0</elevation>
+      <heading_deg>0</heading_deg>
+    </spherical_coordinates>
+    <state world_name='default'>
+      <sim_time>3865 150000000</sim_time>
+      <real_time>939 65393695</real_time>
+      <wall_time>1733086796 963077904</wall_time>
+      <iterations>829729</iterations>
+      <model name='Can'>
+        <pose>-1.42534 0.474681 0.047323 -2.2e-05 8.2e-05 -0</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>-1.42534 0.474681 0.047323 -2.2e-05 8.2e-05 -0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 -0 0 -0 0</acceleration>
+          <wrench>0 0 -0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Can_0'>
+        <pose>-1.42461 0.374855 0.047159 -2.4e-05 0.000124 1e-06</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>-1.42461 0.374855 0.047159 -2.4e-05 0.000124 1e-06</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 -0 0 -0 0</acceleration>
+          <wrench>0 0 -0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Can_1'>
+        <pose>-1.42486 0.27501 0.047584 -2.3e-05 0.000141 1e-06</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>-1.42486 0.27501 0.047584 -2.3e-05 0.000141 1e-06</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 -0 0 -0 0</acceleration>
+          <wrench>0 0 -0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Can_10'>
+        <pose>1.42613 0.174484 0.047323 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>1.42613 0.174484 0.047323 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-0 0 0 -0 -0 -0</acceleration>
+          <wrench>-0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Can_11'>
+        <pose>1.4255 -0.449936 0.047322 -0.00011 0.00019 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>1.4255 -0.449936 0.047322 -0.00011 0.00019 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Can_12'>
+        <pose>1.42505 -0.550146 0.047323 -0.000122 0.000419 2e-06</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>1.42505 -0.550146 0.047323 -0.000122 0.000419 2e-06</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Can_13'>
+        <pose>1.42525 -0.649943 0.047323 -0.000126 0.000479 1e-06</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>1.42525 -0.649943 0.047323 -0.000126 0.000479 1e-06</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Can_14'>
+        <pose>1.42505 -0.75008 0.047323 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>1.42505 -0.75008 0.047323 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Can_15'>
+        <pose>0.249592 -0.049779 0.047325 -4.4e-05 -3.4e-05 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>0.249592 -0.049779 0.047325 -4.4e-05 -3.4e-05 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0.000175 -0.000354 -0.000169 0.018147 0.008952 2.8e-05</acceleration>
+          <wrench>4e-06 -9e-06 -4e-06 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Can_16'>
+        <pose>0.351194 -0.051121 0.047327 0.000565 2.5e-05 4e-06</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>0.351194 -0.051121 0.047327 0.000565 2.5e-05 4e-06</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>9.5e-05 0.000486 -0.000194 -0.024992 0.004376 -0.000304</acceleration>
+          <wrench>2e-06 1.2e-05 -5e-06 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Can_17'>
+        <pose>0.451754 -0.050976 0.047323 0.000482 2.8e-05 2e-06</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>0.451754 -0.050976 0.047323 0.000482 2.8e-05 2e-06</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>8.8e-05 0.000343 1e-05 -0.017702 0.004297 -0.000162</acceleration>
+          <wrench>2e-06 9e-06 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Can_18'>
+        <pose>0.549782 -0.049608 0.047323 0.000268 2.1e-05 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>0.549782 -0.049608 0.047323 0.000268 2.1e-05 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>8.7e-05 0.000129 -2.2e-05 -0.006757 0.004337 -3.1e-05</acceleration>
+          <wrench>2e-06 3e-06 -1e-06 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Can_19'>
+        <pose>-0.550319 -0.04974 0.047324 0.00019 -1.1e-05 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>-0.550319 -0.04974 0.047324 0.00019 -1.1e-05 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 -0 0 -0 0</acceleration>
+          <wrench>0 0 -0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Can_2'>
+        <pose>-1.42532 0.174907 0.046965 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>-1.42532 0.174907 0.046965 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-0 0 0 -0 -0 -0</acceleration>
+          <wrench>-0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Can_20'>
+        <pose>-0.524849 0.725291 0.047322 -0.000333 4.1e-05 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>-0.524849 0.725291 0.047322 -0.000333 4.1e-05 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 -1e-06 0 2.9e-05 1e-05 0</acceleration>
+          <wrench>0 -0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Can_21'>
+        <pose>-0.449206 -0.050984 0.047326 0.000333 -1e-05 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>-0.449206 -0.050984 0.047326 0.000333 -1e-05 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 -0 0 -0 0</acceleration>
+          <wrench>0 0 -0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Can_22'>
+        <pose>-0.348793 -0.050871 0.047324 0.000329 -9e-06 -0</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>-0.348793 -0.050871 0.047324 0.000329 -9e-06 -0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 -0 0 -0 0</acceleration>
+          <wrench>0 0 -0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Can_23'>
+        <pose>-0.250116 -0.049773 0.047324 0.000194 -1.1e-05 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>-0.250116 -0.049773 0.047324 0.000194 -1.1e-05 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 -0 0 -0 0</acceleration>
+          <wrench>0 0 -0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Can_24'>
+        <pose>-0.575106 -0.750403 0.047368 -0.007696 0.003349 0.000203</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>-0.575106 -0.750403 0.047368 -0.007696 0.003349 0.000203</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 -0 0 1e-05 8e-06 0</acceleration>
+          <wrench>0 -0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Can_25'>
+        <pose>-0.67536 -0.750441 0.047044 -0.017794 0.007473 -4.7e-05</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>-0.67536 -0.750441 0.047044 -0.017794 0.007473 -4.7e-05</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 -0 0 1.2e-05 8e-06 0</acceleration>
+          <wrench>0 -0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Can_26'>
+        <pose>-0.775051 -0.750156 0.047222 -0.017126 0.007317 -2.5e-05</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>-0.775051 -0.750156 0.047222 -0.017126 0.007317 -2.5e-05</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 -0 0 1.2e-05 8e-06 0</acceleration>
+          <wrench>0 -0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Can_27'>
+        <pose>-0.875221 -0.750131 0.047379 -0.01012 0.007151 -3.5e-05</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>-0.875221 -0.750131 0.047379 -0.01012 0.007151 -3.5e-05</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 -0 0 1.2e-05 7e-06 -0</acceleration>
+          <wrench>0 -0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Can_28'>
+        <pose>0.575239 -0.750474 0.047323 -8.3e-05 -4e-06 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>0.575239 -0.750474 0.047323 -8.3e-05 -4e-06 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-0 -0 -0 1e-05 -1e-06 0</acceleration>
+          <wrench>-0 -0 -0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Can_29'>
+        <pose>0.675164 -0.750595 0.047324 -0.000125 -9e-06 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>0.675164 -0.750595 0.047324 -0.000125 -9e-06 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-0 -0 -0 9e-06 -1e-06 0</acceleration>
+          <wrench>-0 -0 -0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Can_3'>
+        <pose>-1.42546 -0.750038 0.046914 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>-1.42546 -0.750038 0.046914 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Can_30'>
+        <pose>0.775098 -0.750286 0.047324 -0.00013 -8e-06 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>0.775098 -0.750286 0.047324 -0.00013 -8e-06 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-0 -0 -0 9e-06 -1e-06 0</acceleration>
+          <wrench>-0 -0 -0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Can_31'>
+        <pose>0.524631 0.725786 0.047323 -3.6e-05 5.5e-05 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>0.524631 0.725786 0.047323 -3.6e-05 5.5e-05 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>1.3e-05 4.3e-05 -3e-06 -0.002234 0.000653 4e-06</acceleration>
+          <wrench>0 1e-06 -0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Can_32'>
+        <pose>0.874951 -0.750126 0.047323 -6.9e-05 -4e-06 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>0.874951 -0.750126 0.047323 -6.9e-05 -4e-06 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-0 -0 -0 7e-06 -1e-06 -0</acceleration>
+          <wrench>-0 -0 -0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Can_33'>
+        <pose>0.625282 0.726048 0.047322 -4.3e-05 5.6e-05 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>0.625282 0.726048 0.047322 -4.3e-05 5.6e-05 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>1.3e-05 5.7e-05 -3.5e-05 -0.002891 0.000678 1e-06</acceleration>
+          <wrench>0 1e-06 -1e-06 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Can_34'>
+        <pose>0.72493 0.725553 0.047324 -2.9e-05 5.7e-05 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>0.72493 0.725553 0.047324 -2.9e-05 5.7e-05 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>1.3e-05 5.8e-05 -2e-06 -0.002972 0.000672 3e-06</acceleration>
+          <wrench>0 1e-06 -0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Can_35'>
+        <pose>0.825085 0.725093 0.047323 -2e-05 5.4e-05 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>0.825085 0.725093 0.047323 -2e-05 5.4e-05 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>1.3e-05 6.2e-05 -1.1e-05 -0.003168 0.000647 0</acceleration>
+          <wrench>0 2e-06 -0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Can_36'>
+        <pose>1.42524 0.475414 0.047322 -0.000246 0.000298 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>1.42524 0.475414 0.047322 -0.000246 0.000298 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 -0 0 -0 0</acceleration>
+          <wrench>0 0 -0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Can_37'>
+        <pose>1.42521 0.375005 0.047323 -0.000219 0.000711 3e-06</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>1.42521 0.375005 0.047323 -0.000219 0.000711 3e-06</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Can_38'>
+        <pose>1.42548 0.274974 0.047329 0.000549 0.000614 6e-06</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>1.42548 0.274974 0.047329 0.000549 0.000614 6e-06</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 -0 0 -0 0</acceleration>
+          <wrench>0 0 -0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Can_4'>
+        <pose>-1.42553 -0.64996 0.047006 0.000123 0.000204 -1e-06</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>-1.42553 -0.64996 0.047006 0.000123 0.000204 -1e-06</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 -0 0 -0 0</acceleration>
+          <wrench>0 0 -0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Can_5'>
+        <pose>-1.42525 -0.54997 0.047629 8.9e-05 0.000146 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>-1.42525 -0.54997 0.047629 8.9e-05 0.000146 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 -0 0 -0 0</acceleration>
+          <wrench>0 0 -0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Can_6'>
+        <pose>-1.42518 -0.449827 0.047314 5e-06 2.1e-05 -0</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>-1.42518 -0.449827 0.047314 5e-06 2.1e-05 -0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Can_7'>
+        <pose>-0.825139 0.725605 0.047322 -0.000366 5.9e-05 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>-0.825139 0.725605 0.047322 -0.000366 5.9e-05 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 -0 0 2e-05 1e-05 -0</acceleration>
+          <wrench>0 -0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Can_8'>
+        <pose>-0.724833 0.725455 0.047322 -0.000464 6.2e-05 -1e-06</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>-0.724833 0.725455 0.047322 -0.000464 6.2e-05 -1e-06</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 -1e-06 -0 3e-05 1e-05 0</acceleration>
+          <wrench>0 -0 -0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Can_9'>
+        <pose>-0.624857 0.725021 0.047324 -0.000449 6.1e-05 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>-0.624857 0.725021 0.047324 -0.000449 6.1e-05 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 -1e-06 -0 3e-05 1e-05 0</acceleration>
+          <wrench>0 -0 -0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Stage'>
+        <pose>-0.071315 0.782 0.047551 0 0 -1.57</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>-0.071315 0.782 0.047551 0 0 -1.57</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Table2025'>
+        <pose>0 0 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='table'>
+          <pose>0 0 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='plank'>
+        <pose>-0.723296 -0.749495 0.163381 -0.017033 -0.000632 0.002647</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>-0.723296 -0.749495 0.163381 -0.017033 -0.000632 0.002647</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>1e-06 -2e-06 0 1e-05 8e-06 1e-06</acceleration>
+          <wrench>0 -0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='plank_0'>
+        <pose>-0.675446 0.723272 0.163765 -0.001079 0.000249 -0.000625</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>-0.675446 0.723272 0.163765 -0.001079 0.000249 -0.000625</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>1e-06 -4e-06 0 2e-05 8e-06 0</acceleration>
+          <wrench>0 -0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='plank_1'>
+        <pose>0.677549 0.724113 0.163723 -0.002282 0.000681 -0.000271</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>0.677549 0.724113 0.163723 -0.002282 0.000681 -0.000271</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>7.9e-05 0.000414 -2.5e-05 -0.003631 0.000221 0.000387</acceleration>
+          <wrench>2e-06 1e-05 -1e-06 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='plank_2'>
+        <pose>1.42405 0.324699 0.16345 0.000905 0.004568 1.57366</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>1.42405 0.324699 0.16345 0.000905 0.004568 1.57366</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='plank_3'>
+        <pose>1.42376 -0.599851 0.163462 0.001175 0.004609 1.57369</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>1.42376 -0.599851 0.163462 0.001175 0.004609 1.57369</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 -0 0 -0 0</acceleration>
+          <wrench>0 0 -0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='plank_4'>
+        <pose>-1.42724 -0.598235 0.163467 0.001437 0.003224 1.57367</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>-1.42724 -0.598235 0.163467 0.001437 0.003224 1.57367</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 -0 0 -0 0</acceleration>
+          <wrench>0 0 -0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='plank_5'>
+        <pose>-1.42323 0.327244 0.163408 0.000947 0.004581 1.57367</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>-1.42323 0.327244 0.163408 0.000947 0.004581 1.57367</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 -0 0 -0 0</acceleration>
+          <wrench>0 0 -0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='plank_6'>
+        <pose>-0.401659 -0.051217 0.163541 -0.009487 -0.002267 0.001616</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>-0.401659 -0.051217 0.163541 -0.009487 -0.002267 0.001616</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 -0 0 -0 0</acceleration>
+          <wrench>0 0 -0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='plank_7'>
+        <pose>0.39998 -0.051673 0.16353 -0.009162 -0.002236 0.001776</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>0.39998 -0.051673 0.16353 -0.009162 -0.002236 0.001776</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0.000435 0.002468 4.1e-05 -0.00862 -0.000974 -0.009913</acceleration>
+          <wrench>1.1e-05 6.2e-05 1e-06 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='plank_8'>
+        <pose>0.723783 -0.750585 0.163649 -0.009661 -0.002269 0.001602</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose>0.723783 -0.750585 0.163649 -0.009661 -0.002269 0.001602</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-0 -1e-06 -0 1e-05 0 1e-06</acceleration>
+          <wrench>-0 -0 -0 0 -0 0</wrench>
+        </link>
+      </model>
+      <light name='user_spot_light_0'>
+        <pose>1.5 1 5 -0.200001 0.200001 -0</pose>
+      </light>
+      <light name='user_spot_light_1'>
+        <pose>-1.5 -1 5 0.200001 -0.200001 -0</pose>
+      </light>
+    </state>
+    <gui fullscreen='0'>
+      <camera name='user_camera'>
+        <pose>-0.081042 -3.24024 2.91086 -0 0.717798 1.5856</pose>
+        <view_controller>orbit</view_controller>
+        <projection_type>perspective</projection_type>
+      </camera>
+    </gui>
+    <model name='Table2025'>
+      <static>1</static>
+      <link name='table'>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>108.217</mass>
+          <inertia>
+            <ixx>42.128</ixx>
+            <ixy>-4.25029e-14</ixy>
+            <ixz>6.83557e-16</ixz>
+            <iyy>90.1988</iyy>
+            <iyz>0</iyz>
+            <izz>132.268</izz>
+          </inertia>
+        </inertial>
+        <collision name='table_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://Table2025/meshes/Table2025.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='table_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://Table2025/meshes/Table2025.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>0 0 0 0 -0 0</pose>
+    </model>
+    <light name='user_spot_light_0' type='spot'>
+      <pose>0.011267 -0.01519 1 0 -0 0</pose>
+      <diffuse>0.5 0.5 0.5 1</diffuse>
+      <specular>0.1 0.1 0.1 1</specular>
+      <direction>0 0 -1</direction>
+      <attenuation>
+        <range>20</range>
+        <constant>1.2</constant>
+        <linear>0</linear>
+        <quadratic>0</quadratic>
+      </attenuation>
+      <cast_shadows>0</cast_shadows>
+      <spot>
+        <inner_angle>0.6</inner_angle>
+        <outer_angle>1</outer_angle>
+        <falloff>1</falloff>
+      </spot>
+    </light>
+    <light name='user_spot_light_1' type='spot'>
+      <pose>1.5614 -0.961277 1 0 -0 0</pose>
+      <diffuse>0.5 0.5 0.5 1</diffuse>
+      <specular>0.1 0.1 0.1 1</specular>
+      <direction>0 0 -1</direction>
+      <attenuation>
+        <range>20</range>
+        <constant>1.2</constant>
+        <linear>0</linear>
+        <quadratic>0</quadratic>
+      </attenuation>
+      <cast_shadows>0</cast_shadows>
+      <spot>
+        <inner_angle>0.6</inner_angle>
+        <outer_angle>1</outer_angle>
+        <falloff>1</falloff>
+      </spot>
+    </light>
+    <model name='Stage'>
+      <static>1</static>
+      <plugin name='gz::sim::systems::Label' filename='gz-sim-label-system'>
+        <label>11</label>
+      </plugin>
+      <link name='link_0'>
+        <gravity>1</gravity>
+        <inertial>
+          <pose>0 0 0.02 0 -0 0</pose>
+          <mass>0.025</mass>
+          <inertia>
+            <ixx>2.5e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.5e-05</iyy>
+            <iyz>0</iyz>
+            <izz>8e-06</izz>
+          </inertia>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://Stage/meshes/stage.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='table_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://Stage/meshes/stage.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-2.64635 1.01434 0 0 -0 0</pose>
+      <allow_auto_disable>1</allow_auto_disable>
+    </model>
+    <model name='Can'>
+      <static>0</static>
+      <plugin name='gz::sim::systems::Label' filename='gz-sim-label-system'>
+        <label>11</label>
+      </plugin>
+      <link name='link_0'>
+        <gravity>1</gravity>
+        <inertial>
+          <pose>0 0 0.02 0 -0 0</pose>
+          <mass>0.025</mass>
+          <inertia>
+            <ixx>2.5e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.5e-05</iyy>
+            <iyz>0</iyz>
+            <izz>8e-06</izz>
+          </inertia>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://Can/meshes/can.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>20</max_contacts>
+          <pose>0 0 0.0545 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.0365</radius>
+              <length>0.109</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>10</kp>
+                <kd>1e+09</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-1.42534 0.474681 0 0 -0 0</pose>
+      <allow_auto_disable>1</allow_auto_disable>
+    </model>
+    <model name='Can_0'>
+      <static>0</static>
+      <plugin name='gz::sim::systems::Label' filename='gz-sim-label-system'>
+        <label>11</label>
+      </plugin>
+      <link name='link_0'>
+        <gravity>1</gravity>
+        <inertial>
+          <pose>0 0 0.02 0 -0 0</pose>
+          <mass>0.025</mass>
+          <inertia>
+            <ixx>2.5e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.5e-05</iyy>
+            <iyz>0</iyz>
+            <izz>8e-06</izz>
+          </inertia>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://Can/meshes/can.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>20</max_contacts>
+          <pose>0 0 0.0545 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.0365</radius>
+              <length>0.109</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>10</kp>
+                <kd>1e+09</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-1.42545 0.374819 0 0 -0 0</pose>
+      <allow_auto_disable>1</allow_auto_disable>
+    </model>
+    <model name='Can_1'>
+      <static>0</static>
+      <plugin name='gz::sim::systems::Label' filename='gz-sim-label-system'>
+        <label>11</label>
+      </plugin>
+      <link name='link_0'>
+        <gravity>1</gravity>
+        <inertial>
+          <pose>0 0 0.02 0 -0 0</pose>
+          <mass>0.025</mass>
+          <inertia>
+            <ixx>2.5e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.5e-05</iyy>
+            <iyz>0</iyz>
+            <izz>8e-06</izz>
+          </inertia>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://Can/meshes/can.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>20</max_contacts>
+          <pose>0 0 0.0545 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.0365</radius>
+              <length>0.109</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>10</kp>
+                <kd>1e+09</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-1.42486 0.27501 0 0 -0 0</pose>
+      <allow_auto_disable>1</allow_auto_disable>
+    </model>
+    <model name='Can_2'>
+      <static>0</static>
+      <plugin name='gz::sim::systems::Label' filename='gz-sim-label-system'>
+        <label>11</label>
+      </plugin>
+      <link name='link_0'>
+        <gravity>1</gravity>
+        <inertial>
+          <pose>0 0 0.02 0 -0 0</pose>
+          <mass>0.025</mass>
+          <inertia>
+            <ixx>2.5e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.5e-05</iyy>
+            <iyz>0</iyz>
+            <izz>8e-06</izz>
+          </inertia>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://Can/meshes/can.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>20</max_contacts>
+          <pose>0 0 0.0545 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.0365</radius>
+              <length>0.109</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>10</kp>
+                <kd>1e+09</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-1.42532 0.174907 0 0 -0 0</pose>
+      <allow_auto_disable>1</allow_auto_disable>
+    </model>
+    <model name='Can_3'>
+      <static>0</static>
+      <plugin name='gz::sim::systems::Label' filename='gz-sim-label-system'>
+        <label>11</label>
+      </plugin>
+      <link name='link_0'>
+        <gravity>1</gravity>
+        <inertial>
+          <pose>0 0 0.02 0 -0 0</pose>
+          <mass>0.025</mass>
+          <inertia>
+            <ixx>2.5e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.5e-05</iyy>
+            <iyz>0</iyz>
+            <izz>8e-06</izz>
+          </inertia>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://Can/meshes/can.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>20</max_contacts>
+          <pose>0 0 0.0545 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.0365</radius>
+              <length>0.109</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>10</kp>
+                <kd>1e+09</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-1.42546 -0.750038 0 0 -0 0</pose>
+      <allow_auto_disable>1</allow_auto_disable>
+    </model>
+    <model name='Can_4'>
+      <static>0</static>
+      <plugin name='gz::sim::systems::Label' filename='gz-sim-label-system'>
+        <label>11</label>
+      </plugin>
+      <link name='link_0'>
+        <gravity>1</gravity>
+        <inertial>
+          <pose>0 0 0.02 0 -0 0</pose>
+          <mass>0.025</mass>
+          <inertia>
+            <ixx>2.5e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.5e-05</iyy>
+            <iyz>0</iyz>
+            <izz>8e-06</izz>
+          </inertia>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://Can/meshes/can.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>20</max_contacts>
+          <pose>0 0 0.0545 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.0365</radius>
+              <length>0.109</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>10</kp>
+                <kd>1e+09</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-1.42553 -0.64996 0 0 -0 0</pose>
+      <allow_auto_disable>1</allow_auto_disable>
+    </model>
+    <model name='Can_5'>
+      <static>0</static>
+      <plugin name='gz::sim::systems::Label' filename='gz-sim-label-system'>
+        <label>11</label>
+      </plugin>
+      <link name='link_0'>
+        <gravity>1</gravity>
+        <inertial>
+          <pose>0 0 0.02 0 -0 0</pose>
+          <mass>0.025</mass>
+          <inertia>
+            <ixx>2.5e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.5e-05</iyy>
+            <iyz>0</iyz>
+            <izz>8e-06</izz>
+          </inertia>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://Can/meshes/can.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>20</max_contacts>
+          <pose>0 0 0.0545 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.0365</radius>
+              <length>0.109</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>10</kp>
+                <kd>1e+09</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-1.42525 -0.54997 0 0 -0 0</pose>
+      <allow_auto_disable>1</allow_auto_disable>
+    </model>
+    <model name='Can_6'>
+      <static>0</static>
+      <plugin name='gz::sim::systems::Label' filename='gz-sim-label-system'>
+        <label>11</label>
+      </plugin>
+      <link name='link_0'>
+        <gravity>1</gravity>
+        <inertial>
+          <pose>0 0 0.02 0 -0 0</pose>
+          <mass>0.025</mass>
+          <inertia>
+            <ixx>2.5e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.5e-05</iyy>
+            <iyz>0</iyz>
+            <izz>8e-06</izz>
+          </inertia>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://Can/meshes/can.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>20</max_contacts>
+          <pose>0 0 0.0545 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.0365</radius>
+              <length>0.109</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>10</kp>
+                <kd>1e+09</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-1.42518 -0.449827 0 0 -0 0</pose>
+      <allow_auto_disable>1</allow_auto_disable>
+    </model>
+    <model name='Can_7'>
+      <static>0</static>
+      <plugin name='gz::sim::systems::Label' filename='gz-sim-label-system'>
+        <label>11</label>
+      </plugin>
+      <link name='link_0'>
+        <gravity>1</gravity>
+        <inertial>
+          <pose>0 0 0.02 0 -0 0</pose>
+          <mass>0.025</mass>
+          <inertia>
+            <ixx>2.5e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.5e-05</iyy>
+            <iyz>0</iyz>
+            <izz>8e-06</izz>
+          </inertia>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://Can/meshes/can.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>20</max_contacts>
+          <pose>0 0 0.0545 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.0365</radius>
+              <length>0.109</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>10</kp>
+                <kd>1e+09</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-0.825139 0.725605 0.047323 0 -0 0</pose>
+      <allow_auto_disable>1</allow_auto_disable>
+    </model>
+    <model name='Can_8'>
+      <static>0</static>
+      <plugin name='gz::sim::systems::Label' filename='gz-sim-label-system'>
+        <label>11</label>
+      </plugin>
+      <link name='link_0'>
+        <gravity>1</gravity>
+        <inertial>
+          <pose>0 0 0.02 0 -0 0</pose>
+          <mass>0.025</mass>
+          <inertia>
+            <ixx>2.5e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.5e-05</iyy>
+            <iyz>0</iyz>
+            <izz>8e-06</izz>
+          </inertia>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://Can/meshes/can.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>20</max_contacts>
+          <pose>0 0 0.0545 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.0365</radius>
+              <length>0.109</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>10</kp>
+                <kd>1e+09</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-0.724833 0.725455 0.047323 0 -0 0</pose>
+      <allow_auto_disable>1</allow_auto_disable>
+    </model>
+    <model name='Can_9'>
+      <static>0</static>
+      <plugin name='gz::sim::systems::Label' filename='gz-sim-label-system'>
+        <label>11</label>
+      </plugin>
+      <link name='link_0'>
+        <gravity>1</gravity>
+        <inertial>
+          <pose>0 0 0.02 0 -0 0</pose>
+          <mass>0.025</mass>
+          <inertia>
+            <ixx>2.5e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.5e-05</iyy>
+            <iyz>0</iyz>
+            <izz>8e-06</izz>
+          </inertia>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://Can/meshes/can.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>20</max_contacts>
+          <pose>0 0 0.0545 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.0365</radius>
+              <length>0.109</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>10</kp>
+                <kd>1e+09</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-0.624857 0.725021 0.047323 0 -0 0</pose>
+      <allow_auto_disable>1</allow_auto_disable>
+    </model>
+    <model name='Can_20'>
+      <static>0</static>
+      <plugin name='gz::sim::systems::Label' filename='gz-sim-label-system'>
+        <label>11</label>
+      </plugin>
+      <link name='link_0'>
+        <gravity>1</gravity>
+        <inertial>
+          <pose>0 0 0.02 0 -0 0</pose>
+          <mass>0.025</mass>
+          <inertia>
+            <ixx>2.5e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.5e-05</iyy>
+            <iyz>0</iyz>
+            <izz>8e-06</izz>
+          </inertia>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://Can/meshes/can.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>20</max_contacts>
+          <pose>0 0 0.0545 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.0365</radius>
+              <length>0.109</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>10</kp>
+                <kd>1e+09</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-0.524849 0.725291 0.047323 0 -0 0</pose>
+      <allow_auto_disable>1</allow_auto_disable>
+    </model>
+    <model name='Can_31'>
+      <static>0</static>
+      <plugin name='gz::sim::systems::Label' filename='gz-sim-label-system'>
+        <label>11</label>
+      </plugin>
+      <link name='link_0'>
+        <gravity>1</gravity>
+        <inertial>
+          <pose>0 0 0.02 0 -0 0</pose>
+          <mass>0.025</mass>
+          <inertia>
+            <ixx>2.5e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.5e-05</iyy>
+            <iyz>0</iyz>
+            <izz>8e-06</izz>
+          </inertia>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://Can/meshes/can.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>20</max_contacts>
+          <pose>0 0 0.0545 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.0365</radius>
+              <length>0.109</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>10</kp>
+                <kd>1e+09</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>0.524631 0.725786 0.047323 0 -0 0</pose>
+      <allow_auto_disable>1</allow_auto_disable>
+    </model>
+    <model name='Can_33'>
+      <static>0</static>
+      <plugin name='gz::sim::systems::Label' filename='gz-sim-label-system'>
+        <label>11</label>
+      </plugin>
+      <link name='link_0'>
+        <gravity>1</gravity>
+        <inertial>
+          <pose>0 0 0.02 0 -0 0</pose>
+          <mass>0.025</mass>
+          <inertia>
+            <ixx>2.5e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.5e-05</iyy>
+            <iyz>0</iyz>
+            <izz>8e-06</izz>
+          </inertia>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://Can/meshes/can.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>20</max_contacts>
+          <pose>0 0 0.0545 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.0365</radius>
+              <length>0.109</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>10</kp>
+                <kd>1e+09</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>0.625282 0.726048 0.047323 0 -0 0</pose>
+      <allow_auto_disable>1</allow_auto_disable>
+    </model>
+    <model name='Can_34'>
+      <static>0</static>
+      <plugin name='gz::sim::systems::Label' filename='gz-sim-label-system'>
+        <label>11</label>
+      </plugin>
+      <link name='link_0'>
+        <gravity>1</gravity>
+        <inertial>
+          <pose>0 0 0.02 0 -0 0</pose>
+          <mass>0.025</mass>
+          <inertia>
+            <ixx>2.5e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.5e-05</iyy>
+            <iyz>0</iyz>
+            <izz>8e-06</izz>
+          </inertia>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://Can/meshes/can.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>20</max_contacts>
+          <pose>0 0 0.0545 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.0365</radius>
+              <length>0.109</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>10</kp>
+                <kd>1e+09</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>0.72493 0.725553 0.047323 0 -0 0</pose>
+      <allow_auto_disable>1</allow_auto_disable>
+    </model>
+    <model name='Can_35'>
+      <static>0</static>
+      <plugin name='gz::sim::systems::Label' filename='gz-sim-label-system'>
+        <label>11</label>
+      </plugin>
+      <link name='link_0'>
+        <gravity>1</gravity>
+        <inertial>
+          <pose>0 0 0.02 0 -0 0</pose>
+          <mass>0.025</mass>
+          <inertia>
+            <ixx>2.5e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.5e-05</iyy>
+            <iyz>0</iyz>
+            <izz>8e-06</izz>
+          </inertia>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://Can/meshes/can.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>20</max_contacts>
+          <pose>0 0 0.0545 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.0365</radius>
+              <length>0.109</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>10</kp>
+                <kd>1e+09</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>0.825085 0.725093 0.047323 0 -0 0</pose>
+      <allow_auto_disable>1</allow_auto_disable>
+    </model>
+    <model name='Can_36'>
+      <static>0</static>
+      <plugin name='gz::sim::systems::Label' filename='gz-sim-label-system'>
+        <label>11</label>
+      </plugin>
+      <link name='link_0'>
+        <gravity>1</gravity>
+        <inertial>
+          <pose>0 0 0.02 0 -0 0</pose>
+          <mass>0.025</mass>
+          <inertia>
+            <ixx>2.5e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.5e-05</iyy>
+            <iyz>0</iyz>
+            <izz>8e-06</izz>
+          </inertia>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://Can/meshes/can.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>20</max_contacts>
+          <pose>0 0 0.0545 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.0365</radius>
+              <length>0.109</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>10</kp>
+                <kd>1e+09</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>1.42524 0.475414 0.047323 0 -0 0</pose>
+      <allow_auto_disable>1</allow_auto_disable>
+    </model>
+    <model name='Can_37'>
+      <static>0</static>
+      <plugin name='gz::sim::systems::Label' filename='gz-sim-label-system'>
+        <label>11</label>
+      </plugin>
+      <link name='link_0'>
+        <gravity>1</gravity>
+        <inertial>
+          <pose>0 0 0.02 0 -0 0</pose>
+          <mass>0.025</mass>
+          <inertia>
+            <ixx>2.5e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.5e-05</iyy>
+            <iyz>0</iyz>
+            <izz>8e-06</izz>
+          </inertia>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://Can/meshes/can.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>20</max_contacts>
+          <pose>0 0 0.0545 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.0365</radius>
+              <length>0.109</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>10</kp>
+                <kd>1e+09</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>1.42521 0.375005 0.047323 0 -0 0</pose>
+      <allow_auto_disable>1</allow_auto_disable>
+    </model>
+    <model name='Can_38'>
+      <static>0</static>
+      <plugin name='gz::sim::systems::Label' filename='gz-sim-label-system'>
+        <label>11</label>
+      </plugin>
+      <link name='link_0'>
+        <gravity>1</gravity>
+        <inertial>
+          <pose>0 0 0.02 0 -0 0</pose>
+          <mass>0.025</mass>
+          <inertia>
+            <ixx>2.5e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.5e-05</iyy>
+            <iyz>0</iyz>
+            <izz>8e-06</izz>
+          </inertia>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://Can/meshes/can.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>20</max_contacts>
+          <pose>0 0 0.0545 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.0365</radius>
+              <length>0.109</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>10</kp>
+                <kd>1e+09</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>1.42548 0.274974 0.047323 0 -0 0</pose>
+      <allow_auto_disable>1</allow_auto_disable>
+    </model>
+    <model name='Can_10'>
+      <static>0</static>
+      <plugin name='gz::sim::systems::Label' filename='gz-sim-label-system'>
+        <label>11</label>
+      </plugin>
+      <link name='link_0'>
+        <gravity>1</gravity>
+        <inertial>
+          <pose>0 0 0.02 0 -0 0</pose>
+          <mass>0.025</mass>
+          <inertia>
+            <ixx>2.5e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.5e-05</iyy>
+            <iyz>0</iyz>
+            <izz>8e-06</izz>
+          </inertia>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://Can/meshes/can.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>20</max_contacts>
+          <pose>0 0 0.0545 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.0365</radius>
+              <length>0.109</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>10</kp>
+                <kd>1e+09</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>1.42613 0.174484 0.047323 0 -0 0</pose>
+      <allow_auto_disable>1</allow_auto_disable>
+    </model>
+    <model name='Can_11'>
+      <static>0</static>
+      <plugin name='gz::sim::systems::Label' filename='gz-sim-label-system'>
+        <label>11</label>
+      </plugin>
+      <link name='link_0'>
+        <gravity>1</gravity>
+        <inertial>
+          <pose>0 0 0.02 0 -0 0</pose>
+          <mass>0.025</mass>
+          <inertia>
+            <ixx>2.5e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.5e-05</iyy>
+            <iyz>0</iyz>
+            <izz>8e-06</izz>
+          </inertia>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://Can/meshes/can.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>20</max_contacts>
+          <pose>0 0 0.0545 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.0365</radius>
+              <length>0.109</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>10</kp>
+                <kd>1e+09</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>1.4255 -0.449936 0.047323 0 -0 0</pose>
+      <allow_auto_disable>1</allow_auto_disable>
+    </model>
+    <model name='Can_12'>
+      <static>0</static>
+      <plugin name='gz::sim::systems::Label' filename='gz-sim-label-system'>
+        <label>11</label>
+      </plugin>
+      <link name='link_0'>
+        <gravity>1</gravity>
+        <inertial>
+          <pose>0 0 0.02 0 -0 0</pose>
+          <mass>0.025</mass>
+          <inertia>
+            <ixx>2.5e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.5e-05</iyy>
+            <iyz>0</iyz>
+            <izz>8e-06</izz>
+          </inertia>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://Can/meshes/can.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>20</max_contacts>
+          <pose>0 0 0.0545 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.0365</radius>
+              <length>0.109</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>10</kp>
+                <kd>1e+09</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>1.42505 -0.550146 0.047323 0 -0 0</pose>
+      <allow_auto_disable>1</allow_auto_disable>
+    </model>
+    <model name='Can_13'>
+      <static>0</static>
+      <plugin name='gz::sim::systems::Label' filename='gz-sim-label-system'>
+        <label>11</label>
+      </plugin>
+      <link name='link_0'>
+        <gravity>1</gravity>
+        <inertial>
+          <pose>0 0 0.02 0 -0 0</pose>
+          <mass>0.025</mass>
+          <inertia>
+            <ixx>2.5e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.5e-05</iyy>
+            <iyz>0</iyz>
+            <izz>8e-06</izz>
+          </inertia>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://Can/meshes/can.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>20</max_contacts>
+          <pose>0 0 0.0545 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.0365</radius>
+              <length>0.109</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>10</kp>
+                <kd>1e+09</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>1.42525 -0.649943 0.047323 0 -0 0</pose>
+      <allow_auto_disable>1</allow_auto_disable>
+    </model>
+    <model name='Can_14'>
+      <static>0</static>
+      <plugin name='gz::sim::systems::Label' filename='gz-sim-label-system'>
+        <label>11</label>
+      </plugin>
+      <link name='link_0'>
+        <gravity>1</gravity>
+        <inertial>
+          <pose>0 0 0.02 0 -0 0</pose>
+          <mass>0.025</mass>
+          <inertia>
+            <ixx>2.5e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.5e-05</iyy>
+            <iyz>0</iyz>
+            <izz>8e-06</izz>
+          </inertia>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://Can/meshes/can.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>20</max_contacts>
+          <pose>0 0 0.0545 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.0365</radius>
+              <length>0.109</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>10</kp>
+                <kd>1e+09</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>1.42505 -0.75008 0.047323 0 -0 0</pose>
+      <allow_auto_disable>1</allow_auto_disable>
+    </model>
+    <model name='Can_15'>
+      <static>0</static>
+      <plugin name='gz::sim::systems::Label' filename='gz-sim-label-system'>
+        <label>11</label>
+      </plugin>
+      <link name='link_0'>
+        <gravity>1</gravity>
+        <inertial>
+          <pose>0 0 0.02 0 -0 0</pose>
+          <mass>0.025</mass>
+          <inertia>
+            <ixx>2.5e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.5e-05</iyy>
+            <iyz>0</iyz>
+            <izz>8e-06</izz>
+          </inertia>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://Can/meshes/can.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>20</max_contacts>
+          <pose>0 0 0.0545 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.0365</radius>
+              <length>0.109</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>10</kp>
+                <kd>1e+09</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>0.249592 -0.049779 0.047323 0 -0 0</pose>
+      <allow_auto_disable>1</allow_auto_disable>
+    </model>
+    <model name='Can_16'>
+      <static>0</static>
+      <plugin name='gz::sim::systems::Label' filename='gz-sim-label-system'>
+        <label>11</label>
+      </plugin>
+      <link name='link_0'>
+        <gravity>1</gravity>
+        <inertial>
+          <pose>0 0 0.02 0 -0 0</pose>
+          <mass>0.025</mass>
+          <inertia>
+            <ixx>2.5e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.5e-05</iyy>
+            <iyz>0</iyz>
+            <izz>8e-06</izz>
+          </inertia>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://Can/meshes/can.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>20</max_contacts>
+          <pose>0 0 0.0545 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.0365</radius>
+              <length>0.109</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>10</kp>
+                <kd>1e+09</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>0.351194 -0.051121 0.047323 0 -0 0</pose>
+      <allow_auto_disable>1</allow_auto_disable>
+    </model>
+    <model name='Can_17'>
+      <static>0</static>
+      <plugin name='gz::sim::systems::Label' filename='gz-sim-label-system'>
+        <label>11</label>
+      </plugin>
+      <link name='link_0'>
+        <gravity>1</gravity>
+        <inertial>
+          <pose>0 0 0.02 0 -0 0</pose>
+          <mass>0.025</mass>
+          <inertia>
+            <ixx>2.5e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.5e-05</iyy>
+            <iyz>0</iyz>
+            <izz>8e-06</izz>
+          </inertia>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://Can/meshes/can.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>20</max_contacts>
+          <pose>0 0 0.0545 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.0365</radius>
+              <length>0.109</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>10</kp>
+                <kd>1e+09</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>0.451754 -0.050976 0.047323 0 -0 0</pose>
+      <allow_auto_disable>1</allow_auto_disable>
+    </model>
+    <model name='Can_18'>
+      <static>0</static>
+      <plugin name='gz::sim::systems::Label' filename='gz-sim-label-system'>
+        <label>11</label>
+      </plugin>
+      <link name='link_0'>
+        <gravity>1</gravity>
+        <inertial>
+          <pose>0 0 0.02 0 -0 0</pose>
+          <mass>0.025</mass>
+          <inertia>
+            <ixx>2.5e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.5e-05</iyy>
+            <iyz>0</iyz>
+            <izz>8e-06</izz>
+          </inertia>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://Can/meshes/can.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>20</max_contacts>
+          <pose>0 0 0.0545 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.0365</radius>
+              <length>0.109</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>10</kp>
+                <kd>1e+09</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>0.549782 -0.049608 0.047323 0 -0 0</pose>
+      <allow_auto_disable>1</allow_auto_disable>
+    </model>
+    <model name='Can_19'>
+      <static>0</static>
+      <plugin name='gz::sim::systems::Label' filename='gz-sim-label-system'>
+        <label>11</label>
+      </plugin>
+      <link name='link_0'>
+        <gravity>1</gravity>
+        <inertial>
+          <pose>0 0 0.02 0 -0 0</pose>
+          <mass>0.025</mass>
+          <inertia>
+            <ixx>2.5e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.5e-05</iyy>
+            <iyz>0</iyz>
+            <izz>8e-06</izz>
+          </inertia>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://Can/meshes/can.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>20</max_contacts>
+          <pose>0 0 0.0545 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.0365</radius>
+              <length>0.109</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>10</kp>
+                <kd>1e+09</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-0.550319 -0.04974 0.047323 0 -0 0</pose>
+      <allow_auto_disable>1</allow_auto_disable>
+    </model>
+    <model name='Can_21'>
+      <static>0</static>
+      <plugin name='gz::sim::systems::Label' filename='gz-sim-label-system'>
+        <label>11</label>
+      </plugin>
+      <link name='link_0'>
+        <gravity>1</gravity>
+        <inertial>
+          <pose>0 0 0.02 0 -0 0</pose>
+          <mass>0.025</mass>
+          <inertia>
+            <ixx>2.5e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.5e-05</iyy>
+            <iyz>0</iyz>
+            <izz>8e-06</izz>
+          </inertia>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://Can/meshes/can.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>20</max_contacts>
+          <pose>0 0 0.0545 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.0365</radius>
+              <length>0.109</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>10</kp>
+                <kd>1e+09</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-0.449206 -0.050984 0.047323 0 -0 0</pose>
+      <allow_auto_disable>1</allow_auto_disable>
+    </model>
+    <model name='Can_22'>
+      <static>0</static>
+      <plugin name='gz::sim::systems::Label' filename='gz-sim-label-system'>
+        <label>11</label>
+      </plugin>
+      <link name='link_0'>
+        <gravity>1</gravity>
+        <inertial>
+          <pose>0 0 0.02 0 -0 0</pose>
+          <mass>0.025</mass>
+          <inertia>
+            <ixx>2.5e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.5e-05</iyy>
+            <iyz>0</iyz>
+            <izz>8e-06</izz>
+          </inertia>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://Can/meshes/can.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>20</max_contacts>
+          <pose>0 0 0.0545 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.0365</radius>
+              <length>0.109</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>10</kp>
+                <kd>1e+09</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-0.348793 -0.050871 0.047323 0 -0 0</pose>
+      <allow_auto_disable>1</allow_auto_disable>
+    </model>
+    <model name='Can_23'>
+      <static>0</static>
+      <plugin name='gz::sim::systems::Label' filename='gz-sim-label-system'>
+        <label>11</label>
+      </plugin>
+      <link name='link_0'>
+        <gravity>1</gravity>
+        <inertial>
+          <pose>0 0 0.02 0 -0 0</pose>
+          <mass>0.025</mass>
+          <inertia>
+            <ixx>2.5e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.5e-05</iyy>
+            <iyz>0</iyz>
+            <izz>8e-06</izz>
+          </inertia>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://Can/meshes/can.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>20</max_contacts>
+          <pose>0 0 0.0545 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.0365</radius>
+              <length>0.109</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>10</kp>
+                <kd>1e+09</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-0.250116 -0.049773 0.047323 0 -0 0</pose>
+      <allow_auto_disable>1</allow_auto_disable>
+    </model>
+    <model name='Can_24'>
+      <static>0</static>
+      <plugin name='gz::sim::systems::Label' filename='gz-sim-label-system'>
+        <label>11</label>
+      </plugin>
+      <link name='link_0'>
+        <gravity>1</gravity>
+        <inertial>
+          <pose>0 0 0.02 0 -0 0</pose>
+          <mass>0.025</mass>
+          <inertia>
+            <ixx>2.5e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.5e-05</iyy>
+            <iyz>0</iyz>
+            <izz>8e-06</izz>
+          </inertia>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://Can/meshes/can.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>20</max_contacts>
+          <pose>0 0 0.0545 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.0365</radius>
+              <length>0.109</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>10</kp>
+                <kd>1e+09</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-0.575102 -0.750391 0.047323 0 -0 0</pose>
+      <allow_auto_disable>1</allow_auto_disable>
+    </model>
+    <model name='Can_25'>
+      <static>0</static>
+      <plugin name='gz::sim::systems::Label' filename='gz-sim-label-system'>
+        <label>11</label>
+      </plugin>
+      <link name='link_0'>
+        <gravity>1</gravity>
+        <inertial>
+          <pose>0 0 0.02 0 -0 0</pose>
+          <mass>0.025</mass>
+          <inertia>
+            <ixx>2.5e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.5e-05</iyy>
+            <iyz>0</iyz>
+            <izz>8e-06</izz>
+          </inertia>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://Can/meshes/can.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>20</max_contacts>
+          <pose>0 0 0.0545 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.0365</radius>
+              <length>0.109</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>10</kp>
+                <kd>1e+09</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-0.675356 -0.750428 0.047323 0 -0 0</pose>
+      <allow_auto_disable>1</allow_auto_disable>
+    </model>
+    <model name='Can_26'>
+      <static>0</static>
+      <plugin name='gz::sim::systems::Label' filename='gz-sim-label-system'>
+        <label>11</label>
+      </plugin>
+      <link name='link_0'>
+        <gravity>1</gravity>
+        <inertial>
+          <pose>0 0 0.02 0 -0 0</pose>
+          <mass>0.025</mass>
+          <inertia>
+            <ixx>2.5e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.5e-05</iyy>
+            <iyz>0</iyz>
+            <izz>8e-06</izz>
+          </inertia>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://Can/meshes/can.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>20</max_contacts>
+          <pose>0 0 0.0545 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.0365</radius>
+              <length>0.109</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>10</kp>
+                <kd>1e+09</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-0.775047 -0.750146 0.047323 0 -0 0</pose>
+      <allow_auto_disable>1</allow_auto_disable>
+    </model>
+    <model name='Can_27'>
+      <static>0</static>
+      <plugin name='gz::sim::systems::Label' filename='gz-sim-label-system'>
+        <label>11</label>
+      </plugin>
+      <link name='link_0'>
+        <gravity>1</gravity>
+        <inertial>
+          <pose>0 0 0.02 0 -0 0</pose>
+          <mass>0.025</mass>
+          <inertia>
+            <ixx>2.5e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.5e-05</iyy>
+            <iyz>0</iyz>
+            <izz>8e-06</izz>
+          </inertia>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://Can/meshes/can.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>20</max_contacts>
+          <pose>0 0 0.0545 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.0365</radius>
+              <length>0.109</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>10</kp>
+                <kd>1e+09</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-0.875219 -0.750121 0.047323 0 -0 0</pose>
+      <allow_auto_disable>1</allow_auto_disable>
+    </model>
+    <model name='Can_28'>
+      <static>0</static>
+      <plugin name='gz::sim::systems::Label' filename='gz-sim-label-system'>
+        <label>11</label>
+      </plugin>
+      <link name='link_0'>
+        <gravity>1</gravity>
+        <inertial>
+          <pose>0 0 0.02 0 -0 0</pose>
+          <mass>0.025</mass>
+          <inertia>
+            <ixx>2.5e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.5e-05</iyy>
+            <iyz>0</iyz>
+            <izz>8e-06</izz>
+          </inertia>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://Can/meshes/can.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>20</max_contacts>
+          <pose>0 0 0.0545 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.0365</radius>
+              <length>0.109</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>10</kp>
+                <kd>1e+09</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>0.575239 -0.750474 0.047323 0 -0 0</pose>
+      <allow_auto_disable>1</allow_auto_disable>
+    </model>
+    <model name='Can_29'>
+      <static>0</static>
+      <plugin name='gz::sim::systems::Label' filename='gz-sim-label-system'>
+        <label>11</label>
+      </plugin>
+      <link name='link_0'>
+        <gravity>1</gravity>
+        <inertial>
+          <pose>0 0 0.02 0 -0 0</pose>
+          <mass>0.025</mass>
+          <inertia>
+            <ixx>2.5e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.5e-05</iyy>
+            <iyz>0</iyz>
+            <izz>8e-06</izz>
+          </inertia>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://Can/meshes/can.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>20</max_contacts>
+          <pose>0 0 0.0545 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.0365</radius>
+              <length>0.109</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>10</kp>
+                <kd>1e+09</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>0.675164 -0.750595 0.047323 0 -0 0</pose>
+      <allow_auto_disable>1</allow_auto_disable>
+    </model>
+    <model name='Can_30'>
+      <static>0</static>
+      <plugin name='gz::sim::systems::Label' filename='gz-sim-label-system'>
+        <label>11</label>
+      </plugin>
+      <link name='link_0'>
+        <gravity>1</gravity>
+        <inertial>
+          <pose>0 0 0.02 0 -0 0</pose>
+          <mass>0.025</mass>
+          <inertia>
+            <ixx>2.5e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.5e-05</iyy>
+            <iyz>0</iyz>
+            <izz>8e-06</izz>
+          </inertia>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://Can/meshes/can.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>20</max_contacts>
+          <pose>0 0 0.0545 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.0365</radius>
+              <length>0.109</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>10</kp>
+                <kd>1e+09</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>0.775098 -0.750286 0.047323 0 -0 0</pose>
+      <allow_auto_disable>1</allow_auto_disable>
+    </model>
+    <model name='Can_32'>
+      <static>0</static>
+      <plugin name='gz::sim::systems::Label' filename='gz-sim-label-system'>
+        <label>11</label>
+      </plugin>
+      <link name='link_0'>
+        <gravity>1</gravity>
+        <inertial>
+          <pose>0 0 0.02 0 -0 0</pose>
+          <mass>0.025</mass>
+          <inertia>
+            <ixx>2.5e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.5e-05</iyy>
+            <iyz>0</iyz>
+            <izz>8e-06</izz>
+          </inertia>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://Can/meshes/can.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>20</max_contacts>
+          <pose>0 0 0.0545 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.0365</radius>
+              <length>0.109</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>10</kp>
+                <kd>1e+09</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>0.874951 -0.750126 0.047323 0 -0 0</pose>
+      <allow_auto_disable>1</allow_auto_disable>
+    </model>
+    <model name='plank'>
+      <static>0</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <plugin name='gz::sim::systems::Label' filename='gz-sim-label-system'>
+        <label>10</label>
+      </plugin>
+      <link name='link_0'>
+        <gravity>1</gravity>
+        <inertial>
+          <pose>0 0 0.02 0 -0 0</pose>
+          <mass>0.025</mass>
+          <inertia>
+            <ixx>2.5e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.5e-05</iyy>
+            <iyz>0</iyz>
+            <izz>8e-06</izz>
+          </inertia>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.4 0.1 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.6 0.4 0.2 1</ambient>
+            <diffuse>0.6 0.4 0.2 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <max_contacts>100</max_contacts>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.4 0.1 0.015</size>
+            </box>
+          </geometry>
+          <surface>
+            <bounce>
+              <restitution_coefficient>0</restitution_coefficient>
+              <threshold>100000</threshold>
+            </bounce>
+            <friction>
+              <ode>
+                <mu>2</mu>
+                <mu2>2</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.8</soft_erp>
+                <kp>100000</kp>
+                <kd>1</kd>
+                <max_vel>0.1</max_vel>
+                <min_depth>0.01</min_depth>
+              </ode>
+            </contact>
+            <torsional>
+              <coefficient>1</coefficient>
+              <patch_radius>0.05</patch_radius>
+              <surface_radius>0.05</surface_radius>
+              <use_patch_radius>1</use_patch_radius>
+              <ode>
+                <slip>0</slip>
+              </ode>
+            </torsional>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>0.011552 -0.885926 0 0 -0 0</pose>
+      <allow_auto_disable>1</allow_auto_disable>
+    </model>
+    <model name='plank_0'>
+      <static>0</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <plugin name='gz::sim::systems::Label' filename='gz-sim-label-system'>
+        <label>10</label>
+      </plugin>
+      <link name='link_0'>
+        <gravity>1</gravity>
+        <inertial>
+          <pose>0 0 0.02 0 -0 0</pose>
+          <mass>0.025</mass>
+          <inertia>
+            <ixx>2.5e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.5e-05</iyy>
+            <iyz>0</iyz>
+            <izz>8e-06</izz>
+          </inertia>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.4 0.1 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.6 0.4 0.2 1</ambient>
+            <diffuse>0.6 0.4 0.2 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <max_contacts>100</max_contacts>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.4 0.1 0.015</size>
+            </box>
+          </geometry>
+          <surface>
+            <bounce>
+              <restitution_coefficient>0</restitution_coefficient>
+              <threshold>100000</threshold>
+            </bounce>
+            <friction>
+              <ode>
+                <mu>2</mu>
+                <mu2>2</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.8</soft_erp>
+                <kp>100000</kp>
+                <kd>1</kd>
+                <max_vel>0.1</max_vel>
+                <min_depth>0.01</min_depth>
+              </ode>
+            </contact>
+            <torsional>
+              <coefficient>1</coefficient>
+              <patch_radius>0.05</patch_radius>
+              <surface_radius>0.05</surface_radius>
+              <use_patch_radius>1</use_patch_radius>
+              <ode>
+                <slip>0</slip>
+              </ode>
+            </torsional>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-0.675448 0.732199 0.163758 -0.000579 0.000188 -0.00057</pose>
+      <allow_auto_disable>1</allow_auto_disable>
+    </model>
+    <model name='plank_1'>
+      <static>0</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <plugin name='gz::sim::systems::Label' filename='gz-sim-label-system'>
+        <label>10</label>
+      </plugin>
+      <link name='link_0'>
+        <gravity>1</gravity>
+        <inertial>
+          <pose>0 0 0.02 0 -0 0</pose>
+          <mass>0.025</mass>
+          <inertia>
+            <ixx>2.5e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.5e-05</iyy>
+            <iyz>0</iyz>
+            <izz>8e-06</izz>
+          </inertia>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.4 0.1 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.6 0.4 0.2 1</ambient>
+            <diffuse>0.6 0.4 0.2 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <max_contacts>100</max_contacts>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.4 0.1 0.015</size>
+            </box>
+          </geometry>
+          <surface>
+            <bounce>
+              <restitution_coefficient>0</restitution_coefficient>
+              <threshold>100000</threshold>
+            </bounce>
+            <friction>
+              <ode>
+                <mu>2</mu>
+                <mu2>2</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.8</soft_erp>
+                <kp>100000</kp>
+                <kd>1</kd>
+                <max_vel>0.1</max_vel>
+                <min_depth>0.01</min_depth>
+              </ode>
+            </contact>
+            <torsional>
+              <coefficient>1</coefficient>
+              <patch_radius>0.05</patch_radius>
+              <surface_radius>0.05</surface_radius>
+              <use_patch_radius>1</use_patch_radius>
+              <ode>
+                <slip>0</slip>
+              </ode>
+            </torsional>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>0.673634 0.732048 0.163707 -0.002213 0.000643 -0.000268</pose>
+      <allow_auto_disable>1</allow_auto_disable>
+    </model>
+    <model name='plank_2'>
+      <static>0</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <plugin name='gz::sim::systems::Label' filename='gz-sim-label-system'>
+        <label>10</label>
+      </plugin>
+      <link name='link_0'>
+        <gravity>1</gravity>
+        <inertial>
+          <pose>0 0 0.02 0 -0 0</pose>
+          <mass>0.025</mass>
+          <inertia>
+            <ixx>2.5e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.5e-05</iyy>
+            <iyz>0</iyz>
+            <izz>8e-06</izz>
+          </inertia>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.4 0.1 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.6 0.4 0.2 1</ambient>
+            <diffuse>0.6 0.4 0.2 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <max_contacts>100</max_contacts>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.4 0.1 0.015</size>
+            </box>
+          </geometry>
+          <surface>
+            <bounce>
+              <restitution_coefficient>0</restitution_coefficient>
+              <threshold>100000</threshold>
+            </bounce>
+            <friction>
+              <ode>
+                <mu>2</mu>
+                <mu2>2</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.8</soft_erp>
+                <kp>100000</kp>
+                <kd>1</kd>
+                <max_vel>0.1</max_vel>
+                <min_depth>0.01</min_depth>
+              </ode>
+            </contact>
+            <torsional>
+              <coefficient>1</coefficient>
+              <patch_radius>0.05</patch_radius>
+              <surface_radius>0.05</surface_radius>
+              <use_patch_radius>1</use_patch_radius>
+              <ode>
+                <slip>0</slip>
+              </ode>
+            </torsional>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>1.41196 0.274414 0.163666 -0.004571 0.000504 0.000346</pose>
+      <allow_auto_disable>1</allow_auto_disable>
+    </model>
+    <model name='plank_6'>
+      <static>0</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <plugin name='gz::sim::systems::Label' filename='gz-sim-label-system'>
+        <label>10</label>
+      </plugin>
+      <link name='link_0'>
+        <gravity>1</gravity>
+        <inertial>
+          <pose>0 0 0.02 0 -0 0</pose>
+          <mass>0.025</mass>
+          <inertia>
+            <ixx>2.5e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.5e-05</iyy>
+            <iyz>0</iyz>
+            <izz>8e-06</izz>
+          </inertia>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.4 0.1 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.6 0.4 0.2 1</ambient>
+            <diffuse>0.6 0.4 0.2 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <max_contacts>100</max_contacts>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.4 0.1 0.015</size>
+            </box>
+          </geometry>
+          <surface>
+            <bounce>
+              <restitution_coefficient>0</restitution_coefficient>
+              <threshold>100000</threshold>
+            </bounce>
+            <friction>
+              <ode>
+                <mu>2</mu>
+                <mu2>2</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.8</soft_erp>
+                <kp>100000</kp>
+                <kd>1</kd>
+                <max_vel>0.1</max_vel>
+                <min_depth>0.01</min_depth>
+              </ode>
+            </contact>
+            <torsional>
+              <coefficient>1</coefficient>
+              <patch_radius>0.05</patch_radius>
+              <surface_radius>0.05</surface_radius>
+              <use_patch_radius>1</use_patch_radius>
+              <ode>
+                <slip>0</slip>
+              </ode>
+            </torsional>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-0.408883 -0.052099 0.163528 -0.009845 -0.002255 0.001564</pose>
+      <allow_auto_disable>1</allow_auto_disable>
+    </model>
+    <model name='plank_7'>
+      <static>0</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <plugin name='gz::sim::systems::Label' filename='gz-sim-label-system'>
+        <label>10</label>
+      </plugin>
+      <link name='link_0'>
+        <gravity>1</gravity>
+        <inertial>
+          <pose>0 0 0.02 0 -0 0</pose>
+          <mass>0.025</mass>
+          <inertia>
+            <ixx>2.5e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.5e-05</iyy>
+            <iyz>0</iyz>
+            <izz>8e-06</izz>
+          </inertia>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.4 0.1 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.6 0.4 0.2 1</ambient>
+            <diffuse>0.6 0.4 0.2 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <max_contacts>100</max_contacts>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.4 0.1 0.015</size>
+            </box>
+          </geometry>
+          <surface>
+            <bounce>
+              <restitution_coefficient>0</restitution_coefficient>
+              <threshold>100000</threshold>
+            </bounce>
+            <friction>
+              <ode>
+                <mu>2</mu>
+                <mu2>2</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.8</soft_erp>
+                <kp>100000</kp>
+                <kd>1</kd>
+                <max_vel>0.1</max_vel>
+                <min_depth>0.01</min_depth>
+              </ode>
+            </contact>
+            <torsional>
+              <coefficient>1</coefficient>
+              <patch_radius>0.05</patch_radius>
+              <surface_radius>0.05</surface_radius>
+              <use_patch_radius>1</use_patch_radius>
+              <ode>
+                <slip>0</slip>
+              </ode>
+            </torsional>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>0.398427 -0.053527 0.163541 -0.009486 -0.002268 0.001616</pose>
+      <allow_auto_disable>1</allow_auto_disable>
+    </model>
+    <model name='plank_8'>
+      <static>0</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <plugin name='gz::sim::systems::Label' filename='gz-sim-label-system'>
+        <label>10</label>
+      </plugin>
+      <link name='link_0'>
+        <gravity>1</gravity>
+        <inertial>
+          <pose>0 0 0.02 0 -0 0</pose>
+          <mass>0.025</mass>
+          <inertia>
+            <ixx>2.5e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.5e-05</iyy>
+            <iyz>0</iyz>
+            <izz>8e-06</izz>
+          </inertia>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.4 0.1 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.6 0.4 0.2 1</ambient>
+            <diffuse>0.6 0.4 0.2 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <max_contacts>100</max_contacts>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.4 0.1 0.015</size>
+            </box>
+          </geometry>
+          <surface>
+            <bounce>
+              <restitution_coefficient>0</restitution_coefficient>
+              <threshold>100000</threshold>
+            </bounce>
+            <friction>
+              <ode>
+                <mu>2</mu>
+                <mu2>2</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.8</soft_erp>
+                <kp>100000</kp>
+                <kd>1</kd>
+                <max_vel>0.1</max_vel>
+                <min_depth>0.01</min_depth>
+              </ode>
+            </contact>
+            <torsional>
+              <coefficient>1</coefficient>
+              <patch_radius>0.05</patch_radius>
+              <surface_radius>0.05</surface_radius>
+              <use_patch_radius>1</use_patch_radius>
+              <ode>
+                <slip>0</slip>
+              </ode>
+            </torsional>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>0.721779 -0.739949 0.163541 -0.009486 -0.002268 0.001616</pose>
+      <allow_auto_disable>1</allow_auto_disable>
+    </model>
+    <model name='plank_3'>
+      <static>0</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <plugin name='gz::sim::systems::Label' filename='gz-sim-label-system'>
+        <label>10</label>
+      </plugin>
+      <link name='link_0'>
+        <gravity>1</gravity>
+        <inertial>
+          <pose>0 0 0.02 0 -0 0</pose>
+          <mass>0.025</mass>
+          <inertia>
+            <ixx>2.5e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.5e-05</iyy>
+            <iyz>0</iyz>
+            <izz>8e-06</izz>
+          </inertia>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.4 0.1 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.6 0.4 0.2 1</ambient>
+            <diffuse>0.6 0.4 0.2 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <max_contacts>100</max_contacts>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.4 0.1 0.015</size>
+            </box>
+          </geometry>
+          <surface>
+            <bounce>
+              <restitution_coefficient>0</restitution_coefficient>
+              <threshold>100000</threshold>
+            </bounce>
+            <friction>
+              <ode>
+                <mu>2</mu>
+                <mu2>2</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.8</soft_erp>
+                <kp>100000</kp>
+                <kd>1</kd>
+                <max_vel>0.1</max_vel>
+                <min_depth>0.01</min_depth>
+              </ode>
+            </contact>
+            <torsional>
+              <coefficient>1</coefficient>
+              <patch_radius>0.05</patch_radius>
+              <surface_radius>0.05</surface_radius>
+              <use_patch_radius>1</use_patch_radius>
+              <ode>
+                <slip>0</slip>
+              </ode>
+            </torsional>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>1.43521 -0.600101 0.163449 0.000866 0.004561 1.57363</pose>
+      <allow_auto_disable>1</allow_auto_disable>
+    </model>
+    <model name='plank_4'>
+      <static>0</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <plugin name='gz::sim::systems::Label' filename='gz-sim-label-system'>
+        <label>10</label>
+      </plugin>
+      <link name='link_0'>
+        <gravity>1</gravity>
+        <inertial>
+          <pose>0 0 0.02 0 -0 0</pose>
+          <mass>0.025</mass>
+          <inertia>
+            <ixx>2.5e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.5e-05</iyy>
+            <iyz>0</iyz>
+            <izz>8e-06</izz>
+          </inertia>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.4 0.1 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.6 0.4 0.2 1</ambient>
+            <diffuse>0.6 0.4 0.2 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <max_contacts>100</max_contacts>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.4 0.1 0.015</size>
+            </box>
+          </geometry>
+          <surface>
+            <bounce>
+              <restitution_coefficient>0</restitution_coefficient>
+              <threshold>100000</threshold>
+            </bounce>
+            <friction>
+              <ode>
+                <mu>2</mu>
+                <mu2>2</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.8</soft_erp>
+                <kp>100000</kp>
+                <kd>1</kd>
+                <max_vel>0.1</max_vel>
+                <min_depth>0.01</min_depth>
+              </ode>
+            </contact>
+            <torsional>
+              <coefficient>1</coefficient>
+              <patch_radius>0.05</patch_radius>
+              <surface_radius>0.05</surface_radius>
+              <use_patch_radius>1</use_patch_radius>
+              <ode>
+                <slip>0</slip>
+              </ode>
+            </torsional>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-1.41132 -0.59604 0.163449 0.000877 0.004563 1.57364</pose>
+      <allow_auto_disable>1</allow_auto_disable>
+    </model>
+    <model name='plank_5'>
+      <static>0</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <plugin name='gz::sim::systems::Label' filename='gz-sim-label-system'>
+        <label>10</label>
+      </plugin>
+      <link name='link_0'>
+        <gravity>1</gravity>
+        <inertial>
+          <pose>0 0 0.02 0 -0 0</pose>
+          <mass>0.025</mass>
+          <inertia>
+            <ixx>2.5e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.5e-05</iyy>
+            <iyz>0</iyz>
+            <izz>8e-06</izz>
+          </inertia>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <visual name='visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.4 0.1 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.6 0.4 0.2 1</ambient>
+            <diffuse>0.6 0.4 0.2 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <max_contacts>100</max_contacts>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.4 0.1 0.015</size>
+            </box>
+          </geometry>
+          <surface>
+            <bounce>
+              <restitution_coefficient>0</restitution_coefficient>
+              <threshold>100000</threshold>
+            </bounce>
+            <friction>
+              <ode>
+                <mu>2</mu>
+                <mu2>2</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.8</soft_erp>
+                <kp>100000</kp>
+                <kd>1</kd>
+                <max_vel>0.1</max_vel>
+                <min_depth>0.01</min_depth>
+              </ode>
+            </contact>
+            <torsional>
+              <coefficient>1</coefficient>
+              <patch_radius>0.05</patch_radius>
+              <surface_radius>0.05</surface_radius>
+              <use_patch_radius>1</use_patch_radius>
+              <ode>
+                <slip>0</slip>
+              </ode>
+            </torsional>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-1.43136 0.319467 0.16345 0.000891 0.004566 1.57365</pose>
+      <allow_auto_disable>1</allow_auto_disable>
+    </model>
+  </world>
+</sdf>
