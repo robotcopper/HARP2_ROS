@@ -470,7 +470,7 @@ Visualization Manager:
         - Alpha: 0.699999988079071
           Class: rviz_default_plugins/Map
           Color Scheme: costmap
-          Draw Behind: false
+          Draw Behind: true
           Enabled: true
           Name: Map
           Topic:
@@ -491,7 +491,7 @@ Visualization Manager:
         - Alpha: 0.699999988079071
           Class: rviz_default_plugins/Map
           Color Scheme: costmap
-          Draw Behind: false
+          Draw Behind: true
           Enabled: true
           Name: Map
           Topic:
