@@ -21,7 +21,7 @@ To launch the real robot (publishing motor commands on the `/topic_based_joint_c
 Navigation should remap `/cmd_vel` to this topic during deployment (requires real hardware: not tested yet).
 
 ```bash
-ros2 launch robot_bringup nav2_bringup.launch.py use_TopicBasedSystem_hardware_interface:=True
+ros2 launch robot_bringup robot_nav_bringup.launch.py use_TopicBasedSystem_hardware_interface:=True
 ```
 
 `use_TopicBasedSystem_hardware_interface:=True` implies that it is no longer Gazebo with `ros2_control` (gazebo_ros2_control/GazeboSystem) responsible for providing the joint state, but `topic_based_ros2_control/TopicBasedSystem`, and therefore, no simulation is launched in this case.
@@ -31,7 +31,7 @@ ros2 launch robot_bringup nav2_bringup.launch.py use_TopicBasedSystem_hardware_i
 To launch the simulation:
 
 ```bash
-ros2 launch robot_bringup nav2_bringup.launch.py use_TopicBasedSystem_hardware_interface:=False
+ros2 launch robot_bringup robot_nav_bringup.launch.py use_TopicBasedSystem_hardware_interface:=False
 ```
 
 With `use_TopicBasedSystem_hardware_interface:=False`, the simulation is launched.

@@ -33,6 +33,7 @@ def generate_launch_description():
     use_joint_state_pub_gui = 'False'
     use_sim_time = NotSubstitution(use_TopicBasedSystem_hardware_interface)
     use_gazebo = NotSubstitution(use_TopicBasedSystem_hardware_interface)
+    use_keepout_mask = LaunchConfiguration('use_keepout_mask')
 
     # Specify directory and path to file within package
     robot_description_pkg_dir = get_package_share_directory('robot_description')
@@ -55,6 +56,8 @@ def generate_launch_description():
     map_file_subpath = 'maps/Table2025.yaml'
     nav_launch_file_subpath = 'launch/nav2.launch.py'
     nav2_params_file_subpath = 'params/nav2_params.yaml'
+    keepout_mask_launch_file_subpath = 'launch/keepout_mask.launch.py'
+    keepout_mask_params_file_subpath = 'params/keepout_mask_params.yaml'
 
     # Use xacro to process the file
     xacro_file = os.path.join(robot_description_pkg_dir, urdf_file_subpath)
@@ -123,6 +126,11 @@ def generate_launch_description():
             'map',
             default_value=PathJoinSubstitution([robot_slam_pkg_dir,map_file_subpath]),
             description='map'
+        ), 
+        DeclareLaunchArgument(
+            'use_keepout_mask',
+            default_value='True',
+            description='Whether to keepout mask'
         ),
 
 
@@ -201,6 +209,18 @@ def generate_launch_description():
             launch_arguments={'namespace': namespace,
                               'use_sim_time': use_sim_time,
                               'params_file':PathJoinSubstitution([robot_nav_pkg_dir, nav2_params_file_subpath]),
+                             }.items()
+        ),
+
+        IncludeLaunchDescription(
+            PythonLaunchDescriptionSource(
+                os.path.join(robot_nav_pkg_dir, keepout_mask_launch_file_subpath)
+            ),
+            condition=IfCondition(use_keepout_mask),  
+            launch_arguments={'namespace': namespace,
+                              'use_sim_time': use_sim_time,
+                              'params_file':PathJoinSubstitution([robot_nav_pkg_dir, keepout_mask_params_file_subpath]),
+                              'mask_yaml_file':PathJoinSubstitution([robot_nav_pkg_dir,'maps', 'Table2025_keepout_mask.yaml']),
                              }.items()
         ),
 
