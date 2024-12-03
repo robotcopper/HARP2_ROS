@@ -26,7 +26,7 @@ def generate_launch_description():
     use_TopicBasedSystem_hardware_interface = LaunchConfiguration('use_TopicBasedSystem_hardware_interface')
     rviz_config_file = LaunchConfiguration('rviz_config_file')
     robot_description = LaunchConfiguration('robot_description')
-    use_localisation = LaunchConfiguration('use_localisation')
+    use_localization = LaunchConfiguration('use_localization')
     use_robot_state_pub = 'True'
     use_joint_state_pub = LaunchConfiguration('use_TopicBasedSystem_hardware_interface')
     use_joint_state_pub_gui = 'False'
@@ -54,7 +54,7 @@ def generate_launch_description():
     xacro_file = os.path.join(robot_description_pkg_dir, urdf_file_subpath)
     robot_description_raw = Command(['xacro ', xacro_file, ' use_controller:=', 'True', ' use_TopicBasedSystem_hardware_interface:=', use_TopicBasedSystem_hardware_interface]) # Use of Command to replace robot_description assignment with a call to xacro process rather than Python module
 
-    if use_localisation:
+    if use_localization:
         rviz_config=PathJoinSubstitution([robot_slam_pkg_dir, rviz_localization_config_file_subpath ]),
     else:
         rviz_config=PathJoinSubstitution([robot_slam_pkg_dir, rviz_config_file_subpath ]),
@@ -113,7 +113,7 @@ def generate_launch_description():
             description='Use Gazebo'
         ),
         DeclareLaunchArgument(
-            'use_localisation',
+            'use_localization',
             default_value='False',
             description='Whether to use localization mode with slam_toolbox'
         ),
@@ -182,8 +182,9 @@ def generate_launch_description():
             ),
             launch_arguments={'namespace': namespace,
                               'use_sim_time': use_sim_time,
-                              'use_localisation': use_localisation,
+                              'use_localization': use_localization,
                              }.items()
         ),
+        
 
     ])
