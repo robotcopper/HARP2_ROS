@@ -11,7 +11,7 @@ from nav2_common.launch import RewrittenYaml
 
 def generate_launch_description():
 
-     # Create the launch configuration variables
+    # Create the launch configuration variables
     namespace = LaunchConfiguration('namespace')
     use_sim_time = LaunchConfiguration('use_sim_time')
     autostart = LaunchConfiguration('autostart')

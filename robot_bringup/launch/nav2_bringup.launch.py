@@ -52,7 +52,7 @@ def generate_launch_description():
     amcl_launch_file_subpath = 'launch/amcl.launch.py'
     wordl_file_subpath = 'world/Table2025_with_elements.world'
     amcl_params_file_subpath = 'params/amcl.yaml'
-    map_file_subpath = 'maps/Table2024.yaml'
+    map_file_subpath = 'maps/Table2025.yaml'
     nav_launch_file_subpath = 'launch/nav2.launch.py'
     nav2_params_file_subpath = 'params/nav2_params.yaml'
 

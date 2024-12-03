@@ -30,7 +30,7 @@ def generate_launch_description():
             'z': LaunchConfiguration('z_pose'),
             'R': LaunchConfiguration('roll', default='0.00'),
             'P': LaunchConfiguration('pitch', default='0.00'),
-            'Y': LaunchConfiguration('yaw', default='0.523599')}
+            'Y': LaunchConfiguration('yaw', default='0.00')}
     use_gazebo = LaunchConfiguration('use_gazebo')
 
     # Specify directory and path to file within package
