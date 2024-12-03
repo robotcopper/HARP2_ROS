@@ -168,7 +168,7 @@ controller_server:
       CostCritic: # more centered evoidence
         enabled: true
         cost_power: 1
-        cost_weight: 0.015
+        cost_weight: 0.1
         critical_cost: 300.0
         consider_footprint: true
         collision_cost: 1000000.0
