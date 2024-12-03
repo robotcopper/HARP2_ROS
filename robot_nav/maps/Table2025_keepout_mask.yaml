@@ -1,0 +1,7 @@
+image: Table2025_keepout_mask_2.pgm
+mode: scale #trinary
+resolution: 0.01
+origin: [-1.51, -1.02, 0]
+negate: 0
+occupied_thresh: 0.65
+free_thresh: 0.25
