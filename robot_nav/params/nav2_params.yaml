@@ -426,16 +426,16 @@ planner_server:
       #   tolerance: 1.0e-10
       #   do_refinement: true               # Whether to recursively run the smoother 3 times on the results from prior runs to refine the results further
 
-waypoint_follower:
-  ros__parameters:
-    use_sim_time: True
-    loop_rate: 20
-    stop_on_failure: false
-    waypoint_task_executor_plugin: "wait_at_waypoint"
-    wait_at_waypoint:
-      plugin: "nav2_waypoint_follower::WaitAtWaypoint"
-      enabled: True
-      waypoint_pause_duration: 0
+# waypoint_follower:
+#   ros__parameters:
+#     use_sim_time: True
+#     loop_rate: 20
+#     stop_on_failure: false
+#     waypoint_task_executor_plugin: "wait_at_waypoint"
+#     wait_at_waypoint:
+#       plugin: "nav2_waypoint_follower::WaitAtWaypoint"
+#       enabled: True
+#       waypoint_pause_duration: 2
 
 
 # velocity_smoother: # don't forget to assign a y-value for omnidirectional robots
