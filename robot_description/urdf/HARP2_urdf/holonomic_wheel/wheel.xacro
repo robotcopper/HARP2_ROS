@@ -1,0 +1,665 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:macro name="holonomic_wheel" params="joint_wheel_xyz  joint_wheel_rpy name_roueholonome">
+
+        <link name="${name_roueholonome}">
+            <visual>
+                <origin xyz="0 0 0" rpy="0 -0 0" />
+                <geometry>
+                    <mesh filename="file://$(find robot_description)/urdf/HARP2_urdf/holonomic_wheel/meshes/roueholonome.stl"/>
+                </geometry>
+                <material name="roueholonome_material">
+                    <color rgba="0.80000000000000004441 0.80000000000000004441 0.80000000000000004441 1.0"/>
+                </material>
+            </visual>
+            <collision>
+                <origin xyz="0 0 0" rpy="0 -0 0" />
+                <geometry>
+                    <mesh filename="file://$(find robot_description)/urdf/HARP2_urdf/holonomic_wheel/meshes/roueholonome.stl"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <origin xyz="1.2345961376214179597e-05 5.8083521185160058445e-05 0.019468669120375474424" rpy="0 0 0"/>
+                <mass value="0.03844561768796746215" />
+                <inertia ixx="8.6391130222776277764e-06" ixy="4.1009017309208888305e-09" ixz="5.7124620576176396146e-09" iyy="8.6575346053426999713e-06" iyz="2.6875192958562806848e-08" izz="8.5983534046061550705e-06" />
+            </inertial>
+        </link>
+		<gazebo reference="${name_roueholonome}">
+			<material>Gazebo/Grey</material>
+			<mu1>100.0</mu1>
+    		<mu2>100.8</mu2>
+			<kp>500000.0</kp>
+    		<kd>10.0</kd>
+			<min_depth>0.1</min_depth>
+			<maxVel>0.1</maxVel>
+		</gazebo>
+
+        <link name="rouleau_0_${name_roueholonome}">
+            <visual>
+                <origin xyz="0 0 -3.0930150658287577608e-18" rpy="1.6328812496752814116e-17 -0 0" />
+                <geometry>
+                    <mesh filename="file://$(find robot_description)/urdf/HARP2_urdf/holonomic_wheel/meshes/rouleau.stl"/>
+                </geometry>
+                <material name="rouleau_material">
+                    <color rgba="0.16078431372549020772 0.16078431372549020772 0.16078431372549020772 1.0"/>
+                </material>
+            </visual>
+            <collision>
+                <origin xyz="0 0 -3.0930150658287577608e-18" rpy="1.6328812496752814116e-17 -0 0" />
+                <geometry>
+                    <mesh filename="file://$(find robot_description)/urdf/HARP2_urdf/holonomic_wheel/meshes/rouleau.stl"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <origin xyz="-4.1636449553192852066e-36 1.3533020587657671574e-19 6.3088730355216916597e-17" rpy="0 0 0"/>
+                <mass value="0.0023432187849480503455" />
+                <inertia ixx="8.1170103340490589996e-08" ixy="0" ixz="0" iyy="8.1170103340490589996e-08" iyz="-1.3431533528159207934e-24" izz="4.3364299454179856849e-08" />
+            </inertial>
+        </link>
+		<gazebo reference="rouleau_0_${name_roueholonome}">
+			<material>Gazebo/Black</material>
+			<mu1>100.0</mu1>
+    		<mu2>100.8</mu2>
+			<kp>500000.0</kp>
+    		<kd>10.0</kd>
+			<min_depth>0.1</min_depth>
+			<maxVel>0.1</maxVel>
+		</gazebo>
+
+        <joint name="Rouleau_a_${name_roueholonome}" type="continuous">
+            <origin xyz="-0.013420475016290707784 0.01780957187405463743 0.033325000000000062905" rpy="-0.64577182323790327523 1.5707963267948941155 0" />
+            <parent link="${name_roueholonome}" />
+            <child link="rouleau_0_${name_roueholonome}" />
+            <axis xyz="0 0 1"/>
+            <limit effort="1" velocity="20" />
+            <joint_properties friction="10000.0"/>
+        </joint>
+
+        <link name="rouleau_2_${name_roueholonome}">
+            <visual>
+                <origin xyz="-3.4694469519536141888e-18 0 -3.4303132193351734043e-18" rpy="0 5.2889516682960319527e-17 0" />
+                <geometry>
+                    <mesh filename="file://$(find robot_description)/urdf/HARP2_urdf/holonomic_wheel/meshes/rouleau.stl"/>
+                </geometry>
+                <material name="rouleau_material">
+                    <color rgba="0.16078431372549020772 0.16078431372549020772 0.16078431372549020772 1.0"/>
+                </material>
+            </visual>
+            <collision>
+                <origin xyz="-3.4694469519536141888e-18 0 -3.4303132193351734043e-18" rpy="0 5.2889516682960319527e-17 0" />
+                <geometry>
+                    <mesh filename="file://$(find robot_description)/urdf/HARP2_urdf/holonomic_wheel/meshes/rouleau.stl"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <origin xyz="-3.4694469519536149592e-18 1.3533020587658078427e-19 6.2751432201710500954e-17" rpy="0 0 0"/>
+                <mass value="0.0023432187849480503455" />
+                <inertia ixx="8.1170103340490616466e-08" ixy="0" ixz="-5.0191476286347619465e-24" iyy="8.1170103340490589996e-08" iyz="0" izz="4.3364299454179856849e-08" />
+            </inertial>
+        </link>
+		<gazebo reference="rouleau_2_${name_roueholonome}">
+			<material>Gazebo/Black</material>
+			<mu1>100.0</mu1>
+    		<mu2>100.8</mu2>
+			<kp>500000.0</kp>
+    		<kd>10.0</kd>
+			<min_depth>0.1</min_depth>
+			<maxVel>0.1</maxVel>
+		</gazebo>
+
+        <joint name="Rouleau_b_${name_roueholonome}" type="continuous">
+            <origin xyz="-0.021085064235864696414 -0.0072601698443945615613 0.03332500000000003515" rpy="-1.5707963267948956698 -3.1417578441620903761e-16 0.33161255787892368607" />
+            <parent link="${name_roueholonome}" />
+            <child link="rouleau_2_${name_roueholonome}" />
+            <axis xyz="0 0 1"/>
+            <limit effort="1" velocity="20" />
+            <joint_properties friction="10000.0"/>
+        </joint>
+
+        <link name="rouleau_3_${name_roueholonome}">
+            <visual>
+                <origin xyz="0 0 -3.2818071290114697205e-18" rpy="3.9747098187420817097e-19 2.5137490391159056275e-32 -1.1680412449543689587e-31" />
+                <geometry>
+                    <mesh filename="file://$(find robot_description)/urdf/HARP2_urdf/holonomic_wheel/meshes/rouleau.stl"/>
+                </geometry>
+                <material name="rouleau_material">
+                    <color rgba="0.16078431372549020772 0.16078431372549020772 0.16078431372549020772 1.0"/>
+                </material>
+            </visual>
+            <collision>
+                <origin xyz="0 0 -3.2818071290114697205e-18" rpy="3.9747098187420817097e-19 2.5137490391159056275e-32 -1.1680412449543689587e-31" />
+                <geometry>
+                    <mesh filename="file://$(find robot_description)/urdf/HARP2_urdf/holonomic_wheel/meshes/rouleau.stl"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <origin xyz="-4.1636449553306578204e-36 1.3533020587658080834e-19 6.2899938292034204638e-17" rpy="0 0 0"/>
+                <mass value="0.0023432187849480503455" />
+                <inertia ixx="8.1170103340490589996e-08" ixy="2.2838269043937083388e-52" ixz="-9.502443162347014947e-39" iyy="8.1170103340490589996e-08" iyz="4.9498811355915796748e-26" izz="4.3364299454179856849e-08" />
+            </inertial>
+        </link>
+		<gazebo reference="rouleau_3_${name_roueholonome}">
+			<material>Gazebo/Black</material>
+			<mu1>100.0</mu1>
+    		<mu2>100.8</mu2>
+			<kp>500000.0</kp>
+    		<kd>10.0</kd>
+			<min_depth>0.1</min_depth>
+			<maxVel>0.1</maxVel>
+		</gazebo>
+
+        <joint name="Rouleau_c_${name_roueholonome}" type="continuous">
+            <origin xyz="0.00038918866355149348392 -0.02229660360198754826 0.033325000000000042089" rpy="-0.017453292519944572231 1.5707963267948392705 0" />
+            <parent link="${name_roueholonome}" />
+            <child link="rouleau_3_${name_roueholonome}" />
+            <axis xyz="0 0 1"/>
+            <limit effort="1" velocity="20" />
+            <joint_properties friction="10000.0"/>
+        </joint>
+
+        <link name="rouleau_4_${name_roueholonome}">
+            <visual>
+                <origin xyz="0 0 -3.7936842187680065164e-18" rpy="0 1.1457193178364117436e-17 0" />
+                <geometry>
+                    <mesh filename="file://$(find robot_description)/urdf/HARP2_urdf/holonomic_wheel/meshes/rouleau.stl"/>
+                </geometry>
+                <material name="rouleau_material">
+                    <color rgba="0.16078431372549020772 0.16078431372549020772 0.16078431372549020772 1.0"/>
+                </material>
+            </visual>
+            <collision>
+                <origin xyz="0 0 -3.7936842187680065164e-18" rpy="0 1.1457193178364117436e-17 0" />
+                <geometry>
+                    <mesh filename="file://$(find robot_description)/urdf/HARP2_urdf/holonomic_wheel/meshes/rouleau.stl"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <origin xyz="-7.6242068712555452973e-34 1.3533020587658078427e-19 6.2388061202277667842e-17" rpy="0 0 0"/>
+                <mass value="0.0023432187849480503455" />
+                <inertia ixx="8.1170103340490589996e-08" ixy="8.0039901497578101316e-39" ixz="-1.4268147101707474409e-24" iyy="8.1170103340490589996e-08" iyz="8.5521001304248375049e-39" izz="4.3364299454179856849e-08" />
+            </inertial>
+        </link>
+		<gazebo reference="rouleau_4_${name_roueholonome}">
+			<material>Gazebo/Black</material>
+			<mu1>100.0</mu1>
+    		<mu2>100.8</mu2>
+			<kp>500000.0</kp>
+    		<kd>10.0</kd>
+			<min_depth>0.1</min_depth>
+			<maxVel>0.1</maxVel>
+		</gazebo>
+        
+        <joint name="Rouleau_d_${name_roueholonome}" type="continuous">
+            <origin xyz="0.021325596057975706316 -0.0065198890153169881956 0.033325000000000049027" rpy="-1.5707963267948950037 4.6817282506571147944e-16 -0.29670597283903521468" />
+            <parent link="${name_roueholonome}" />
+            <child link="rouleau_4_${name_roueholonome}" />
+            <axis xyz="0 0 1"/>
+            <limit effort="1" velocity="20" />
+            <joint_properties friction="10000.0"/>
+        </joint>
+
+        <link name="rouleau_5_${name_roueholonome}">
+            <visual>
+                <origin xyz="0 3.4694469519536141888e-18 -5.1334533855142423561e-18" rpy="1.4775655823719441705e-17 -6.2815500895366350825e-33 -7.2179616202439049587e-33" />
+                <geometry>
+                    <mesh filename="file://$(find robot_description)/urdf/HARP2_urdf/holonomic_wheel/meshes/rouleau.stl"/>
+                </geometry>
+                <material name="rouleau_material">
+                    <color rgba="0.16078431372549020772 0.16078431372549020772 0.16078431372549020772 1.0"/>
+                </material>
+            </visual>
+            <collision>
+                <origin xyz="0 3.4694469519536141888e-18 -5.1334533855142423561e-18" rpy="1.4775655823719441705e-17 -6.2815500895366350825e-33 -7.2179616202439049587e-33" />
+                <geometry>
+                    <mesh filename="file://$(find robot_description)/urdf/HARP2_urdf/holonomic_wheel/meshes/rouleau.stl"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <origin xyz="-4.163644955319293893e-36 3.6047771578301899897e-18 6.1048292035531432002e-17" rpy="0 0 0"/>
+                <mass value="0.0023432187849480503455" />
+                <inertia ixx="8.1170103340490589996e-08" ixy="-1.0004987687197264296e-39" ixz="5.0473217986283619396e-40" iyy="8.1170103340490589996e-08" iyz="-1.5872032362845766826e-24" izz="4.3364299454179856849e-08" />
+            </inertial>
+        </link>
+		<gazebo reference="rouleau_5_${name_roueholonome}">
+			<material>Gazebo/Black</material>
+			<mu1>100.0</mu1>
+    		<mu2>100.8</mu2>
+			<kp>500000.0</kp>
+    		<kd>10.0</kd>
+			<min_depth>0.1</min_depth>
+			<maxVel>0.1</maxVel>
+		</gazebo>
+        
+        <joint name="Rouleau_e_${name_roueholonome}" type="continuous">
+            <origin xyz="0.012790754530628296176 0.018267090587644554261 0.033325000000000090661" rpy="0.61086523819801497037 1.570796326794896558 0" />
+            <parent link="${name_roueholonome}" />
+            <child link="rouleau_5_${name_roueholonome}" />
+            <axis xyz="0 0 1"/>
+            <limit effort="1" velocity="20" />
+            <joint_properties friction="10000.0"/>
+        </joint>
+
+        <link name="rouleau_6_${name_roueholonome}">
+            <visual>
+                <origin xyz="-3.4694469519536141888e-18 0 -4.113646662772658464e-18" rpy="0 8.1627970084569010276e-17 0" />
+                <geometry>
+                    <mesh filename="file://$(find robot_description)/urdf/HARP2_urdf/holonomic_wheel/meshes/rouleau.stl"/>
+                </geometry>
+                <material name="rouleau_material">
+                    <color rgba="0.16078431372549020772 0.16078431372549020772 0.16078431372549020772 1.0"/>
+                </material>
+            </visual>
+            <collision>
+                <origin xyz="-3.4694469519536141888e-18 0 -4.113646662772658464e-18" rpy="0 8.1627970084569010276e-17 0" />
+                <geometry>
+                    <mesh filename="file://$(find robot_description)/urdf/HARP2_urdf/holonomic_wheel/meshes/rouleau.stl"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <origin xyz="-3.4694469519536018629e-18 1.3533020587658078427e-19 6.2068098758273031302e-17" rpy="0 0 0"/>
+                <mass value="0.0023432187849480503455" />
+                <inertia ixx="8.1170103340490589996e-08" ixy="5.0024938435986329636e-40" ixz="1.182866047679964768e-24" iyy="8.1170103340490589996e-08" iyz="1.0690125163031048512e-39" izz="4.3364299454179870084e-08" />
+            </inertial>
+        </link>
+		<gazebo reference="rouleau_6_${name_roueholonome}">
+			<material>Gazebo/Black</material>
+			<mu1>100.0</mu1>
+    		<mu2>100.8</mu2>
+			<kp>500000.0</kp>
+    		<kd>10.0</kd>
+			<min_depth>0.1</min_depth>
+			<maxVel>0.1</maxVel>
+		</gazebo>
+        
+        <joint name="Rouleau_f_${name_roueholonome}" type="continuous">
+            <origin xyz="0.019114830805657331836 0.011485349070494411255 0.021074999999999954881" rpy="-1.570796326794896558 -4.9043767385674226062e-17 0.54105206811824368973" />
+            <parent link="${name_roueholonome}" />
+            <child link="rouleau_6_${name_roueholonome}" />
+            <axis xyz="0 0 1"/>
+            <limit effort="1" velocity="20" />
+            <joint_properties friction="10000.0"/>
+        </joint>
+
+        <link name="rouleau_7_${name_roueholonome}">
+            <visual>
+                <origin xyz="0 0 -3.498296657825723703e-18" rpy="-3.389198516519853225e-18 -0 0" />
+                <geometry>
+                    <mesh filename="file://$(find robot_description)/urdf/HARP2_urdf/holonomic_wheel/meshes/rouleau.stl"/>
+                </geometry>
+                <material name="rouleau_material">
+                    <color rgba="0.16078431372549020772 0.16078431372549020772 0.16078431372549020772 1.0"/>
+                </material>
+            </visual>
+            <collision>
+                <origin xyz="0 0 -3.498296657825723703e-18" rpy="-3.389198516519853225e-18 -0 0" />
+                <geometry>
+                    <mesh filename="file://$(find robot_description)/urdf/HARP2_urdf/holonomic_wheel/meshes/rouleau.stl"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <origin xyz="-4.1636449553323369848e-36 1.3533020587658051945e-19 6.2683448763219938329e-17" rpy="0 0 0"/>
+                <mass value="0.0023432187849480503455" />
+                <inertia ixx="8.1170103340490589996e-08" ixy="3.5068503374215154205e-56" ixz="-8.5521001304248361998e-39" iyy="8.1170103340490589996e-08" iyz="-4.5292003123307193684e-25" izz="4.3364299454179843614e-08" />
+            </inertial>
+        </link>
+		<gazebo reference="rouleau_7_${name_roueholonome}">
+			<material>Gazebo/Black</material>
+			<mu1>100.0</mu1>
+    		<mu2>100.8</mu2>
+			<kp>500000.0</kp>
+    		<kd>10.0</kd>
+			<min_depth>0.1</min_depth>
+			<maxVel>0.1</maxVel>
+		</gazebo>
+        
+        <joint name="Rouleau_g_${name_roueholonome}" type="continuous">
+            <origin xyz="-0.0050164085118679924147 0.021728452444710857211 0.021074999999999941003" rpy="-0.22689280275926387853 1.5707963267948932273 0" />
+            <parent link="${name_roueholonome}" />
+            <child link="rouleau_7_${name_roueholonome}" />
+            <axis xyz="0 0 1"/>
+            <limit effort="1" velocity="20" />
+            <joint_properties friction="10000.0"/>
+        </joint>
+
+        <link name="rouleau_8_${name_roueholonome}">
+            <visual>
+                <origin xyz="3.4694469519536141888e-18 0 -3.1501452545943534117e-18" rpy="0 -9.4143971163664187238e-18 0" />
+                <geometry>
+                    <mesh filename="file://$(find robot_description)/urdf/HARP2_urdf/holonomic_wheel/meshes/rouleau.stl"/>
+                </geometry>
+                <material name="rouleau_material">
+                    <color rgba="0.16078431372549020772 0.16078431372549020772 0.16078431372549020772 1.0"/>
+                </material>
+            </visual>
+            <collision>
+                <origin xyz="3.4694469519536141888e-18 0 -3.1501452545943534117e-18" rpy="0 -9.4143971163664187238e-18 0" />
+                <geometry>
+                    <mesh filename="file://$(find robot_description)/urdf/HARP2_urdf/holonomic_wheel/meshes/rouleau.stl"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <origin xyz="3.4694469519536141888e-18 1.3533020587658078427e-19 6.3031600166451320947e-17" rpy="0 0 0"/>
+                <mass value="0.0023432187849480503455" />
+                <inertia ixx="8.1170103340490616466e-08" ixy="0" ixz="7.5281333379692518021e-25" iyy="8.1170103340490589996e-08" iyz="0" izz="4.3364299454179856849e-08" />
+            </inertial>
+        </link>
+		<gazebo reference="rouleau_8_${name_roueholonome}">
+			<material>Gazebo/Black</material>
+			<mu1>100.0</mu1>
+    		<mu2>100.8</mu2>
+			<kp>500000.0</kp>
+    		<kd>10.0</kd>
+			<min_depth>0.1</min_depth>
+			<maxVel>0.1</maxVel>
+		</gazebo>
+        
+        <joint name="Rouleau_h_${name_roueholonome}" type="continuous">
+            <origin xyz="-0.022215141767445704957 0.0019435730632728369285 0.021074999999999906308" rpy="-1.5707963267948961139 4.8838622353046982012e-17 -0.087266462599715891035" />
+            <parent link="${name_roueholonome}" />
+            <child link="rouleau_8_${name_roueholonome}" />
+            <axis xyz="0 0 1"/>
+            <limit effort="1" velocity="20" />
+            <joint_properties friction="10000.0"/>
+        </joint>
+
+        <link name="rouleau_9_${name_roueholonome}">
+            <visual>
+                <origin xyz="0 0 -3.7825609954261960022e-18" rpy="5.4193505429179457753e-17 9.8607613152626475676e-32 0" />
+                <geometry>
+                    <mesh filename="file://$(find robot_description)/urdf/HARP2_urdf/holonomic_wheel/meshes/rouleau.stl"/>
+                </geometry>
+                <material name="rouleau_material">
+                    <color rgba="0.16078431372549020772 0.16078431372549020772 0.16078431372549020772 1.0"/>
+                </material>
+            </visual>
+            <collision>
+                <origin xyz="0 0 -3.7825609954261960022e-18" rpy="5.4193505429179457753e-17 9.8607613152626475676e-32 0" />
+                <geometry>
+                    <mesh filename="file://$(find robot_description)/urdf/HARP2_urdf/holonomic_wheel/meshes/rouleau.stl"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <origin xyz="-4.163644955316022429e-36 1.3533020587657681203e-19 6.2399184425619478356e-17" rpy="0 0 0"/>
+                <mass value="0.0023432187849480503455" />
+                <inertia ixx="8.1170103340490589996e-08" ixy="-1.2856873392799733584e-55" ixz="-5.8659651171516010817e-39" iyy="8.1170103340490589996e-08" iyz="1.7912087123193848539e-24" izz="4.3364299454179856849e-08" />
+            </inertial>
+        </link>
+		<gazebo reference="rouleau_9_${name_roueholonome}">
+			<material>Gazebo/Black</material>
+			<mu1>100.0</mu1>
+    		<mu2>100.8</mu2>
+			<kp>500000.0</kp>
+    		<kd>10.0</kd>
+			<min_depth>0.1</min_depth>
+			<maxVel>0.1</maxVel>
+		</gazebo>
+        
+        <joint name="Rouleau_i_${name_roueholonome}" type="continuous">
+            <origin xyz="-0.0087133041653105550162 -0.020527258231989323201 0.021074999999999920186" rpy="0.4014257279586944116 1.5707963267948954478 0" />
+            <parent link="${name_roueholonome}" />
+            <child link="rouleau_9_${name_roueholonome}" />
+            <axis xyz="0 0 1"/>
+            <limit effort="1" velocity="20" />
+            <joint_properties friction="10000.0"/>
+        </joint>
+
+        <link name="rouleau_10_${name_roueholonome}">
+            <visual>
+                <origin xyz="-3.4694469519536141888e-18 0 -4.2694766912701180357e-18" rpy="0 -2.6055645275229619976e-18 -9.8607613152626475676e-32" />
+                <geometry>
+                    <mesh filename="file://$(find robot_description)/urdf/HARP2_urdf/holonomic_wheel/meshes/rouleau.stl"/>
+                </geometry>
+                <material name="rouleau_material">
+                    <color rgba="0.16078431372549020772 0.16078431372549020772 0.16078431372549020772 1.0"/>
+                </material>
+            </visual>
+            <collision>
+                <origin xyz="-3.4694469519536141888e-18 0 -4.2694766912701180357e-18" rpy="0 -2.6055645275229619976e-18 -9.8607613152626475676e-32" />
+                <geometry>
+                    <mesh filename="file://$(find robot_description)/urdf/HARP2_urdf/holonomic_wheel/meshes/rouleau.stl"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <origin xyz="-3.4694469519536134185e-18 1.3533020587658078427e-19 6.1912268729775556322e-17" rpy="0 0 0"/>
+                <mass value="0.0023432187849480503455" />
+                <inertia ixx="8.1170103340490589996e-08" ixy="-1.6007980299515620263e-38" ixz="7.9942606734118332814e-25" iyy="8.1170103340490589996e-08" iyz="4.2760500652124187525e-39" izz="4.3364299454179856849e-08" />
+            </inertial>
+        </link>
+		<gazebo reference="rouleau_10_${name_roueholonome}">
+			<material>Gazebo/Black</material>
+			<mu1>100.0</mu1>
+    		<mu2>100.8</mu2>
+			<kp>500000.0</kp>
+    		<kd>10.0</kd>
+			<min_depth>0.1</min_depth>
+			<maxVel>0.1</maxVel>
+		</gazebo>
+        
+        <joint name="Rouleau_j_${name_roueholonome}" type="continuous">
+            <origin xyz="0.016830023638968003019 -0.014630116346488147502 0.021074999999999961819" rpy="-1.5707963267948958919 7.1421411548152096475e-16 -0.71558499331767400076" />
+            <parent link="${name_roueholonome}" />
+            <child link="rouleau_10_${name_roueholonome}" />
+            <axis xyz="0 0 1"/>
+            <limit effort="1" velocity="20" />
+            <joint_properties friction="10000.0"/>
+        </joint>
+
+        <link name="rouleau_11_${name_roueholonome}">
+            <visual>
+                <origin xyz="0 0 -3.5362776034089499733e-18" rpy="0 -9.2577948740125188586e-18 -1.368455531567203867e-48" />
+                <geometry>
+                    <mesh filename="file://$(find robot_description)/urdf/HARP2_urdf/holonomic_wheel/meshes/rouleau.stl"/>
+                </geometry>
+                <material name="rouleau_material">
+                    <color rgba="0.16078431372549020772 0.16078431372549020772 0.16078431372549020772 1.0"/>
+                </material>
+            </visual>
+            <collision>
+                <origin xyz="0 0 -3.5362776034089499733e-18" rpy="0 -9.2577948740125188586e-18 -1.368455531567203867e-48" />
+                <geometry>
+                    <mesh filename="file://$(find robot_description)/urdf/HARP2_urdf/holonomic_wheel/meshes/rouleau.stl"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <origin xyz="1.5431465330455382918e-33 1.3533020587658078427e-19 6.2645467817636712059e-17" rpy="0 0 0"/>
+                <mass value="0.0023432187849480503455" />
+                <inertia ixx="8.1170103340490616466e-08" ixy="-2.2215535382835192681e-55" ixz="1.7653010188678165801e-24" iyy="8.1170103340490589996e-08" iyz="4.7473692368487286907e-55" izz="4.3364299454179843614e-08" />
+            </inertial>
+        </link>
+		<gazebo reference="rouleau_11_${name_roueholonome}">
+			<material>Gazebo/Black</material>
+			<mu1>100.0</mu1>
+    		<mu2>100.8</mu2>
+			<kp>500000.0</kp>
+    		<kd>10.0</kd>
+			<min_depth>0.1</min_depth>
+			<maxVel>0.1</maxVel>
+		</gazebo>
+        
+        <joint name="Rouleau_k_${name_roueholonome}" type="continuous">
+            <origin xyz="0.022133779181601007796 0.002717686357935402211 0.0088249999999999856337" rpy="1.570796326794896558 1.0594055922300230704e-32 0.1221730476396042514" />
+            <parent link="${name_roueholonome}" />
+            <child link="rouleau_11_${name_roueholonome}" />
+            <axis xyz="0 0 1"/>
+            <limit effort="1" velocity="20" />
+            <joint_properties friction="10000.0"/>
+        </joint>
+
+        <link name="rouleau_12_${name_roueholonome}">
+            <visual>
+                <origin xyz="0 0 -3.5868899049170104631e-18" rpy="-1.0347990611373122057e-17 -0 1.4012984643248170709e-45" />
+                <geometry>
+                    <mesh filename="file://$(find robot_description)/urdf/HARP2_urdf/holonomic_wheel/meshes/rouleau.stl"/>
+                </geometry>
+                <material name="rouleau_material">
+                    <color rgba="0.16078431372549020772 0.16078431372549020772 0.16078431372549020772 1.0"/>
+                </material>
+            </visual>
+            <collision>
+                <origin xyz="0 0 -3.5868899049170104631e-18" rpy="-1.0347990611373122057e-17 -0 1.4012984643248170709e-45" />
+                <geometry>
+                    <mesh filename="file://$(find robot_description)/urdf/HARP2_urdf/holonomic_wheel/meshes/rouleau.stl"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <origin xyz="-4.1636449553192852066e-36 1.3533020587657970093e-19 6.2594855516128651569e-17" rpy="0 0 0"/>
+                <mass value="0.0023432187849480503455" />
+                <inertia ixx="8.1170103340490589996e-08" ixy="1.1374354116011616798e-52" ixz="0" iyy="8.1170103340490589996e-08" iyz="-1.5515367201655790677e-24" izz="4.3364299454179843614e-08" />
+            </inertial>
+        </link>
+		<gazebo reference="rouleau_12_${name_roueholonome}">
+			<material>Gazebo/Black</material>
+			<mu1>100.0</mu1>
+    		<mu2>100.8</mu2>
+			<kp>500000.0</kp>
+    		<kd>10.0</kd>
+			<min_depth>0.1</min_depth>
+			<maxVel>0.1</maxVel>
+		</gazebo>
+        
+        <joint name="Rouleau_l_${name_roueholonome}" type="continuous">
+            <origin xyz="0.0042550405968964557374 0.021890286190883428974 0.0088249999999999856337" rpy="0.19198621771937532388 1.570796326794896558 0" />
+            <parent link="${name_roueholonome}" />
+            <child link="rouleau_12_${name_roueholonome}" />
+            <axis xyz="0 0 1"/>
+            <limit effort="1" velocity="20" />
+            <joint_properties friction="10000.0"/>
+        </joint>
+
+        <link name="rouleau_13_${name_roueholonome}">
+            <visual>
+                <origin xyz="3.4694469519536141888e-18 0 -2.4387729003912535683e-18" rpy="0 1.6705076408613812658e-17 0" />
+                <geometry>
+                    <mesh filename="file://$(find robot_description)/urdf/HARP2_urdf/holonomic_wheel/meshes/rouleau.stl"/>
+                </geometry>
+                <material name="rouleau_material">
+                    <color rgba="0.16078431372549020772 0.16078431372549020772 0.16078431372549020772 1.0"/>
+                </material>
+            </visual>
+            <collision>
+                <origin xyz="3.4694469519536141888e-18 0 -2.4387729003912535683e-18" rpy="0 1.6705076408613812658e-17 0" />
+                <geometry>
+                    <mesh filename="file://$(find robot_description)/urdf/HARP2_urdf/holonomic_wheel/meshes/rouleau.stl"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <origin xyz="3.4694469519536195814e-18 1.3533020587658078427e-19 6.3742972520654408464e-17" rpy="0 0 0"/>
+                <mass value="0.0023432187849480503455" />
+                <inertia ixx="8.1170103340490589996e-08" ixy="-6.2349052187640093419e-70" ixz="2.2035488566905369753e-24" iyy="8.1170103340490589996e-08" iyz="-7.5957907789579659051e-54" izz="4.3364299454179843614e-08" />
+            </inertial>
+        </link>
+		<gazebo reference="rouleau_13_${name_roueholonome}">
+			<material>Gazebo/Black</material>
+			<mu1>100.0</mu1>
+    		<mu2>100.8</mu2>
+			<kp>500000.0</kp>
+    		<kd>10.0</kd>
+			<min_depth>0.1</min_depth>
+			<maxVel>0.1</maxVel>
+		</gazebo>
+        
+        <joint name="Rouleau_m_${name_roueholonome}" type="continuous">
+            <origin xyz="-0.019504019469209064874 0.010811254531493870792 0.0088249999999999786948" rpy="-1.570796326794896558 5.9783382435715084657e-31 -0.50614548307835438568" />
+            <parent link="${name_roueholonome}" />
+            <child link="rouleau_13_${name_roueholonome}" />
+            <axis xyz="0 0 1"/>
+            <limit effort="1" velocity="20" />
+            <joint_properties friction="10000.0"/>
+        </joint>
+
+        <link name="rouleau_14_${name_roueholonome}">
+            <visual>
+                <origin xyz="0 0 -3.1178521529106991068e-18" rpy="0 -1.6409621240755411598e-17 0" />
+                <geometry>
+                    <mesh filename="file://$(find robot_description)/urdf/HARP2_urdf/holonomic_wheel/meshes/rouleau.stl"/>
+                </geometry>
+                <material name="rouleau_material">
+                    <color rgba="0.16078431372549020772 0.16078431372549020772 0.16078431372549020772 1.0"/>
+                </material>
+            </visual>
+            <collision>
+                <origin xyz="0 0 -3.1178521529106991068e-18" rpy="0 -1.6409621240755411598e-17 0" />
+                <geometry>
+                    <mesh filename="file://$(find robot_description)/urdf/HARP2_urdf/holonomic_wheel/meshes/rouleau.stl"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <origin xyz="-6.2657960271764045994e-33 1.3533020587658078427e-19 6.3063893268134975251e-17" rpy="0 0 0"/>
+                <mass value="0.0023432187849480503455" />
+                <inertia ixx="8.1170103340490589996e-08" ixy="-1.4217942645014520998e-53" ixz="-2.7708419887728443482e-24" iyy="8.1170103340490589996e-08" iyz="0" izz="4.3364299454179856849e-08" />
+            </inertial>
+        </link>
+		<gazebo reference="rouleau_14_${name_roueholonome}">
+			<material>Gazebo/Black</material>
+			<mu1>100.0</mu1>
+    		<mu2>100.8</mu2>
+			<kp>500000.0</kp>
+    		<kd>10.0</kd>
+			<min_depth>0.1</min_depth>
+			<maxVel>0.1</maxVel>
+		</gazebo>
+        
+        <joint name="Rouleau_n_${name_roueholonome}" type="continuous">
+            <origin xyz="-0.016309187546107956762 -0.015208563429393149105 0.0088249999999999717559" rpy="1.570796326794896558 1.1436665179810820258e-30 0.75049157835756241663" />
+            <parent link="${name_roueholonome}" />
+            <child link="rouleau_14_${name_roueholonome}" />
+            <axis xyz="0 0 1"/>
+            <limit effort="1" velocity="20" />
+            <joint_properties friction="10000.0"/>
+        </joint>
+
+        <link name="rouleau_15_${name_roueholonome}">
+            <visual>
+                <origin xyz="0 3.4694469519536141888e-18 -3.2874178854571565963e-18" rpy="-1.8345763277748644265e-17 -3.5032461608120426773e-46 0" />
+                <geometry>
+                    <mesh filename="file://$(find robot_description)/urdf/HARP2_urdf/holonomic_wheel/meshes/rouleau.stl"/>
+                </geometry>
+                <material name="rouleau_material">
+                    <color rgba="0.16078431372549020772 0.16078431372549020772 0.16078431372549020772 1.0"/>
+                </material>
+            </visual>
+            <collision>
+                <origin xyz="0 3.4694469519536141888e-18 -3.2874178854571565963e-18" rpy="-1.8345763277748644265e-17 -3.5032461608120426773e-46 0" />
+                <geometry>
+                    <mesh filename="file://$(find robot_description)/urdf/HARP2_urdf/holonomic_wheel/meshes/rouleau.stl"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <origin xyz="-4.1636449553192852066e-36 3.6047771578301930712e-18 6.2894327535588517762e-17" rpy="0 0 0"/>
+                <mass value="0.0023432187849480503455" />
+                <inertia ixx="8.1170103340490589996e-08" ixy="-2.7870115907613766886e-70" ixz="4.3627466847944978442e-53" iyy="8.1170103340490589996e-08" iyz="-2.2846786736068231429e-24" izz="4.3364299454179856849e-08" />
+            </inertial>
+        </link>
+		<gazebo reference="rouleau_15_${name_roueholonome}">
+			<material>Gazebo/Black</material>
+			<mu1>100.0</mu1>
+    		<mu2>100.8</mu2>
+			<kp>500000.0</kp>
+    		<kd>10.0</kd>
+			<min_depth>0.1</min_depth>
+			<maxVel>0.1</maxVel>
+		</gazebo>
+        
+        <joint name="Rouleau_o_${name_roueholonome}" type="continuous">
+            <origin xyz="0.0094243872368171555109 -0.020210663650916695783 0.0088249999999999786948" rpy="-0.43633231299858277197 1.570796326794896558 0" />
+            <parent link="${name_roueholonome}" />
+            <child link="rouleau_15_${name_roueholonome}" />
+            <axis xyz="0 0 1"/>
+            <limit effort="1" velocity="20" />
+            <joint_properties friction="10000.0"/>
+        </joint>
+
+
+        <joint name="joint_wheel_${name_roueholonome}" type="continuous">
+            <origin xyz="${joint_wheel_xyz}" rpy="${joint_wheel_rpy}" />
+            <parent link="base_link" />
+            <child link="${name_roueholonome}" />
+            <axis xyz="0 0 1"/>
+            <limit effort="1" velocity="20" />
+            <joint_properties friction="10000.0"/>
+        </joint>
+
+    </xacro:macro>
+
+</robot>

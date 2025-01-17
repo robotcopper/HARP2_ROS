@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro"  name="robot">
+
+    <!-- Include all the contents. -->
+    <xacro:include filename="$(find robot_description)/urdf/meshes/standard_inertia_util.xacro" />
+    <xacro:include filename="$(find robot_description)/urdf/HARP2_urdf/holonomic_wheel/wheel.xacro" />
+
+    <xacro:arg name="use_TopicBasedSystem_hardware_interface" default="false"/>
+    <xacro:arg name="use_controller" default="false"/>
+
+    <!-- Hhardware interfaces chosen according to whether the robot is simulated or real -->
+    <xacro:if value="$(arg use_controller)">
+        <xacro:if value="$(arg use_TopicBasedSystem_hardware_interface)">
+            <xacro:include filename="$(find robot_controller)/urdf/TopicBasedSystem_hardware_interface.urdf.xacro"/>
+        </xacro:if>
+        <xacro:unless value="$(arg use_TopicBasedSystem_hardware_interface)">
+            <xacro:include filename="$(find robot_controller)/urdf/GazeboSystem_hardware_interface.urdf.xacro"/>
+        </xacro:unless>
+    </xacro:if>
+
+    <!-- This first link called "base_footprint" is empty -->
+    <link name="base_footprint"/>
+    
+    <joint name="base_joint" type="fixed">
+        <origin xyz="0 0 0" rpy="0 0 0.523599"/>
+        <parent link="base_footprint"/>
+        <child link="base_link"/>        
+    </joint>
+    
+    <xacro:property name="length" value="0.42235" />
+    <xacro:property name="radius" value="0.15" />
+    <xacro:property name="mass" value="3.0" />
+
+    <link name="base_link">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <!-- <mesh filename="file://$(find robot_description)/urdf/meshes/robot_base.dae"/> -->
+                <mesh filename="file://$(find robot_description)/urdf/HARP2_urdf/meshes/HARP2_body.dae"/>
+            </geometry>
+            <cast_shadow>false</cast_shadow>
+            <material name="robot_base_material">
+                <color rgba="1 1 1 1.0"/>
+            </material>
+	    </visual>
+        <collision>
+            <origin xyz="0 0 0.231175" rpy="0 0 0" />
+            <geometry>
+                <cylinder radius="${radius}" length="${length}"/>
+                <!-- <mesh filename="file://$(find robot_description)/urdf/HARP2_urdf/meshes/HARP2_body.dae"/> -->
+            </geometry>
+            <surface>
+                <contact>
+                    <ode>
+                        <min_depth>0.001</min_depth>
+                    </ode>
+                </contact>
+            </surface>
+        </collision>
+	    <xacro:inertial_cylinder mass="${mass}" length="${length}" radius="${radius}">
+            <origin xyz="0 0 0.0765" rpy="0 0 0" />
+        </xacro:inertial_cylinder>
+    </link>
+    <gazebo reference="base_link">
+        <!-- <material>Gazebo/Black</material> -->
+        <mu1>1.0</mu1>
+        <mu2>0.8</mu2>
+        <kp>500000.0</kp>
+        <kd>10.0</kd>
+        <min_depth>0.1</min_depth>
+        <maxVel>0.1</maxVel>
+    </gazebo>
+
+
+
+    <!-- Add the 3 holonomic wheel -->
+    <xacro:holonomic_wheel joint_wheel_xyz="-0.10449143 0.0001469 0.02881000" joint_wheel_rpy="3.14159265 1.57079633 0" name_roueholonome="roueholonome1">
+    </xacro:holonomic_wheel>
+    
+    <xacro:holonomic_wheel joint_wheel_xyz="0.05225842 0.09048483 0.02881000" joint_wheel_rpy="-1.04719755 1.57079633 0" name_roueholonome="roueholonome2">
+    </xacro:holonomic_wheel>
+
+    <xacro:holonomic_wheel joint_wheel_xyz="0.05223294 -0.09049959 0.02881000" joint_wheel_rpy="1.04719755 1.57079633 0" name_roueholonome="roueholonome3">
+    </xacro:holonomic_wheel>
+
+    <!-- Add YDlidar_X4 -->
+    <xacro:include filename="$(find robot_description)/urdf/HARP2_urdf/lidar/YDlidar_X4/lidar.xacro" />
+
+</robot>
