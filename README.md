@@ -94,6 +94,7 @@ cmake ..
 make -j$(nproc)
 sudo make install
 #you may have to install third party dependencies
+#https://classic.gazebosim.org/tutorials?tut=install_from_source
 
 #install tf2-geometry-msgs
 sudo apt install ros-humble-tf2-geometry-msgs
