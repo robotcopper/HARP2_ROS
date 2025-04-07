@@ -26,7 +26,7 @@ def generate_launch_description():
 
     # Specify directory and path to file within package
     robot_description_pkg_dir = get_package_share_directory('robot_description')
-    urdf_file_subpath = 'urdf/robot.urdf.xacro'
+    urdf_file_subpath = 'urdf/HARP2_urdf/arm/arm.urdf.xacro'
 
     # Use xacro to process the file
     xacro_file = os.path.join(robot_description_pkg_dir, urdf_file_subpath)

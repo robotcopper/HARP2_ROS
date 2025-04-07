@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<robot name="HARP2_arm"
+    xmlns:xacro="http://ros.org/wiki/xacro">
+
+    <xacro:include filename="$(find robot_description)/urdf/meshes/standard_inertia_util.xacro" />
+    
+    <!-- Base -->
+    <link name="base_link">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="file://$(find robot_description)/urdf/HARP2_urdf/arm/meshes/arm_baselink.dae"/>
+            </geometry>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="file://$(find robot_description)/urdf/HARP2_urdf/arm/meshes/arm_baselink.dae"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name="prismatic_joint" type="prismatic">
+        <parent link="base_link"/>
+        <child link="Lx16a_1"/>
+        <origin xyz="0 -0.04070000 0" rpy="0 0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-0.105" upper="0.095" effort="100.0" velocity="0.5"/>
+    </joint>
+
+    <link name="Lx16a_1">
+        <visual>
+            <origin xyz="0 0.04070000 0" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="file://$(find robot_description)/urdf/HARP2_urdf/arm/meshes/Lx16a_1.dae"/>
+            </geometry>
+        </visual>
+        <collision>
+            <origin xyz="0 0.04070000 0" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="file://$(find robot_description)/urdf/HARP2_urdf/arm/meshes/Lx16a_1.dae"/>
+            </geometry>
+        </collision>
+        <xacro:inertial_box mass="0.06" x="0.0245" y="0.0507" z="0.035">
+				<origin xyz="0 0.01474695 0" rpy="0 0 0"/>
+		</xacro:inertial_box>
+    </link>
+
+    <joint name="joint_1" type="revolute">
+        <origin xyz="0 0 -0.03383600" rpy="3.14159 0 -1.0472"/>
+        <parent link="Lx16a_1"/>
+        <child link="Lx16a_2"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="0" upper="4.1887902" effort="10.0" velocity="1.0"/>
+        <joint_properties friction="0.0"/>
+    </joint>
+
+    <link name="Lx16a_2">
+        <visual>
+            <origin xyz="0 0.04070000 0.03383600" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="file://$(find robot_description)/urdf/HARP2_urdf/arm/meshes/Lx16a_2.dae"/>
+            </geometry>
+        </visual>
+        <collision>
+            <origin xyz="0 0.04070000 0.03383600" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="file://$(find robot_description)/urdf/HARP2_urdf/arm/meshes/Lx16a_2.dae"/>
+            </geometry>
+        </collision>
+        <xacro:inertial_box mass="0.06" x="0.0245" y="0.0492" z="0.035">
+				<origin xyz="0 0.01174695 0" rpy="0 0 0"/>
+		</xacro:inertial_box>
+    </link>
+
+    <joint name="joint_2" type="revolute">
+        <origin xyz="0 0 0" rpy="-2.0943951 0 3.14159265"/>
+        <parent link="Lx16a_2"/>
+        <child link="wrist2end_effector"/>
+        <axis xyz="1 0 0"/>
+        <limit lower="0" upper="4.1887902" effort="10.0" velocity="1.0"/>
+        <joint_properties friction="0.0"/>
+    </joint>
+
+    <link name="wrist2end_effector">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="file://$(find robot_description)/urdf/HARP2_urdf/arm/meshes/wrist2end_effector.dae"/>
+            </geometry>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="file://$(find robot_description)/urdf/HARP2_urdf/arm/meshes/wrist2end_effector.dae"/>
+            </geometry>
+        </collision>
+        <xacro:inertial_box mass="0.004" x="0.044" y="0.02800297" z="0.022">
+				<origin xyz="0.0005 0.009982745 0" rpy="0 0 0"/>
+		</xacro:inertial_box>
+    </link>
+
+    <joint name="fixed_joint" type="fixed">
+        <parent link="wrist2end_effector"/>
+        <child link="end_effector"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+
+    <link name="end_effector">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 3.14159 0"/>
+            <geometry>
+                <mesh filename="file://$(find robot_description)/urdf/HARP2_urdf/arm/meshes/end_effector.dae"/>
+            </geometry>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 3.14159 0"/>
+            <geometry>
+                <mesh filename="file://$(find robot_description)/urdf/HARP2_urdf/arm/meshes/end_effector.dae"/>
+            </geometry>
+        </collision>
+        <xacro:inertial_box mass="0.065" x="0.07248686" y="0.05971815" z="0.084">
+				<origin xyz="0 0.058859075 -0.009" rpy="0 0 0"/>
+		</xacro:inertial_box>
+    </link>
+
+</robot>
