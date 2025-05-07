@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="HARP2_arm">
+    <!-- <xacro:arg name="initial_positions_file" default="initial_positions.yaml" /> -->
+
+    <!-- Import HARP2_arm urdf file -->
+    <xacro:include filename="$(find robot_description)/urdf/HARP2_urdf/arm/arm.urdf.xacro" />
+
+    <!-- Import control_xacro -->
+    <xacro:include filename="HARP2_arm.ros2_control.xacro" />
+    <xacro:HARP2_arm_ros2_control name="LX16AHardwareInterface"/>
+
+</robot>

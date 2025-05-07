@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:macro name="HARP2_arm_ros2_control" params="name">
+
+        <ros2_control name="${name}" type="system">
+            <hardware>
+                <plugin>lx16a_hardware_interface/LX16AHardwareInterface</plugin>
+                <param name="usb_port">/dev/Lx16A_BusLinker</param>
+            </hardware>
+            <joint name="prismatic_joint">
+                <param name="id">0</param>
+                <param name="cmd_mode">vel</param>
+                <command_interface name="position"/>
+                <state_interface name="position"/>
+            </joint>
+            <joint name="joint_1">
+                <param name="id">1</param>
+                <command_interface name="position"/>
+                <state_interface name="position"/>
+            </joint>
+            <joint name="joint_2">
+                <param name="id">2</param>
+                <command_interface name="position"/>
+                <state_interface name="position"/>
+            </joint>
+            
+            <transmission name="prismatic_joint_transmission">
+            	<plugin>transmission_interface/SimpleTransmission</plugin>
+            	<actuator name="prismatic_joint_actuator" role="prismatic_joint_actuator"/>
+		<joint name="prismatic_joint" role="prismatic_joint">
+		  <mechanical_reduction>-97.097842583</mechanical_reduction>
+		  <offset>0.0</offset>
+		</joint>
+	    </transmission>
+	    	      
+        </ros2_control>
+    </xacro:macro>
+</robot>

@@ -1,0 +1,27 @@
+moveit_setup_assistant_config:
+  urdf:
+    package: robot_description
+    relative_path: urdf/HARP2_urdf/arm/arm.urdf.xacro
+  srdf:
+    relative_path: config/HARP2_arm.srdf
+  package_settings:
+    author_name: F.Jousselin
+    author_email: 95591405+robotcopper@users.noreply.github.com
+    generated_timestamp: 1738874060
+  control_xacro:
+    command:
+      - position
+      - velocity
+    state:
+      - position
+      - velocity
+  modified_urdf:
+    xacros:
+      - control_xacro
+  control_xacro:
+    command:
+      - position
+      - velocity
+    state:
+      - position
+      - velocity

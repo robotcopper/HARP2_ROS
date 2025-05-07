@@ -1,0 +1,6 @@
+# Default initial positions for HARP2_arm's ros2_control fake system
+
+initial_positions:
+  joint_1: 2.0943951
+  joint_2: 0.523599
+  prismatic_joint: 0.0

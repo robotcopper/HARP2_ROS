@@ -1,0 +1,25 @@
+
+planning_plugin: ompl_interface/OMPLPlanner
+
+request_adapters: >-
+  default_planner_request_adapters/AddTimeOptimalParameterization
+  default_planner_request_adapters/ResolveConstraintFrames
+  default_planner_request_adapters/FixWorkspaceBounds
+  default_planner_request_adapters/FixStartStateBounds
+  default_planner_request_adapters/FixStartStateCollision
+  default_planner_request_adapters/FixStartStatePathConstraints
+start_state_max_bounds_error: 0.1
+
+planner_configs:
+  RRTConnect:
+      type: geometric::RRTConnect
+      range: 0.003  # Max motion added to tree. ==> maxDistance_ default: 0.0, if 0.0, set on setup()
+
+  arm:
+    default_planner_config: RRTConnect
+    planner_configs:
+      - RRTConnect
+
+    # projection_evaluator: joints(prismatic_joint,joint_1,joint_2)
+    # enforce_joint_model_state_space: false
+    # longest_valid_segment_fraction: 0.003
