@@ -40,7 +40,7 @@ def generate_launch_description():
     robot_description_launch_file_subpath = 'launch/robot_description.launch.py'
     rviz_launch_file_subpath = 'launch/rviz.launch.py'
     rviz_config_file_subpath = 'rviz/robot_description_rviz.rviz'
-    urdf_file_subpath = 'urdf/robot.urdf.xacro'
+    urdf_file_subpath = 'urdf/HARP2_urdf/robot.urdf.xacro'
     wordl_file_subpath = 'world/Table2024.world'
     robot_sim_launch_file_subpath = 'launch/robot_sim.launch.py'
 
