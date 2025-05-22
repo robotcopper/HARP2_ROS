@@ -21,7 +21,7 @@ public:
         /// ############# Settings ############# //
 
         // double q_end[3] = {(-97.097842583*(-(0.375))), 2.0944, 2.0944}; // Point1
-        double q_start[3] = {(97.097842583*(2.02*(0.1)-0.034)), 2.0944, 2.0944}; // Point1 
+        double q_start[3] = {(97.097842583*(2.02*(0.1)-0.033)), 2.0944, 2.0944}; // Point1 
         double q_end[3]   = {0.0, 2.0944, 0.523599}; // Point2
         v = {5.0, 1.0, 1.0};
         a = {0.0, 1.0, 1.0};
@@ -61,10 +61,10 @@ private:
         //     generateTrajectory();
         //     return;
         // }
-        if (trajectory_data_.empty() || current_point_index_ * 3 + 2 >= trajectory_data_.size()) {
+
+        // if (trajectory_data_.empty() || current_point_index_ * 3 + 2 >= trajectory_data_.size()) {
         //     if (!waiting_before_switch_) {
         //         waiting_before_switch_ = true;
-    
         //         switch_timer_ = this->create_wall_timer(
         //             std::chrono::seconds(3),
         //             [this]() {
@@ -74,11 +74,10 @@ private:
         //                 waiting_before_switch_ = false;
         //                 switch_timer_->cancel(); // pour éviter que ça tourne
         //             });
-    
         //         return;  // on sort pour attendre les 3 secondes
         //     }
-            return;
-        }
+        //     return;
+        // }
 
         trajectory_msgs::msg::JointTrajectoryPoint point;
 
