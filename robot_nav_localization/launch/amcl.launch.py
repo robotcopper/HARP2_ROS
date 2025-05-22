@@ -20,7 +20,7 @@ def generate_launch_description():
     lifecycle_nodes = ['map_server', 'amcl']
 
     # Specify directory and path to file within package
-    robot_localization_pkg_dir = get_package_share_directory('robot_localization')
+    robot_localization_pkg_dir = get_package_share_directory('robot_nav_localization')
     robot_slam_pkg_dir = get_package_share_directory('robot_slam')
     amcl_params_file_subpath = 'params/amcl.yaml'
     map_file_subpath = 'maps/Table2024.yaml'
