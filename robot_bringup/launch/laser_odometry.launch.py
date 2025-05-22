@@ -37,7 +37,7 @@ def generate_launch_description():
         ),
         DeclareLaunchArgument(
             'odom_topic',
-            default_value='/odom_rf2o',
+            default_value='/odom/rf2o',
             description='odom_topic'
         ),
         DeclareLaunchArgument(
@@ -66,7 +66,7 @@ def generate_launch_description():
             parameters=[{
                         'laser_scan_topic' : scan_topic,
                         'odom_topic' : odom_topic,
-                        'publish_tf' : True,
+                        'publish_tf' : False,
                         'base_frame_id' : base_frame_id,
                         'odom_frame_id' : odom_frame_id,
                         'init_pose_from_topic' : '',

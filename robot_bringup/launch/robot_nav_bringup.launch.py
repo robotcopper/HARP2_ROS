@@ -40,7 +40,7 @@ def generate_launch_description():
     robot_sim_pkg_dir = get_package_share_directory('robot_sim')
     robot_controller_pkg_dir = get_package_share_directory('robot_controller')
     robot_bringup_pkg_dir = get_package_share_directory('robot_bringup')
-    robot_localization_pkg_dir = get_package_share_directory('robot_localization')
+    robot_localization_pkg_dir = get_package_share_directory('robot_nav_localization')
     robot_slam_pkg_dir = get_package_share_directory('robot_slam')
     robot_nav_pkg_dir = get_package_share_directory('robot_nav')
     rviz_config_file_subpath = 'rviz/nav2.rviz'
