@@ -127,6 +127,12 @@ git clone -b humble git@github.com:micro-ROS/micro_ros_msgs.git
 #install ros2_controll
 sudo apt install ros-humble-ros2-control ros-humble-ros2-controllers
 
+#install robot-localization
+sudo apt install ros-humble-robot-localization
+
+#install moveit2 (optional)
+sudo apt install ros-humble-moveit
+
 ```
 
 <br>
