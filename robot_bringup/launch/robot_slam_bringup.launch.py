@@ -39,6 +39,7 @@ def generate_launch_description():
     robot_controller_pkg_dir = get_package_share_directory('robot_controller')
     robot_bringup_pkg_dir = get_package_share_directory('robot_bringup')
     robot_slam_pkg_dir = get_package_share_directory('robot_slam')
+    robot_localization_pkg_dir = get_package_share_directory('robot_nav_localization')
     rviz_config_file_subpath = 'rviz/slam_localization.rviz'
     rviz_localization_config_file_subpath = 'rviz/slam.rviz'
     urdf_file_subpath = 'urdf/robot.urdf.xacro'
@@ -169,7 +170,7 @@ def generate_launch_description():
 
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(
-                os.path.join(robot_bringup_pkg_dir, laser_odometry_launch_file_subpath)
+                os.path.join(robot_localization_pkg_dir, laser_odometry_launch_file_subpath)
             ),
             launch_arguments={'namespace': namespace,
                               'use_TopicBasedSystem_hardware_interface': use_TopicBasedSystem_hardware_interface,

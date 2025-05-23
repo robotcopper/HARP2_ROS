@@ -184,7 +184,7 @@ def generate_launch_description():
 
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(
-                os.path.join(robot_bringup_pkg_dir, laser_odometry_launch_file_subpath)
+                os.path.join(robot_localization_pkg_dir, laser_odometry_launch_file_subpath)
             ),
             launch_arguments={'namespace': namespace,
                               'use_TopicBasedSystem_hardware_interface': use_TopicBasedSystem_hardware_interface,
