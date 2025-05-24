@@ -47,7 +47,7 @@ def generate_launch_description():
         ),
         DeclareLaunchArgument(
             'odom_frame_id',
-            default_value='odom',
+            default_value='odom_rf2o',
             description='odom_frame_id'
         ),
         DeclareLaunchArgument(
