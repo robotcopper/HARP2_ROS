@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" >
+
+    <xacro:include filename="$(find robot_description)/urdf/meshes/standard_inertia_util.xacro" />
+
+    <joint name="paa5160_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="paa5160_frame"/>
+        <origin xyz="0 0 0.019" rpy="0 0 3.66519"/>
+    </joint>
+
+    <link name="paa5160_frame">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="file://$(find robot_description)/urdf/paa5160/meshes/paa5160.dae"/>
+            </geometry>
+            <cast_shadow>false</cast_shadow>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="file://$(find robot_description)/urdf/paa5160/meshes/paa5160.dae"/>
+            </geometry>
+        </collision>
+        <xacro:inertial_box mass="0.015" x="0.0254" y="0.0254" z="0.005">
+				<origin xyz="0 -0.001 0.002" rpy="0 0 0"/>
+		</xacro:inertial_box>
+    </link>
+
+</robot>

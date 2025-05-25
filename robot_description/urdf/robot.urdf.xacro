@@ -5,6 +5,7 @@
     <xacro:include filename="$(find robot_description)/urdf/meshes/standard_inertia_util.xacro" />
     <xacro:include filename="$(find robot_description)/urdf/holonomic_wheel/wheel.xacro" />
     <xacro:include filename="$(find robot_description)/urdf/lidar/lidar.xacro" />
+    <xacro:include filename="$(find robot_description)/urdf/paa5160/paa5160.xacro" />
 
     <xacro:arg name="use_TopicBasedSystem_hardware_interface" default="false"/>
     <xacro:arg name="use_controller" default="false"/>
