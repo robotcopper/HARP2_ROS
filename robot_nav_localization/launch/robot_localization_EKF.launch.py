@@ -48,14 +48,19 @@ def generate_launch_description():
                              }.items()
         ),
 
-        Node(
-            package='robot_localization',
-            executable='ekf_node',
-            name='ekf_node',
-            output='screen',
-            parameters=[os.path.join(robot_localization_pkg_dir, laser_and_optical_odom_configured_params)],
-        ),
 
+        TimerAction(
+            period=5.0,
+            actions=[
+                Node(
+                    package='robot_localization',
+                    executable='ekf_node',
+                    name='ekf_filter_node',
+                    output='screen',
+                    parameters=[os.path.join(robot_localization_pkg_dir, laser_and_optical_odom_configured_params)],
+                )
+            ]
+        ),
         
 
     ])
