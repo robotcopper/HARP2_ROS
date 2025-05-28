@@ -133,6 +133,11 @@ sudo apt install ros-humble-robot-localization
 #install moveit2 (optional)
 sudo apt install ros-humble-moveit
 
+#install topic_based (optional)
+sudo apt install ros-humble-topic-base-ros2-control
+
+#remove brltty to be able to conect in usb with the bus linker of the lx16a
+sudo apt remove brltty
 ```
 
 <br>
