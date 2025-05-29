@@ -54,7 +54,7 @@ class GPIOReader(Node):
     def scan_callback(self, msg):
         # Vérifie si une mesure est inférieure à 0.3 m
         for dist in msg.ranges:
-            if 0.0 < dist < 0.5:
+            if 0.0 < dist < 0.3:
                 if not self.obstacle_detected:
                     self.get_logger().warn('Obstacle detected within 30 cm! Stopping motion.')
                 self.obstacle_detected = True
