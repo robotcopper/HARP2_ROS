@@ -30,11 +30,11 @@
 
     <gazebo reference="ydlidarx4_laser_frame">
 
-        <sensor name="laser" type="gpu_ray">
+        <sensor name="laser" type="ray">
             <always_on>true</always_on>
             <pose> 0 0 0 0 0 0 </pose>
             <visualize>false</visualize>
-            <update_rate>15</update_rate>
+            <update_rate>7</update_rate>
             <ray> 
                 <scan>
                     <horizontal>
