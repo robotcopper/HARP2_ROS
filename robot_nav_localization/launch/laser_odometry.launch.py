@@ -72,6 +72,7 @@ def generate_launch_description():
                         'init_pose_from_topic' : '',
                         'freq' : freq,
                        }],
+            arguments=['--ros-args', '--log-level', 'ERROR'],
         ),
 
     ])
