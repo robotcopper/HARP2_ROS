@@ -91,32 +91,34 @@ controller_server:
       # movement_time_allowance: 30.0
       plugin: "nav2_controller::PoseProgressChecker"
       required_movement_radius: 0.01
-      required_movement_angle: 0.01
+      required_movement_angle: 0.001
       movement_time_allowance: 5.0
 
     goal_checker:
-      # plugin: "nav2_controller::SimpleGoalChecker"
-      # stateful: True
-      # xy_goal_tolerance: 0.001
-      # yaw_goal_tolerance: 0.02
-      plugin: "nav2_controller::StoppedGoalChecker"
-      trans_stopped_velocity: 0.001
-      rot_stopped_velocity: 0.001
+      plugin: "nav2_controller::SimpleGoalChecker"
+      stateful: True
       xy_goal_tolerance: 0.01 #1cm
-      yaw_goal_tolerance: 0.0349066 #2° #0.00872665 #0.5°
-      stateful: False
+      yaw_goal_tolerance: 0.00872665 #0.5°
+      # plugin: "nav2_controller::StoppedGoalChecker"
+      # trans_stopped_velocity: 0.001
+      # rot_stopped_velocity: 0.0001
+      # xy_goal_tolerance: 0.01 #1cm
+      # yaw_goal_tolerance: 0.349066 #20° 0.174533 #10° 0.0872665 #5° 0.0523599 #3° 0.0349066 #2° 0.00872665 #0.5°
+      # stateful: False
 
     FollowPath:
 
       plugin: "nav2_rotation_shim_controller::RotationShimController"
       primary_controller: "nav2_mppi_controller::MPPIController"
-      angular_dist_threshold: 3.14159
-      forward_sampling_distance: 0.8
-      rotate_to_heading_angular_vel: 7.0
-      max_angular_accel: 50.0
+      angular_dist_threshold: 0.785
+      forward_sampling_distance: 0.5
+      rotate_to_heading_angular_vel: 3.6
+      max_angular_accel: 6.4
       simulate_ahead_time: 1.0
       rotate_to_goal_heading: True
-      rotate_to_heading_once: True
+      rotate_to_heading_once: False
+      closed_loop: True
+      use_path_orientations: True
 
       time_steps: 30
       model_dt: 0.034 #frec 30Hz
@@ -149,7 +151,7 @@ controller_server:
       
       GoalCritic:
         enabled: true
-        cost_power: 2
+        cost_power: 1
         cost_weight: 15.0
         threshold_to_consider: 0.2
       
