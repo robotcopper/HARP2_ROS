@@ -110,7 +110,7 @@ controller_server:
 
       plugin: "nav2_rotation_shim_controller::RotationShimController"
       primary_controller: "nav2_mppi_controller::MPPIController"
-      angular_dist_threshold: 0.785
+      angular_dist_threshold: 1.5708
       forward_sampling_distance: 0.5
       rotate_to_heading_angular_vel: 3.6
       max_angular_accel: 6.4
