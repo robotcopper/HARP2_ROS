@@ -75,6 +75,11 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        bno085_imu:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         paa5160_frame:
           Alpha: 1
           Show Axes: false
@@ -267,6 +272,8 @@ Visualization Manager:
           Value: true
         base_link:
           Value: false
+        bno085_imu:
+          Value: false
         map:
           Value: false
         odom:
@@ -351,6 +358,8 @@ Visualization Manager:
           odom:
             base_footprint:
               base_link:
+                bno085_imu:
+                  {}
                 paa5160_frame:
                   {}
                 roueholonome1:
@@ -680,25 +689,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 5.213955879211426
+      Distance: 5.416421413421631
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: -0.1013401672244072
-        Y: 0.07237038761377335
-        Z: -0.8990690112113953
+        X: -0.01623048074543476
+        Y: 0.09020520746707916
+        Z: -0.812493085861206
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 1.5547963380813599
+      Pitch: 1.399796485900879
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 4.70853328704834
+      Yaw: 4.698528289794922
     Saved: ~
 Window Geometry:
   Displays:
