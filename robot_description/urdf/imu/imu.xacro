@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" >
+
+    <xacro:include filename="$(find robot_description)/urdf/meshes/standard_inertia_util.xacro" />
+
+    <joint name="imu_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="bno085_imu"/>
+        <origin xyz="0 0 0.08" rpy="0 0 -0.523599"/>
+    </joint>
+
+    <link name="bno085_imu">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="file://$(find robot_description)/urdf/imu/meshes/BNO085.dae"/>
+            </geometry>
+            <cast_shadow>false</cast_shadow>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="file://$(find robot_description)/urdf/imu/meshes/BNO085.dae"/>
+            </geometry>
+        </collision>
+        <xacro:inertial_box mass="0.0025" x="0.0256" y="0.0227" z="0.0046">
+            <origin xyz="0 0 0" rpy="0 0 0" />
+        </xacro:inertial_box>
+    </link>
+
+    <gazebo reference="bno085_imu">
+        <gravity>False</gravity>
+        <sensor name="imu_sensor" type="imu">
+        <always_on>true</always_on>
+        <update_rate>100</update_rate>
+        <visualize>true</visualize>
+        <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
+            <ros>
+                <remapping>~/out:=/imu_data</remapping>
+            </ros>
+            <bodyName>bno085_imu</bodyName>
+            <updateRateHZ>100</updateRateHZ>
+            <gaussianNoise>0.0</gaussianNoise>
+            <xyzOffset>0 0 0</xyzOffset>
+            <rpyOffset>0 0 0</rpyOffset>
+            <frameName>bno085_imu</frameName>
+            <initialOrientationAsReference>false</initialOrientationAsReference>
+        </plugin>
+        <pose>0 0 0 0 0 0</pose>
+        </sensor>
+    </gazebo>
+    
+</robot>
