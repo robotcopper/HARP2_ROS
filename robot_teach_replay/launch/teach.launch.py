@@ -19,6 +19,7 @@ def generate_launch_description():
     namespace = LaunchConfiguration('namespace')
     launch_on_robot = LaunchConfiguration('launch_on_robot')
     safety_enabled = LaunchConfiguration('safety_enabled')
+    use_lidar = LaunchConfiguration('use_lidar')
     bag_path = LaunchConfiguration('bag_path')
 
     return LaunchDescription([
@@ -30,6 +31,9 @@ def generate_launch_description():
             'safety_enabled', default_value='True',
             description='Enable collision_monitor safety filter on /cmd_vel'),
         DeclareLaunchArgument(
+            'use_lidar', default_value='True',
+            description='Launch the YDLIDAR driver (required for safety filter)'),
+        DeclareLaunchArgument(
             'bag_path', default_value=default_bag_path,
             description='Output directory for the recorded bag'),
 
@@ -40,6 +44,7 @@ def generate_launch_description():
                 'namespace': namespace,
                 'launch_on_robot': launch_on_robot,
                 'safety_enabled': safety_enabled,
+                'use_lidar': use_lidar,
             }.items(),
         ),
 

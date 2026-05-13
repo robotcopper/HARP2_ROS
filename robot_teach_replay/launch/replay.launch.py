@@ -24,6 +24,7 @@ def generate_launch_description():
     namespace = LaunchConfiguration('namespace')
     launch_on_robot = LaunchConfiguration('launch_on_robot')
     safety_enabled = LaunchConfiguration('safety_enabled')
+    use_lidar = LaunchConfiguration('use_lidar')
     bag = LaunchConfiguration('bag')
 
     return LaunchDescription([
@@ -34,6 +35,9 @@ def generate_launch_description():
         DeclareLaunchArgument(
             'safety_enabled', default_value='True',
             description='Enable collision_monitor safety filter on /cmd_vel'),
+        DeclareLaunchArgument(
+            'use_lidar', default_value='True',
+            description='Launch the YDLIDAR driver (required for safety filter)'),
         DeclareLaunchArgument(
             'bag', description='Path to the bag directory to replay (required)'),
 
@@ -64,6 +68,12 @@ def generate_launch_description():
                 'namespace': namespace,
                 'use_TopicBasedSystem_hardware_interface': 'True',
             }.items(),
+        ),
+
+        IncludeLaunchDescription(
+            PythonLaunchDescriptionSource(
+                os.path.join(robot_bringup_pkg, 'launch', 'lidar.launch.py')),
+            launch_arguments={'use_lidar': use_lidar}.items(),
         ),
 
         IncludeLaunchDescription(

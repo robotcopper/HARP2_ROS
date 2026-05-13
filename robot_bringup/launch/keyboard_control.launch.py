@@ -18,6 +18,7 @@ def generate_launch_description():
     namespace = LaunchConfiguration('namespace')
     use_twist_acc_filter = LaunchConfiguration('use_twist_acc_filter')
     safety_enabled = LaunchConfiguration('safety_enabled')
+    use_lidar = LaunchConfiguration('use_lidar')
 
     # Specify directory and path to file within package
     robot_description_pkg_dir = get_package_share_directory('robot_description')
@@ -26,6 +27,7 @@ def generate_launch_description():
     controller_launch_file_subpath = 'launch/controller.launch.py'
     robot_description_launch_file_subpath = 'launch/robot_description.launch.py'
     safety_layer_launch_subpath = 'launch/safety_layer.launch.py'
+    lidar_launch_subpath = 'launch/lidar.launch.py'
     urdf_file_subpath = 'urdf/robot.urdf.xacro'
 
 
@@ -52,6 +54,12 @@ def generate_launch_description():
             'safety_enabled',
             default_value='True',
             description='Enable collision_monitor safety filter on /cmd_vel'
+        ),
+
+        DeclareLaunchArgument(
+            'use_lidar',
+            default_value='True',
+            description='Launch the YDLIDAR driver (required for safety filter to function)'
         ),
 
         ExecuteProcess(
@@ -110,6 +118,13 @@ def generate_launch_description():
             # twist_acc_filter has /omnidirectional_controller/cmd_vel_unstamped hardcoded
             # as its output topic. Redirect it to /cmd_vel so it passes through the safety layer.
             remappings=[("/omnidirectional_controller/cmd_vel_unstamped", "/cmd_vel")],
+        ),
+
+        IncludeLaunchDescription(
+            PythonLaunchDescriptionSource(
+                os.path.join(robot_bringup_pkg_dir, lidar_launch_subpath)
+            ),
+            launch_arguments={'use_lidar': use_lidar}.items()
         ),
 
         IncludeLaunchDescription(

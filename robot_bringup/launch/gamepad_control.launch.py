@@ -18,6 +18,7 @@ def generate_launch_description():
     namespace = LaunchConfiguration('namespace')
     launch_on_robot = LaunchConfiguration('launch_on_robot')
     safety_enabled = LaunchConfiguration('safety_enabled')
+    use_lidar = LaunchConfiguration('use_lidar')
 
     # Specify directory and path to file within package
     robot_description_pkg_dir = get_package_share_directory('robot_description')
@@ -26,6 +27,7 @@ def generate_launch_description():
     controller_launch_file_subpath = 'launch/controller.launch.py'
     robot_description_launch_file_subpath = 'launch/robot_description.launch.py'
     safety_layer_launch_subpath = 'launch/safety_layer.launch.py'
+    lidar_launch_subpath = 'launch/lidar.launch.py'
     urdf_file_subpath = 'urdf/robot.urdf.xacro'
     gamepad_config = PathJoinSubstitution([FindPackageShare("robot_bringup"),"params","teleop_holonomic_config.yaml"])
 
@@ -66,6 +68,12 @@ def generate_launch_description():
             'safety_enabled',
             default_value='True',
             description='Enable collision_monitor safety filter on /cmd_vel'
+        ),
+
+        DeclareLaunchArgument(
+            'use_lidar',
+            default_value='True',
+            description='Launch the YDLIDAR driver (required for safety filter to function)'
         ),
 
         ExecuteProcess(
@@ -114,6 +122,13 @@ def generate_launch_description():
             output="screen",
             namespace=namespace,
             remappings=[("/joy", "/gamepad_joy"),]
+        ),
+
+        IncludeLaunchDescription(
+            PythonLaunchDescriptionSource(
+                os.path.join(robot_bringup_pkg_dir, lidar_launch_subpath)
+            ),
+            launch_arguments={'use_lidar': use_lidar}.items()
         ),
 
         IncludeLaunchDescription(
