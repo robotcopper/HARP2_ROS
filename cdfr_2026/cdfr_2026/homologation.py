@@ -125,16 +125,20 @@ class Homologation(Node):
         )
 
     def on_tirette(self, msg: Bool):
-        if self.last_tirette_state != msg.data:
-            if msg.data:
-                self.get_logger().info(
-                    '>>> TIRETTE EN PLACE (gpio=HIGH) - standby, waiting to be pulled'
-                )
-            else:
-                self.get_logger().info(
-                    '>>> TIRETTE RETIREE (gpio=LOW) - MATCH TRIGGER'
-                )
-            self.last_tirette_state = msg.data
+        # Only react on state change. /gpio_state arrives at ~20Hz, we don't
+        # want to log or evaluate triggers on every steady-state message.
+        if self.last_tirette_state == msg.data:
+            return
+
+        if msg.data:
+            self.get_logger().info(
+                '>>> TIRETTE EN PLACE (gpio=HIGH) - standby, waiting to be pulled'
+            )
+        else:
+            self.get_logger().info(
+                '>>> TIRETTE RETIREE (gpio=LOW) - MATCH TRIGGER'
+            )
+        self.last_tirette_state = msg.data
 
         triggered = (not msg.data) if self.trigger_on_low else bool(msg.data)
         if not triggered:
