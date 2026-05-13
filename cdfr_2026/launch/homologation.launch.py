@@ -44,7 +44,7 @@ def generate_launch_description():
             'use_gpio_reader', default_value='True',
             description='Launch the cdfr_2026 gpio_reader node (requires RPi.GPIO on a Raspberry Pi)'),
         DeclareLaunchArgument(
-            'safety_distance', default_value='0.22',
+            'safety_distance', default_value='0.35',
             description='Min distance (m) to any scan point before pausing'),
         DeclareLaunchArgument(
             'scan_min_range', default_value='0.16',
