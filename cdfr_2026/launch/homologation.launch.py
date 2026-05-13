@@ -24,6 +24,7 @@ def generate_launch_description():
     namespace = LaunchConfiguration('namespace')
     launch_on_robot = LaunchConfiguration('launch_on_robot')
     use_lidar = LaunchConfiguration('use_lidar')
+    use_gpio_reader = LaunchConfiguration('use_gpio_reader')
     safety_distance = LaunchConfiguration('safety_distance')
     pause_timeout = LaunchConfiguration('pause_timeout')
 
@@ -35,6 +36,9 @@ def generate_launch_description():
         DeclareLaunchArgument(
             'use_lidar', default_value='True',
             description='Launch the YDLIDAR driver'),
+        DeclareLaunchArgument(
+            'use_gpio_reader', default_value='True',
+            description='Launch the cdfr_2026 gpio_reader node (requires RPi.GPIO on a Raspberry Pi)'),
         DeclareLaunchArgument(
             'safety_distance', default_value='0.30',
             description='Min distance (m) to any scan point before pausing'),
@@ -75,6 +79,14 @@ def generate_launch_description():
             PythonLaunchDescriptionSource(
                 os.path.join(robot_bringup_pkg, 'launch', 'lidar.launch.py')),
             launch_arguments={'use_lidar': use_lidar}.items(),
+        ),
+
+        Node(
+            condition=IfCondition(use_gpio_reader),
+            package='cdfr_2026',
+            executable='gpio_reader',
+            name='gpio_reader',
+            output='screen',
         ),
 
         Node(

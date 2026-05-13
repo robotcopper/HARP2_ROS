@@ -25,6 +25,7 @@ setup(
     entry_points={
         'console_scripts': [
             'homologation = cdfr_2026.homologation:main',
+            'gpio_reader = cdfr_2026.gpio_reader:main',
         ],
     },
 )
