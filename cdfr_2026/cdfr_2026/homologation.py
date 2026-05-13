@@ -60,8 +60,7 @@ def wait(seconds):
 # ============================================================================
 TRAJECTORY = [
     forward(1.0),
-    rotate_ccw(90),
-    forward(0.5),
+    backward(1.0),
 ]
 
 
@@ -76,6 +75,7 @@ class Homologation(Node):
         self.declare_parameter('safety_distance', 0.30)
         self.declare_parameter('scan_min_range', 0.17)
         self.declare_parameter('pause_timeout', 90.0)
+        self.declare_parameter('match_duration', 100.0)
         self.declare_parameter('trigger_on_low', True)
         self.declare_parameter('control_rate', 20.0)
 
@@ -85,6 +85,7 @@ class Homologation(Node):
         self.safety_distance = float(self.get_parameter('safety_distance').value)
         self.scan_min_range = float(self.get_parameter('scan_min_range').value)
         self.pause_timeout = float(self.get_parameter('pause_timeout').value)
+        self.match_duration = float(self.get_parameter('match_duration').value)
         self.trigger_on_low = bool(self.get_parameter('trigger_on_low').value)
         rate = float(self.get_parameter('control_rate').value)
         self.dt = 1.0 / rate
@@ -106,12 +107,14 @@ class Homologation(Node):
         self.step_idx = 0
         self.step_elapsed = 0.0
         self.pause_start = None
+        self.match_start_time = None
 
         self.create_timer(self.dt, self.tick)
 
         self.get_logger().info(
             f'====== HOMOLOGATION READY ======\n'
             f'  match steps         : {len(TRAJECTORY)}\n'
+            f'  match duration      : {self.match_duration}s (hard stop at expiry)\n'
             f'  publishing cmd_vel  : {cmd_topic}\n'
             f'  listening tirette   : {gpio_topic}\n'
             f'  safety distance     : {self.safety_distance}m '
@@ -151,8 +154,10 @@ class Homologation(Node):
         self.state = 'running'
         self.step_idx = 0
         self.step_elapsed = 0.0
+        self.match_start_time = self.get_clock().now()
         self.get_logger().info(
-            f'>>> MATCH START: sequence of {len(TRAJECTORY)} steps <<<'
+            f'>>> MATCH START: sequence of {len(TRAJECTORY)} steps, '
+            f'{self.match_duration}s on the clock <<<'
         )
 
     def on_scan(self, msg: LaserScan):
@@ -177,6 +182,21 @@ class Homologation(Node):
     def tick(self):
         if self.state == 'idle':
             return
+
+        # Official match timer: wall-clock since tirette trigger. Independent
+        # of obstacle pauses — match time keeps running even while paused.
+        if self.match_start_time is not None:
+            elapsed = (self.get_clock().now() - self.match_start_time).nanoseconds / 1e9
+            if elapsed >= self.match_duration:
+                self.get_logger().info(
+                    f'>>> MATCH TIME UP ({self.match_duration}s elapsed) - '
+                    f'FULL STOP at step {self.step_idx} <<<'
+                )
+                self.stop()
+                self.done = True
+                self.state = 'idle'
+                self.pause_start = None
+                return
 
         if self.obstacle:
             if self.state == 'running':

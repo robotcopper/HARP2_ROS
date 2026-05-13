@@ -27,6 +27,7 @@ def generate_launch_description():
     use_gpio_reader = LaunchConfiguration('use_gpio_reader')
     safety_distance = LaunchConfiguration('safety_distance')
     pause_timeout = LaunchConfiguration('pause_timeout')
+    match_duration = LaunchConfiguration('match_duration')
 
     return LaunchDescription([
         DeclareLaunchArgument('namespace', default_value=''),
@@ -45,6 +46,9 @@ def generate_launch_description():
         DeclareLaunchArgument(
             'pause_timeout', default_value='90.0',
             description='Seconds of continuous pause before aborting current trajectory'),
+        DeclareLaunchArgument(
+            'match_duration', default_value='100.0',
+            description='Total match duration in seconds (wall-clock from tirette pull)'),
 
         ExecuteProcess(
             condition=IfCondition(launch_on_robot),
@@ -97,6 +101,7 @@ def generate_launch_description():
             parameters=[{
                 'safety_distance': safety_distance,
                 'pause_timeout': pause_timeout,
+                'match_duration': match_duration,
             }],
         ),
     ])
