@@ -26,6 +26,7 @@ def generate_launch_description():
     use_lidar = LaunchConfiguration('use_lidar')
     use_gpio_reader = LaunchConfiguration('use_gpio_reader')
     safety_distance = LaunchConfiguration('safety_distance')
+    scan_min_range = LaunchConfiguration('scan_min_range')
     pause_timeout = LaunchConfiguration('pause_timeout')
     match_duration = LaunchConfiguration('match_duration')
 
@@ -41,8 +42,11 @@ def generate_launch_description():
             'use_gpio_reader', default_value='True',
             description='Launch the cdfr_2026 gpio_reader node (requires RPi.GPIO on a Raspberry Pi)'),
         DeclareLaunchArgument(
-            'safety_distance', default_value='0.30',
+            'safety_distance', default_value='0.22',
             description='Min distance (m) to any scan point before pausing'),
+        DeclareLaunchArgument(
+            'scan_min_range', default_value='0.16',
+            description='Ignore scan returns below this (robot self-detection)'),
         DeclareLaunchArgument(
             'pause_timeout', default_value='90.0',
             description='Seconds of continuous pause before aborting current trajectory'),
@@ -100,6 +104,7 @@ def generate_launch_description():
             output='screen',
             parameters=[{
                 'safety_distance': safety_distance,
+                'scan_min_range': scan_min_range,
                 'pause_timeout': pause_timeout,
                 'match_duration': match_duration,
             }],
