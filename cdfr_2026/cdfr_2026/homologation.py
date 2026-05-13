@@ -1,4 +1,5 @@
 import math
+import time
 
 import rclpy
 from rclpy.node import Node
@@ -174,7 +175,7 @@ class Homologation(Node):
         self.state = 'running'
         self.step_idx = 0
         self.step_elapsed = 0.0
-        self.match_start_time = self.get_clock().now()
+        self.match_start_time = time.monotonic()
         self.get_logger().info(
             f'{C.BOLD}{C.GREEN}>>> MATCH START: sequence of {len(TRAJECTORY)} steps, '
             f'{self.match_duration}s on the clock <<<{C.RESET}'
@@ -210,7 +211,7 @@ class Homologation(Node):
         # after the sequence completed, so we always log when the 100s window
         # actually closes.
         if self.match_start_time is not None and not self.match_window_closed:
-            elapsed = (self.get_clock().now() - self.match_start_time).nanoseconds / 1e9
+            elapsed = time.monotonic() - self.match_start_time
             if elapsed >= self.match_duration:
                 if self.state != 'idle':
                     self.get_logger().info(
@@ -235,7 +236,7 @@ class Homologation(Node):
         if self.obstacle:
             if self.state == 'running':
                 self.state = 'paused'
-                self.pause_start = self.get_clock().now()
+                self.pause_start = time.monotonic()
                 d = self.obstacle_distance if self.obstacle_distance is not None else 0.0
                 self.get_logger().warn(
                     f'{C.BOLD}{C.RED}/!\\ OBSTACLE at {d:.2f}m{C.RESET} '
@@ -245,7 +246,7 @@ class Homologation(Node):
                 )
             self.stop()
 
-            paused_for = (self.get_clock().now() - self.pause_start).nanoseconds / 1e9
+            paused_for = time.monotonic() - self.pause_start
             if paused_for > self.pause_timeout:
                 self.abort_current(
                     f'paused for {paused_for:.1f}s > {self.pause_timeout}s timeout'
