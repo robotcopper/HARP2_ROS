@@ -73,7 +73,7 @@ class Homologation(Node):
         self.declare_parameter('gpio_topic', '/gpio_state')
         self.declare_parameter('scan_topic', '/scan')
         self.declare_parameter('safety_distance', 0.30)
-        self.declare_parameter('scan_min_range', 0.17)
+        self.declare_parameter('scan_min_range', 0.19)
         self.declare_parameter('pause_timeout', 90.0)
         self.declare_parameter('match_duration', 100.0)
         self.declare_parameter('trigger_on_low', True)
@@ -101,6 +101,7 @@ class Homologation(Node):
         self.create_subscription(LaserScan, scan_topic, self.on_scan, scan_qos)
 
         self.obstacle = False
+        self.obstacle_distance = None
         self.last_tirette_state = None
         self.state = 'idle'
         self.done = False
@@ -165,7 +166,13 @@ class Homologation(Node):
         # own structure (lidar is mounted near the center of a 35cm robot).
         d = self.safety_distance
         m = self.scan_min_range
-        self.obstacle = any(m < r < d for r in msg.ranges)
+        in_zone = [r for r in msg.ranges if m < r < d]
+        if in_zone:
+            self.obstacle = True
+            self.obstacle_distance = min(in_zone)
+        else:
+            self.obstacle = False
+            self.obstacle_distance = None
 
     def stop(self):
         self.cmd_pub.publish(Twist())
@@ -202,8 +209,10 @@ class Homologation(Node):
             if self.state == 'running':
                 self.state = 'paused'
                 self.pause_start = self.get_clock().now()
+                d = self.obstacle_distance if self.obstacle_distance is not None else 0.0
                 self.get_logger().warn(
-                    f'/!\\ OBSTACLE detected within {self.safety_distance}m '
+                    f'/!\\ OBSTACLE at {d:.2f}m '
+                    f'(zone {self.scan_min_range:.2f}-{self.safety_distance:.2f}m) '
                     f'-> match PAUSED at step {self.step_idx} '
                     f'(will abort after {self.pause_timeout}s)'
                 )
