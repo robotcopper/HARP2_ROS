@@ -74,7 +74,7 @@ class Homologation(Node):
         self.declare_parameter('gpio_topic', '/gpio_state')
         self.declare_parameter('scan_topic', '/scan')
         self.declare_parameter('safety_distance', 0.30)
-        self.declare_parameter('scan_min_range', 0.15)
+        self.declare_parameter('scan_min_range', 0.17)
         self.declare_parameter('pause_timeout', 90.0)
         self.declare_parameter('trigger_on_low', True)
         self.declare_parameter('control_rate', 20.0)
