@@ -46,10 +46,11 @@ class Homologation(Node):
         super().__init__('homologation')
 
         self.declare_parameter('cmd_vel_topic',
-                               '/omnidirectional_controller/cmd_vel_safety_unstamped')
+                               '/omnidirectional_controller/cmd_vel_unstamped')
         self.declare_parameter('gpio_topic', '/gpio_state')
         self.declare_parameter('scan_topic', '/scan')
         self.declare_parameter('safety_distance', 0.30)
+        self.declare_parameter('scan_min_range', 0.15)
         self.declare_parameter('pause_timeout', 90.0)
         self.declare_parameter('trigger_on_low', True)
         self.declare_parameter('control_rate', 20.0)
@@ -58,6 +59,7 @@ class Homologation(Node):
         gpio_topic = self.get_parameter('gpio_topic').value
         scan_topic = self.get_parameter('scan_topic').value
         self.safety_distance = float(self.get_parameter('safety_distance').value)
+        self.scan_min_range = float(self.get_parameter('scan_min_range').value)
         self.pause_timeout = float(self.get_parameter('pause_timeout').value)
         self.trigger_on_low = bool(self.get_parameter('trigger_on_low').value)
         rate = float(self.get_parameter('control_rate').value)
@@ -88,7 +90,7 @@ class Homologation(Node):
         )
 
     def on_tirette(self, msg: Bool):
-        triggered = (msg.data is False) if self.trigger_on_low else (msg.data is True)
+        triggered = (not msg.data) if self.trigger_on_low else bool(msg.data)
         if not triggered:
             return
 
@@ -113,8 +115,11 @@ class Homologation(Node):
         )
 
     def on_scan(self, msg: LaserScan):
+        # Ignore returns below scan_min_range: those are typically the robot's
+        # own structure (lidar is mounted near the center of a 35cm robot).
         d = self.safety_distance
-        self.obstacle = any(0.0 < r < d for r in msg.ranges)
+        m = self.scan_min_range
+        self.obstacle = any(m < r < d for r in msg.ranges)
 
     def stop(self):
         self.cmd_pub.publish(Twist())
