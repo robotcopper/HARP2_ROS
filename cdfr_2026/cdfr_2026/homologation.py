@@ -76,6 +76,8 @@ class Homologation(Node):
         self.create_subscription(LaserScan, scan_topic, self.on_scan, scan_qos)
 
         self.obstacle = False
+        self.last_obstacle_logged = False
+        self.last_tirette_state = None
         self.state = 'idle'
         self.traj_idx = 0
         self.step_idx = 0
@@ -85,24 +87,41 @@ class Homologation(Node):
         self.create_timer(self.dt, self.tick)
 
         self.get_logger().info(
-            f'homologation ready: {len(TRAJECTORIES)} trajectories loaded, '
-            f'publishing to {cmd_topic}, listening to {gpio_topic}'
+            f'====== HOMOLOGATION READY ======\n'
+            f'  trajectories loaded : {len(TRAJECTORIES)}\n'
+            f'  publishing cmd_vel  : {cmd_topic}\n'
+            f'  listening tirette   : {gpio_topic}\n'
+            f'  safety distance     : {self.safety_distance}m '
+            f'(ignoring returns < {self.scan_min_range}m)\n'
+            f'  pause timeout       : {self.pause_timeout}s\n'
+            f'  >>> WAITING FOR FIRST /gpio_state MESSAGE FROM tirette_node <<<'
         )
 
     def on_tirette(self, msg: Bool):
+        if self.last_tirette_state != msg.data:
+            if msg.data:
+                self.get_logger().info(
+                    '>>> TIRETTE EN PLACE (gpio=HIGH) - standby, waiting to be pulled'
+                )
+            else:
+                self.get_logger().info(
+                    '>>> TIRETTE RETIREE (gpio=LOW) - MATCH TRIGGER'
+                )
+            self.last_tirette_state = msg.data
+
         triggered = (not msg.data) if self.trigger_on_low else bool(msg.data)
         if not triggered:
             return
 
         if self.state != 'idle':
             self.get_logger().warn(
-                f'tirette ignored: still {self.state} on trajectory {self.traj_idx}'
+                f'match start IGNORED: still {self.state} on trajectory {self.traj_idx}'
             )
             return
 
         if self.traj_idx >= len(TRAJECTORIES):
             self.get_logger().warn(
-                f'tirette ignored: all {len(TRAJECTORIES)} trajectories already played'
+                f'match start IGNORED: all {len(TRAJECTORIES)} trajectories already played'
             )
             return
 
@@ -110,8 +129,8 @@ class Homologation(Node):
         self.step_idx = 0
         self.step_elapsed = 0.0
         self.get_logger().info(
-            f'tirette -> starting trajectory {self.traj_idx} '
-            f'({len(TRAJECTORIES[self.traj_idx])} steps)'
+            f'>>> MATCH START: trajectory {self.traj_idx} '
+            f'({len(TRAJECTORIES[self.traj_idx])} steps) <<<'
         )
 
     def on_scan(self, msg: LaserScan):
@@ -144,7 +163,9 @@ class Homologation(Node):
                 self.state = 'paused'
                 self.pause_start = self.get_clock().now()
                 self.get_logger().warn(
-                    f'obstacle within {self.safety_distance}m -> pausing'
+                    f'/!\\ OBSTACLE detected within {self.safety_distance}m '
+                    f'-> trajectory {self.traj_idx} PAUSED (will abort after '
+                    f'{self.pause_timeout}s)'
                 )
             self.stop()
 
@@ -158,7 +179,10 @@ class Homologation(Node):
         if self.state == 'paused':
             self.state = 'running'
             self.pause_start = None
-            self.get_logger().info('clear -> resuming')
+            self.get_logger().info(
+                f'>>> obstacle CLEARED -> RESUMING trajectory {self.traj_idx} '
+                f'at step {self.step_idx}'
+            )
 
         traj = TRAJECTORIES[self.traj_idx]
         vx, vy, vw, duration = traj[self.step_idx]
