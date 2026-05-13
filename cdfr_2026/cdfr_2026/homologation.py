@@ -9,35 +9,59 @@ from sensor_msgs.msg import LaserScan
 
 
 # ============================================================================
-# EDIT THIS LIST TO DEFINE YOUR TRAJECTORIES
-# ----------------------------------------------------------------------------
-# Each trajectory is a list of steps. Each step is (vx, vy, vw, duration_s).
-#   vx, vy : m/s in base_link frame (vx = forward, vy = left)
-#   vw     : rad/s (positive = counter-clockwise)
-#   duration_s : how long to maintain that velocity
-#
-# Pause due to obstacle does NOT count towards the duration: the step's clock
-# only advances when the robot is actually moving.
+# DEFAULT SPEEDS — adjust if needed
 # ============================================================================
-TRAJECTORIES = [
-    # Trajectory 0 : forward 1.0 m
-    [
-        (0.2, 0.0, 0.0, 5.0),
-    ],
+LINEAR_SPEED = 0.2     # m/s for forward/backward/strafe
+ANGULAR_SPEED = 0.5    # rad/s for rotations (~28.6 deg/s, so 90 deg = ~3.14 s)
 
-    # Trajectory 1 : rotate ~90 deg then forward 0.5 m
-    [
-        (0.0, 0.0, 0.5, math.pi / 2 / 0.5),
-        (0.2, 0.0, 0.0, 2.5),
-    ],
 
-    # Trajectory 2 : square (forward, left, backward, right) of 0.5 m each
-    [
-        (0.2, 0.0, 0.0, 2.5),
-        (0.0, 0.2, 0.0, 2.5),
-        (-0.2, 0.0, 0.0, 2.5),
-        (0.0, -0.2, 0.0, 2.5),
-    ],
+# ============================================================================
+# HIGH-LEVEL TRAJECTORY HELPERS
+# ----------------------------------------------------------------------------
+# Each helper returns a step tuple (vx, vy, vw, duration_s).
+# Speeds can be overridden per-call with the optional 'speed' argument.
+# ============================================================================
+def forward(distance_m, speed=LINEAR_SPEED):
+    return (speed, 0.0, 0.0, distance_m / speed)
+
+
+def backward(distance_m, speed=LINEAR_SPEED):
+    return (-speed, 0.0, 0.0, distance_m / speed)
+
+
+def strafe_left(distance_m, speed=LINEAR_SPEED):
+    return (0.0, speed, 0.0, distance_m / speed)
+
+
+def strafe_right(distance_m, speed=LINEAR_SPEED):
+    return (0.0, -speed, 0.0, distance_m / speed)
+
+
+def rotate_ccw(angle_deg, speed=ANGULAR_SPEED):
+    return (0.0, 0.0, speed, math.radians(angle_deg) / speed)
+
+
+def rotate_cw(angle_deg, speed=ANGULAR_SPEED):
+    return (0.0, 0.0, -speed, math.radians(angle_deg) / speed)
+
+
+def wait(seconds):
+    return (0.0, 0.0, 0.0, seconds)
+
+
+# ============================================================================
+# EDIT THIS LIST TO DEFINE YOUR MATCH SEQUENCE
+# ----------------------------------------------------------------------------
+# The whole list is one match: triggered by the tirette, runs to completion.
+# Pause due to obstacle does NOT count towards a step's duration; the step's
+# clock only advances when the robot is actually moving.
+# Once the sequence is complete (or aborted on safety timeout), further tirette
+# pulls are ignored.
+# ============================================================================
+TRAJECTORY = [
+    forward(1.0),
+    rotate_ccw(90),
+    forward(0.5),
 ]
 
 
@@ -76,10 +100,9 @@ class Homologation(Node):
         self.create_subscription(LaserScan, scan_topic, self.on_scan, scan_qos)
 
         self.obstacle = False
-        self.last_obstacle_logged = False
         self.last_tirette_state = None
         self.state = 'idle'
-        self.traj_idx = 0
+        self.done = False
         self.step_idx = 0
         self.step_elapsed = 0.0
         self.pause_start = None
@@ -88,13 +111,13 @@ class Homologation(Node):
 
         self.get_logger().info(
             f'====== HOMOLOGATION READY ======\n'
-            f'  trajectories loaded : {len(TRAJECTORIES)}\n'
+            f'  match steps         : {len(TRAJECTORY)}\n'
             f'  publishing cmd_vel  : {cmd_topic}\n'
             f'  listening tirette   : {gpio_topic}\n'
             f'  safety distance     : {self.safety_distance}m '
             f'(ignoring returns < {self.scan_min_range}m)\n'
             f'  pause timeout       : {self.pause_timeout}s\n'
-            f'  >>> WAITING FOR FIRST /gpio_state MESSAGE FROM tirette_node <<<'
+            f'  >>> WAITING FOR FIRST /gpio_state MESSAGE <<<'
         )
 
     def on_tirette(self, msg: Bool):
@@ -113,15 +136,15 @@ class Homologation(Node):
         if not triggered:
             return
 
-        if self.state != 'idle':
+        if self.done:
             self.get_logger().warn(
-                f'match start IGNORED: still {self.state} on trajectory {self.traj_idx}'
+                'match start IGNORED: sequence already completed (or aborted)'
             )
             return
 
-        if self.traj_idx >= len(TRAJECTORIES):
+        if self.state != 'idle':
             self.get_logger().warn(
-                f'match start IGNORED: all {len(TRAJECTORIES)} trajectories already played'
+                f'match start IGNORED: still {self.state} at step {self.step_idx}'
             )
             return
 
@@ -129,8 +152,7 @@ class Homologation(Node):
         self.step_idx = 0
         self.step_elapsed = 0.0
         self.get_logger().info(
-            f'>>> MATCH START: trajectory {self.traj_idx} '
-            f'({len(TRAJECTORIES[self.traj_idx])} steps) <<<'
+            f'>>> MATCH START: sequence of {len(TRAJECTORY)} steps <<<'
         )
 
     def on_scan(self, msg: LaserScan):
@@ -145,12 +167,10 @@ class Homologation(Node):
 
     def abort_current(self, reason: str):
         self.get_logger().error(
-            f'aborting trajectory {self.traj_idx} at step {self.step_idx}: {reason}'
+            f'aborting match at step {self.step_idx}: {reason}'
         )
         self.stop()
-        self.traj_idx += 1
-        self.step_idx = 0
-        self.step_elapsed = 0.0
+        self.done = True
         self.state = 'idle'
         self.pause_start = None
 
@@ -164,8 +184,8 @@ class Homologation(Node):
                 self.pause_start = self.get_clock().now()
                 self.get_logger().warn(
                     f'/!\\ OBSTACLE detected within {self.safety_distance}m '
-                    f'-> trajectory {self.traj_idx} PAUSED (will abort after '
-                    f'{self.pause_timeout}s)'
+                    f'-> match PAUSED at step {self.step_idx} '
+                    f'(will abort after {self.pause_timeout}s)'
                 )
             self.stop()
 
@@ -180,12 +200,10 @@ class Homologation(Node):
             self.state = 'running'
             self.pause_start = None
             self.get_logger().info(
-                f'>>> obstacle CLEARED -> RESUMING trajectory {self.traj_idx} '
-                f'at step {self.step_idx}'
+                f'>>> obstacle CLEARED -> RESUMING match at step {self.step_idx}'
             )
 
-        traj = TRAJECTORIES[self.traj_idx]
-        vx, vy, vw, duration = traj[self.step_idx]
+        vx, vy, vw, duration = TRAJECTORY[self.step_idx]
 
         cmd = Twist()
         cmd.linear.x = float(vx)
@@ -199,14 +217,12 @@ class Homologation(Node):
             self.step_idx += 1
             self.step_elapsed = 0.0
 
-            if self.step_idx >= len(traj):
+            if self.step_idx >= len(TRAJECTORY):
                 self.stop()
                 self.get_logger().info(
-                    f'trajectory {self.traj_idx} done. '
-                    f'Next available: {self.traj_idx + 1}/{len(TRAJECTORIES)}'
+                    f'>>> MATCH COMPLETE: {len(TRAJECTORY)} steps done <<<'
                 )
-                self.traj_idx += 1
-                self.step_idx = 0
+                self.done = True
                 self.state = 'idle'
 
 
