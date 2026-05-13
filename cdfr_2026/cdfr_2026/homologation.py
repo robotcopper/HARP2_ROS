@@ -87,6 +87,8 @@ class Homologation(Node):
         self.declare_parameter('scan_topic', '/scan')
         self.declare_parameter('safety_distance', 0.22)
         self.declare_parameter('scan_min_range', 0.16)
+        self.declare_parameter('safety_cone_deg', 60.0)
+        self.declare_parameter('lidar_yaw_offset', 0.523599)
         self.declare_parameter('pause_timeout', 90.0)
         self.declare_parameter('match_duration', 100.0)
         self.declare_parameter('trigger_on_low', True)
@@ -97,6 +99,10 @@ class Homologation(Node):
         scan_topic = self.get_parameter('scan_topic').value
         self.safety_distance = float(self.get_parameter('safety_distance').value)
         self.scan_min_range = float(self.get_parameter('scan_min_range').value)
+        # Parameter is total cone angle; internal value is half-angle for math.
+        self.safety_cone_rad = math.radians(
+            float(self.get_parameter('safety_cone_deg').value) / 2.0)
+        self.lidar_yaw_offset = float(self.get_parameter('lidar_yaw_offset').value)
         self.pause_timeout = float(self.get_parameter('pause_timeout').value)
         self.match_duration = float(self.get_parameter('match_duration').value)
         self.trigger_on_low = bool(self.get_parameter('trigger_on_low').value)
@@ -182,14 +188,42 @@ class Homologation(Node):
         )
 
     def on_scan(self, msg: LaserScan):
-        # Ignore returns below scan_min_range: those are typically the robot's
-        # own structure (lidar is mounted near the center of a 35cm robot).
+        # Directional safety: only flag points within a cone around the current
+        # commanded motion direction. Pure rotations and wait steps don't
+        # trigger. scan_min_range filters out the robot's own structure.
+        if self.state == 'idle' or self.step_idx >= len(TRAJECTORY):
+            self.obstacle = False
+            self.obstacle_distance = None
+            return
+
+        vx, vy, _, _ = TRAJECTORY[self.step_idx]
+        if math.hypot(vx, vy) < 0.01:
+            self.obstacle = False
+            self.obstacle_distance = None
+            return
+
+        # Motion direction in base_link, then converted to lidar frame.
+        motion_dir_lidar = math.atan2(vy, vx) - self.lidar_yaw_offset
+        motion_dir_lidar = math.atan2(math.sin(motion_dir_lidar),
+                                      math.cos(motion_dir_lidar))
+
         d = self.safety_distance
         m = self.scan_min_range
-        in_zone = [r for r in msg.ranges if m < r < d]
-        if in_zone:
+        cone = self.safety_cone_rad
+
+        nearest = None
+        for i, r in enumerate(msg.ranges):
+            if not (m < r < d):
+                continue
+            angle = msg.angle_min + i * msg.angle_increment
+            diff = angle - motion_dir_lidar
+            diff = math.atan2(math.sin(diff), math.cos(diff))
+            if abs(diff) <= cone and (nearest is None or r < nearest):
+                nearest = r
+
+        if nearest is not None:
             self.obstacle = True
-            self.obstacle_distance = min(in_zone)
+            self.obstacle_distance = nearest
         else:
             self.obstacle = False
             self.obstacle_distance = None

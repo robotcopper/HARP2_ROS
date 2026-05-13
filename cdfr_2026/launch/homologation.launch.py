@@ -27,6 +27,8 @@ def generate_launch_description():
     use_gpio_reader = LaunchConfiguration('use_gpio_reader')
     safety_distance = LaunchConfiguration('safety_distance')
     scan_min_range = LaunchConfiguration('scan_min_range')
+    safety_cone_deg = LaunchConfiguration('safety_cone_deg')
+    lidar_yaw_offset = LaunchConfiguration('lidar_yaw_offset')
     pause_timeout = LaunchConfiguration('pause_timeout')
     match_duration = LaunchConfiguration('match_duration')
 
@@ -47,6 +49,12 @@ def generate_launch_description():
         DeclareLaunchArgument(
             'scan_min_range', default_value='0.16',
             description='Ignore scan returns below this (robot self-detection)'),
+        DeclareLaunchArgument(
+            'safety_cone_deg', default_value='60.0',
+            description='Total angle of safety cone around motion direction (deg)'),
+        DeclareLaunchArgument(
+            'lidar_yaw_offset', default_value='0.523599',
+            description='Lidar yaw relative to base_link (rad, from URDF laser_joint)'),
         DeclareLaunchArgument(
             'pause_timeout', default_value='90.0',
             description='Seconds of continuous pause before aborting current trajectory'),
@@ -105,6 +113,8 @@ def generate_launch_description():
             parameters=[{
                 'safety_distance': safety_distance,
                 'scan_min_range': scan_min_range,
+                'safety_cone_deg': safety_cone_deg,
+                'lidar_yaw_offset': lidar_yaw_offset,
                 'pause_timeout': pause_timeout,
                 'match_duration': match_duration,
             }],
