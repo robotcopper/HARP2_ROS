@@ -14,13 +14,13 @@ class GPIOReader(Node):
 
         self.C = 17
         self.NO = 22
-        self.TEAM = 21
+        # self.TEAM = 21
 
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.C, GPIO.OUT)
         GPIO.setup(self.NO, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
         GPIO.output(self.C, GPIO.HIGH)
-        GPIO.setup(self.TEAM, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        # GPIO.setup(self.TEAM, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
         self.SERVO_PIN = 18
         GPIO.setup(self.SERVO_PIN, GPIO.OUT)
@@ -44,7 +44,7 @@ class GPIOReader(Node):
         #     qos
         # )
 
-        self.team = 0
+        # self.team = 0
         self.pose_sent = False
 
         self.last_state = None
@@ -76,7 +76,7 @@ class GPIOReader(Node):
         self.get_logger().info(f'Servo set to {angle} degrees (duty cycle: {duty:.2f}%)')
 
     def read_gpio(self):
-        self.team = GPIO.input(self.TEAM)
+        # self.team = GPIO.input(self.TEAM)
         # self.get_logger().info(f'TEAM: {team}.')
 
         current_state = GPIO.input(self.NO)
@@ -154,11 +154,11 @@ class GPIOReader(Node):
             twist.linear.y = y
             self.publisher_cmdvel.publish(twist)
             if (now - self.state_start_time).nanoseconds / 1e9 > 0.5/abs(vel):
-                team_choice = 1
+                team_choice = 0 #<<<<<<<<<ICI equipe
                 if (team_choice == 0):
                     self.state = 'left'
                     self.state_start_time = now
-                else:
+                elif (team_choice == 1):
                     self.state = 'right'
                     self.state_start_time = now
 
@@ -178,7 +178,7 @@ class GPIOReader(Node):
             twist.linear.x = x
             twist.linear.y = y
             self.publisher_cmdvel.publish(twist)
-            if (now - self.state_start_time).nanoseconds / 1e9 > 1.1/abs(vel):
+            if (now - self.state_start_time).nanoseconds / 1e9 > 0.9/abs(vel):
                 self.state = 'idle'
                 self.state_start_time = now
         
@@ -198,7 +198,7 @@ class GPIOReader(Node):
                 twist.linear.x = x
                 twist.linear.y = y
                 self.publisher_cmdvel.publish(twist)
-                if (now - self.state_start_time).nanoseconds / 1e9 > 1.2/abs(vel):
+                if (now - self.state_start_time).nanoseconds / 1e9 > 0.9/abs(vel):
                     self.state = 'idle'
                     self.state_start_time = now
         
