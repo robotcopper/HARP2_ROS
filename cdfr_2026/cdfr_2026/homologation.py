@@ -121,6 +121,7 @@ class Homologation(Node):
         self.step_elapsed = 0.0
         self.pause_start = None
         self.match_start_time = None
+        self.match_window_closed = False
 
         self.create_timer(self.dt, self.tick)
 
@@ -205,23 +206,31 @@ class Homologation(Node):
         self.pause_start = None
 
     def tick(self):
-        if self.state == 'idle':
-            return
-
-        # Official match timer: wall-clock since tirette trigger. Independent
-        # of obstacle pauses — match time keeps running even while paused.
-        if self.match_start_time is not None:
+        # Official match timer: wall-clock since tirette trigger. Runs even
+        # after the sequence completed, so we always log when the 100s window
+        # actually closes.
+        if self.match_start_time is not None and not self.match_window_closed:
             elapsed = (self.get_clock().now() - self.match_start_time).nanoseconds / 1e9
             if elapsed >= self.match_duration:
-                self.get_logger().info(
-                    f'{C.BOLD}{C.YELLOW}>>> MATCH TIME UP ({self.match_duration}s elapsed) - '
-                    f'FULL STOP at step {self.step_idx} <<<{C.RESET}'
-                )
-                self.stop()
-                self.done = True
-                self.state = 'idle'
-                self.pause_start = None
+                if self.state != 'idle':
+                    self.get_logger().info(
+                        f'{C.BOLD}{C.YELLOW}>>> MATCH TIME UP ({self.match_duration}s) - '
+                        f'FULL STOP at step {self.step_idx} <<<{C.RESET}'
+                    )
+                    self.stop()
+                    self.done = True
+                    self.state = 'idle'
+                    self.pause_start = None
+                else:
+                    self.get_logger().info(
+                        f'{C.BOLD}{C.YELLOW}>>> MATCH TIME UP ({self.match_duration}s) - '
+                        f'end of the 100s window <<<{C.RESET}'
+                    )
+                self.match_window_closed = True
                 return
+
+        if self.state == 'idle':
+            return
 
         if self.obstacle:
             if self.state == 'running':
