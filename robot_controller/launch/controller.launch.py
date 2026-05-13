@@ -49,7 +49,14 @@ def generate_launch_description():
             ],
             output="both",
             namespace=namespace,
-            remappings=[("~/robot_description", "robot_description"),] # Use of robot_description topic to get robot description
+            remappings=[
+                ("~/robot_description", "robot_description"),
+                # Route the controller's cmd_vel input through the safety layer.
+                # Sources publish to /cmd_vel; safety_layer (collision_monitor or relay)
+                # forwards to /omnidirectional_controller/cmd_vel_safety_unstamped.
+                ("/omnidirectional_controller/cmd_vel_unstamped",
+                 "/omnidirectional_controller/cmd_vel_safety_unstamped"),
+            ]
         ),
 
         Node(

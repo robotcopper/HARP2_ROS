@@ -1,0 +1,39 @@
+collision_monitor:
+  ros__parameters:
+    base_frame_id: "base_link"
+    odom_frame_id: "odom"
+    cmd_vel_in_topic: "/cmd_vel"
+    cmd_vel_out_topic: "/omnidirectional_controller/cmd_vel_safety_unstamped"
+    state_topic: "/collision_monitor_state"
+    transform_tolerance: 0.2
+    source_timeout: 1.0
+    base_shift_correction: True
+    stop_pub_timeout: 2.0
+
+    polygons: ["StopCircle", "ApproachCircle"]
+
+    StopCircle:
+      type: "circle"
+      radius: 0.20
+      action_type: "stop"
+      min_points: 4
+      visualize: True
+      polygon_pub_topic: "/collision_monitor/stop_circle"
+      enabled: True
+
+    ApproachCircle:
+      type: "circle"
+      radius: 0.40
+      action_type: "approach"
+      time_before_collision: 2.0
+      simulation_time_step: 0.1
+      min_points: 4
+      visualize: True
+      polygon_pub_topic: "/collision_monitor/approach_circle"
+      enabled: True
+
+    observation_sources: ["scan"]
+    scan:
+      type: "scan"
+      topic: "/scan"
+      enabled: True

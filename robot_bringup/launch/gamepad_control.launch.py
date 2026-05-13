@@ -17,12 +17,15 @@ def generate_launch_description():
     # Create the launch configuration variables
     namespace = LaunchConfiguration('namespace')
     launch_on_robot = LaunchConfiguration('launch_on_robot')
+    safety_enabled = LaunchConfiguration('safety_enabled')
 
     # Specify directory and path to file within package
     robot_description_pkg_dir = get_package_share_directory('robot_description')
     robot_controller_pkg_dir = get_package_share_directory('robot_controller')
+    robot_bringup_pkg_dir = get_package_share_directory('robot_bringup')
     controller_launch_file_subpath = 'launch/controller.launch.py'
     robot_description_launch_file_subpath = 'launch/robot_description.launch.py'
+    safety_layer_launch_subpath = 'launch/safety_layer.launch.py'
     urdf_file_subpath = 'urdf/robot.urdf.xacro'
     gamepad_config = PathJoinSubstitution([FindPackageShare("robot_bringup"),"params","teleop_holonomic_config.yaml"])
 
@@ -57,6 +60,12 @@ def generate_launch_description():
             'launch_on_robot',
             default_value='False',
             description='launch_on_robot'
+        ),
+
+        DeclareLaunchArgument(
+            'safety_enabled',
+            default_value='True',
+            description='Enable collision_monitor safety filter on /cmd_vel'
         ),
 
         ExecuteProcess(
@@ -104,9 +113,16 @@ def generate_launch_description():
             ],
             output="screen",
             namespace=namespace,
-            remappings=[("/cmd_vel", "/omnidirectional_controller/cmd_vel_unstamped"),("/joy", "/gamepad_joy"),]
+            remappings=[("/joy", "/gamepad_joy"),]
         ),
-        
+
+        IncludeLaunchDescription(
+            PythonLaunchDescriptionSource(
+                os.path.join(robot_bringup_pkg_dir, safety_layer_launch_subpath)
+            ),
+            launch_arguments={'safety_enabled': safety_enabled}.items()
+        ),
+
         # Log the message if launch_on_robot is false
         TimerAction(
             period=2.0,  # Wait 2 seconds after the last node starts

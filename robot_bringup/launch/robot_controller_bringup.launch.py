@@ -140,7 +140,7 @@ def generate_launch_description():
                               'world': world,
                               'robot_name': robot_name,
                               'x_pose': pose['x'],
-                              'x_pose': pose['y'],
+                              'y_pose': pose['y'],
                               'z_pose': pose['z'],
                               'use_gazebo': use_gazebo,
                              }.items()

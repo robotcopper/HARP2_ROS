@@ -17,12 +17,15 @@ def generate_launch_description():
     # Create the launch configuration variables
     namespace = LaunchConfiguration('namespace')
     use_twist_acc_filter = LaunchConfiguration('use_twist_acc_filter')
+    safety_enabled = LaunchConfiguration('safety_enabled')
 
     # Specify directory and path to file within package
     robot_description_pkg_dir = get_package_share_directory('robot_description')
     robot_controller_pkg_dir = get_package_share_directory('robot_controller')
+    robot_bringup_pkg_dir = get_package_share_directory('robot_bringup')
     controller_launch_file_subpath = 'launch/controller.launch.py'
     robot_description_launch_file_subpath = 'launch/robot_description.launch.py'
+    safety_layer_launch_subpath = 'launch/safety_layer.launch.py'
     urdf_file_subpath = 'urdf/robot.urdf.xacro'
 
 
@@ -43,6 +46,12 @@ def generate_launch_description():
             'use_twist_acc_filter',
             default_value='False',
             description='use_twist_acc_filter'
+        ),
+
+        DeclareLaunchArgument(
+            'safety_enabled',
+            default_value='True',
+            description='Enable collision_monitor safety filter on /cmd_vel'
         ),
 
         ExecuteProcess(
@@ -85,21 +94,29 @@ def generate_launch_description():
 
 
         ExecuteProcess(
-            condition=UnlessCondition(use_twist_acc_filter), 
+            condition=UnlessCondition(use_twist_acc_filter),
             cmd=[
                 'gnome-terminal', '--', 'ros2', 'run', 'teleop_twist_keyboard', 'teleop_twist_keyboard',
-                '--ros-args', '--remap', '/cmd_vel:=/omnidirectional_controller/cmd_vel_unstamped'
             ],
             output='screen',
         ),
 
         Node(
-            condition=IfCondition(use_twist_acc_filter), 
+            condition=IfCondition(use_twist_acc_filter),
             package="robot_controller",
             executable="twist_acc_filter",
             output="screen",
             namespace=namespace,
+            # twist_acc_filter has /omnidirectional_controller/cmd_vel_unstamped hardcoded
+            # as its output topic. Redirect it to /cmd_vel so it passes through the safety layer.
+            remappings=[("/omnidirectional_controller/cmd_vel_unstamped", "/cmd_vel")],
         ),
-        
+
+        IncludeLaunchDescription(
+            PythonLaunchDescriptionSource(
+                os.path.join(robot_bringup_pkg_dir, safety_layer_launch_subpath)
+            ),
+            launch_arguments={'safety_enabled': safety_enabled}.items()
+        ),
 
     ])
