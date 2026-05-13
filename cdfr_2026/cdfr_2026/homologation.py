@@ -8,6 +8,18 @@ from geometry_msgs.msg import Twist
 from sensor_msgs.msg import LaserScan
 
 
+# ANSI escape codes for colored log messages.
+class C:
+    RESET = '\033[0m'
+    BOLD = '\033[1m'
+    RED = '\033[91m'
+    GREEN = '\033[92m'
+    YELLOW = '\033[93m'
+    BLUE = '\033[94m'
+    MAGENTA = '\033[95m'
+    CYAN = '\033[96m'
+
+
 # ============================================================================
 # DEFAULT SPEEDS — adjust if needed
 # ============================================================================
@@ -113,7 +125,7 @@ class Homologation(Node):
         self.create_timer(self.dt, self.tick)
 
         self.get_logger().info(
-            f'====== HOMOLOGATION READY ======\n'
+            f'{C.BOLD}{C.CYAN}====== HOMOLOGATION READY ======{C.RESET}\n'
             f'  match steps         : {len(TRAJECTORY)}\n'
             f'  match duration      : {self.match_duration}s (hard stop at expiry)\n'
             f'  publishing cmd_vel  : {cmd_topic}\n'
@@ -121,7 +133,7 @@ class Homologation(Node):
             f'  safety distance     : {self.safety_distance}m '
             f'(ignoring returns < {self.scan_min_range}m)\n'
             f'  pause timeout       : {self.pause_timeout}s\n'
-            f'  >>> WAITING FOR FIRST /gpio_state MESSAGE <<<'
+            f'  {C.YELLOW}>>> WAITING FOR FIRST /gpio_state MESSAGE <<<{C.RESET}'
         )
 
     def on_tirette(self, msg: Bool):
@@ -132,11 +144,13 @@ class Homologation(Node):
 
         if msg.data:
             self.get_logger().info(
-                '>>> TIRETTE EN PLACE (gpio=HIGH) - standby, waiting to be pulled'
+                f'{C.GREEN}>>> TIRETTE EN PLACE (gpio=HIGH) - '
+                f'standby, waiting to be pulled{C.RESET}'
             )
         else:
             self.get_logger().info(
-                '>>> TIRETTE RETIREE (gpio=LOW) - MATCH TRIGGER'
+                f'{C.BOLD}{C.MAGENTA}>>> TIRETTE RETIREE (gpio=LOW) - '
+                f'MATCH TRIGGER{C.RESET}'
             )
         self.last_tirette_state = msg.data
 
@@ -161,8 +175,8 @@ class Homologation(Node):
         self.step_elapsed = 0.0
         self.match_start_time = self.get_clock().now()
         self.get_logger().info(
-            f'>>> MATCH START: sequence of {len(TRAJECTORY)} steps, '
-            f'{self.match_duration}s on the clock <<<'
+            f'{C.BOLD}{C.GREEN}>>> MATCH START: sequence of {len(TRAJECTORY)} steps, '
+            f'{self.match_duration}s on the clock <<<{C.RESET}'
         )
 
     def on_scan(self, msg: LaserScan):
@@ -183,7 +197,7 @@ class Homologation(Node):
 
     def abort_current(self, reason: str):
         self.get_logger().error(
-            f'aborting match at step {self.step_idx}: {reason}'
+            f'{C.BOLD}{C.RED}aborting match at step {self.step_idx}: {reason}{C.RESET}'
         )
         self.stop()
         self.done = True
@@ -200,8 +214,8 @@ class Homologation(Node):
             elapsed = (self.get_clock().now() - self.match_start_time).nanoseconds / 1e9
             if elapsed >= self.match_duration:
                 self.get_logger().info(
-                    f'>>> MATCH TIME UP ({self.match_duration}s elapsed) - '
-                    f'FULL STOP at step {self.step_idx} <<<'
+                    f'{C.BOLD}{C.YELLOW}>>> MATCH TIME UP ({self.match_duration}s elapsed) - '
+                    f'FULL STOP at step {self.step_idx} <<<{C.RESET}'
                 )
                 self.stop()
                 self.done = True
@@ -215,9 +229,9 @@ class Homologation(Node):
                 self.pause_start = self.get_clock().now()
                 d = self.obstacle_distance if self.obstacle_distance is not None else 0.0
                 self.get_logger().warn(
-                    f'/!\\ OBSTACLE at {d:.2f}m '
+                    f'{C.BOLD}{C.RED}/!\\ OBSTACLE at {d:.2f}m{C.RESET} '
                     f'(zone {self.scan_min_range:.2f}-{self.safety_distance:.2f}m) '
-                    f'-> match PAUSED at step {self.step_idx} '
+                    f'-> match {C.BOLD}PAUSED{C.RESET} at step {self.step_idx} '
                     f'(will abort after {self.pause_timeout}s)'
                 )
             self.stop()
@@ -233,7 +247,8 @@ class Homologation(Node):
             self.state = 'running'
             self.pause_start = None
             self.get_logger().info(
-                f'>>> obstacle CLEARED -> RESUMING match at step {self.step_idx}'
+                f'{C.GREEN}>>> obstacle CLEARED -> RESUMING match at step '
+                f'{self.step_idx}{C.RESET}'
             )
 
         vx, vy, vw, duration = TRAJECTORY[self.step_idx]
@@ -253,7 +268,8 @@ class Homologation(Node):
             if self.step_idx >= len(TRAJECTORY):
                 self.stop()
                 self.get_logger().info(
-                    f'>>> MATCH COMPLETE: {len(TRAJECTORY)} steps done <<<'
+                    f'{C.BOLD}{C.GREEN}>>> MATCH COMPLETE: '
+                    f'{len(TRAJECTORY)} steps done <<<{C.RESET}'
                 )
                 self.done = True
                 self.state = 'idle'
