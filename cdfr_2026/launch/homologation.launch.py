@@ -3,8 +3,16 @@ import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch_ros.actions import Node
-from launch.actions import DeclareLaunchArgument, ExecuteProcess, IncludeLaunchDescription
+from launch.actions import (
+    DeclareLaunchArgument,
+    ExecuteProcess,
+    IncludeLaunchDescription,
+    RegisterEventHandler,
+    EmitEvent,
+)
 from launch.conditions import IfCondition
+from launch.event_handlers import OnProcessExit
+from launch.events import Shutdown
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration, Command, PythonExpression
 
@@ -39,6 +47,33 @@ def generate_launch_description():
     lidar_yaw_offset = LaunchConfiguration('lidar_yaw_offset')
     pause_timeout = LaunchConfiguration('pause_timeout')
     match_duration = LaunchConfiguration('match_duration')
+
+    # Tue tout agent résiduel AVANT de lancer le nouveau (règle le problème de
+    # reconnexion forcée après Ctrl+C / Ctrl+Z)
+    cleanup_agent = ExecuteProcess(
+        condition=IfCondition(launch_on_robot),
+        cmd=['bash', '-c', 'pkill -9 -f micro_ros_agent || true; sleep 0.5'],
+        output='screen',
+    )
+
+    # L'agent micro-ROS avec timeouts de shutdown explicites
+    micro_ros_agent = ExecuteProcess(
+        condition=IfCondition(launch_on_robot),
+        cmd=['ros2', 'run', 'micro_ros_agent', 'micro_ros_agent',
+             'serial', '--dev', '/dev/pico_mobile_base'],
+        output='screen',
+        sigterm_timeout='3',
+        sigkill_timeout='2',
+    )
+
+    # Si l'agent meurt inopinément → shutdown propre de tout le launch
+    agent_exit_handler = RegisterEventHandler(
+        condition=IfCondition(launch_on_robot),
+        event_handler=OnProcessExit(
+            target_action=micro_ros_agent,
+            on_exit=[EmitEvent(event=Shutdown())],
+        )
+    )
 
     return LaunchDescription([
         DeclareLaunchArgument('namespace', default_value=''),
@@ -79,12 +114,10 @@ def generate_launch_description():
             'match_duration', default_value='100.0',
             description='Total match duration in seconds (wall-clock from tirette pull)'),
 
-        ExecuteProcess(
-            condition=IfCondition(launch_on_robot),
-            cmd=['ros2', 'run', 'micro_ros_agent', 'micro_ros_agent',
-                 'serial', '--dev', '/dev/pico_mobile_base'],
-            output='screen',
-        ),
+        # micro_ros_agent : nettoyage résidu → lancement → handler de sortie
+        cleanup_agent,
+        micro_ros_agent,
+        agent_exit_handler,
 
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(
