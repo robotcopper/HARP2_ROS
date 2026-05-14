@@ -46,22 +46,53 @@ def generate_launch_description():
     pause_timeout = LaunchConfiguration('pause_timeout')
     match_duration = LaunchConfiguration('match_duration')
 
-    # --- micro_ros_agent: cleanup + sequenced launch -----------------------
-    # `pkill -x` matches the executable basename exactly so it does NOT match
-    # this bash process (whose command line contains "micro_ros_agent" as
-    # text in its arguments and would self-kill with `pkill -f`).
+    # --- micro_ros_agent: graceful cleanup + sequenced launch --------------
+    # 1) SIGTERM (graceful), wait 1s, then SIGKILL fallback. Gives the agent
+    #    a chance to close the serial port cleanly, reducing Pico-zombie risk.
+    # 2) Wait for /dev/pico_mobile_base to be back (udev re-creates after
+    #    USB CDC re-handshake).
+    # 3) Optional USB reset via sysfs if `pico_usb_reset.sh` is on PATH.
+    # 4) Clear error if port still missing.
+    # `pkill -x` matches the binary name exactly (NOT this bash, whose cmd
+    # line contains "micro_ros_agent" as text and would be self-killed by -f).
     cleanup_agent = ExecuteProcess(
         condition=IfCondition(launch_on_robot),
         cmd=['bash', '-c',
-             'pkill -9 -x micro_ros_agent 2>/dev/null || true'],
+             'echo "[cleanup] graceful shutdown of any stale micro_ros_agent..."; '
+             'pkill -TERM -x micro_ros_agent 2>/dev/null && sleep 1 || true; '
+             'pkill -9 -x micro_ros_agent 2>/dev/null || true; '
+             'sleep 0.5; '
+             'echo "[cleanup] waiting for /dev/pico_mobile_base..."; '
+             'for i in $(seq 1 20); do '
+             '  if [ -e /dev/pico_mobile_base ]; then '
+             '    echo "[cleanup] serial port ready"; '
+             '    exit 0; '
+             '  fi; '
+             '  sleep 0.5; '
+             'done; '
+             '# Last resort: try usbreset if available (needs udev rule).'
+             'if command -v pico_usb_reset.sh >/dev/null 2>&1; then '
+             '  echo "[cleanup] trying USB reset..."; '
+             '  pico_usb_reset.sh || true; '
+             '  sleep 2; '
+             '  [ -e /dev/pico_mobile_base ] && echo "[cleanup] port recovered" && exit 0; '
+             'fi; '
+             'echo "[cleanup] /!\\\\ /dev/pico_mobile_base NOT FOUND - '
+             'PICO ZOMBIE, REPLUG IT" >&2; '
+             'exit 1'],
         output='screen',
     )
 
+    # sigterm_timeout: give micro_ros_agent 5s to flush & close serial when
+    # Ctrl+C'ing, before sending SIGKILL. The agent thus has time to send
+    # a final disconnect to the Pico so its USB CDC stays sane.
     micro_ros_agent = ExecuteProcess(
         condition=IfCondition(launch_on_robot),
         cmd=['ros2', 'run', 'micro_ros_agent', 'micro_ros_agent',
              'serial', '--dev', '/dev/pico_mobile_base'],
         output='screen',
+        sigterm_timeout='5',
+        sigkill_timeout='2',
     )
 
     # Sequential: micro_ros_agent only starts AFTER cleanup_agent exits.
