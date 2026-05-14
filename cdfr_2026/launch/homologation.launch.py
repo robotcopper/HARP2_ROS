@@ -45,6 +45,8 @@ def generate_launch_description():
     lidar_yaw_offset = LaunchConfiguration('lidar_yaw_offset')
     pause_timeout = LaunchConfiguration('pause_timeout')
     match_duration = LaunchConfiguration('match_duration')
+    backup_overshoot_m = LaunchConfiguration('backup_overshoot_m')
+    rotation_overshoot_deg = LaunchConfiguration('rotation_overshoot_deg')
 
     # --- micro_ros_agent: graceful cleanup + sequenced launch --------------
     # 1) SIGTERM (graceful), wait 1s, then SIGKILL fallback. Gives the agent
@@ -150,6 +152,12 @@ def generate_launch_description():
         DeclareLaunchArgument(
             'match_duration', default_value='100.0',
             description='Total match duration in seconds (wall-clock from tirette pull)'),
+        DeclareLaunchArgument(
+            'backup_overshoot_m', default_value='0.0',
+            description='Calibration: meters subtracted from BACKUP target to compensate inertia overshoot'),
+        DeclareLaunchArgument(
+            'rotation_overshoot_deg', default_value='0.0',
+            description='Calibration: degrees subtracted from ROTATE target to compensate inertia overshoot'),
 
         # micro_ros_agent sequence : cleanup -> agent (sequential, no cascade)
         cleanup_agent,
@@ -216,6 +224,10 @@ def generate_launch_description():
             name='calibration_node',
             output='screen',
             emulate_tty=True,
+            parameters=[{
+                'backup_overshoot_m': backup_overshoot_m,
+                'rotation_overshoot_deg': rotation_overshoot_deg,
+            }],
         ),
 
         Node(

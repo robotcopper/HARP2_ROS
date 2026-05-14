@@ -67,6 +67,12 @@ class CalibrationNode(Node):
         self.declare_parameter('rotation_angle_deg', -30.0)
         self.declare_parameter('final_rotation_angle_deg', 60.0)
 
+        # --- Overshoot compensation: subtracted from target before computing
+        # the phase duration. To tune: if the robot overshoots by X cm or Y°,
+        # set the overshoot to ~X cm / Y° (in m and deg).
+        self.declare_parameter('backup_overshoot_m', 0.0)
+        self.declare_parameter('rotation_overshoot_deg', 0.0)
+
         # --- Limit switch indices
         self.declare_parameter('switches_right', [2, 3])
         self.declare_parameter('switches_left', [0, 1])
@@ -93,6 +99,10 @@ class CalibrationNode(Node):
             float(self.get_parameter('rotation_angle_deg').value))
         self.final_rotation_angle_rad = math.radians(
             float(self.get_parameter('final_rotation_angle_deg').value))
+        self.backup_overshoot_m = float(
+            self.get_parameter('backup_overshoot_m').value)
+        self.rotation_overshoot_rad = math.radians(
+            float(self.get_parameter('rotation_overshoot_deg').value))
         self.switches_right = list(self.get_parameter('switches_right').value)
         self.switches_left = list(self.get_parameter('switches_left').value)
         rate = float(self.get_parameter('control_rate').value)
@@ -135,6 +145,8 @@ class CalibrationNode(Node):
             f'/ {self.left_backup_m*100:.3f} cm (switches {self.switches_left})\n'
             f'  mid rotation        : {math.degrees(self.rotation_angle_rad):+.1f}°\n'
             f'  final rotation      : {math.degrees(self.final_rotation_angle_rad):+.1f}°\n'
+            f'  overshoot comp      : backup {self.backup_overshoot_m*100:.2f} cm, '
+            f'rotation {math.degrees(self.rotation_overshoot_rad):.2f}°\n'
             f'  speeds              : v_t = {self.v_t} m/s, v_r = {self.v_r} rad/s\n'
             f'  homing timeout      : {self.homing_timeout}s\n'
             f'  auto_start          : {self.auto_start} '
@@ -220,10 +232,13 @@ class CalibrationNode(Node):
             self.cmd_pub.publish(self.translation_twist(self.right_dir_rad))
             if self.all_pressed(self.switches_right):
                 self.stop()
-                self.phase_duration = self.right_backup_m / self.v_t
+                effective = max(0.0, self.right_backup_m - self.backup_overshoot_m)
+                self.phase_duration = effective / self.v_t
                 self.transition(
                     S_BACKUP_RIGHT,
-                    f'backing up {self.right_backup_m*100:.3f} cm '
+                    f'backing up {self.right_backup_m*100:.2f} cm '
+                    f'(commanded {effective*100:.2f} cm, '
+                    f'overshoot comp {self.backup_overshoot_m*100:.2f} cm) '
                     f'over {self.phase_duration:.2f}s',
                     color=C.CYAN,
                 )
@@ -234,10 +249,16 @@ class CalibrationNode(Node):
                 self.translation_twist(self.right_dir_rad + math.pi))
             if (now - self.phase_start_time) >= self.phase_duration:
                 self.stop()
-                self.phase_duration = abs(self.rotation_angle_rad) / self.v_r
+                eff_rad = max(0.0,
+                              abs(self.rotation_angle_rad)
+                              - self.rotation_overshoot_rad)
+                self.phase_duration = eff_rad / self.v_r
                 self.transition(
                     S_ROTATE,
                     f'rotating {math.degrees(self.rotation_angle_rad):+.1f}° '
+                    f'(commanded {math.degrees(eff_rad) * (1 if self.rotation_angle_rad >= 0 else -1):+.2f}°, '
+                    f'overshoot comp '
+                    f'{math.degrees(self.rotation_overshoot_rad):.2f}°) '
                     f'over {self.phase_duration:.2f}s',
                     color=C.CYAN,
                 )
@@ -260,10 +281,13 @@ class CalibrationNode(Node):
             self.cmd_pub.publish(self.translation_twist(self.left_dir_rad))
             if self.all_pressed(self.switches_left):
                 self.stop()
-                self.phase_duration = self.left_backup_m / self.v_t
+                effective = max(0.0, self.left_backup_m - self.backup_overshoot_m)
+                self.phase_duration = effective / self.v_t
                 self.transition(
                     S_BACKUP_LEFT,
-                    f'backing up {self.left_backup_m*100:.3f} cm '
+                    f'backing up {self.left_backup_m*100:.2f} cm '
+                    f'(commanded {effective*100:.2f} cm, '
+                    f'overshoot comp {self.backup_overshoot_m*100:.2f} cm) '
                     f'over {self.phase_duration:.2f}s',
                     color=C.CYAN,
                 )
@@ -274,10 +298,16 @@ class CalibrationNode(Node):
                 self.translation_twist(self.left_dir_rad + math.pi))
             if (now - self.phase_start_time) >= self.phase_duration:
                 self.stop()
-                self.phase_duration = abs(self.final_rotation_angle_rad) / self.v_r
+                eff_rad = max(0.0,
+                              abs(self.final_rotation_angle_rad)
+                              - self.rotation_overshoot_rad)
+                self.phase_duration = eff_rad / self.v_r
                 self.transition(
                     S_FINAL_ROTATE,
                     f'final rotation {math.degrees(self.final_rotation_angle_rad):+.1f}° '
+                    f'(commanded {math.degrees(eff_rad) * (1 if self.final_rotation_angle_rad >= 0 else -1):+.2f}°, '
+                    f'overshoot comp '
+                    f'{math.degrees(self.rotation_overshoot_rad):.2f}°) '
                     f'over {self.phase_duration:.2f}s',
                     color=C.CYAN,
                 )
