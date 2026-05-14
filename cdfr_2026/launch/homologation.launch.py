@@ -6,7 +6,7 @@ from launch_ros.actions import Node
 from launch.actions import DeclareLaunchArgument, ExecuteProcess, IncludeLaunchDescription
 from launch.conditions import IfCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import LaunchConfiguration, Command
+from launch.substitutions import LaunchConfiguration, Command, PythonExpression
 
 
 def generate_launch_description():
@@ -24,7 +24,13 @@ def generate_launch_description():
     namespace = LaunchConfiguration('namespace')
     launch_on_robot = LaunchConfiguration('launch_on_robot')
     use_lidar = LaunchConfiguration('use_lidar')
+    lidar_model = LaunchConfiguration('lidar_model')
     use_gpio_reader = LaunchConfiguration('use_gpio_reader')
+
+    # /ydlidarx4/scan for X4, /tminipro/scan otherwise.
+    scan_topic = PythonExpression([
+        "'/ydlidarx4/scan' if '", lidar_model, "' == 'X4' else '/tminipro/scan'"
+    ])
     safety_distance = LaunchConfiguration('safety_distance')
     scan_min_range = LaunchConfiguration('scan_min_range')
     safety_cone_deg = LaunchConfiguration('safety_cone_deg')
@@ -40,6 +46,9 @@ def generate_launch_description():
         DeclareLaunchArgument(
             'use_lidar', default_value='True',
             description='Launch the YDLIDAR driver'),
+        DeclareLaunchArgument(
+            'lidar_model', default_value='TminiPro',
+            description='Lidar model: X4 or TminiPro. Selects the YAML in robot_bringup/params/ and the scan topic name (/ydlidarx4/scan or /tminipro/scan).'),
         DeclareLaunchArgument(
             'use_gpio_reader', default_value='True',
             description='Launch the cdfr_2026 gpio_reader node (requires RPi.GPIO on a Raspberry Pi)'),
@@ -94,7 +103,15 @@ def generate_launch_description():
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(
                 os.path.join(robot_bringup_pkg, 'launch', 'lidar.launch.py')),
-            launch_arguments={'use_lidar': use_lidar}.items(),
+            launch_arguments={
+                'use_lidar': use_lidar,
+                'lidar_params_file': [
+                    robot_bringup_pkg + '/params/',
+                    lidar_model,
+                    '.yaml',
+                ],
+                'scan_topic': scan_topic,
+            }.items(),
         ),
 
         Node(
@@ -117,6 +134,7 @@ def generate_launch_description():
                 'lidar_yaw_offset': lidar_yaw_offset,
                 'pause_timeout': pause_timeout,
                 'match_duration': match_duration,
+                'scan_topic': scan_topic,
             }],
         ),
     ])
