@@ -10,14 +10,23 @@ except ImportError:
     GPIO = None
 
 
-class GpioReader(Node):
+class PullGpioReader(Node):
+    """Reads the tirette (pull-cord) switch and publishes its state.
+
+    Wiring (BCM):
+      Pin 11 (BCM 17) ── [Switch] ── Pin 15 (BCM 22)
+         OUT HIGH                       IN + pull-down
+         (3.3V)                              │
+                                            GND
+    """
+
     def __init__(self):
-        super().__init__('gpio_reader')
+        super().__init__('pull_gpio_reader')
 
         self.declare_parameter('com_pin', 17)
         self.declare_parameter('no_pin', 22)
         self.declare_parameter('publish_rate', 20.0)
-        self.declare_parameter('topic', '/gpio_state')
+        self.declare_parameter('topic', '/pull_gpio_state')
 
         self.com_pin = int(self.get_parameter('com_pin').value)
         self.no_pin = int(self.get_parameter('no_pin').value)
@@ -42,7 +51,7 @@ class GpioReader(Node):
         self.create_timer(1.0 / rate, self.read_and_publish)
 
         self.get_logger().info(
-            f'gpio_reader started: BCM com={self.com_pin}, no={self.no_pin}, '
+            f'pull_gpio_reader started: BCM com={self.com_pin}, no={self.no_pin}, '
             f'rate={rate}Hz, topic={topic}'
         )
 
@@ -54,7 +63,9 @@ class GpioReader(Node):
 
         if current != self.last_state:
             label = 'CONNECTED' if current else 'DISCONNECTED'
-            self.get_logger().info(f'tirette {label} (GPIO {self.no_pin} = {current})')
+            self.get_logger().info(
+                f'tirette {label} (GPIO {self.no_pin} = {current})'
+            )
             self.last_state = current
 
     def destroy_node(self):
@@ -65,7 +76,7 @@ class GpioReader(Node):
 
 def main():
     rclpy.init()
-    node = GpioReader()
+    node = PullGpioReader()
     try:
         rclpy.spin(node)
     except KeyboardInterrupt:

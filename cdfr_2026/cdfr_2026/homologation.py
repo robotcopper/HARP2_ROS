@@ -83,7 +83,7 @@ class Homologation(Node):
 
         self.declare_parameter('cmd_vel_topic',
                                '/omnidirectional_controller/cmd_vel_unstamped')
-        self.declare_parameter('gpio_topic', '/gpio_state')
+        self.declare_parameter('gpio_topic', '/pull_gpio_state')
         self.declare_parameter('scan_topic', '/scan')
         self.declare_parameter('safety_distance', 0.22)
         self.declare_parameter('scan_min_range', 0.16)

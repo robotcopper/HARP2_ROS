@@ -25,7 +25,8 @@ def generate_launch_description():
     launch_on_robot = LaunchConfiguration('launch_on_robot')
     use_lidar = LaunchConfiguration('use_lidar')
     lidar_model = LaunchConfiguration('lidar_model')
-    use_gpio_reader = LaunchConfiguration('use_gpio_reader')
+    use_pull_gpio_reader = LaunchConfiguration('use_pull_gpio_reader')
+    use_team_gpio_reader = LaunchConfiguration('use_team_gpio_reader')
 
     # /ydlidarx4/scan for X4, /tminipro/scan otherwise.
     scan_topic = PythonExpression([
@@ -50,8 +51,11 @@ def generate_launch_description():
             'lidar_model', default_value='TminiPro',
             description='Lidar model: X4 or TminiPro. Selects the YAML in robot_bringup/params/ and the scan topic name (/ydlidarx4/scan or /tminipro/scan).'),
         DeclareLaunchArgument(
-            'use_gpio_reader', default_value='True',
-            description='Launch the cdfr_2026 gpio_reader node (requires RPi.GPIO on a Raspberry Pi)'),
+            'use_pull_gpio_reader', default_value='True',
+            description='Launch the cdfr_2026 pull_gpio_reader node (tirette, requires RPi.GPIO)'),
+        DeclareLaunchArgument(
+            'use_team_gpio_reader', default_value='True',
+            description='Launch the cdfr_2026 team_gpio_reader node (team selector, requires RPi.GPIO)'),
         DeclareLaunchArgument(
             'safety_distance', default_value='0.5',
             description='Min distance (m) to any scan point before pausing'),
@@ -115,10 +119,18 @@ def generate_launch_description():
         ),
 
         Node(
-            condition=IfCondition(use_gpio_reader),
+            condition=IfCondition(use_pull_gpio_reader),
             package='cdfr_2026',
-            executable='gpio_reader',
-            name='gpio_reader',
+            executable='pull_gpio_reader',
+            name='pull_gpio_reader',
+            output='screen',
+        ),
+
+        Node(
+            condition=IfCondition(use_team_gpio_reader),
+            package='cdfr_2026',
+            executable='team_gpio_reader',
+            name='team_gpio_reader',
             output='screen',
         ),
 
