@@ -26,6 +26,7 @@ S_BACKUP_RIGHT = 'backup_right'
 S_ROTATE = 'rotate'
 S_HOMING_LEFT = 'homing_left'
 S_BACKUP_LEFT = 'backup_left'
+S_FINAL_ROTATE = 'final_rotate'
 S_DONE = 'done'
 S_FAILED = 'failed'
 
@@ -63,7 +64,8 @@ class CalibrationNode(Node):
         self.declare_parameter('left_dir_deg', 120.0)
         self.declare_parameter('right_backup_m', 0.216325)
         self.declare_parameter('left_backup_m', 0.141325)
-        self.declare_parameter('rotation_angle_deg', 60.0)
+        self.declare_parameter('rotation_angle_deg', -30.0)
+        self.declare_parameter('final_rotation_angle_deg', 60.0)
 
         # --- Limit switch indices
         self.declare_parameter('switches_right', [2, 3])
@@ -89,6 +91,8 @@ class CalibrationNode(Node):
         self.left_backup_m = float(self.get_parameter('left_backup_m').value)
         self.rotation_angle_rad = math.radians(
             float(self.get_parameter('rotation_angle_deg').value))
+        self.final_rotation_angle_rad = math.radians(
+            float(self.get_parameter('final_rotation_angle_deg').value))
         self.switches_right = list(self.get_parameter('switches_right').value)
         self.switches_left = list(self.get_parameter('switches_left').value)
         rate = float(self.get_parameter('control_rate').value)
@@ -129,7 +133,8 @@ class CalibrationNode(Node):
             f'/ {self.right_backup_m*100:.3f} cm (switches {self.switches_right})\n'
             f'  left dir / backup   : {math.degrees(self.left_dir_rad):+.1f}° '
             f'/ {self.left_backup_m*100:.3f} cm (switches {self.switches_left})\n'
-            f'  rotation            : {math.degrees(self.rotation_angle_rad):+.1f}°\n'
+            f'  mid rotation        : {math.degrees(self.rotation_angle_rad):+.1f}°\n'
+            f'  final rotation      : {math.degrees(self.final_rotation_angle_rad):+.1f}°\n'
             f'  speeds              : v_t = {self.v_t} m/s, v_r = {self.v_r} rad/s\n'
             f'  homing timeout      : {self.homing_timeout}s\n'
             f'  auto_start          : {self.auto_start} '
@@ -267,6 +272,20 @@ class CalibrationNode(Node):
         if self.state == S_BACKUP_LEFT:
             self.cmd_pub.publish(
                 self.translation_twist(self.left_dir_rad + math.pi))
+            if (now - self.phase_start_time) >= self.phase_duration:
+                self.stop()
+                self.phase_duration = abs(self.final_rotation_angle_rad) / self.v_r
+                self.transition(
+                    S_FINAL_ROTATE,
+                    f'final rotation {math.degrees(self.final_rotation_angle_rad):+.1f}° '
+                    f'over {self.phase_duration:.2f}s',
+                    color=C.CYAN,
+                )
+            return
+
+        if self.state == S_FINAL_ROTATE:
+            self.cmd_pub.publish(self.rotation_twist(
+                math.copysign(self.v_r, self.final_rotation_angle_rad)))
             if (now - self.phase_start_time) >= self.phase_duration:
                 self.stop()
                 self.publish_calibrated(True)
