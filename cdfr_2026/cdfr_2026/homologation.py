@@ -128,7 +128,6 @@ class Homologation(Node):
         self.step_elapsed = 0.0
         self.pause_start = None
         self.match_start_time = None
-        self.match_start_walltime = None
         self.match_window_closed = False
 
         self.create_timer(self.dt, self.tick)
@@ -197,7 +196,6 @@ class Homologation(Node):
         self.step_idx = 0
         self.step_elapsed = 0.0
         self.match_start_time = time.monotonic()
-        self.match_start_walltime = time.time()
         self.get_logger().info(
             f'{C.BOLD}{C.GREEN}>>> MATCH START: sequence of {len(TRAJECTORY)} steps, '
             f'{self.match_duration}s on the clock <<<{C.RESET}'
@@ -263,12 +261,10 @@ class Homologation(Node):
         if self.match_start_time is not None and not self.match_window_closed:
             elapsed = time.monotonic() - self.match_start_time
             if elapsed >= self.match_duration:
-                wall_elapsed = (time.time() - self.match_start_walltime
-                                if self.match_start_walltime is not None else 0.0)
                 if self.state != 'idle':
                     self.get_logger().info(
-                        f'{C.BOLD}{C.YELLOW}>>> MATCH TIME UP at monotonic={elapsed:.2f}s '
-                        f'/ walltime={wall_elapsed:.2f}s (limit {self.match_duration}s) - '
+                        f'{C.BOLD}{C.YELLOW}>>> MATCH TIME UP at {elapsed:.2f}s '
+                        f'(limit {self.match_duration}s) - '
                         f'FULL STOP at step {self.step_idx} <<<{C.RESET}'
                     )
                     self.stop()
@@ -277,8 +273,8 @@ class Homologation(Node):
                     self.pause_start = None
                 else:
                     self.get_logger().info(
-                        f'{C.BOLD}{C.YELLOW}>>> MATCH TIME UP at monotonic={elapsed:.2f}s '
-                        f'/ walltime={wall_elapsed:.2f}s (limit {self.match_duration}s) - '
+                        f'{C.BOLD}{C.YELLOW}>>> MATCH TIME UP at {elapsed:.2f}s '
+                        f'(limit {self.match_duration}s) - '
                         f'end of the match window <<<{C.RESET}'
                     )
                 self.match_window_closed = True
