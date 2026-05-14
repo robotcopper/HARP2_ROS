@@ -8,11 +8,9 @@ from launch.actions import (
     ExecuteProcess,
     IncludeLaunchDescription,
     RegisterEventHandler,
-    EmitEvent,
 )
 from launch.conditions import IfCondition
 from launch.event_handlers import OnProcessExit
-from launch.events import Shutdown
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration, Command, PythonExpression
 
@@ -48,30 +46,32 @@ def generate_launch_description():
     pause_timeout = LaunchConfiguration('pause_timeout')
     match_duration = LaunchConfiguration('match_duration')
 
-    # Tue tout agent résiduel AVANT de lancer le nouveau (règle le problème de
-    # reconnexion forcée après Ctrl+C / Ctrl+Z)
+    # --- micro_ros_agent: cleanup + sequenced launch -----------------------
+    # `pkill -x` matches the executable basename exactly so it does NOT match
+    # this bash process (whose command line contains "micro_ros_agent" as
+    # text in its arguments and would self-kill with `pkill -f`).
     cleanup_agent = ExecuteProcess(
         condition=IfCondition(launch_on_robot),
-        cmd=['bash', '-c', 'pkill -9 -f micro_ros_agent || true; sleep 0.5'],
+        cmd=['bash', '-c',
+             'pkill -9 -x micro_ros_agent 2>/dev/null || true'],
         output='screen',
     )
 
-    # L'agent micro-ROS avec timeouts de shutdown explicites
     micro_ros_agent = ExecuteProcess(
         condition=IfCondition(launch_on_robot),
         cmd=['ros2', 'run', 'micro_ros_agent', 'micro_ros_agent',
              'serial', '--dev', '/dev/pico_mobile_base'],
         output='screen',
-        sigterm_timeout='3',
-        sigkill_timeout='2',
     )
 
-    # Si l'agent meurt inopinément → shutdown propre de tout le launch
-    agent_exit_handler = RegisterEventHandler(
+    # Sequential: micro_ros_agent only starts AFTER cleanup_agent exits.
+    # No Shutdown cascade if the agent later dies — the rest of the launch
+    # keeps running. The user can Ctrl+C manually if they want a full shutdown.
+    agent_after_cleanup = RegisterEventHandler(
         condition=IfCondition(launch_on_robot),
         event_handler=OnProcessExit(
-            target_action=micro_ros_agent,
-            on_exit=[EmitEvent(event=Shutdown())],
+            target_action=cleanup_agent,
+            on_exit=[micro_ros_agent],
         )
     )
 
@@ -114,10 +114,9 @@ def generate_launch_description():
             'match_duration', default_value='100.0',
             description='Total match duration in seconds (wall-clock from tirette pull)'),
 
-        # micro_ros_agent : nettoyage résidu → lancement → handler de sortie
+        # micro_ros_agent sequence : cleanup -> agent (sequential, no cascade)
         cleanup_agent,
-        micro_ros_agent,
-        agent_exit_handler,
+        agent_after_cleanup,
 
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(
