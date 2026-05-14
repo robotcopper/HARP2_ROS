@@ -249,7 +249,8 @@ class Homologation(Node):
             if elapsed >= self.match_duration:
                 if self.state != 'idle':
                     self.get_logger().info(
-                        f'{C.BOLD}{C.YELLOW}>>> MATCH TIME UP ({self.match_duration}s) - '
+                        f'{C.BOLD}{C.YELLOW}>>> MATCH TIME UP at {elapsed:.2f}s '
+                        f'(limit {self.match_duration}s) - '
                         f'FULL STOP at step {self.step_idx} <<<{C.RESET}'
                     )
                     self.stop()
@@ -258,8 +259,9 @@ class Homologation(Node):
                     self.pause_start = None
                 else:
                     self.get_logger().info(
-                        f'{C.BOLD}{C.YELLOW}>>> MATCH TIME UP ({self.match_duration}s) - '
-                        f'end of the 100s window <<<{C.RESET}'
+                        f'{C.BOLD}{C.YELLOW}>>> MATCH TIME UP at {elapsed:.2f}s '
+                        f'(limit {self.match_duration}s) - '
+                        f'end of the match window <<<{C.RESET}'
                     )
                 self.match_window_closed = True
                 return
@@ -311,9 +313,12 @@ class Homologation(Node):
 
             if self.step_idx >= len(TRAJECTORY):
                 self.stop()
+                match_elapsed = (time.monotonic() - self.match_start_time
+                                 if self.match_start_time is not None else 0.0)
                 self.get_logger().info(
                     f'{C.BOLD}{C.GREEN}>>> MATCH COMPLETE: '
-                    f'{len(TRAJECTORY)} steps done <<<{C.RESET}'
+                    f'{len(TRAJECTORY)} steps done in {match_elapsed:.2f}s '
+                    f'(of {self.match_duration}s window) <<<{C.RESET}'
                 )
                 self.done = True
                 self.state = 'idle'
