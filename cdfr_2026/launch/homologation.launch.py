@@ -124,6 +124,7 @@ def generate_launch_description():
             executable='pull_gpio_reader',
             name='pull_gpio_reader',
             output='screen',
+            emulate_tty=True,
         ),
 
         Node(
@@ -132,6 +133,7 @@ def generate_launch_description():
             executable='team_gpio_reader',
             name='team_gpio_reader',
             output='screen',
+            emulate_tty=True,
         ),
 
         Node(
@@ -139,6 +141,7 @@ def generate_launch_description():
             executable='homologation',
             name='homologation',
             output='screen',
+            emulate_tty=True,
             parameters=[{
                 'safety_distance': safety_distance,
                 'scan_min_range': scan_min_range,
