@@ -84,6 +84,7 @@ class Homologation(Node):
         self.declare_parameter('cmd_vel_topic',
                                '/omnidirectional_controller/cmd_vel_unstamped')
         self.declare_parameter('gpio_topic', '/pull_gpio_state')
+        self.declare_parameter('calibrated_topic', '/calibrated')
         self.declare_parameter('scan_topic', '/scan')
         self.declare_parameter('safety_distance', 0.22)
         self.declare_parameter('scan_min_range', 0.16)
@@ -96,6 +97,7 @@ class Homologation(Node):
 
         cmd_topic = self.get_parameter('cmd_vel_topic').value
         gpio_topic = self.get_parameter('gpio_topic').value
+        calibrated_topic = self.get_parameter('calibrated_topic').value
         scan_topic = self.get_parameter('scan_topic').value
         self.safety_distance = float(self.get_parameter('safety_distance').value)
         self.scan_min_range = float(self.get_parameter('scan_min_range').value)
@@ -112,6 +114,16 @@ class Homologation(Node):
         self.cmd_pub = self.create_publisher(Twist, cmd_topic, 10)
         self.create_subscription(Bool, gpio_topic, self.on_tirette, 10)
 
+        # /calibrated is published with TRANSIENT_LOCAL by calibration_node,
+        # so we subscribe with the same durability to get the last value.
+        calibrated_qos = QoSProfile(
+            depth=1,
+            reliability=ReliabilityPolicy.RELIABLE,
+            durability=DurabilityPolicy.TRANSIENT_LOCAL,
+        )
+        self.create_subscription(
+            Bool, calibrated_topic, self.on_calibrated, calibrated_qos)
+
         scan_qos = QoSProfile(
             depth=10,
             reliability=ReliabilityPolicy.BEST_EFFORT,
@@ -122,6 +134,8 @@ class Homologation(Node):
         self.obstacle = False
         self.obstacle_distance = None
         self.last_tirette_state = None
+        self.calibrated = False
+        self.last_calibrated_logged = None
         self.state = 'idle'
         self.done = False
         self.step_idx = 0
@@ -138,11 +152,28 @@ class Homologation(Node):
             f'  match duration      : {self.match_duration}s (hard stop at expiry)\n'
             f'  publishing cmd_vel  : {cmd_topic}\n'
             f'  listening tirette   : {gpio_topic}\n'
+            f'  listening calibrated: {calibrated_topic}\n'
             f'  safety distance     : {self.safety_distance}m '
             f'(ignoring returns < {self.scan_min_range}m)\n'
             f'  pause timeout       : {self.pause_timeout}s\n'
-            f'  {C.YELLOW}>>> WAITING FOR FIRST /gpio_state MESSAGE <<<{C.RESET}'
+            f'  {C.YELLOW}>>> WAITING FOR CALIBRATION + TIRETTE <<<{C.RESET}'
         )
+
+    def on_calibrated(self, msg: Bool):
+        self.calibrated = bool(msg.data)
+        if self.last_calibrated_logged != self.calibrated:
+            if self.calibrated:
+                self.get_logger().info(
+                    f'{C.BOLD}{C.GREEN}>>> /calibrated = True - '
+                    f'pre-match calibration DONE, tirette enabled{C.RESET}'
+                )
+            else:
+                if self.last_calibrated_logged is True:
+                    self.get_logger().warn(
+                        f'{C.YELLOW}>>> /calibrated = False - tirette pull '
+                        f'will be ignored until calibration completes{C.RESET}'
+                    )
+            self.last_calibrated_logged = self.calibrated
 
     def on_tirette(self, msg: Bool):
         # Only react on state change. /gpio_state arrives at ~20Hz, we don't
@@ -178,6 +209,13 @@ class Homologation(Node):
 
         triggered = (not msg.data) if self.trigger_on_low else bool(msg.data)
         if not triggered:
+            return
+
+        if not self.calibrated:
+            self.get_logger().warn(
+                f'{C.YELLOW}match start IGNORED: /calibrated is False, '
+                f'wait for the pre-match calibration to complete first{C.RESET}'
+            )
             return
 
         if self.done:

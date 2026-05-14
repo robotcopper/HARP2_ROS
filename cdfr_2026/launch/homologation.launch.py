@@ -27,6 +27,7 @@ def generate_launch_description():
     lidar_model = LaunchConfiguration('lidar_model')
     use_pull_gpio_reader = LaunchConfiguration('use_pull_gpio_reader')
     use_team_gpio_reader = LaunchConfiguration('use_team_gpio_reader')
+    use_calibration_node = LaunchConfiguration('use_calibration_node')
 
     # /ydlidarx4/scan for X4, /tminipro/scan otherwise.
     scan_topic = PythonExpression([
@@ -56,6 +57,9 @@ def generate_launch_description():
         DeclareLaunchArgument(
             'use_team_gpio_reader', default_value='True',
             description='Launch the cdfr_2026 team_gpio_reader node (team selector, requires RPi.GPIO)'),
+        DeclareLaunchArgument(
+            'use_calibration_node', default_value='True',
+            description='Launch the cdfr_2026 calibration_node (watches /limit_switches, publishes /calibrated)'),
         DeclareLaunchArgument(
             'safety_distance', default_value='0.5',
             description='Min distance (m) to any scan point before pausing'),
@@ -132,6 +136,15 @@ def generate_launch_description():
             package='cdfr_2026',
             executable='team_gpio_reader',
             name='team_gpio_reader',
+            output='screen',
+            emulate_tty=True,
+        ),
+
+        Node(
+            condition=IfCondition(use_calibration_node),
+            package='cdfr_2026',
+            executable='calibration_node',
+            name='calibration_node',
             output='screen',
             emulate_tty=True,
         ),
