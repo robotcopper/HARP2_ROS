@@ -59,11 +59,11 @@ class CalibrationNode(Node):
         # --- Geometry & motion
         self.declare_parameter('translation_speed', 0.05)
         self.declare_parameter('rotation_speed', 0.3)
-        self.declare_parameter('right_dir_deg', -60.0)
-        self.declare_parameter('left_dir_deg', 60.0)
+        self.declare_parameter('right_dir_deg', -120.0)
+        self.declare_parameter('left_dir_deg', 120.0)
         self.declare_parameter('right_backup_m', 0.216325)
         self.declare_parameter('left_backup_m', 0.141325)
-        self.declare_parameter('rotation_angle_deg', 30.0)
+        self.declare_parameter('rotation_angle_deg', 60.0)
 
         # --- Limit switch indices
         self.declare_parameter('switches_right', [2, 3])
