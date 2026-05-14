@@ -150,17 +150,31 @@ class Homologation(Node):
         if self.last_tirette_state == msg.data:
             return
 
+        is_initial = self.last_tirette_state is None
+        self.last_tirette_state = msg.data
+
         if msg.data:
             self.get_logger().info(
                 f'{C.GREEN}>>> TIRETTE EN PLACE (gpio=HIGH) - '
                 f'standby, waiting to be pulled{C.RESET}'
             )
         else:
-            self.get_logger().info(
-                f'{C.BOLD}{C.MAGENTA}>>> TIRETTE RETIREE (gpio=LOW) - '
-                f'MATCH TRIGGER{C.RESET}'
-            )
-        self.last_tirette_state = msg.data
+            if is_initial:
+                self.get_logger().warn(
+                    f'{C.YELLOW}>>> TIRETTE NOT IN PLACE at boot (gpio=LOW) - '
+                    f'IGNORED, plug the tirette in and pull it to trigger the match{C.RESET}'
+                )
+            else:
+                self.get_logger().info(
+                    f'{C.BOLD}{C.MAGENTA}>>> TIRETTE RETIREE (gpio=LOW) - '
+                    f'MATCH TRIGGER{C.RESET}'
+                )
+
+        # First /pull_gpio_state message reports the boot-time state. Even if
+        # it's LOW, do NOT trigger the match: we only trigger on an actual
+        # high->low transition (user pulling the tirette).
+        if is_initial:
+            return
 
         triggered = (not msg.data) if self.trigger_on_low else bool(msg.data)
         if not triggered:
