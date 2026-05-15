@@ -6,6 +6,7 @@ from rclpy.node import Node
 from rclpy.qos import QoSProfile, ReliabilityPolicy, DurabilityPolicy
 from std_msgs.msg import Bool
 from geometry_msgs.msg import Twist
+from nav_msgs.msg import Odometry
 from sensor_msgs.msg import LaserScan
 
 
@@ -103,6 +104,8 @@ class Match1(Node):
 
         self.declare_parameter('cmd_vel_topic',
                                '/omnidirectional_controller/cmd_vel_unstamped')
+        self.declare_parameter('odom_topic',
+                               '/omnidirectional_controller/odom')
         self.declare_parameter('gpio_topic', '/pull_gpio_state')
         self.declare_parameter('team_topic', '/team_gpio_state')
         self.declare_parameter('calibrated_topic', '/calibrated')
@@ -115,12 +118,18 @@ class Match1(Node):
         self.declare_parameter('match_duration', 100.0)
         self.declare_parameter('trigger_on_low', True)
         self.declare_parameter('control_rate', 20.0)
+        # Closed-loop overshoot compensation: each motion step's target is
+        # reduced by this amount, so the robot stops earlier and coasts
+        # roughly onto the requested displacement.
+        self.declare_parameter('linear_overshoot_m', 0.0)
+        self.declare_parameter('rotation_overshoot_deg', 0.0)
         # team_a_is_yellow: maps team_gpio_reader's "team A" (switch CLOSED,
         # gpio HIGH, msg.data=True) to the YELLOW trajectory. Flip to False
         # if the wiring/convention is reversed.
         self.declare_parameter('team_a_is_yellow', True)
 
         cmd_topic = self.get_parameter('cmd_vel_topic').value
+        odom_topic = self.get_parameter('odom_topic').value
         gpio_topic = self.get_parameter('gpio_topic').value
         team_topic = self.get_parameter('team_topic').value
         calibrated_topic = self.get_parameter('calibrated_topic').value
@@ -134,6 +143,10 @@ class Match1(Node):
         self.pause_timeout = float(self.get_parameter('pause_timeout').value)
         self.match_duration = float(self.get_parameter('match_duration').value)
         self.trigger_on_low = bool(self.get_parameter('trigger_on_low').value)
+        self.linear_overshoot_m = float(
+            self.get_parameter('linear_overshoot_m').value)
+        self.rotation_overshoot_rad = math.radians(
+            float(self.get_parameter('rotation_overshoot_deg').value))
         self.team_a_is_yellow = bool(self.get_parameter('team_a_is_yellow').value)
         rate = float(self.get_parameter('control_rate').value)
         self.dt = 1.0 / rate
@@ -141,6 +154,13 @@ class Match1(Node):
         self.cmd_pub = self.create_publisher(Twist, cmd_topic, 10)
         self.create_subscription(Bool, gpio_topic, self.on_tirette, 10)
         self.create_subscription(Bool, team_topic, self.on_team, 10)
+
+        odom_qos = QoSProfile(
+            depth=10,
+            reliability=ReliabilityPolicy.RELIABLE,
+            durability=DurabilityPolicy.VOLATILE,
+        )
+        self.create_subscription(Odometry, odom_topic, self.on_odom, odom_qos)
 
         # /calibrated is published with TRANSIENT_LOCAL by calibration_node,
         # so we subscribe with the same durability to get the last value.
@@ -171,7 +191,13 @@ class Match1(Node):
         self.state = 'idle'
         self.done = False
         self.step_idx = 0
-        self.step_elapsed = 0.0
+        self.step_elapsed = 0.0      # used for wait() steps only
+        # Closed-loop step tracking. step_kind in {'linear','angular','wait'};
+        # step_start_pose snapshots odom at the first running tick of a step.
+        self.odom_pose = None         # (x, y, yaw) from /odom
+        self.step_kind = None
+        self.step_target = 0.0
+        self.step_start_pose = None
         self.pause_start = None
         self.match_start_time = None
         self.match_window_closed = False
@@ -184,6 +210,7 @@ class Match1(Node):
             f'  blue steps          : {len(BLUE_TRAJECTORY)}\n'
             f'  match duration      : {self.match_duration}s (hard stop at expiry)\n'
             f'  publishing cmd_vel  : {cmd_topic}\n'
+            f'  listening odom      : {odom_topic} (closed-loop on displacement)\n'
             f'  listening tirette   : {gpio_topic}\n'
             f'  listening team      : {team_topic} '
             f'(team A = {"YELLOW" if self.team_a_is_yellow else "BLUE"})\n'
@@ -191,8 +218,22 @@ class Match1(Node):
             f'  safety distance     : {self.safety_distance}m '
             f'(ignoring returns < {self.scan_min_range}m)\n'
             f'  pause timeout       : {self.pause_timeout}s\n'
-            f'  {C.YELLOW}>>> WAITING FOR CALIBRATION + TEAM + TIRETTE <<<{C.RESET}'
+            f'  overshoot comp.     : linear -{self.linear_overshoot_m:.3f}m, '
+            f'rotation -{math.degrees(self.rotation_overshoot_rad):.1f}deg\n'
+            f'  {C.YELLOW}>>> WAITING FOR CALIBRATION + TEAM + ODOM + TIRETTE <<<{C.RESET}'
         )
+
+    def on_odom(self, msg: Odometry):
+        # Extract yaw from quaternion. We don't need a full tf2 stack here:
+        # the controller publishes a 2D pose with the planar yaw encoded in
+        # (z, w) primarily, but using the full formula is safe and cheap.
+        q = msg.pose.pose.orientation
+        siny_cosp = 2.0 * (q.w * q.z + q.x * q.y)
+        cosy_cosp = 1.0 - 2.0 * (q.y * q.y + q.z * q.z)
+        yaw = math.atan2(siny_cosp, cosy_cosp)
+        self.odom_pose = (msg.pose.pose.position.x,
+                          msg.pose.pose.position.y,
+                          yaw)
 
     def on_calibrated(self, msg: Bool):
         self.calibrated = bool(msg.data)
@@ -275,6 +316,13 @@ class Match1(Node):
             )
             return
 
+        if self.odom_pose is None:
+            self.get_logger().warn(
+                f'{C.YELLOW}match start IGNORED: no odometry received yet '
+                f'(closed-loop needs /odom){C.RESET}'
+            )
+            return
+
         if self.done:
             self.get_logger().warn(
                 'match start IGNORED: sequence already completed (or aborted)'
@@ -301,6 +349,9 @@ class Match1(Node):
         self.state = 'running'
         self.step_idx = 0
         self.step_elapsed = 0.0
+        self.step_kind = None
+        self.step_target = 0.0
+        self.step_start_pose = None
         self.match_start_time = time.monotonic()
         self.get_logger().info(
             f'{C.BOLD}{color_ansi}>>> MATCH START [{self.team_name}]: '
@@ -421,17 +472,59 @@ class Match1(Node):
 
         vx, vy, vw, duration = self.trajectory[self.step_idx]
 
+        # First running tick of this step: classify it and snapshot start pose.
+        if self.step_kind is None:
+            linear_speed = math.hypot(vx, vy)
+            if linear_speed > 0.01:
+                self.step_kind = 'linear'
+                target = linear_speed * duration - self.linear_overshoot_m
+                self.step_target = max(target, 0.0)
+            elif abs(vw) > 0.01:
+                self.step_kind = 'angular'
+                target = abs(vw) * duration - self.rotation_overshoot_rad
+                self.step_target = max(target, 0.0)
+            else:
+                self.step_kind = 'wait'
+                self.step_target = duration
+            self.step_start_pose = self.odom_pose
+            self.step_elapsed = 0.0
+            self.get_logger().info(
+                f'{C.CYAN}step {self.step_idx + 1}/{len(self.trajectory)} '
+                f'[{self.step_kind}] target='
+                f'{self.step_target:.3f}'
+                f'{"m" if self.step_kind == "linear" else ("rad" if self.step_kind == "angular" else "s")}'
+                f'{C.RESET}'
+            )
+
         cmd = Twist()
         cmd.linear.x = float(vx)
         cmd.linear.y = float(vy)
         cmd.angular.z = float(vw)
         self.cmd_pub.publish(cmd)
 
-        self.step_elapsed += self.dt
+        # Progress: odom-based for motion, time-based for wait.
+        if self.step_kind == 'wait':
+            self.step_elapsed += self.dt
+            progress = self.step_elapsed
+        else:
+            x0, y0, yaw0 = self.step_start_pose
+            x, y, yaw = self.odom_pose
+            if self.step_kind == 'linear':
+                progress = math.hypot(x - x0, y - y0)
+            else:  # angular
+                dyaw = math.atan2(math.sin(yaw - yaw0), math.cos(yaw - yaw0))
+                progress = abs(dyaw)
 
-        if self.step_elapsed >= duration:
+        if progress >= self.step_target:
+            self.get_logger().info(
+                f'{C.GREEN}step {self.step_idx + 1} done '
+                f'(reached {progress:.3f} >= {self.step_target:.3f}){C.RESET}'
+            )
             self.step_idx += 1
             self.step_elapsed = 0.0
+            self.step_kind = None
+            self.step_target = 0.0
+            self.step_start_pose = None
 
             if self.step_idx >= len(self.trajectory):
                 self.stop()

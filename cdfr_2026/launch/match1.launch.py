@@ -47,6 +47,8 @@ def generate_launch_description():
     match_duration = LaunchConfiguration('match_duration')
     backup_overshoot_m = LaunchConfiguration('backup_overshoot_m')
     rotation_overshoot_deg = LaunchConfiguration('rotation_overshoot_deg')
+    match_linear_overshoot_m = LaunchConfiguration('match_linear_overshoot_m')
+    match_rotation_overshoot_deg = LaunchConfiguration('match_rotation_overshoot_deg')
     team_a_is_yellow = LaunchConfiguration('team_a_is_yellow')
 
     # --- micro_ros_agent: graceful cleanup + sequenced launch --------------
@@ -160,6 +162,12 @@ def generate_launch_description():
             'rotation_overshoot_deg', default_value='10.0',
             description='Calibration: degrees subtracted from ROTATE target to compensate inertia overshoot'),
         DeclareLaunchArgument(
+            'match_linear_overshoot_m', default_value='0.0',
+            description='Match closed-loop: meters subtracted from each linear step target to compensate inertia overshoot'),
+        DeclareLaunchArgument(
+            'match_rotation_overshoot_deg', default_value='0.0',
+            description='Match closed-loop: degrees subtracted from each rotation step target to compensate inertia overshoot'),
+        DeclareLaunchArgument(
             'team_a_is_yellow', default_value='True',
             description='If True, team_gpio_reader "team A" (gpio HIGH) selects the YELLOW trajectory; flip to False if wiring is reversed'),
 
@@ -248,6 +256,8 @@ def generate_launch_description():
                 'pause_timeout': pause_timeout,
                 'match_duration': match_duration,
                 'scan_topic': scan_topic,
+                'linear_overshoot_m': match_linear_overshoot_m,
+                'rotation_overshoot_deg': match_rotation_overshoot_deg,
                 'team_a_is_yellow': team_a_is_yellow,
             }],
         ),
