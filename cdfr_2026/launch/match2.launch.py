@@ -167,7 +167,7 @@ def generate_launch_description():
             'match_linear_overshoot_m', default_value='0.0',
             description='Match closed-loop: meters subtracted from each linear step target to compensate inertia overshoot'),
         DeclareLaunchArgument(
-            'match_rotation_overshoot_deg', default_value='31.0',
+            'match_rotation_overshoot_deg', default_value='30.0',
             description='Match closed-loop: degrees subtracted from each rotation step target to compensate inertia overshoot'),
         DeclareLaunchArgument(
             'match_linear_accel', default_value='0.4',
