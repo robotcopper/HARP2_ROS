@@ -86,8 +86,12 @@ def mirror_x(trajectory):
 # pulls are ignored.
 # ============================================================================
 YELLOW_TRAJECTORY = [
-    forward(1.0),
-    backward(1.0),
+    rotate_ccw(180),
+    strafe_right(0.15),
+    forward(0.80),
+    backward(0.10),
+    strafe_left(0.30),
+    forward(0.70),
 ]
 
 BLUE_TRAJECTORY = mirror_x(YELLOW_TRAJECTORY)
