@@ -93,6 +93,22 @@ def mirror_x(trajectory):
             for (vx, vy, vw, target, kind) in trajectory]
 
 
+def rotate_local(step, delta_deg):
+    """Rotate (vx, vy) of a linear step by delta_deg in the robot's local frame.
+
+    Used when one side's rotation step is overridden: the robot's final
+    orientation diverges from the mirror by `delta_deg`, so any subsequent
+    local-frame translation must be rotated by the same delta to keep its
+    world-frame direction unchanged.
+    """
+    vx, vy, vw, target, kind = step
+    if kind != 'linear':
+        return step
+    a = math.radians(delta_deg)
+    c, s = math.cos(a), math.sin(a)
+    return (c * vx - s * vy, s * vx + c * vy, vw, target, kind)
+
+
 # ============================================================================
 # EDIT THIS LIST TO DEFINE THE YELLOW TEAM MATCH SEQUENCE
 # ----------------------------------------------------------------------------
@@ -123,6 +139,15 @@ YELLOW_TRAJECTORY = [
 ]    
 
 BLUE_TRAJECTORY = mirror_x(YELLOW_TRAJECTORY)
+# Asymmetric robot arm: on the blue side the second rotation must be 120 deg
+# instead of the mirrored 240 deg; direction (CW from the mirror) is correct.
+# Because the override leaves the robot 120 deg MORE CCW than the mirror
+# would, every following local-frame translation gets rotated by -120 deg
+# in the local frame so its world-frame direction stays the mirrored one.
+# Index 8 = the rotate_ccw(240) step in YELLOW_TRAJECTORY.
+BLUE_TRAJECTORY[8] = rotate_cw(120)
+for _i in range(9, len(BLUE_TRAJECTORY)):
+    BLUE_TRAJECTORY[_i] = rotate_local(BLUE_TRAJECTORY[_i], -120)
 
 
 class Match2(Node):
