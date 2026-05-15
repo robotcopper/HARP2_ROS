@@ -25,8 +25,8 @@ class C:
 # ============================================================================
 # DEFAULT SPEEDS — adjust if needed
 # ============================================================================
-LINEAR_SPEED = 0.2     # m/s for forward/backward/strafe
-ANGULAR_SPEED = 0.5    # rad/s for rotations (~28.6 deg/s, so 90 deg = ~3.14 s)
+LINEAR_SPEED = 0.4     # m/s for forward/backward/strafe
+ANGULAR_SPEED = 0.8    # rad/s for rotations (~28.6 deg/s, so 90 deg = ~3.14 s)
 
 
 # ============================================================================
@@ -53,6 +53,21 @@ def strafe_left(distance_m, speed=LINEAR_SPEED):
 
 def strafe_right(distance_m, speed=LINEAR_SPEED):
     return (0.0, -speed, 0.0, distance_m, 'linear')
+
+
+# Translation along any heading, expressed in the robot's local frame.
+# angle_deg is measured CCW from the robot's +X axis (forward):
+#   0    -> forward                  45  -> forward-left
+#   90   -> strafe_left              135 -> backward-left
+#   180  -> backward                -45  -> forward-right
+#  -90   -> strafe_right            -135 -> backward-right
+# Magnitude hypot(vx,vy) is always `speed`, so cruise speed and the trapezoidal
+# ramp behave identically regardless of heading. `distance_m` is the euclidean
+# displacement along that heading, which is what closed-loop progress measures.
+def diagonal(distance_m, angle_deg, speed=LINEAR_SPEED):
+    a = math.radians(angle_deg)
+    return (speed * math.cos(a), speed * math.sin(a), 0.0,
+            distance_m, 'linear')
 
 
 def rotate_ccw(angle_deg, speed=ANGULAR_SPEED):
@@ -97,11 +112,11 @@ YELLOW_TRAJECTORY = [
     backward(0.75),
     forward(0.10),
     strafe_right(0.30),
-    backward(0.75),
-    strafe_left(0.12),
-    rotate_ccw(90),
-    backward(0.10),
-
+    backward(1.1),
+    forward(0.10),
+    strafe_left(0.46),
+    rotate_ccw(240),
+    diagonal(0.05, 45),
 ]
 
 BLUE_TRAJECTORY = mirror_x(YELLOW_TRAJECTORY)
