@@ -154,10 +154,10 @@ def generate_launch_description():
             'match_duration', default_value='100.0',
             description='Total match duration in seconds (wall-clock from tirette pull)'),
         DeclareLaunchArgument(
-            'backup_overshoot_m', default_value='0.0',
+            'backup_overshoot_m', default_value='0.015',
             description='Calibration: meters subtracted from BACKUP target to compensate inertia overshoot'),
         DeclareLaunchArgument(
-            'rotation_overshoot_deg', default_value='0.0',
+            'rotation_overshoot_deg', default_value='10.0',
             description='Calibration: degrees subtracted from ROTATE target to compensate inertia overshoot'),
         DeclareLaunchArgument(
             'team_a_is_yellow', default_value='True',
