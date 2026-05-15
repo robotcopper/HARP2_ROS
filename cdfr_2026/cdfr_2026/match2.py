@@ -132,22 +132,17 @@ YELLOW_TRAJECTORY = [
     forward(0.10),
     strafe_left(0.40),
     rotate_ccw(240),
-    diagonal(0.04, -30),
-    diagonal(0.04, 60),
-    diagonal(0.51, 155),
-    diagonal(1.8, -103),
+    diagonal(0.14, -30),
+    diagonal(0.1, 60),
+    diagonal(0.56, 145),
+    diagonal(1.8, -106),
 ]    
 
 BLUE_TRAJECTORY = mirror_x(YELLOW_TRAJECTORY)
 # Asymmetric robot arm: on the blue side the second rotation must be 120 deg
 # instead of the mirrored 240 deg; direction (CW from the mirror) is correct.
-# Because the override leaves the robot 120 deg MORE CCW than the mirror
-# would, every following local-frame translation gets rotated by -120 deg
-# in the local frame so its world-frame direction stays the mirrored one.
 # Index 8 = the rotate_ccw(240) step in YELLOW_TRAJECTORY.
 BLUE_TRAJECTORY[8] = rotate_cw(120)
-for _i in range(9, len(BLUE_TRAJECTORY)):
-    BLUE_TRAJECTORY[_i] = rotate_local(BLUE_TRAJECTORY[_i], -120)
 
 
 class Match2(Node):
