@@ -140,7 +140,7 @@ def generate_launch_description():
             'use_calibration_node', default_value='True',
             description='Launch the cdfr_2026 calibration_node (watches /limit_switches, publishes /calibrated)'),
         DeclareLaunchArgument(
-            'safety_distance', default_value='0.5',
+            'safety_distance', default_value='0.7',
             description='Min distance (m) to any scan point before pausing'),
         DeclareLaunchArgument(
             'scan_min_range', default_value='0.16',

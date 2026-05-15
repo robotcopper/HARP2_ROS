@@ -114,10 +114,12 @@ YELLOW_TRAJECTORY = [
     strafe_right(0.30),
     backward(1.1),
     forward(0.10),
-    strafe_left(0.46),
+    strafe_left(0.45),
     rotate_ccw(240),
-    diagonal(0.05, 45),
-]
+    diagonal(0.04, 60),
+    diagonal(0.51, 155),
+    diagonal(1.8, -103),
+]    
 
 BLUE_TRAJECTORY = mirror_x(YELLOW_TRAJECTORY)
 
