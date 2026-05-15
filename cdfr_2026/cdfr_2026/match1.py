@@ -32,35 +32,39 @@ ANGULAR_SPEED = 0.5    # rad/s for rotations (~28.6 deg/s, so 90 deg = ~3.14 s)
 # ============================================================================
 # HIGH-LEVEL TRAJECTORY HELPERS
 # ----------------------------------------------------------------------------
-# Each helper returns a step tuple (vx, vy, vw, duration_s).
+# Each helper returns a step tuple (vx, vy, vw, target, kind):
+#   - kind='linear'  -> target is meters (euclidean displacement from start)
+#   - kind='angular' -> target is radians (accumulated |dyaw| from start)
+#   - kind='wait'    -> target is seconds (time-based, only mode that uses it)
 # Speeds can be overridden per-call with the optional 'speed' argument.
+# Termination is purely odom-based for linear/angular steps.
 # ============================================================================
 def forward(distance_m, speed=LINEAR_SPEED):
-    return (speed, 0.0, 0.0, distance_m / speed)
+    return (speed, 0.0, 0.0, distance_m, 'linear')
 
 
 def backward(distance_m, speed=LINEAR_SPEED):
-    return (-speed, 0.0, 0.0, distance_m / speed)
+    return (-speed, 0.0, 0.0, distance_m, 'linear')
 
 
 def strafe_left(distance_m, speed=LINEAR_SPEED):
-    return (0.0, speed, 0.0, distance_m / speed)
+    return (0.0, speed, 0.0, distance_m, 'linear')
 
 
 def strafe_right(distance_m, speed=LINEAR_SPEED):
-    return (0.0, -speed, 0.0, distance_m / speed)
+    return (0.0, -speed, 0.0, distance_m, 'linear')
 
 
 def rotate_ccw(angle_deg, speed=ANGULAR_SPEED):
-    return (0.0, 0.0, speed, math.radians(angle_deg) / speed)
+    return (0.0, 0.0, speed, math.radians(angle_deg), 'angular')
 
 
 def rotate_cw(angle_deg, speed=ANGULAR_SPEED):
-    return (0.0, 0.0, -speed, math.radians(angle_deg) / speed)
+    return (0.0, 0.0, -speed, math.radians(angle_deg), 'angular')
 
 
 def wait(seconds):
-    return (0.0, 0.0, 0.0, seconds)
+    return (0.0, 0.0, 0.0, seconds, 'wait')
 
 
 def mirror_x(trajectory):
@@ -70,7 +74,8 @@ def mirror_x(trajectory):
     and waits are unchanged. This matches the CDFR rule that the blue side is
     the geometric mirror of the yellow side across the table's long axis.
     """
-    return [(vx, -vy, -vw, dt) for (vx, vy, vw, dt) in trajectory]
+    return [(vx, -vy, -vw, target, kind)
+            for (vx, vy, vw, target, kind) in trajectory]
 
 
 # ============================================================================
@@ -377,7 +382,7 @@ class Match1(Node):
             self.obstacle_distance = None
             return
 
-        vx, vy, _, _ = self.trajectory[self.step_idx]
+        vx, vy, _, _, _ = self.trajectory[self.step_idx]
         if math.hypot(vx, vy) < 0.01:
             self.obstacle = False
             self.obstacle_distance = None
@@ -478,32 +483,26 @@ class Match1(Node):
                 f'{self.step_idx}{C.RESET}'
             )
 
-        vx, vy, vw, duration = self.trajectory[self.step_idx]
+        vx, vy, vw, target, kind = self.trajectory[self.step_idx]
 
-        # First running tick of this step: classify it and snapshot start pose.
+        # First running tick of this step: apply overshoot margin and snapshot.
         if self.step_kind is None:
-            linear_speed = math.hypot(vx, vy)
-            if linear_speed > 0.01:
-                self.step_kind = 'linear'
-                target = linear_speed * duration - self.linear_overshoot_m
-                self.step_target = max(target, 0.0)
-            elif abs(vw) > 0.01:
-                self.step_kind = 'angular'
-                target = abs(vw) * duration - self.rotation_overshoot_rad
-                self.step_target = max(target, 0.0)
+            self.step_kind = kind
+            if kind == 'linear':
+                self.step_target = max(target - self.linear_overshoot_m, 0.0)
+            elif kind == 'angular':
+                self.step_target = max(
+                    target - self.rotation_overshoot_rad, 0.0)
             else:
-                self.step_kind = 'wait'
-                self.step_target = duration
+                self.step_target = target
             self.step_start_pose = self.odom_pose
             self.step_traveled_angle = 0.0
             self.last_odom_yaw = self.odom_pose[2]
             self.step_elapsed = 0.0
+            unit = {'linear': 'm', 'angular': 'rad', 'wait': 's'}[kind]
             self.get_logger().info(
                 f'{C.CYAN}step {self.step_idx + 1}/{len(self.trajectory)} '
-                f'[{self.step_kind}] target='
-                f'{self.step_target:.3f}'
-                f'{"m" if self.step_kind == "linear" else ("rad" if self.step_kind == "angular" else "s")}'
-                f'{C.RESET}'
+                f'[{kind}] target={self.step_target:.3f}{unit}{C.RESET}'
             )
 
         cmd = Twist()
