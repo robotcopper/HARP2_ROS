@@ -138,11 +138,28 @@ YELLOW_TRAJECTORY = [
     diagonal(1.8, -106),
 ]    
 
-BLUE_TRAJECTORY = mirror_x(YELLOW_TRAJECTORY)
-# Asymmetric robot arm: on the blue side the second rotation must be 120 deg
-# instead of the mirrored 240 deg; direction (CW from the mirror) is correct.
-# Index 8 = the rotate_ccw(240) step in YELLOW_TRAJECTORY.
-BLUE_TRAJECTORY[8] = rotate_cw(120)
+# Explicit blue trajectory. Mostly the X-axis mirror of YELLOW_TRAJECTORY,
+# except index 8 (the second rotation) is rotate_cw(120) instead of the
+# mirrored rotate_cw(240) because the robot arm is not symmetric.
+BLUE_TRAJECTORY = [
+    rotate_cw(180),         # mirror of rotate_ccw(180)
+    strafe_right(0.12),     # mirror of strafe_left(0.12)
+    backward(0.75),         # unchanged by mirror (vy=0)
+    forward(0.10),          # unchanged by mirror (vy=0)
+    strafe_left(0.30),      # mirror of strafe_right(0.30)
+    backward(1.1),          # unchanged by mirror (vy=0)
+    forward(0.10),          # unchanged by mirror (vy=0)
+    strafe_right(0.40),     # mirror of strafe_left(0.40)
+    rotate_cw(120),         # OVERRIDE: asymmetric arm (mirror would be rotate_cw(240))
+    # The 4 diagonals below are the X-mirror of YELLOW then rotated by -120
+    # deg in the local frame, to compensate the 120 deg orientation gap
+    # introduced by the rotation override above, so they end up pointing in
+    # the X-mirrored world directions of the yellow ones.
+    diagonal(0.14, -90),    # mirror -> 30; -120 -> -90 (strafe_right)
+    diagonal(0.1, -180),    # mirror -> -60; -120 -> -180 (backward)
+    diagonal(0.56, 95),     # mirror -> -145; -120 -> -265 -> +95
+    diagonal(1.8, -14),     # mirror -> 106; -120 -> -14
+]
 
 
 class Match2(Node):
