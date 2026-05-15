@@ -194,10 +194,16 @@ class Match1(Node):
         self.step_elapsed = 0.0      # used for wait() steps only
         # Closed-loop step tracking. step_kind in {'linear','angular','wait'};
         # step_start_pose snapshots odom at the first running tick of a step.
+        # Linear progress is euclidean displacement from step_start_pose;
+        # angular progress accumulates the abs of inter-tick yaw deltas to
+        # survive crossings of the ±pi wrap (a single-shot diff would saturate
+        # at pi and never trigger termination on a 180+ deg rotation).
         self.odom_pose = None         # (x, y, yaw) from /odom
         self.step_kind = None
         self.step_target = 0.0
         self.step_start_pose = None
+        self.step_traveled_angle = 0.0
+        self.last_odom_yaw = None
         self.pause_start = None
         self.match_start_time = None
         self.match_window_closed = False
@@ -352,6 +358,8 @@ class Match1(Node):
         self.step_kind = None
         self.step_target = 0.0
         self.step_start_pose = None
+        self.step_traveled_angle = 0.0
+        self.last_odom_yaw = None
         self.match_start_time = time.monotonic()
         self.get_logger().info(
             f'{C.BOLD}{color_ansi}>>> MATCH START [{self.team_name}]: '
@@ -487,6 +495,8 @@ class Match1(Node):
                 self.step_kind = 'wait'
                 self.step_target = duration
             self.step_start_pose = self.odom_pose
+            self.step_traveled_angle = 0.0
+            self.last_odom_yaw = self.odom_pose[2]
             self.step_elapsed = 0.0
             self.get_logger().info(
                 f'{C.CYAN}step {self.step_idx + 1}/{len(self.trajectory)} '
@@ -506,14 +516,17 @@ class Match1(Node):
         if self.step_kind == 'wait':
             self.step_elapsed += self.dt
             progress = self.step_elapsed
-        else:
-            x0, y0, yaw0 = self.step_start_pose
-            x, y, yaw = self.odom_pose
-            if self.step_kind == 'linear':
-                progress = math.hypot(x - x0, y - y0)
-            else:  # angular
-                dyaw = math.atan2(math.sin(yaw - yaw0), math.cos(yaw - yaw0))
-                progress = abs(dyaw)
+        elif self.step_kind == 'linear':
+            x0, y0, _ = self.step_start_pose
+            x, y, _ = self.odom_pose
+            progress = math.hypot(x - x0, y - y0)
+        else:  # angular: integrate inter-tick |dyaw| to survive pi wrap
+            yaw = self.odom_pose[2]
+            dyaw = math.atan2(math.sin(yaw - self.last_odom_yaw),
+                              math.cos(yaw - self.last_odom_yaw))
+            self.step_traveled_angle += abs(dyaw)
+            self.last_odom_yaw = yaw
+            progress = self.step_traveled_angle
 
         if progress >= self.step_target:
             self.get_logger().info(
@@ -525,6 +538,8 @@ class Match1(Node):
             self.step_kind = None
             self.step_target = 0.0
             self.step_start_pose = None
+            self.step_traveled_angle = 0.0
+            self.last_odom_yaw = None
 
             if self.step_idx >= len(self.trajectory):
                 self.stop()
