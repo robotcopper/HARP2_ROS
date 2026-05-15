@@ -95,7 +95,13 @@ YELLOW_TRAJECTORY = [
     rotate_ccw(180),
     strafe_left(0.12),
     backward(0.75),
-    forward(0.80),
+    forward(0.10),
+    strafe_right(0.30),
+    backward(0.75),
+    strafe_left(0.12),
+    rotate_ccw(90),
+    backward(0.10),
+
 ]
 
 BLUE_TRAJECTORY = mirror_x(YELLOW_TRAJECTORY)
@@ -126,6 +132,11 @@ class Match2(Node):
         # roughly onto the requested displacement.
         self.declare_parameter('linear_overshoot_m', 0.0)
         self.declare_parameter('rotation_overshoot_deg', 0.0)
+        # Trapezoidal velocity profile (accel up, cruise, decel down).
+        # Larger values = snappier moves but more end-of-step rocking;
+        # smaller = smoother but slower steps.
+        self.declare_parameter('linear_accel', 0.4)   # m/s^2
+        self.declare_parameter('angular_accel', 1.0)  # rad/s^2
         # team_a_is_yellow: maps team_gpio_reader's "team A" (switch CLOSED,
         # gpio HIGH, msg.data=True) to the YELLOW trajectory. Flip to False
         # if the wiring/convention is reversed.
@@ -150,6 +161,10 @@ class Match2(Node):
             self.get_parameter('linear_overshoot_m').value)
         self.rotation_overshoot_rad = math.radians(
             float(self.get_parameter('rotation_overshoot_deg').value))
+        self.linear_accel = max(
+            float(self.get_parameter('linear_accel').value), 1e-3)
+        self.angular_accel = max(
+            float(self.get_parameter('angular_accel').value), 1e-3)
         self.team_a_is_yellow = bool(self.get_parameter('team_a_is_yellow').value)
         rate = float(self.get_parameter('control_rate').value)
         self.dt = 1.0 / rate
@@ -207,6 +222,7 @@ class Match2(Node):
         self.step_start_pose = None
         self.step_traveled_angle = 0.0
         self.last_odom_yaw = None
+        self.step_alpha = 0.0   # trapezoidal velocity scaling [0,1]
         self.pause_start = None
         self.match_start_time = None
         self.match_window_closed = False
@@ -363,6 +379,7 @@ class Match2(Node):
         self.step_start_pose = None
         self.step_traveled_angle = 0.0
         self.last_odom_yaw = None
+        self.step_alpha = 0.0
         self.match_start_time = time.monotonic()
         self.get_logger().info(
             f'{C.BOLD}{color_ansi}>>> MATCH START [{self.team_name}]: '
@@ -476,6 +493,10 @@ class Match2(Node):
         if self.state == 'paused':
             self.state = 'running'
             self.pause_start = None
+            # Restart the ramp from rest: the robot has been stopped during
+            # the pause, so we re-accelerate from 0 instead of stepping back
+            # to the pre-pause velocity.
+            self.step_alpha = 0.0
             self.get_logger().info(
                 f'{C.GREEN}>>> obstacle CLEARED -> RESUMING match at step '
                 f'{self.step_idx}{C.RESET}'
@@ -497,19 +518,16 @@ class Match2(Node):
             self.step_traveled_angle = 0.0
             self.last_odom_yaw = self.odom_pose[2]
             self.step_elapsed = 0.0
+            self.step_alpha = 0.0
             unit = {'linear': 'm', 'angular': 'rad', 'wait': 's'}[kind]
             self.get_logger().info(
                 f'{C.CYAN}step {self.step_idx + 1}/{len(self.trajectory)} '
                 f'[{kind}] target={self.step_target:.3f}{unit}{C.RESET}'
             )
 
-        cmd = Twist()
-        cmd.linear.x = float(vx)
-        cmd.linear.y = float(vy)
-        cmd.angular.z = float(vw)
-        self.cmd_pub.publish(cmd)
-
-        # Progress: odom-based for motion, time-based for wait.
+        # Progress: odom-based for motion, time-based for wait. Must be
+        # computed BEFORE publishing so the ramp can see the latest state
+        # and trigger deceleration at the right moment.
         if self.step_kind == 'wait':
             self.step_elapsed += self.dt
             progress = self.step_elapsed
@@ -525,6 +543,38 @@ class Match2(Node):
             self.last_odom_yaw = yaw
             progress = self.step_traveled_angle
 
+        # Trapezoidal velocity profile: ramp alpha in [0,1] up to cruise,
+        # then ramp down as remaining distance shrinks below the stopping
+        # distance v^2 / (2 a). For wait steps alpha is irrelevant — we
+        # publish zero velocity.
+        if self.step_kind == 'wait':
+            self.cmd_pub.publish(Twist())
+        else:
+            if self.step_kind == 'linear':
+                cruise = math.hypot(vx, vy)
+                accel = self.linear_accel
+            else:  # angular
+                cruise = abs(vw)
+                accel = self.angular_accel
+
+            if cruise > 1e-6:
+                v_actual = self.step_alpha * cruise
+                d_to_stop = (v_actual * v_actual) / (2.0 * accel)
+                remaining = max(self.step_target - progress, 0.0)
+                d_alpha = (accel * self.dt) / cruise
+                if remaining <= d_to_stop:
+                    self.step_alpha = max(self.step_alpha - d_alpha, 0.0)
+                else:
+                    self.step_alpha = min(self.step_alpha + d_alpha, 1.0)
+            else:
+                self.step_alpha = 0.0
+
+            cmd = Twist()
+            cmd.linear.x = float(vx) * self.step_alpha
+            cmd.linear.y = float(vy) * self.step_alpha
+            cmd.angular.z = float(vw) * self.step_alpha
+            self.cmd_pub.publish(cmd)
+
         if progress >= self.step_target:
             self.get_logger().info(
                 f'{C.GREEN}step {self.step_idx + 1} done '
@@ -537,6 +587,7 @@ class Match2(Node):
             self.step_start_pose = None
             self.step_traveled_angle = 0.0
             self.last_odom_yaw = None
+            self.step_alpha = 0.0
 
             if self.step_idx >= len(self.trajectory):
                 self.stop()

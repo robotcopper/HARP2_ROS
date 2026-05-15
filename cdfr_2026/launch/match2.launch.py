@@ -49,6 +49,8 @@ def generate_launch_description():
     rotation_overshoot_deg = LaunchConfiguration('rotation_overshoot_deg')
     match_linear_overshoot_m = LaunchConfiguration('match_linear_overshoot_m')
     match_rotation_overshoot_deg = LaunchConfiguration('match_rotation_overshoot_deg')
+    match_linear_accel = LaunchConfiguration('match_linear_accel')
+    match_angular_accel = LaunchConfiguration('match_angular_accel')
     team_a_is_yellow = LaunchConfiguration('team_a_is_yellow')
 
     # --- micro_ros_agent: graceful cleanup + sequenced launch --------------
@@ -168,6 +170,12 @@ def generate_launch_description():
             'match_rotation_overshoot_deg', default_value='31.0',
             description='Match closed-loop: degrees subtracted from each rotation step target to compensate inertia overshoot'),
         DeclareLaunchArgument(
+            'match_linear_accel', default_value='0.4',
+            description='Match trapezoidal profile: linear accel/decel (m/s^2); smaller = smoother but slower'),
+        DeclareLaunchArgument(
+            'match_angular_accel', default_value='1.0',
+            description='Match trapezoidal profile: angular accel/decel (rad/s^2); smaller = smoother but slower'),
+        DeclareLaunchArgument(
             'team_a_is_yellow', default_value='True',
             description='If True, team_gpio_reader "team A" (gpio HIGH) selects the YELLOW trajectory; flip to False if wiring is reversed'),
 
@@ -258,6 +266,8 @@ def generate_launch_description():
                 'scan_topic': scan_topic,
                 'linear_overshoot_m': match_linear_overshoot_m,
                 'rotation_overshoot_deg': match_rotation_overshoot_deg,
+                'linear_accel': match_linear_accel,
+                'angular_accel': match_angular_accel,
                 'team_a_is_yellow': team_a_is_yellow,
             }],
         ),
