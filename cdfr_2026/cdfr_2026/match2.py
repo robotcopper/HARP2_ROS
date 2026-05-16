@@ -150,15 +150,15 @@ BLUE_TRAJECTORY = [
     backward(1.1),          # unchanged by mirror (vy=0)
     forward(0.10),          # unchanged by mirror (vy=0)
     strafe_right(0.40),     # mirror of strafe_left(0.40)
-    rotate_cw(120),         # OVERRIDE: asymmetric arm (mirror would be rotate_cw(240))
+    rotate_cw(135),         # OVERRIDE: asymmetric arm (mirror would be rotate_cw(240))
     # The 4 diagonals below are the X-mirror of YELLOW then rotated by -120
     # deg in the local frame, to compensate the 120 deg orientation gap
     # introduced by the rotation override above, so they end up pointing in
     # the X-mirrored world directions of the yellow ones.
-    diagonal(0.14, -90),    # mirror -> 30; -120 -> -90 (strafe_right)
-    diagonal(0.1, -180),    # mirror -> -60; -120 -> -180 (backward)
-    diagonal(0.56, 95),     # mirror -> -145; -120 -> -265 -> +95
-    diagonal(1.8, -14),     # mirror -> 106; -120 -> -14
+    diagonal(0.14, 150),    # mirror -> 30; -120 -> -90 (strafe_right)
+    diagonal(0.1, 60),    # mirror -> -60; -120 -> -180 (backward)
+    diagonal(0.57, -25),     # mirror -> -145; -120 -> -265 -> +95
+    diagonal(1.8, -135),     # mirror -> 106; -120 -> -14
 ]
 
 
